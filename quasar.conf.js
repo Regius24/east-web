@@ -80,7 +80,7 @@ module.exports = function (/* ctx */) {
       port: 8080,
       open: true, // opens browser window automatically
       proxy: {
-        '/api': {
+        '/api2': {
           target: 'http://localhost:50001/',
           changeOrigin: true
         }
