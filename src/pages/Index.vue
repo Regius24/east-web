@@ -1,10 +1,57 @@
 <template>
   <div class="window-height page_bg">
     <div class="flex flex-center fit">
-      <q-card>
+      <q-card
+        class="q-pa-md text-center card_bg"
+        style="width: 40%;"
+      >
+        <!-- LOGO -->
         <q-card-section>
-          WEST
+          <q-img
+            src="~assets/logo/west_black.png"
+            width="300px"
+          />
         </q-card-section>
+
+        <q-card-section class="q-gutter-sm">
+          <q-input
+            filled
+            label="Username"
+            v-model="domain"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-account" />
+            </template>
+          </q-input>
+
+          <q-input
+            filled
+            label="Password"
+            :type="isPwd ? 'password' : 'text'"
+            v-model="password"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-lock" />
+            </template>
+
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+        </q-card-section>
+
+        <!-- BUTTON -->
+        <q-card-actions class="">
+          <q-btn
+            label="sign in"
+            color="red"
+            class="full-width"
+          />
+        </q-card-actions>
       </q-card>
     </div>
   </div>
@@ -12,13 +59,29 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'LoginPage',
+
+  data () {
+    return {
+      domain: '',
+      password: '',
+      isPwd: true,
+      loading: false
+    }
+  },
+
+  methods: {
+    signMeIn () {
+      console.log('LOG ME IN!')
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .page_bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/bg/photo-1543946602-a0fce8117697.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../assets/bg/photo-1543946602-a0fce8117697.jpg");
   background-size: cover;
 }
 </style>
