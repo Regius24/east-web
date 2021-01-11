@@ -1,18 +1,17 @@
 <template>
-  <q-toolbar class="bg-blue-grey-3">
+  <q-toolbar :class="$q.dark.isActive ? 'bg-grey-10' : ''">
     <q-btn
       flat
       dense
       round
-      color="grey-8"
+      :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
       icon="menu"
       aria-label="Menu"
       @click="triggerDrawer"
     />
 
-    <q-toolbar-title class="text-grey-8">
-      <div v-if="$q.platform.is.mobile">CCARE COMM APP</div>
-      <div v-else>CONSUMER CARE COMMUNITY APP</div>
+    <q-toolbar-title :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'">
+      <div>WEST</div>
     </q-toolbar-title>
 
     <q-img

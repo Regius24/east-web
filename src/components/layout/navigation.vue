@@ -2,7 +2,7 @@
   <q-list>
     <q-item-label
       header
-      class="text-grey-8"
+      :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
     >
       Navigation Links
     </q-item-label>
@@ -29,9 +29,9 @@
 
 <script>
 const routes = [
-  { pathName: 'dashboard', label: 'Dashboard', icon: 'mdi-view-dashboard' },
-  { pathName: 'tickets', label: 'Tickets', icon: 'mdi-file' },
-  { pathName: 'reports', label: 'Reports', icon: 'mdi-file-chart' }
+  { pathName: 'dashboard', label: 'Dashboard', icon: 'mdi-view-dashboard' }
+  // { pathName: 'tickets', label: 'Tickets', icon: 'mdi-file' },
+  // { pathName: 'reports', label: 'Reports', icon: 'mdi-file-chart' }
 ]
 
 export default {
