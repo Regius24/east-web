@@ -11,7 +11,7 @@
       <NAVIGATION />
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container :class="$q.dark.isActive ? '' : 'bg-grey-3'">
       <transition
         name="fade"
         mode="out-in"
@@ -19,6 +19,18 @@
         <router-view />
       </transition>
     </q-page-container>
+
+    <q-page-sticky
+      position="bottom-right"
+      :offset="[18, 18]"
+    >
+      <q-btn
+        fab
+        icon="mdi-invert-colors"
+        color="accent"
+        @click="$q.dark.toggle()"
+      />
+    </q-page-sticky>
   </q-layout>
 </template>
 
