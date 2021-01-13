@@ -31,10 +31,29 @@
       label="Tools"
     >
       <q-list>
+        <!-- FULLSCREEN -->
         <q-item
           clickable
           v-close-popup
-          tabindex="0"
+          @click="$q.fullscreen.toggle()"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
+              color="accent"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label v-if="$q.fullscreen.isActive">Unfocus</q-item-label>
+            <q-item-label v-else>Focus</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <!-- INVERT COLOR -->
+        <q-item
+          clickable
+          v-close-popup
           @click="$q.dark.toggle()"
         >
           <q-item-section avatar>

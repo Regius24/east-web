@@ -111,7 +111,8 @@ module.exports = function (/* ctx */) {
       plugins: [
         'Notify',
         'Dialog',
-        'Loading'
+        'Loading',
+        'AppFullscreen'
       ]
     },
 
