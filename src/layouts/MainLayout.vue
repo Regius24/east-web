@@ -1,9 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    <!-- HEADER -->
     <q-header>
       <TOOLBAR />
     </q-header>
 
+    <!-- DRAWER -->
     <q-drawer
       v-model="openDrawer"
       bordered
@@ -11,6 +13,7 @@
       <NAVIGATION />
     </q-drawer>
 
+    <!-- PAGES -->
     <q-page-container :class="$q.dark.isActive ? '' : 'bg-grey-3'">
       <transition
         name="fade"

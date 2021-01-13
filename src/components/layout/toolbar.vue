@@ -1,5 +1,6 @@
 <template>
   <q-toolbar :class="$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-5'">
+    <!-- DRAWER BTN -->
     <q-btn
       flat
       dense
@@ -10,7 +11,8 @@
       @click="triggerDrawer"
     />
 
-    <q-toolbar-title :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'">
+    <!-- TITLE / LOGO -->
+    <q-toolbar-title>
       <div>
         <q-img
           v-if="$q.dark.isActive"
@@ -25,6 +27,7 @@
       </div>
     </q-toolbar-title>
 
+    <!-- DROPDOWN TOOLS -->
     <q-btn-dropdown
       stretch
       flat
