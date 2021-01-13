@@ -29,8 +29,8 @@
 
 <script>
 const routes = [
-  { pathName: 'dashboard', label: 'Dashboard', icon: 'mdi-view-dashboard' }
-  // { pathName: 'tickets', label: 'Tickets', icon: 'mdi-file' },
+  { pathName: 'dashboard', label: 'Dashboard', icon: 'mdi-view-dashboard' },
+  { pathName: 'access-manager', label: 'Access Manager', icon: 'mdi-file' }
   // { pathName: 'reports', label: 'Reports', icon: 'mdi-file-chart' }
 ]
 

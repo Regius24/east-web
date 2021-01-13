@@ -6,10 +6,11 @@ const routes = [
     component: () => import('pages/Index.vue')
   },
   {
-    path: '/page/',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'dashboard', name: 'dashboard', component: () => import('pages/Dashboard.vue') }
+      { path: 'dashboard', name: 'dashboard', component: () => import('pages/Dashboard.vue') },
+      { path: 'access-manager', name: 'access-manager', component: () => import('pages/AccessManager.vue') }
     ]
   },
 

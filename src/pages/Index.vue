@@ -8,15 +8,23 @@
         <!-- LOGO -->
         <q-card-section>
           <q-img
+            v-if="$q.dark.isActive"
+            src="~assets/logo/west_white.png"
+            width="300px"
+          />
+          <q-img
+            v-else
             src="~assets/logo/west_black.png"
             width="300px"
           />
         </q-card-section>
 
+        <!-- FORM -->
         <q-form @submit="signMeIn">
           <q-card-section class="q-gutter-sm">
             <q-input
               filled
+              color="grey"
               label="Username"
               v-model="domain"
             >
@@ -27,6 +35,7 @@
 
             <q-input
               filled
+              color="grey"
               label="Password"
               :type="isPwd ? 'password' : 'text'"
               v-model="password"
