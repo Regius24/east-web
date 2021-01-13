@@ -31,7 +31,7 @@
     <q-btn-dropdown
       stretch
       flat
-      label="Tools"
+      label="misc"
     >
       <q-list>
         <!-- FULLSCREEN -->
