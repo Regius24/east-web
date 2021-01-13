@@ -25,6 +25,33 @@
       </div>
     </q-toolbar-title>
 
+    <q-btn-dropdown
+      stretch
+      flat
+      label="Tools"
+    >
+      <q-list>
+        <q-item
+          clickable
+          v-close-popup
+          tabindex="0"
+          @click="$q.dark.toggle()"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-invert-colors"
+              color="accent"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label v-if="$q.dark.isActive">Light Mode</q-item-label>
+            <q-item-label v-else>Dark Mode</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+
     <q-img
       src="~assets/logo/pldtsmart.png"
       style="width: 15%;"
