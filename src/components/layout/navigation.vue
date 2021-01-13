@@ -29,8 +29,8 @@
 
 <script>
 const routes = [
-  { pathName: 'dashboard', label: 'User Access', icon: 'mdi-view-dashboard' },
-  { pathName: 'dashboard', label: 'Workforce Management', icon: 'mdi-view-dashboard' },
+  { pathName: 'user-access', label: 'User Access', icon: 'mdi-view-dashboard' },
+  { pathName: 'workforce-management', label: 'Workforce Management', icon: 'mdi-view-dashboard' },
   { pathName: 'access-manager', label: 'Access Manager', icon: 'mdi-shield-account' }
   // { pathName: 'reports', label: 'Reports', icon: 'mdi-file-chart' }
 ]

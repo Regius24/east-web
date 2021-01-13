@@ -109,7 +109,7 @@ export default {
 
       setTimeout(() => {
         this.$q.loading.hide()
-        this.$router.push({ name: 'dashboard' })
+        this.$router.push({ name: 'user-access' })
       }, 2500)
     }
   }

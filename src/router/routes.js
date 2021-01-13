@@ -9,7 +9,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'dashboard', name: 'dashboard', component: () => import('pages/Dashboard.vue') },
+      { path: 'user-access', name: 'user-access', component: () => import('pages/UserAccess.vue') },
+      { path: 'workforce-management', name: 'workforce-management', component: () => import('pages/WorkforceManagement.vue') },
       { path: 'access-manager', name: 'access-manager', component: () => import('pages/AccessManager.vue') }
     ]
   },
