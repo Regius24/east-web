@@ -26,6 +26,8 @@
 
 <script>
 import Papa from 'papaparse'
+import { notify } from 'boot/notifier'
+import { QSpinnerGears } from 'quasar'
 
 export default {
   data () {
@@ -39,11 +41,11 @@ export default {
     parseFile () {
       this.loading = true
 
+      notify('Processing', 'parsing file', QSpinnerGears, 'accent')
+
       Papa.parse(this.file, {
         header: true,
         complete: (parsed, file) => {
-          console.log(parsed.data)
-
           this.$axios
             .post('api/post/useraccessdata', { payload: parsed.data })
             .then((result) => {
