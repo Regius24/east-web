@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
     <div class="row">
-      <q-card class="col-12">
+      <q-card class="col-12 overflow-auto">
         <q-card-section>
-          <div class="text-h5">REPORT HERE</div>
+          <SUMMARY />
         </q-card-section>
       </q-card>
     </div>
@@ -23,10 +23,14 @@
 </template>
 
 <script>
-import UPLOADER from 'components/dashboard/uploader'
+import UPLOADER from 'components/user-access/uploader'
 
 export default {
   name: 'UserAccess',
+
+  components: {
+    SUMMARY: () => import('components/user-access/report-summary')
+  },
 
   methods: {
     openUploader () {
