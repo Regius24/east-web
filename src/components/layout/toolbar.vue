@@ -32,6 +32,7 @@
       stretch
       flat
       label="misc"
+      :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
       <q-list>
         <!-- FULLSCREEN -->
