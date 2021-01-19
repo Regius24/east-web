@@ -1,18 +1,17 @@
 <template>
   <div>
-    REPORT HERE
+    {{ data }}
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      file: null
-    }
-  },
+  props: ['data'],
 
   methods: {
+  },
+
+  mounted () {
   }
 }
 </script>

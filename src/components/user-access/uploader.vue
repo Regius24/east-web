@@ -28,7 +28,7 @@
 import Papa from 'papaparse'
 import { notify } from 'boot/notifier'
 import { QSpinnerGears } from 'quasar'
-import PostRepository from 'src/repository/post'
+import PostRepo from 'src/repository/post'
 
 export default {
   data () {
@@ -49,9 +49,13 @@ export default {
         skipEmptyLines: true,
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
-          const result = await PostRepository.postUserAccessData(parsed.data[0].Subgroup1, parsed.data)
+          const { status, statusText } = await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
 
-          console.log(result)
+          if (status === 200) {
+            notify('Success', 'file uploaded', 'mdi-check', 'green')
+          } else {
+            console.log(statusText)
+          }
         }
       })
     },
