@@ -28,6 +28,7 @@
 import Papa from 'papaparse'
 import { notify } from 'boot/notifier'
 import { QSpinnerGears } from 'quasar'
+import PostRepository from 'src/repository/post'
 
 export default {
   data () {
@@ -45,14 +46,12 @@ export default {
 
       Papa.parse(this.file, {
         header: true,
-        complete: (parsed, file) => {
-          this.$axios
-            .post('api/post/useraccessdata', { payload: parsed.data })
-            .then((result) => {
-              console.log(result)
-            }).catch((err) => {
-              console.log(err)
-            })
+        skipEmptyLines: true,
+        transformHeader: col => col.split(' ').join('').trim(),
+        complete: async (parsed, file) => {
+          const result = await PostRepository.postUserAccessData(parsed.data[0].Subgroup1, parsed.data)
+
+          console.log(result)
         }
       })
     },
