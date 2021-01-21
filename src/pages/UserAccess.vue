@@ -1,12 +1,16 @@
 <template>
   <q-page padding>
-    <div class="row">
+    <div class="row justify-center q-col-gutter-xs">
       <!-- SUMMARY REPORT -->
-      <q-card class="col-12 overflow-auto">
-        <q-card-section>
-          <SUMMARY :data="uamDataSummaryPldt" />
-        </q-card-section>
-      </q-card>
+      <div
+        class="col-12 col-md-4 overflow-auto"
+        v-for="(table, i) in uamDataSummaryPldt"
+        :key="i"
+      >
+        <q-card>
+          <PLDTSUMMARY :data="table" />
+        </q-card>
+      </div>
     </div>
 
     <!-- UPLOAD BUTTON -->
@@ -35,7 +39,7 @@ export default {
   name: 'UserAccess',
 
   components: {
-    SUMMARY: () => import('components/user-access/report-summary')
+    PLDTSUMMARY: () => import('components/user-access/report-summary')
   },
 
   data () {
@@ -64,27 +68,26 @@ export default {
           const type = i === 2 ? 'Access' : 'Complete'
           const groupedData = groupBy(m.data, 'Brand')
           const expression = jsonata(`
-            PLDT {
-                'Total': {
-                    'Agents': $sum($.Agents),
-                    '${type}': $sum($.${type}),
-                    '%': ($sum($.${type}) / $sum($.Agents)) * 100
-                },
-                Lob: {
-                    'Agents': $sum(Agents),
-                    '${type}': $sum(${type}),
-                    '%': ($sum($.${type}) / $sum($.Agents)) * 100,
-                    'Vendors': Vendor.{
-                        'Name': $,
-                        'Agents': %.Agents,
-                        'Comelete': %.${type},
-                        '%': ($sum(%.${type}) / $sum(%.Agents)) * 100
-                    }
+            PLDT { Lob: $ }
+            ~> $each(function($v, $k) {
+                {
+                    'Name': $k,
+                    'Agents': $sum($v.Agents),
+                    '${type}': $sum($v.${type}),
+                    'Percent': $round(($sum($v.${type})/$sum($v.Agents)) * 100, 2),
+                    '_children': $v { 
+                        Vendor: $ 
+                    } ~> $each(function($v2, $k2) {
+                        {
+                            'Name': $k2,
+                            'Agents': $sum($v2.Agents),
+                            '${type}': $sum($v2.${type}),
+                            'Percent': $round(($sum($v.${type})/$sum($v.Agents)) * 100, 2)
+                        }
+                    })
                 }
-            }
+            })
         `)
-
-          // console.log(JSON.stringify(groupedData, null, ' '))
           return expression.evaluate(groupedData)
         })
 
