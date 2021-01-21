@@ -31,11 +31,12 @@ export default {
     renderTable () {
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
-        height: 200,
+        height: 300,
         data: this.data,
         dataTree: true,
         dataTreeStartExpanded: false,
         index: 'Name',
+        groupBy: 'Table',
         columns: [
           {
             title: 'Name',
@@ -48,8 +49,8 @@ export default {
             sorter: 'string'
           },
           {
-            title: ('Access' in this.data[0]) ? 'Access' : 'Complete',
-            field: ('Access' in this.data[0]) ? 'Access' : 'Complete',
+            title: 'Complete',
+            field: 'Complete',
             sorter: 'string'
           },
           {
