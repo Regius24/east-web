@@ -1,18 +1,24 @@
 <template>
   <q-page padding>
     <div class="row justify-center q-col-gutter-xs">
+      <!-- <div class="col-6">
+        <q-card class="overflow-hidden">
+          <SUMMARY2
+            :title="'PLDT'"
+            :data="uamDataSummaryPldt"
+            class="rounded-borders"
+          />
+        </q-card>
+      </div> -->
+
       <!-- SUMMARY REPORT PLDT -->
       <div class="col-12 col-md-6">
-        <q-card class="overflow-hidden">
-          <SUMMARY :data="uamDataSummaryPldt" />
-        </q-card>
+        <SUMMARY :data="uamDataSummaryPldt" />
       </div>
 
       <!-- SUMMARY REPORT SMART -->
       <div class="col-12 col-md-6">
-        <q-card class="overflow-hidden">
-          <SUMMARY :data="uamDataSummarySmart" />
-        </q-card>
+        <SUMMARY :data="uamDataSummarySmart" />
       </div>
     </div>
 
@@ -43,6 +49,7 @@ export default {
 
   components: {
     SUMMARY: () => import('components/user-access/report-summary')
+    // SUMMARY2: () => import('components/user-access/report-summary-fgv.vue')
   },
 
   data () {
