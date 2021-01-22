@@ -2,15 +2,15 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-xs">
       <!-- SUMMARY REPORT PLDT -->
-      <div class="col-12 col-md-6 overflow-auto">
-        <q-card>
+      <div class="col-12 col-md-6">
+        <q-card class="overflow-hidden">
           <SUMMARY :data="uamDataSummaryPldt" />
         </q-card>
       </div>
 
       <!-- SUMMARY REPORT SMART -->
-      <div class="col-12 col-md-6 overflow-auto">
-        <q-card>
+      <div class="col-12 col-md-6">
+        <q-card class="overflow-hidden">
           <SUMMARY :data="uamDataSummarySmart" />
         </q-card>
       </div>
@@ -105,6 +105,8 @@ export default {
           return m2
         }))
         this.uamDataSummaryPldt = flatten(data)
+
+        // console.log(flatten(data))
       } catch (err) {
         console.log(err)
       }
