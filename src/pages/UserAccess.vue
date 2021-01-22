@@ -1,37 +1,35 @@
 <template>
   <q-page padding>
     <div class="row justify-center q-col-gutter-xs">
-      <!-- <div class="col-6">
-        <q-card class="overflow-hidden">
-          <SUMMARY2
-            :title="'PLDT'"
-            :data="uamDataSummaryPldt"
-            class="rounded-borders"
-          />
-        </q-card>
-      </div> -->
-
       <!-- SUMMARY REPORT PLDT -->
       <div class="col-12 col-md-6">
-        <SUMMARY :data="uamDataSummaryPldt" />
+        <SUMMARY
+          :data="uamDataSummaryPldt"
+          :title="'PLDT Summary'"
+        />
       </div>
 
       <!-- SUMMARY REPORT SMART -->
       <div class="col-12 col-md-6">
-        <SUMMARY :data="uamDataSummarySmart" />
+        <SUMMARY
+          :data="uamDataSummarySmart"
+          :title="'SMART Summary'"
+        />
       </div>
     </div>
 
     <!-- UPLOAD BUTTON -->
     <q-page-sticky
       position="bottom-right"
-      :offset="[18, 18]"
+      :offset="fabPos"
     >
       <q-btn
         fab
         icon="mdi-file-upload"
         color="primary"
         @click="openUploader"
+        :disable="draggingFab"
+        v-touch-pan.prevent.mouse="moveFab"
       />
     </q-page-sticky>
   </q-page>
@@ -55,11 +53,22 @@ export default {
   data () {
     return {
       uamDataSummaryPldt: [],
-      uamDataSummarySmart: []
+      uamDataSummarySmart: [],
+      fabPos: [18, 18],
+      draggingFab: false
     }
   },
 
   methods: {
+    moveFab (ev) {
+      this.draggingFab = ev.isFirst !== true && ev.isFinal !== true
+
+      this.fabPos = [
+        this.fabPos[0] - ev.delta.x,
+        this.fabPos[1] - ev.delta.y
+      ]
+    },
+
     openUploader () {
       this.$q.dialog({
         component: UPLOADER,
@@ -108,6 +117,8 @@ export default {
           if (i === 0) { m2.Table = 'ACTIVE' }
           if (i === 1) { m2.Table = 'TRAINEES' }
           if (i === 2) { m2.Table = 'RESIGNED' }
+
+          console.log(m2)
 
           return m2
         }))

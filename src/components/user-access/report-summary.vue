@@ -2,6 +2,7 @@
   <q-card class="overflow-hidden">
     <!-- TABLE -->
     <q-card-section>
+      <div class="text-h5">{{ title }}</div>
       <div
         ref="table"
         class="rounded-borders"
@@ -9,10 +10,18 @@
     </q-card-section>
 
     <q-card-actions align="right">
+      <!-- DOWNLOAD BTN -->
+      <q-btn
+        flat
+        label="CSV"
+        color="accent"
+        @click="csvTable"
+      />
+
       <!-- COPY BTN -->
       <q-btn
         flat
-        label="Copy Table"
+        label="copy"
         color="accent"
         @click="copyTable"
       />
@@ -20,7 +29,7 @@
       <!-- PRINT BTN -->
       <q-btn
         flat
-        label="Print Table"
+        label="print"
         color="accent"
         @click="printTable"
       />
@@ -35,7 +44,7 @@ import Tabulator from 'tabulator-tables'
 export default {
   components: {},
 
-  props: ['data'],
+  props: ['data', 'title'],
 
   watch: {
     data (val) {
@@ -51,15 +60,16 @@ export default {
 
   methods: {
     renderTable () {
-      const _this = this
-      _this.tabulator = new Tabulator(this.$refs.table, {
+      this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
-        height: 300,
+        maxHeight: 300,
         data: this.data,
         dataTree: true,
-        dataTreeStartExpanded: false,
         index: 'Name',
+        dataTreeStartExpanded: false,
         groupBy: 'Table',
+        groupStartOpen: false,
+        groupClosedShowCalcs: true,
         placeholder: 'No Data Set',
         columns: [
           {
@@ -70,17 +80,20 @@ export default {
           {
             title: 'Agents',
             field: 'Agents',
-            sorter: 'string'
+            sorter: 'number',
+            topCalc: 'sum'
           },
           {
             title: 'Complete',
             field: 'Complete',
-            sorter: 'string'
+            sorter: 'number',
+            topCalc: 'sum'
           },
           {
             title: '%',
             field: 'Percent',
-            sorter: 'string'
+            sorter: 'number',
+            topCalc: 'sum'
           }
         ],
         clipboard: true,
@@ -92,6 +105,10 @@ export default {
         { column: 'Table', dir: 'asc' },
         { column: 'Name', dir: 'asc' }
       ])
+    },
+
+    csvTable () {
+      this.tabulator.download('csv', 'data.csv')
     },
 
     copyTable () {
