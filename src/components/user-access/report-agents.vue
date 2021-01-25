@@ -9,8 +9,28 @@
     row-key="name"
     separator="vertical"
     :filter="filter"
+    :loading="loading"
+    color="accent"
   >
     <template v-slot:top-right>
+      <!-- BUTTONS -->
+      <q-btn-group
+        flat
+        class="q-mr-sm"
+      >
+        <q-btn
+          flat
+          color="accent"
+          label="CSV"
+          @click="exportData"
+        >
+          <q-tooltip content-class="bg-accent">
+            Download Data
+          </q-tooltip>
+        </q-btn>
+      </q-btn-group>
+
+      <!-- SEARCH -->
       <q-input
         borderless
         dense
@@ -27,8 +47,11 @@
 </template>
 
 <script>
+import { exportFile, date } from 'quasar'
+import { unparse } from 'papaparse'
+
 export default {
-  props: ['data'],
+  props: ['brand', 'data'],
 
   data () {
     return {
@@ -45,6 +68,21 @@ export default {
         { name: 'End Date', field: 'End Date', label: 'End Date' },
         { name: 'Job Level', field: 'Job Level', label: 'Job Level' }
       ]
+    }
+  },
+
+  computed: {
+    loading () { return !(this.data.length > 0) }
+  },
+
+  methods: {
+    exportData () {
+      const title = `${this.brand} Agent List ${date.formatDate(Date.now(), 'MMDDYYYY-HHmmss')}`
+      this.export(title, unparse(this.data))
+    },
+
+    export (name, data) {
+      exportFile(`${name}.csv`, data)
     }
   }
 }

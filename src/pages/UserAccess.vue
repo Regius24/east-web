@@ -25,17 +25,23 @@
         />
       </div>
 
+      <!-- AGENT LIST REPORT -->
       <div class="col-12">
         <q-card>
           <q-card-section>
+            <!-- BRAND SELECTOR -->
             <q-btn-toggle
+              unelevated
+              class="q-mb-sm"
               v-model="uamDataAgentsType"
-              toggle-color="primary"
+              toggle-color="accent"
               :options="uamDataAgentsOptions"
             />
-          </q-card-section>
-          <q-card-section>
-            <AGENTS :data="uamDataAgents" />
+
+            <AGENTS
+              :brand="uamDataAgentsType"
+              :data="uamDataAgents"
+            />
           </q-card-section>
         </q-card>
       </div>
