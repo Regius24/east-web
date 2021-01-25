@@ -19,21 +19,20 @@
           />
         </q-card-section>
 
-        <!-- FORM -->
-        <q-form @submit="signMeIn">
-          <q-card-section class="q-gutter-sm">
-            <q-input
-              filled
-              color="grey"
-              label="Username"
-              v-model="domain"
-            >
-              <template v-slot:prepend>
-                <q-icon name="mdi-account" />
-              </template>
-            </q-input>
+        <!-- INPUTS -->
+        <q-card-section class="q-gutter-sm">
+          <q-input
+            filled
+            color="grey"
+            label="Username"
+            v-model="domain"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-account" />
+            </template>
+          </q-input>
 
-            <q-input
+          <!-- <q-input
               filled
               color="grey"
               label="Password"
@@ -51,26 +50,30 @@
                   @click="isPwd = !isPwd"
                 />
               </template>
-            </q-input>
-          </q-card-section>
+            </q-input> -->
+        </q-card-section>
 
-          <!-- BUTTON -->
-          <q-card-actions class="">
-            <q-btn
-              type="submit"
-              label="sign in"
-              color="red"
-              class="full-width"
-              :disable="disable"
-            />
-          </q-card-actions>
-        </q-form>
+        <!-- BUTTON -->
+        <q-card-actions class="">
+          <q-btn
+            type="submit"
+            label="sign in"
+            color="red"
+            class="full-width"
+            :disable="disable"
+            @click="signMeIn"
+          />
+        </q-card-actions>
       </q-card>
     </div>
   </div>
 </template>
 
 <script>
+import GetRepo from 'src/repository/get'
+import { mapActions } from 'vuex'
+import { notify } from 'boot/notifier'
+
 export default {
   name: 'LoginPage',
 
@@ -95,22 +98,34 @@ export default {
 
   watch: {
     creds (val) {
-      if (val.domain.length > 3 && val.password.length > 3) {
+      // if (val.domain.length > 3 && val.password.length > 3) {
+      if (val.domain.length > 3) {
         this.disable = false
       }
     }
   },
 
   methods: {
-    signMeIn () {
-      console.log('LOG ME IN!')
-
+    ...mapActions('data', ['SET_USER']),
+    async signMeIn () {
       this.$q.loading.show()
 
-      setTimeout(() => {
-        this.$q.loading.hide()
-        this.$router.push({ name: 'user-access' })
-      }, 2500)
+      try {
+        const { data } = await GetRepo.UserProfile(this.domain)
+        this.SET_USER(data)
+
+        setTimeout(() => {
+          this.$q.loading.hide()
+          this.$router.push({ name: 'user-access' })
+        }, 2500)
+      } catch (err) {
+        console.log(err)
+
+        setTimeout(() => {
+          this.$q.loading.hide()
+          notify('Account Not Found', 'something\'s wrong', 'mdi-alert', 'red')
+        }, 2500)
+      }
     }
   }
 }
