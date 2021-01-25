@@ -7,5 +7,5 @@ export default {
   UamDataRaw: (BRAND, VENDOR) => axios.get(`${resource}UamDataRaw?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataSummary: (BRAND) => axios.get(`${resource}UamDataSummary?brand=${BRAND}`),
   UamDataSummary2: (BRAND, TABLE) => axios.get(`${resource}UamDataSummary2?brand=${BRAND}&table=${TABLE}`),
-  UamDataAgents: (BRAND) => axios.get(`${resource}UamDataAgents?brand=${BRAND}`)
+  UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`)
 }

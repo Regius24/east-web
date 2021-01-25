@@ -35,6 +35,24 @@
       :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
       <q-list>
+        <!-- LOGOUT -->
+        <q-item
+          clickable
+          v-close-popup
+          @click="logOut"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-power"
+              color="accent"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <!-- FULLSCREEN -->
         <q-item
           clickable
@@ -90,8 +108,18 @@ export default {
 
   methods: {
     ...mapActions('data', ['SET_OPENDRAWER']),
+
     triggerDrawer () {
       this.SET_OPENDRAWER(!this.openDrawer)
+    },
+
+    logOut () {
+      this.$q.loading.show()
+
+      setTimeout(() => {
+        this.$q.loading.hide()
+        this.$router.push({ name: 'login' })
+      }, 2500)
     }
   }
 }

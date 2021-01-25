@@ -24,6 +24,21 @@
           :title="'SMART Summary'"
         />
       </div>
+
+      <div class="col-12">
+        <q-card>
+          <q-card-section>
+            <q-btn-toggle
+              v-model="uamDataAgentsType"
+              toggle-color="primary"
+              :options="uamDataAgentsOptions"
+            />
+          </q-card-section>
+          <q-card-section>
+            <AGENTS :data="uamDataAgents" />
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
 
     <!-- UPLOAD BUTTON -->
@@ -54,7 +69,8 @@ export default {
   name: 'UserAccess',
 
   components: {
-    SUMMARY: () => import('components/user-access/report-summary')
+    SUMMARY: () => import('components/user-access/report-summary'),
+    AGENTS: () => import('components/user-access/report-agents')
   },
 
   computed: {
@@ -67,8 +83,24 @@ export default {
     return {
       uamDataSummaryPldt: [],
       uamDataSummarySmart: [],
+      uamDataAgentsType: '',
+      uamDataAgentsOptions: [],
+      uamDataAgents: [],
       fabPos: [18, 18],
       draggingFab: false
+    }
+  },
+
+  watch: {
+    async uamDataAgentsType (val) {
+      try {
+        const vendor = this.vendorType === 'all' ? '%' : this.vendorType
+        const { data } = await GetRepo.UamDataAgents(val, vendor)
+
+        this.uamDataAgents = data
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
 
@@ -91,108 +123,6 @@ export default {
 
     brandCheck (brand) {
       return this.brandList.indexOf(brand) > -1
-    },
-
-    async FetchUamDataSummaryPldt () {
-      try {
-        // QUERY ALL TABLES
-        let data = await Promise.all([
-          GetRepo.UamDataSummary2('pldt', 'ACTIVE'),
-          GetRepo.UamDataSummary2('pldt', 'TRAINEES'),
-          GetRepo.UamDataSummary2('pldt', 'RESIGNED')
-        ])
-
-        // FORMAT JSON
-        data = data.map((m, i) => {
-          const filterData = this.vendorType === 'all' ? m.data : m.data.filter(f => f.Vendor === this.vendorType)
-          const groupedData = groupBy(filterData, 'Brand')
-          const expression = jsonata(`
-            PLDT { Lob: $ }
-            ~> $each(function($v, $k) {
-                {
-                    'Name': $k,
-                    'Agents': $sum($v.Agents),
-                    'Complete': $sum($v.Complete),
-                    'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2),
-                    '_children': $v { 
-                        Vendor: $ 
-                    } ~> $each(function($v2, $k2) {
-                        {
-                            'Name': $k2,
-                            'Agents': $sum($v2.Agents),
-                            'Complete': $sum($v2.Complete),
-                            'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2)
-                        }
-                    })
-                }
-            })
-        `)
-          return expression.evaluate(groupedData)
-        })
-
-        // ADD TABLE IDENTIFIER
-        data = data.map((m, i) => m.map(m2 => {
-          if (i === 0) { m2.Table = 'ACTIVE' }
-          if (i === 1) { m2.Table = 'TRAINEES' }
-          if (i === 2) { m2.Table = 'RESIGNED' }
-
-          return m2
-        }))
-
-        this.uamDataSummaryPldt = flatten(data)
-      } catch (err) {
-        console.log(err)
-      }
-    },
-
-    async FetchUamDataSummarySmart () {
-      try {
-        // QUERY ALL TABLES
-        let data = await Promise.all([
-          GetRepo.UamDataSummary2('smart', 'ACTIVE'),
-          GetRepo.UamDataSummary2('smart', 'TRAINEES'),
-          GetRepo.UamDataSummary2('smart', 'RESIGNED')
-        ])
-
-        // FORMAT JSON
-        data = data.map((m, i) => {
-          const groupedData = groupBy(m.data, 'Brand')
-          const expression = jsonata(`
-            SMART { Lob: $ }
-            ~> $each(function($v, $k) {
-                {
-                    'Name': $k,
-                    'Agents': $sum($v.Agents),
-                    'Complete': $sum($v.Complete),
-                    'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2),
-                    '_children': $v { 
-                        Vendor: $ 
-                    } ~> $each(function($v2, $k2) {
-                        {
-                            'Name': $k2,
-                            'Agents': $sum($v2.Agents),
-                            'Complete': $sum($v2.Complete),
-                            'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2)
-                        }
-                    })
-                }
-            })
-        `)
-          return expression.evaluate(groupedData)
-        })
-
-        // ADD TABLE IDENTIFIER
-        data = data.map((m, i) => m.map(m2 => {
-          if (i === 0) { m2.Table = 'ACTIVE' }
-          if (i === 1) { m2.Table = 'TRAINEES' }
-          if (i === 2) { m2.Table = 'RESIGNED' }
-
-          return m2
-        }))
-        this.uamDataSummarySmart = flatten(data)
-      } catch (err) {
-        console.log(err)
-      }
     },
 
     async FetchUamDataSummary (brand) {
@@ -245,6 +175,14 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+
+    async FetchUamDataAgents (brand) {
+      try {
+
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
 
@@ -253,9 +191,11 @@ export default {
 
     const _this = this
 
-    _this.brandList.forEach(brand => {
-      _this.FetchUamDataSummary(brand)
-    })
+    if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt')
+    if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart')
+
+    _this.uamDataAgentsType = _this.brandList[0]
+    _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
   }
 }
 </script>
