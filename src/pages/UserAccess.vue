@@ -2,7 +2,11 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-xs">
       <!-- SUMMARY REPORT PLDT -->
-      <div class="col-12 col-md-6">
+      <div
+        class="col-12"
+        :class="brandList.length > 1 ? 'col-md-6' : ''"
+        v-show="brandCheck('Pldt')"
+      >
         <SUMMARY
           :data="uamDataSummaryPldt"
           :title="'PLDT Summary'"
@@ -10,7 +14,11 @@
       </div>
 
       <!-- SUMMARY REPORT SMART -->
-      <div class="col-12 col-md-6">
+      <div
+        class="col-12 col-md-6"
+        :class="brandList.length > 1 ? 'col-md-6' : ''"
+        v-show="brandCheck('Smart')"
+      >
         <SUMMARY
           :data="uamDataSummarySmart"
           :title="'SMART Summary'"
@@ -36,18 +44,23 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
 import { groupBy, flatten } from 'lodash'
 import jsonata from 'jsonata'
-// import UPLOADER from 'components/user-access/uploader'
 
 export default {
   name: 'UserAccess',
 
   components: {
     SUMMARY: () => import('components/user-access/report-summary')
-    // SUMMARY2: () => import('components/user-access/report-summary-fgv.vue')
+  },
+
+  computed: {
+    ...mapState('data', ['user']),
+    brandList () { return this.user[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
+    vendorType () { return this.user[0].vendor }
   },
 
   data () {
@@ -76,6 +89,10 @@ export default {
       })
     },
 
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
+    },
+
     async FetchUamDataSummaryPldt () {
       try {
         // QUERY ALL TABLES
@@ -87,7 +104,8 @@ export default {
 
         // FORMAT JSON
         data = data.map((m, i) => {
-          const groupedData = groupBy(m.data, 'Brand')
+          const filterData = this.vendorType === 'all' ? m.data : m.data.filter(f => f.Vendor === this.vendorType)
+          const groupedData = groupBy(filterData, 'Brand')
           const expression = jsonata(`
             PLDT { Lob: $ }
             ~> $each(function($v, $k) {
@@ -118,13 +136,10 @@ export default {
           if (i === 1) { m2.Table = 'TRAINEES' }
           if (i === 2) { m2.Table = 'RESIGNED' }
 
-          console.log(m2)
-
           return m2
         }))
-        this.uamDataSummaryPldt = flatten(data)
 
-        // console.log(flatten(data))
+        this.uamDataSummaryPldt = flatten(data)
       } catch (err) {
         console.log(err)
       }
@@ -178,14 +193,69 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+
+    async FetchUamDataSummary (brand) {
+      try {
+        const loBrand = brand.toLowerCase()
+        const hiBrand = brand.toUpperCase()
+        // QUERY ALL TABLES
+        let data = await Promise.all([
+          GetRepo.UamDataSummary2(loBrand, 'ACTIVE'),
+          GetRepo.UamDataSummary2(loBrand, 'TRAINEES'),
+          GetRepo.UamDataSummary2(loBrand, 'RESIGNED')
+        ])
+
+        // FORMAT JSON
+        data = data.map((m, i) => {
+          const groupedData = groupBy(m.data, 'Brand')
+          const expression = jsonata(`
+            ${hiBrand} { Lob: $ }
+            ~> $each(function($v, $k) {
+                {
+                    'Name': $k,
+                    'Agents': $sum($v.Agents),
+                    'Complete': $sum($v.Complete),
+                    'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2),
+                    '_children': $v { 
+                        Vendor: $ 
+                    } ~> $each(function($v2, $k2) {
+                        {
+                            'Name': $k2,
+                            'Agents': $sum($v2.Agents),
+                            'Complete': $sum($v2.Complete),
+                            'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2)
+                        }
+                    })
+                }
+            })
+        `)
+          return expression.evaluate(groupedData)
+        })
+
+        // ADD TABLE IDENTIFIER
+        data = data.map((m, i) => m.map(m2 => {
+          if (i === 0) { m2.Table = 'ACTIVE' }
+          if (i === 1) { m2.Table = 'TRAINEES' }
+          if (i === 2) { m2.Table = 'RESIGNED' }
+
+          return m2
+        }))
+        this[`uamDataSummary${brand}`] = flatten(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
 
   mounted () {
     notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
 
-    this.FetchUamDataSummaryPldt()
-    this.FetchUamDataSummarySmart()
+    const _this = this
+
+    _this.brandList.forEach(brand => {
+      _this.FetchUamDataSummary(brand)
+    })
   }
 }
 </script>
