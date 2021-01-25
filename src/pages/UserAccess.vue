@@ -36,11 +36,11 @@
 </template>
 
 <script>
+import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
 import { groupBy, flatten } from 'lodash'
 import jsonata from 'jsonata'
-import GetRepo from 'src/repository/get'
-import UPLOADER from 'components/user-access/uploader'
+// import UPLOADER from 'components/user-access/uploader'
 
 export default {
   name: 'UserAccess',
@@ -71,7 +71,7 @@ export default {
 
     openUploader () {
       this.$q.dialog({
-        component: UPLOADER,
+        component: () => import('components/user-access/uploader'),
         parent: this
       })
     },

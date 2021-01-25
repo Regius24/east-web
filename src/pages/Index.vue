@@ -107,6 +107,7 @@ export default {
 
   methods: {
     ...mapActions('data', ['SET_USER']),
+
     async signMeIn () {
       this.$q.loading.show()
 
@@ -119,11 +120,11 @@ export default {
           this.$router.push({ name: 'user-access' })
         }, 2500)
       } catch (err) {
-        console.log(err)
+        const statusText = err.response.statusText
 
         setTimeout(() => {
           this.$q.loading.hide()
-          notify('Account Not Found', 'something\'s wrong', 'mdi-alert', 'red')
+          notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
         }, 2500)
       }
     }
