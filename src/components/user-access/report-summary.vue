@@ -17,7 +17,11 @@
         label="CSV"
         color="accent"
         @click="csvTable"
-      />
+      >
+        <q-tooltip content-class="bg-accent">
+          Raw Data
+        </q-tooltip>
+      </q-btn>
 
       <!-- <q-btn
         flat
