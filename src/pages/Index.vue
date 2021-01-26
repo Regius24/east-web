@@ -32,25 +32,25 @@
             </template>
           </q-input>
 
-          <!-- <q-input
-              filled
-              color="grey"
-              label="Password"
-              :type="isPwd ? 'password' : 'text'"
-              v-model="password"
-            >
-              <template v-slot:prepend>
-                <q-icon name="mdi-lock" />
-              </template>
+          <q-input
+            filled
+            color="grey"
+            label="Password"
+            :type="isPwd ? 'password' : 'text'"
+            v-model="password"
+          >
+            <template v-slot:prepend>
+              <q-icon name="mdi-lock" />
+            </template>
 
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
-            </q-input> -->
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
         </q-card-section>
 
         <!-- BUTTON -->
@@ -112,7 +112,7 @@ export default {
       this.$q.loading.show()
 
       try {
-        const { data } = await GetRepo.UserProfile(this.domain)
+        const { data } = await GetRepo.UserProfile(this.domain, this.password)
         this.SET_USER(data)
 
         setTimeout(() => {

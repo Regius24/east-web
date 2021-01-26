@@ -2,7 +2,7 @@
   <q-card class="overflow-hidden">
     <!-- TABLE -->
     <q-card-section>
-      <div class="text-h5">{{ title }}</div>
+      <div class="text-h5 text-weight-light text-center q-mb-xs">{{ title }}</div>
       <div
         ref="table"
         class="rounded-borders"
@@ -11,6 +11,7 @@
 
     <q-card-actions align="right">
       <!-- DOWNLOAD BTN -->
+
       <q-btn
         flat
         label="CSV"
@@ -18,28 +19,41 @@
         @click="csvTable"
       />
 
+      <!-- <q-btn
+        flat
+        label="XLSX"
+        color="accent"
+        @click="xlsxTable"
+      /> -->
+
       <!-- COPY BTN -->
-      <q-btn
+      <!-- <q-btn
         flat
         label="copy"
         color="accent"
         @click="copyTable"
-      />
+      /> -->
 
       <!-- PRINT BTN -->
-      <q-btn
+      <!-- <q-btn
         flat
         label="print"
         color="accent"
         @click="printTable"
-      />
+      /> -->
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
 import 'tabulator-tables/dist/css/tabulator.min.css'
+// import 'tabulator-tables/dist/css/tabulator_midnight.min.css'
+// import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
+import { flatten } from 'lodash'
+import { exportFile } from 'quasar'
+import { unparse } from 'papaparse'
+import GetRepo from 'src/repository/get'
 
 export default {
   components: {},
@@ -97,7 +111,6 @@ export default {
           }
         ],
         clipboard: true,
-        clipboardPasteAction: 'replace',
         printAsHtml: true
       })
 
@@ -107,12 +120,50 @@ export default {
       ])
     },
 
+    async FetchUamDataSummary () {
+      try {
+        const brand = this.title.split(' ')[0]
+        const loBrand = brand.toLowerCase()
+        // QUERY ALL TABLES
+        let data = await Promise.all([
+          GetRepo.UamDataSummary2(loBrand, 'ACTIVE'),
+          GetRepo.UamDataSummary2(loBrand, 'TRAINEES'),
+          GetRepo.UamDataSummary2(loBrand, 'RESIGNED')
+        ])
+
+        // ADD TABLE IDENTIFIER
+        data = data
+          .map(m => m.data)
+          .map((m, i) => {
+            return m.map((m2) => {
+              if (i === 0) m2.Table = 'ACTIVE'
+              if (i === 1) m2.Table = 'TRAINEES'
+              if (i === 2) m2.Table = 'RESIGNED'
+
+              return m2
+            })
+          })
+
+        return flatten(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
     csvTable () {
-      this.tabulator.download('csv', 'data.csv')
+      // this.tabulator.download('csv', 'data.csv')
+      this.FetchUamDataSummary()
+        .then(data => {
+          exportFile(`${this.title} Raw.csv`, unparse(data))
+        })
+    },
+
+    xlsxTable () {
+      // this.tabulator.download(XLSX, 'data.xlsx')
     },
 
     copyTable () {
-      this.tabulator.copyToClipboard('all')
+      this.tabulator.copyToClipboard()
     },
 
     printTable () {
