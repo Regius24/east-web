@@ -106,13 +106,14 @@ export default {
   },
 
   methods: {
-    ...mapActions('data', ['SET_USER']),
+    ...mapActions('data', ['SET_USER', 'SET_ALLOW']),
 
     async signMeIn () {
       this.$q.loading.show()
 
       try {
         const { data } = await GetRepo.UserProfile(this.domain, this.password)
+        this.SET_ALLOW(true)
         this.SET_USER(data)
 
         setTimeout(() => {

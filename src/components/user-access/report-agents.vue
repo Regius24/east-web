@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { exportFile, date } from 'quasar'
+import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 
 export default {
@@ -77,7 +77,7 @@ export default {
 
   methods: {
     exportData () {
-      const title = `${this.brand} Agent List ${date.formatDate(Date.now(), 'MMDDYYYY-HHmmss')}`
+      const title = `${this.brand} Agent List`
       this.export(title, unparse(this.data))
     },
 

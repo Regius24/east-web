@@ -107,7 +107,7 @@ export default {
   computed: mapState('data', ['openDrawer']),
 
   methods: {
-    ...mapActions('data', ['SET_OPENDRAWER']),
+    ...mapActions('data', ['SET_OPENDRAWER', 'SET_ALLOW']),
 
     triggerDrawer () {
       this.SET_OPENDRAWER(!this.openDrawer)
@@ -117,6 +117,7 @@ export default {
       this.$q.loading.show()
 
       setTimeout(() => {
+        this.SET_ALLOW(false)
         this.$q.loading.hide()
         this.$router.push({ name: 'login' })
       }, 2500)
