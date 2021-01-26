@@ -78,7 +78,8 @@ export default {
 
   methods: {
     renderTable () {
-      this.tabulator = new Tabulator(this.$refs.table, {
+      const _this = this
+      _this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 300,
         data: this.data,
@@ -115,7 +116,19 @@ export default {
           }
         ],
         clipboard: true,
-        printAsHtml: true
+        printAsHtml: true,
+        rowClick: (e, row) => {
+          if (row.getTreeParent()) {
+            const Vendor = row.getIndex()
+            const { Name: Lob, Table } = row.getTreeParent().getData()
+
+            _this.FetchUamDataFiltered(Lob, Vendor, Table)
+          } else {
+            const { Name: Lob, Table } = row.getData()
+
+            _this.FetchUamDataFiltered(Lob, '%', Table)
+          }
+        }
       })
 
       this.tabulator.setSort([
@@ -149,6 +162,24 @@ export default {
           })
 
         return flatten(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async FetchUamDataFiltered (lob, vendor, table) {
+      const brand = this.title.split(' ')[0].toUpperCase()
+      const payload = {
+        brand: brand,
+        lob: lob,
+        vendor: vendor,
+        table: table
+      }
+
+      try {
+        const { data } = await GetRepo.UamDataAgentsDetailed(payload)
+
+        console.log(data)
       } catch (err) {
         console.log(err)
       }
