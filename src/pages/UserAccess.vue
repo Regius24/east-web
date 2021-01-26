@@ -56,20 +56,22 @@
         fab
         icon="mdi-file-upload"
         color="primary"
-        @click="openUploader"
+        :class="currentDay ? '' : 'hidden'"
         :disable="draggingFab"
         v-touch-pan.prevent.mouse="moveFab"
+        @click="openUploader"
       />
     </q-page-sticky>
   </q-page>
 </template>
 
 <script>
+import { date } from 'quasar'
 import { mapState } from 'vuex'
-import GetRepo from 'src/repository/get'
-import { notify } from 'boot/notifier'
 import { groupBy, flatten } from 'lodash'
 import jsonata from 'jsonata'
+import GetRepo from 'src/repository/get'
+import { notify } from 'boot/notifier'
 
 export default {
   name: 'UserAccess',
@@ -82,7 +84,8 @@ export default {
   computed: {
     ...mapState('data', ['user']),
     brandList () { return this.user[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
-    vendorType () { return this.user[0].vendor }
+    vendorType () { return this.user[0].vendor },
+    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' }
   },
 
   data () {
