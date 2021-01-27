@@ -58,10 +58,9 @@ import { flatten } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import GetRepo from 'src/repository/get'
+import { notify } from 'boot/notifier'
 
 export default {
-  components: {},
-
   props: ['data', 'title'],
 
   watch: {
@@ -176,12 +175,23 @@ export default {
         table: table
       }
 
+      this.$q.loadingBar.start()
+      notify('Fetching Data', 'Please wait', 'mdi-timer', 'orange')
+
       try {
         const { data } = await GetRepo.UamDataAgentsDetailed(payload)
 
-        console.log(data)
+        this.$q.dialog({
+          component: () => import('./report-agents-detailed'),
+          parent: this,
+          data: data,
+          title: `${brand} ${lob}`
+        })
+
+        this.$q.loadingBar.stop()
       } catch (err) {
         console.log(err)
+        this.$q.loadingBar.stop()
       }
     },
 
