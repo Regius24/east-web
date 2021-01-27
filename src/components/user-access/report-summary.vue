@@ -176,7 +176,7 @@ export default {
       }
 
       this.$q.loadingBar.start()
-      notify('Fetching Data', 'Please wait', 'mdi-timer', 'orange')
+      notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
 
       try {
         const { data } = await GetRepo.UamDataAgentsDetailed(payload)
