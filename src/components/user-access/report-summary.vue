@@ -111,7 +111,12 @@ export default {
             title: '%',
             field: 'Percent',
             sorter: 'number',
-            topCalc: 'sum'
+            topCalc: (values, data) => {
+              const Agents = data.reduce((x, y) => x + y.Agents, 0)
+              const Complete = data.reduce((x, y) => x + y.Complete, 0)
+              const Computed = (Complete / Agents) * 100
+              return Computed.toFixed(2)
+            }
           }
         ],
         clipboard: true,

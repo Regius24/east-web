@@ -56,7 +56,6 @@
         fab
         icon="mdi-file-upload"
         color="primary"
-        :class="currentDay ? '' : 'hidden'"
         :disable="draggingFab"
         v-touch-pan.prevent.mouse="moveFab"
         @click="openUploader"
@@ -85,7 +84,8 @@ export default {
     ...mapState('data', ['user']),
     brandList () { return this.user[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
     vendorType () { return this.user[0].vendor },
-    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' }
+    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
+    showUploader () { return this.user[0].upload }
   },
 
   data () {
@@ -148,6 +148,7 @@ export default {
         // FORMAT JSON
         data = data.map((m, i) => {
           const groupedData = groupBy(m.data, 'Brand')
+          console.log(JSON.stringify({ [i]: groupedData }, null, ' '))
           const expression = jsonata(`
             ${hiBrand} { Lob: $ }
             ~> $each(function($v, $k) {
@@ -205,6 +206,8 @@ export default {
 
     _this.uamDataAgentsType = _this.brandList[0]
     _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
+
+    console.log(this.user)
   }
 }
 </script>

@@ -49,12 +49,20 @@ export default {
         skipEmptyLines: true,
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
-          const { status, statusText } = await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
+          try {
+            const { data } = await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
 
-          if (status === 200) {
+            console.log(data)
+
             notify('Success', 'file uploaded', 'mdi-check', 'green')
-          } else {
-            console.log(statusText)
+
+            this.loading = false
+            this.hide()
+            this.$router.go()
+          } catch (err) {
+            console.log(err)
+
+            this.loading = false
           }
         }
       })
