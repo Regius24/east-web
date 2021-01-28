@@ -6,10 +6,7 @@
     </q-header>
 
     <!-- DRAWER -->
-    <q-drawer
-      v-model="openDrawer"
-      bordered
-    >
+    <q-drawer v-model="openDrawer">
       <NAVIGATION />
     </q-drawer>
 

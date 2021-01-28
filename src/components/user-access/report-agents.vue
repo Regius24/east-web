@@ -49,6 +49,7 @@
 <script>
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
+import { notify } from 'boot/notifier'
 
 export default {
   props: ['brand', 'data'],
@@ -82,6 +83,7 @@ export default {
     },
 
     export (name, data) {
+      notify('Downloading Data', 'Please wait', 'mdi-download', 'primary')
       exportFile(`${name}.csv`, data)
     }
   }

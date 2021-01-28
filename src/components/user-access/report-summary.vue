@@ -161,7 +161,8 @@ export default {
 
         return data
       } catch (err) {
-        console.log(err)
+        const statusText = err.response.statusText
+        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
     },
 

@@ -83,7 +83,7 @@ export default {
   computed: {
     ...mapState('data', ['user']),
     brandList () { return this.user[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
-    vendorType () { return this.user[0].vendor },
+    profileType () { return this.user[0].profile },
     currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
     showUploader () { return this.user[0].upload }
   },
@@ -103,12 +103,13 @@ export default {
   watch: {
     async uamDataAgentsType (val) {
       try {
-        const vendor = this.vendorType === 'all' ? '%' : this.vendorType
+        const vendor = this.profileType === 'admin' ? '%' : this.profileType
         const { data } = await GetRepo.UamDataAgents(val, vendor)
 
         this.uamDataAgents = data
       } catch (err) {
-        console.log(err)
+        const statusText = err.response.statusText
+        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
     }
   },
@@ -137,9 +138,10 @@ export default {
     async FetchUamDataSummary (brand) {
       try {
         const loBrand = brand.toLowerCase()
+        const vendor = this.profileType === 'admin' ? '%' : this.user[0].vendor
 
         // QUERY ALL TABLES
-        let { data } = await GetRepo.UamDataSummary2(loBrand)
+        let { data } = await GetRepo.UamDataSummary2(loBrand, vendor)
 
         // FORMAT JSON
         const expression = jsonata(`
@@ -169,15 +171,8 @@ export default {
 
         this[`uamDataSummary${brand}`] = flatten(data)
       } catch (err) {
-        console.log(err)
-      }
-    },
-
-    async FetchUamDataAgents (brand) {
-      try {
-
-      } catch (err) {
-        console.log(err)
+        const statusText = err.response.statusText
+        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
     }
   },
