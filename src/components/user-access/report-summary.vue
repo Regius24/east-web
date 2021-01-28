@@ -25,6 +25,17 @@
 
       <!-- <q-btn
         flat
+        label="Copy"
+        color="accent"
+        @click="htmlTable"
+      >
+        <q-tooltip content-class="bg-accent">
+          HTML Table
+        </q-tooltip>
+      </q-btn> -->
+
+      <!-- <q-btn
+        flat
         label="XLSX"
         color="accent"
         @click="xlsxTable"
@@ -54,7 +65,6 @@ import 'tabulator-tables/dist/css/tabulator.min.css'
 // import 'tabulator-tables/dist/css/tabulator_midnight.min.css'
 // import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
-import { flatten } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import GetRepo from 'src/repository/get'
@@ -86,6 +96,7 @@ export default {
         index: 'Name',
         dataTreeStartExpanded: false,
         groupBy: 'Table',
+        groupHeader: (value, count) => `${value} (${count} items)`,
         groupStartOpen: false,
         groupClosedShowCalcs: true,
         placeholder: 'No Data Set',
@@ -108,14 +119,15 @@ export default {
             topCalc: 'sum'
           },
           {
-            title: '%',
+            title: 'Percentage',
             field: 'Percent',
             sorter: 'number',
+            formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
             topCalc: (values, data) => {
               const Agents = data.reduce((x, y) => x + y.Agents, 0)
               const Complete = data.reduce((x, y) => x + y.Complete, 0)
               const Computed = (Complete / Agents) * 100
-              return Computed.toFixed(2)
+              return `${Computed.toFixed(2)}%`
             }
           }
         ],
@@ -136,8 +148,7 @@ export default {
       })
 
       this.tabulator.setSort([
-        { column: 'Table', dir: 'asc' },
-        { column: 'Name', dir: 'asc' }
+        { column: 'Table', dir: 'asc' }
       ])
     },
 
@@ -145,27 +156,10 @@ export default {
       try {
         const brand = this.title.split(' ')[0]
         const loBrand = brand.toLowerCase()
-        // QUERY ALL TABLES
-        let data = await Promise.all([
-          GetRepo.UamDataSummary2(loBrand, 'ACTIVE'),
-          GetRepo.UamDataSummary2(loBrand, 'TRAINEES'),
-          GetRepo.UamDataSummary2(loBrand, 'RESIGNED')
-        ])
 
-        // ADD TABLE IDENTIFIER
-        data = data
-          .map(m => m.data)
-          .map((m, i) => {
-            return m.map((m2) => {
-              if (i === 0) m2.Table = 'ACTIVE'
-              if (i === 1) m2.Table = 'TRAINEES'
-              if (i === 2) m2.Table = 'RESIGNED'
+        const { data } = await GetRepo.UamDataSummary2(loBrand)
 
-              return m2
-            })
-          })
-
-        return flatten(data)
+        return data
       } catch (err) {
         console.log(err)
       }
@@ -218,6 +212,10 @@ export default {
 
     printTable () {
       this.tabulator.print(false, true)
+    },
+
+    htmlTable () {
+      this.tabulator.getHtml()
     }
   },
 
