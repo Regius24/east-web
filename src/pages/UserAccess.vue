@@ -67,7 +67,7 @@
 <script>
 import { date } from 'quasar'
 import { mapState } from 'vuex'
-import { groupBy, flatten } from 'lodash'
+import { flatten } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
@@ -137,50 +137,36 @@ export default {
     async FetchUamDataSummary (brand) {
       try {
         const loBrand = brand.toLowerCase()
-        const hiBrand = brand.toUpperCase()
+
         // QUERY ALL TABLES
-        let data = await Promise.all([
-          GetRepo.UamDataSummary2(loBrand, 'ACTIVE'),
-          GetRepo.UamDataSummary2(loBrand, 'TRAINEES'),
-          GetRepo.UamDataSummary2(loBrand, 'RESIGNED')
-        ])
+        let { data } = await GetRepo.UamDataSummary2(loBrand)
 
         // FORMAT JSON
-        data = data.map((m, i) => {
-          const groupedData = groupBy(m.data, 'Brand')
-          console.log(JSON.stringify({ [i]: groupedData }, null, ' '))
-          const expression = jsonata(`
-            ${hiBrand} { Lob: $ }
-            ~> $each(function($v, $k) {
+        const expression = jsonata(`
+            $ { Table: $ } ~> $each(function($v1, $k1){
+            $v1 { Lob: $ } ~> $each(function($v2, $k2){ 
                 {
-                    'Name': $k,
-                    'Agents': $sum($v.Agents),
-                    'Complete': $sum($v.Complete),
-                    'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2),
-                    '_children': $v { 
+                    'Table': $distinct($v2.Table),
+                    'Name': $k2,
+                    'Agents': $sum($v2.Agents),
+                    'Complete': $sum($v2.Complete),
+                    'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
+                    '_children': $v2 { 
                         Vendor: $ 
-                    } ~> $each(function($v2, $k2) {
+                    } ~> $each(function($v3, $k3) {
                         {
-                            'Name': $k2,
-                            'Agents': $sum($v2.Agents),
-                            'Complete': $sum($v2.Complete),
-                            'Percent': $round(($sum($v.Complete)/$sum($v.Agents)) * 100, 2)
+                            'Name': $k3,
+                            'Agents': $sum($v3.Agents),
+                            'Complete': $sum($v3.Complete),
+                            'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2)
                         }
                     })
                 }
             })
+          })
         `)
-          return expression.evaluate(groupedData)
-        })
+        data = expression.evaluate(data)
 
-        // ADD TABLE IDENTIFIER
-        data = data.map((m, i) => m.map(m2 => {
-          if (i === 0) { m2.Table = 'ACTIVE' }
-          if (i === 1) { m2.Table = 'TRAINEES' }
-          if (i === 2) { m2.Table = 'RESIGNED' }
-
-          return m2
-        }))
         this[`uamDataSummary${brand}`] = flatten(data)
       } catch (err) {
         console.log(err)
@@ -206,8 +192,6 @@ export default {
 
     _this.uamDataAgentsType = _this.brandList[0]
     _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
-
-    console.log(this.user)
   }
 }
 </script>
