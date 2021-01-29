@@ -15,7 +15,7 @@
 
       <!-- SUMMARY REPORT SMART -->
       <div
-        class="col-12 col-md-6"
+        class="col-12"
         :class="brandList.length > 1 ? 'col-md-6' : ''"
         v-show="brandCheck('Smart')"
       >
@@ -66,7 +66,7 @@
 
 <script>
 import { date } from 'quasar'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { flatten } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
@@ -81,11 +81,11 @@ export default {
   },
 
   computed: {
-    ...mapState('data', ['user']),
-    brandList () { return this.user[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
-    profileType () { return this.user[0].profile },
+    ...mapState('data', ['user', 'userProfile']),
+    brandList () { return this.userProfile[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
+    profileType () { return this.userProfile[0].profile },
     currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
-    showUploader () { return this.user[0].upload }
+    showUploader () { return this.userProfile[0].upload }
   },
 
   data () {
@@ -111,10 +111,15 @@ export default {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
+    },
+
+    userProfile () {
+      this.fetchData()
     }
   },
 
   methods: {
+    ...mapActions('data', ['SET_USERPROFILE']),
     moveFab (ev) {
       this.draggingFab = ev.isFirst !== true && ev.isFinal !== true
 
@@ -174,19 +179,29 @@ export default {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
+    },
+
+    fetchData () {
+      const _this = this
+
+      if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt')
+      if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart')
+
+      _this.uamDataAgentsType = _this.brandList[0]
+      _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
     }
+  },
+
+  async beforeMount () {
+    const { data } = await GetRepo.UserProfile(this.user)
+
+    this.SET_USERPROFILE(data)
   },
 
   mounted () {
     notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
 
-    const _this = this
-
-    if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt')
-    if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart')
-
-    _this.uamDataAgentsType = _this.brandList[0]
-    _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
+    this.fetchData()
   }
 }
 </script>

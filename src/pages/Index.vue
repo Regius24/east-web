@@ -106,15 +106,23 @@ export default {
   },
 
   methods: {
-    ...mapActions('data', ['SET_USER', 'SET_ALLOW']),
+    ...mapActions('data', ['SET_ALLOW', 'SET_USER', 'SET_USERPROFILE']),
 
     async signMeIn () {
       this.$q.loading.show()
 
       try {
-        const { data } = await GetRepo.UserProfile(this.domain, this.password)
+        const data = await Promise.all([
+          GetRepo.ValidateUser(this.domain, this.password),
+          GetRepo.UserProfile(this.domain)
+        ])
+
+        data.forEach((v, i) => {
+          if (i === 0) this.SET_USER(v.data)
+          if (i === 1) this.SET_USERPROFILE(v.data)
+        })
+
         this.SET_ALLOW(true)
-        this.SET_USER(data)
 
         setTimeout(() => {
           this.$q.loading.hide()
@@ -129,6 +137,11 @@ export default {
         }, 2500)
       }
     }
+  },
+
+  mounted () {
+    localStorage.clear()
+    sessionStorage.clear()
   }
 }
 </script>

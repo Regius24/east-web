@@ -3,7 +3,8 @@ import { axios } from 'boot/axios'
 const resource = 'api/get/'
 
 export default {
-  UserProfile: (USERNAME, PASSWORD) => axios.get(`${resource}UserProfile?username=${USERNAME}&password=${PASSWORD}`),
+  ValidateUser: (USERNAME, PASSWORD) => axios.get(`${resource}ValidateUser?username=${USERNAME}&password=${PASSWORD}`),
+  UserProfile: (USERNAME) => axios.get(`${resource}UserProfile?username=${USERNAME}`),
   UamDataRaw: (BRAND, VENDOR) => axios.get(`${resource}UamDataRaw?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataSummary: (BRAND) => axios.get(`${resource}UamDataSummary?brand=${BRAND}`),
   UamDataSummary2: (BRAND, VENDOR) => axios.get(`${resource}UamDataSummary2?brand=${BRAND}&vendor=${VENDOR}`),
