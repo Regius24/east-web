@@ -1,8 +1,8 @@
 {
-  "name": "west2",
+  "name": "east",
   "version": "0.0.1",
-  "description": "WEST2",
-  "productName": "WEST2",
+  "description": "Empowering Access and System Tracker",
+  "productName": "EAST",
   "author": "Alfonso Tristan Jay Arias <AMArias@smart.com.ph>",
   "private": true,
   "scripts": {

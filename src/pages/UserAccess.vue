@@ -46,7 +46,6 @@
         </q-card>
       </div>
     </div>
-
     <!-- UPLOAD BUTTON -->
     <q-page-sticky
       position="bottom-right"
@@ -57,6 +56,7 @@
         icon="mdi-file-upload"
         color="primary"
         :disable="draggingFab"
+        :style="showUploader ? '' : 'display: none;'"
         v-touch-pan.prevent.mouse="moveFab"
         @click="openUploader"
       />

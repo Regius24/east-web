@@ -89,7 +89,7 @@ export default {
     renderTable () {
       const _this = this
       _this.tabulator = new Tabulator(this.$refs.table, {
-        layout: 'fitDataStretch',
+        layout: 'fitColumns',
         maxHeight: 300,
         data: this.data,
         dataTree: true,
