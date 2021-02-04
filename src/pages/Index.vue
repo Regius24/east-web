@@ -20,50 +20,53 @@
         </q-card-section>
 
         <!-- INPUTS -->
-        <q-card-section class="q-gutter-sm">
-          <q-input
-            filled
-            color="grey"
-            label="Username"
-            v-model="domain"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-account" />
-            </template>
-          </q-input>
+        <q-form @submit.prevent="signMeIn">
+          <q-card-section class="q-gutter-sm">
+            <q-input
+              filled
+              color="grey"
+              label="Username"
+              v-model="domain"
+            >
+              <template v-slot:prepend>
+                <q-icon name="mdi-account" />
+              </template>
+            </q-input>
 
-          <q-input
-            filled
-            color="grey"
-            label="Password"
-            :type="isPwd ? 'password' : 'text'"
-            v-model="password"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-lock" />
-            </template>
+            <q-input
+              filled
+              color="grey"
+              label="Password"
+              :type="isPwd ? 'password' : 'text'"
+              v-model="password"
+            >
+              <template v-slot:prepend>
+                <q-icon name="mdi-lock" />
+              </template>
 
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
-        </q-card-section>
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+          </q-card-section>
 
-        <!-- BUTTON -->
-        <q-card-actions class="">
-          <q-btn
-            type="submit"
-            label="sign in"
-            color="red"
-            class="full-width"
-            :disable="disable"
-            @click="signMeIn"
-          />
-        </q-card-actions>
+          <!-- BUTTON -->
+          <q-card-actions>
+            <q-btn
+              type="submit"
+              label="sign in"
+              color="red"
+              class="full-width"
+              :disable="disable"
+              @click="signMeIn"
+            />
+          </q-card-actions>
+
+        </q-form>
       </q-card>
     </div>
   </div>

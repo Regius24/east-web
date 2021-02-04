@@ -119,7 +119,7 @@ export default {
             topCalc: 'sum'
           },
           {
-            title: 'Percentage',
+            title: '% of Agents with Compelete Tools',
             field: 'Percent',
             sorter: 'number',
             formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
