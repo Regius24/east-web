@@ -58,6 +58,7 @@ export default {
     return {
       filter: '',
       columns: [
+        { name: 'Subgroup1', field: 'Subgroup1', label: 'Sub Group1' },
         { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name' },
         { name: 'Company Name', field: 'Company Name', label: 'Company Name' },
         { name: 'Site', field: 'Site', label: 'Site' },

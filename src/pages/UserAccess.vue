@@ -82,14 +82,14 @@ export default {
 
   computed: {
     ...mapState('data', ['user', 'userProfile']),
-    brandList () { return this.userProfile[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase())) },
-    profileType () { return this.userProfile[0].profile },
-    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
-    showUploader () { return this.userProfile[0].upload }
+    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' }
   },
 
   data () {
     return {
+      brandList: [],
+      profileType: '',
+      showUploader: false,
       uamDataSummaryPldt: [],
       uamDataSummarySmart: [],
       uamDataAgentsType: '',
@@ -113,7 +113,10 @@ export default {
       }
     },
 
-    userProfile () {
+    userProfile (val) {
+      this.brandList = val[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      this.profileType = val[0].profile
+      this.showUploader = val[0].upload
       this.fetchData()
     }
   },
@@ -193,15 +196,13 @@ export default {
   },
 
   async beforeMount () {
-    const { data } = await GetRepo.UserProfile(this.user)
+    const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
 
     this.SET_USERPROFILE(data)
   },
 
   mounted () {
     notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-
-    this.fetchData()
   }
 }
 </script>

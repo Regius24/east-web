@@ -62,7 +62,6 @@
               color="red"
               class="full-width"
               :disable="disable"
-              @click="signMeIn"
             />
           </q-card-actions>
 
@@ -115,15 +114,9 @@ export default {
       this.$q.loading.show()
 
       try {
-        const data = await Promise.all([
-          GetRepo.ValidateUser(this.domain, this.password),
-          GetRepo.UserProfile(this.domain)
-        ])
+        const { data } = await GetRepo.ValidateUser(this.domain, this.password)
 
-        data.forEach((v, i) => {
-          if (i === 0) this.SET_USER(v.data)
-          if (i === 1) this.SET_USERPROFILE(v.data)
-        })
+        this.$q.localStorage.set('userAccnt', data)
 
         this.SET_ALLOW(true)
 

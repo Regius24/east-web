@@ -9,10 +9,9 @@
       ></div>
     </q-card-section>
 
-    <q-card-actions align="right">
-      <!-- DOWNLOAD BTN -->
-
-      <q-btn
+    <!-- DOWNLOAD BTN -->
+    <!-- <q-card-actions align="right"> -->
+    <!-- <q-btn
         flat
         label="CSV"
         color="accent"
@@ -21,9 +20,9 @@
         <q-tooltip content-class="bg-accent">
           Raw Data
         </q-tooltip>
-      </q-btn>
+      </q-btn> -->
 
-      <!-- <q-btn
+    <!-- <q-btn
         flat
         label="Copy"
         color="accent"
@@ -34,29 +33,29 @@
         </q-tooltip>
       </q-btn> -->
 
-      <!-- <q-btn
+    <!-- <q-btn
         flat
         label="XLSX"
         color="accent"
         @click="xlsxTable"
       /> -->
 
-      <!-- COPY BTN -->
-      <!-- <q-btn
+    <!-- COPY BTN -->
+    <!-- <q-btn
         flat
         label="copy"
         color="accent"
         @click="copyTable"
       /> -->
 
-      <!-- PRINT BTN -->
-      <!-- <q-btn
+    <!-- PRINT BTN -->
+    <!-- <q-btn
         flat
         label="print"
         color="accent"
         @click="printTable"
       /> -->
-    </q-card-actions>
+    <!-- </q-card-actions> -->
   </q-card>
 </template>
 
