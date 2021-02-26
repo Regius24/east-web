@@ -41,6 +41,7 @@
             <AGENTS
               :brand="uamDataAgentsType"
               :data="uamDataAgents"
+              :loading="uamDataAgentsLoad"
             />
           </q-card-section>
         </q-card>
@@ -93,6 +94,7 @@ export default {
       uamDataSummaryPldt: [],
       uamDataSummarySmart: [],
       uamDataAgentsType: '',
+      uamDataAgentsLoad: true,
       uamDataAgentsOptions: [],
       uamDataAgents: [],
       fabPos: [18, 18],
@@ -102,22 +104,18 @@ export default {
 
   watch: {
     async uamDataAgentsType (val) {
+      this.uamDataAgentsLoad = true
+
       try {
         const vendor = this.profileType === 'admin' ? '%' : this.profileType
         const { data } = await GetRepo.UamDataAgents(val, vendor)
 
         this.uamDataAgents = data
+        this.uamDataAgentsLoad = false
       } catch (err) {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
-    },
-
-    userProfile (val) {
-      this.brandList = val[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
-      this.profileType = val[0].profile
-      this.showUploader = val[0].upload
-      this.fetchData()
     }
   },
 
@@ -198,7 +196,12 @@ export default {
   async beforeMount () {
     const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
 
+    this.brandList = data[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+    this.profileType = data[0].profile
+    this.showUploader = data[0].upload
+
     this.SET_USERPROFILE(data)
+    this.fetchData()
   },
 
   mounted () {

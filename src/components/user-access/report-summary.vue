@@ -10,8 +10,8 @@
     </q-card-section>
 
     <!-- DOWNLOAD BTN -->
-    <!-- <q-card-actions align="right"> -->
-    <!-- <q-btn
+    <q-card-actions align="right">
+      <!-- <q-btn
         flat
         label="CSV"
         color="accent"
@@ -22,7 +22,7 @@
         </q-tooltip>
       </q-btn> -->
 
-    <!-- <q-btn
+      <!-- <q-btn
         flat
         label="Copy"
         color="accent"
@@ -33,41 +33,43 @@
         </q-tooltip>
       </q-btn> -->
 
-    <!-- <q-btn
+      <!--<q-btn
         flat
         label="XLSX"
         color="accent"
         @click="xlsxTable"
       /> -->
 
-    <!-- COPY BTN -->
-    <!-- <q-btn
+      <!-- COPY BTN -->
+      <!-- <q-btn
         flat
         label="copy"
         color="accent"
         @click="copyTable"
       /> -->
 
-    <!-- PRINT BTN -->
-    <!-- <q-btn
+      <!-- PRINT BTN -->
+      <!-- <q-btn
         flat
         label="print"
         color="accent"
         @click="printTable"
       /> -->
-    <!-- </q-card-actions> -->
+    </q-card-actions>
   </q-card>
 </template>
 
 <script>
 import 'tabulator-tables/dist/css/tabulator.min.css'
 // import 'tabulator-tables/dist/css/tabulator_midnight.min.css'
-// import XLSX from 'xlsx/dist/xlsx.full.min.js'
+import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
+
+window.XLSX = XLSX
 
 export default {
   props: ['data', 'title'],
@@ -203,7 +205,7 @@ export default {
     },
 
     xlsxTable () {
-      // this.tabulator.download(XLSX, 'data.xlsx')
+      this.tabulator.download('xlsx', `${this.title}.xlsx`)
     },
 
     copyTable () {

@@ -22,6 +22,7 @@
           flat
           color="accent"
           label="CSV"
+          :disable="loading"
           @click="exportData"
         >
           <q-tooltip content-class="bg-accent">
@@ -52,7 +53,7 @@ import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
 
 export default {
-  props: ['brand', 'data'],
+  props: ['brand', 'data', 'loading'],
 
   data () {
     return {
@@ -71,10 +72,6 @@ export default {
         { name: 'Job Level', field: 'Job Level', label: 'Job Level' }
       ]
     }
-  },
-
-  computed: {
-    loading () { return !(this.data.length > 0) }
   },
 
   methods: {
