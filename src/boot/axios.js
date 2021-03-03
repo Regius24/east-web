@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 
 // const DEV = "http://localhost:64575/";
-const PROD = location.origin + location.pathname
+const PROD = location.origin + process.env.PROD ? '/east/' : ''
 
 if (process.env.PROD) axios.defaults.baseURL = PROD
 // axios.defaults.withCredentials = true

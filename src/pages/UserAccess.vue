@@ -67,7 +67,7 @@
 
 <script>
 import { date } from 'quasar'
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { flatten } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
@@ -82,7 +82,7 @@ export default {
   },
 
   computed: {
-    ...mapState('data', ['user', 'userProfile']),
+    // ...mapState('data', ['user', 'userProfile']),
     currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' }
   },
 
@@ -200,7 +200,7 @@ export default {
     this.profileType = data[0].profile
     this.showUploader = data[0].upload
 
-    this.SET_USERPROFILE(data)
+    // this.SET_USERPROFILE(data)
     this.fetchData()
   },
 

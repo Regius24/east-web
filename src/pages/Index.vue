@@ -108,7 +108,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('data', ['SET_ALLOW', 'SET_USER', 'SET_USERPROFILE']),
+    ...mapActions('data', ['SET_ALLOW']),
 
     async signMeIn () {
       this.$q.loading.show()
@@ -125,11 +125,12 @@ export default {
           this.$router.push({ name: 'user-access' })
         }, 2500)
       } catch (err) {
-        const statusText = err.response.statusText
+        console.log(err)
+        // const statusText = err.response.statusText
 
         setTimeout(() => {
           this.$q.loading.hide()
-          notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+          notify('Something went wrong', 'Something went wrong...', 'mdi-alert', 'red')
         }, 2500)
       }
     }
