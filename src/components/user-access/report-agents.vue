@@ -63,7 +63,6 @@ export default {
         { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name' },
         { name: 'Company Name', field: 'Company Name', label: 'Company Name' },
         { name: 'Site', field: 'Site', label: 'Site' },
-        { name: 'Domain', field: 'Domain', label: 'Domain' },
         { name: 'Employee ID', field: 'Employee ID', label: 'Employee ID' },
         { name: 'Agent Status', field: 'Agent Status', label: 'Agent Status' },
         { name: 'Batch Name', field: 'Batch Name', label: 'Batch Name' },

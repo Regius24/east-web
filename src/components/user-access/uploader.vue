@@ -58,9 +58,14 @@ export default {
 
             this.loading = false
             this.hide()
-            this.$router.go()
+
+            setTimeout(() => {
+              this.$router.go()
+            }, 1200)
           } catch (err) {
             console.log(err)
+
+            notify('Error encountered', 'file not uploaded', 'mdi-alert', 'red')
 
             this.loading = false
           }

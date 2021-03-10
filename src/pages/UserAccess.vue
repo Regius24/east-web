@@ -166,7 +166,7 @@ export default {
                             'Name': $k3,
                             'Agents': $sum($v3.Agents),
                             'Complete': $sum($v3.Complete),
-                            'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2)
+                            'Percent': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
                         }
                     })
                 }
