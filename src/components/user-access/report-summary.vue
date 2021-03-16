@@ -2,7 +2,8 @@
   <q-card class="overflow-hidden">
     <!-- TABLE -->
     <q-card-section>
-      <div class="text-h5 text-weight-light text-center q-mb-xs">{{ title }}</div>
+      <div class="text-h5 text-weight-light text-center">{{ title }}</div>
+      <div class="text-caption text-weight-light text-center">updated as of: {{ dateCheck }}</div>
       <div
         ref="table"
         class="rounded-borders"
@@ -72,7 +73,17 @@ import { notify } from 'boot/notifier'
 window.XLSX = XLSX
 
 export default {
-  props: ['data', 'title'],
+  props: ['data', 'title', 'date'],
+
+  computed: {
+    dateCheck () {
+      if (this.date == null) {
+        return 'N/A'
+      } else {
+        return this.date.Date
+      }
+    }
+  },
 
   watch: {
     data (val) {

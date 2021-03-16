@@ -9,6 +9,7 @@
       >
         <SUMMARY
           :data="uamDataSummaryPldt"
+          :date="uamDataSummaryPldtDate"
           :title="'PLDT Summary'"
         />
       </div>
@@ -21,6 +22,7 @@
       >
         <SUMMARY
           :data="uamDataSummarySmart"
+          :date="uamDataSummarySmartDate"
           :title="'SMART Summary'"
         />
       </div>
@@ -93,6 +95,8 @@ export default {
       showUploader: false,
       uamDataSummaryPldt: [],
       uamDataSummarySmart: [],
+      uamDataSummaryPldtDate: null,
+      uamDataSummarySmartDate: null,
       uamDataAgentsType: '',
       uamDataAgentsLoad: true,
       uamDataAgentsOptions: [],
@@ -149,12 +153,15 @@ export default {
         // QUERY ALL TABLES
         let { data } = await GetRepo.UamDataSummary2(loBrand, vendor)
 
+        this[`uamDataSummary${brand}Date`] = data.splice(0, 1)[0]
+
         // FORMAT JSON
         const expression = jsonata(`
             $ { Table: $ } ~> $each(function($v1, $k1){
             $v1 { Lob: $ } ~> $each(function($v2, $k2){ 
                 {
                     'Table': $distinct($v2.Table),
+                    'Date': $distinct($v2.Date),
                     'Name': $k2,
                     'Agents': $sum($v2.Agents),
                     'Complete': $sum($v2.Complete),
