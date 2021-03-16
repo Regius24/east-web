@@ -16,12 +16,12 @@
       <div>
         <q-img
           v-if="$q.dark.isActive"
-          src="~assets/logo/west_white.png"
+          src="~assets/logo/east_light.png"
           style="width: 10%;"
         />
         <q-img
           v-else
-          src="~assets/logo/west_black.png"
+          src="~assets/logo/east_dark.png"
           style="width: 10%;"
         />
       </div>
