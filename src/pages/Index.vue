@@ -6,6 +6,7 @@
         class="fit"
       ></div>
       <q-card
+        flat
         class="q-pa-md text-center card_bg absolute"
         style="width: 40%;"
       >

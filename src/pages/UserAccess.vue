@@ -3,8 +3,8 @@
     <div class="row justify-center q-col-gutter-xs">
       <!-- SUMMARY REPORT PLDT -->
       <div
-        class="col-12"
-        :class="brandList.length > 1 ? 'col-md-6' : ''"
+        class="col-10 col-sm-10"
+        :class="brandList.length > 1 ? 'col-md-5' : ''"
         v-show="brandCheck('Pldt')"
       >
         <SUMMARY
@@ -16,8 +16,8 @@
 
       <!-- SUMMARY REPORT SMART -->
       <div
-        class="col-12"
-        :class="brandList.length > 1 ? 'col-md-6' : ''"
+        class="col-10 col-sm-10"
+        :class="brandList.length > 1 ? 'col-md-5' : ''"
         v-show="brandCheck('Smart')"
       >
         <SUMMARY
@@ -28,7 +28,7 @@
       </div>
 
       <!-- AGENT LIST REPORT -->
-      <div class="col-12">
+      <div class="col-10">
         <q-card>
           <q-card-section>
             <!-- BRAND SELECTOR -->
@@ -153,11 +153,11 @@ export default {
         // QUERY ALL TABLES
         let { data } = await GetRepo.UamDataSummary2(loBrand, vendor)
 
-        this[`uamDataSummary${brand}Date`] = data.splice(0, 1)[0]
+        this[`uamDataSummary${brand}Date`] = data[0]
 
         // FORMAT JSON
         const expression = jsonata(`
-            $ { Table: $ } ~> $each(function($v1, $k1){
+          $ { Table: $ } ~> $each(function($v1, $k1){
             $v1 { Lob: $ } ~> $each(function($v2, $k2){ 
                 {
                     'Table': $distinct($v2.Table),
