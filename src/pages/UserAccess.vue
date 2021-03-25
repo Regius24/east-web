@@ -11,6 +11,7 @@
           :data="uamDataSummaryPldt"
           :date="uamDataSummaryPldtDate"
           :title="'PLDT Summary'"
+          :textcolor="'text-primary'"
         />
       </div>
 
@@ -24,6 +25,7 @@
           :data="uamDataSummarySmart"
           :date="uamDataSummarySmartDate"
           :title="'SMART Summary'"
+          :textcolor="'text-secondary'"
         />
       </div>
 
@@ -57,7 +59,7 @@
       <q-btn
         fab
         icon="mdi-file-upload"
-        color="primary"
+        color="accent"
         :disable="draggingFab"
         :style="showUploader ? '' : 'display: none;'"
         v-touch-pan.prevent.mouse="moveFab"
