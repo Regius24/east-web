@@ -9,5 +9,7 @@ export default {
   UamDataSummary: (BRAND) => axios.get(`${resource}UamDataSummary?brand=${BRAND}`),
   UamDataSummary2: (BRAND, VENDOR) => axios.get(`${resource}UamDataSummary2?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`),
-  UamDataAgentsDetailed: ({ brand, lob, vendor, table }) => axios.get(`${resource}UamDataAgentsDetailed?brand=${brand}&lob=${lob}&vendor=${vendor}&table=${table}`)
+  UamDataAgentsDetailed: ({ brand, lob, vendor, table }) => axios.get(`${resource}UamDataAgentsDetailed?brand=${brand}&lob=${lob}&vendor=${vendor}&table=${table}`),
+  IrabData: () => axios.get(`${resource}IrabData`),
+  IrabDataSummary: () => axios.get(`${resource}IrabDataSummary`)
 }

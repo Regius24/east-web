@@ -6,7 +6,7 @@ const notify = (message, caption, icon, color) => {
     caption: caption,
     icon: icon,
     color: color,
-    position: 'bottom-right'
+    position: 'top-right'
   })
 }
 

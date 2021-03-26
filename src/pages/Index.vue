@@ -249,11 +249,10 @@ export default {
         }, 2500)
       } catch (err) {
         console.log(err)
-        // const statusText = err.response.statusText
 
         setTimeout(() => {
           this.$q.loading.hide()
-          notify('Something went wrong', 'Something went wrong...', 'mdi-alert', 'red')
+          notify('Something went wrong', '', 'mdi-alert', 'red')
         }, 2500)
       }
     }

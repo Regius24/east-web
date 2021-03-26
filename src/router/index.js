@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 
 import routes from './routes'
 
+import GetRepo from 'src/repository/get'
+import { LocalStorage } from 'quasar'
+
 Vue.use(VueRouter)
 
 /*
@@ -26,11 +29,16 @@ export default function ({ store } /* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach(async (to, from, next) => {
     if (to.meta.allow) {
-      if (store.state.data.allow) next()
-      // NORMAL PAGE ACCESS
-      else next({ name: 'error401' })
+      if (store.state.data.allow) {
+        const { data } = await GetRepo.UserProfile(LocalStorage.getItem('userAccnt'))
+        const { useraccess, irab } = data[0]
+
+        if (to.name === 'user-access' && useraccess) next()
+        else if (to.name === 'report-irab' && irab) next()
+        else next({ name: 'error401' })
+      } else next({ name: 'error401' })
     }
 
     next()

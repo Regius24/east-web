@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="row justify-center q-col-gutter-xs">
+    <div class="row justify-center q-col-gutter-sm">
       <!-- SUMMARY REPORT PLDT -->
       <div
         class="col-10 col-sm-10"
@@ -203,14 +203,19 @@ export default {
   },
 
   async beforeMount () {
-    const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+    try {
+      const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
 
-    this.brandList = data[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
-    this.profileType = data[0].profile
-    this.showUploader = data[0].upload
+      this.brandList = data[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      this.profileType = data[0].profile
+      this.showUploader = data[0].upload
 
-    // this.SET_USERPROFILE(data)
-    this.fetchData()
+      // this.SET_USERPROFILE(data)
+      this.fetchData()
+    } catch (err) {
+      console.log(err)
+      notify('Something went wrong', '', 'mdi-alert', 'red')
+    }
   },
 
   mounted () {
