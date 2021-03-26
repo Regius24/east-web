@@ -1,10 +1,24 @@
 <template>
   <q-card>
-    <q-card-section>
-      <div
-        ref="table"
-        class="rounded-borders"
-      ></div>
+    <q-card-section class="row justify-end">
+      <!-- FILTER -->
+      <q-select
+        dense
+        outlined
+        label="Month Filter"
+        class="col-4 q-mb-sm"
+        style="max-width: 30%;"
+        v-model="month"
+        :options="months"
+      />
+
+      <!-- TABLE -->
+      <div class="col-12">
+        <div
+          ref="table"
+          class="rounded-borders"
+        ></div>
+      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -17,10 +31,11 @@ import Tabulator from 'tabulator-tables'
 export default {
   name: 'Summary',
 
-  props: ['data'],
+  props: ['data', 'months'],
 
   data () {
     return {
+      month: '',
       processedData: []
     }
   },
@@ -71,6 +86,9 @@ export default {
 
       this.processedData = expression.evaluate(val)
       this.renderTable()
+    },
+    month (val) {
+      this.$emit('monthChange', val)
     }
   },
 

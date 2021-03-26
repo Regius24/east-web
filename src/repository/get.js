@@ -11,5 +11,5 @@ export default {
   UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataAgentsDetailed: ({ brand, lob, vendor, table }) => axios.get(`${resource}UamDataAgentsDetailed?brand=${brand}&lob=${lob}&vendor=${vendor}&table=${table}`),
   IrabData: () => axios.get(`${resource}IrabData`),
-  IrabDataSummary: () => axios.get(`${resource}IrabDataSummary`)
+  IrabDataSummary: (MONTH) => axios.get(`${resource}IrabDataSummary?month=${MONTH}`)
 }

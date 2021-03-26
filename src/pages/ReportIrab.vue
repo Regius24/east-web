@@ -1,10 +1,16 @@
 <template>
   <q-page padding>
     <div class="row justify-center q-col-gutter-sm">
+      <!-- SUMMARY -->
       <div class="col-10">
-        <SUMMARY :data="summary" />
+        <SUMMARY
+          :data="summary"
+          :months="months"
+          @monthChange="monthChange"
+        />
       </div>
 
+      <!-- TABLE -->
       <div class="col-10">
         <TABLE :data="raw" />
       </div>
@@ -31,7 +37,7 @@
 <script>
 import GET from 'src/repository/get'
 import { notify } from 'boot/notifier'
-import { first } from 'lodash'
+import { first, flatten, uniq } from 'lodash'
 
 export default {
   name: 'ReportIrab',
@@ -53,14 +59,21 @@ export default {
     }
   },
 
+  watch: {
+    async months (val) {
+      const { data: summary } = await GET.IrabDataSummary(first(val))
+      this.summary = summary
+    }
+  },
+
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { data: summary } = await GET.IrabDataSummary()
       const { data: raw } = await GET.IrabData()
 
-      this.summary = summary
       this.raw = raw
+      this.months = uniq(flatten(raw.map(m => m.MONTH)))
+      this.months.unshift('')
       this.showUploader = first(user).upload
     } catch (err) {
       console.log(err)
@@ -69,6 +82,11 @@ export default {
   },
 
   methods: {
+    async monthChange (val) {
+      const { data: summary } = await GET.IrabDataSummary(val)
+      this.summary = summary
+    },
+
     moveFab (ev) {
       this.draggingFab = ev.isFirst !== true && ev.isFinal !== true
 
