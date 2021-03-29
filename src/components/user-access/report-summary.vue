@@ -13,6 +13,27 @@
       ></div>
     </q-card-section>
 
+    <!-- FILTERS -->
+    <q-card-section class="row q-col-gutter-sm">
+      <q-select
+        dense
+        outlined
+        class="col-12 col-md-6"
+        v-model="vendor"
+        :options="vendors"
+        :display-value="`Company Name: ${vendor ? vendor : '*none*'}`"
+        :disable="vendorDis"
+      />
+      <q-select
+        dense
+        outlined
+        class="col-12 col-md-6"
+        v-model="site"
+        :options="sites"
+        :display-value="`Site: ${site ? site : '*none*'}`"
+      />
+    </q-card-section>
+
     <!-- DOWNLOAD BTN -->
     <q-card-actions align="right">
       <!-- <q-btn
@@ -76,7 +97,7 @@ import { notify } from 'boot/notifier'
 window.XLSX = XLSX
 
 export default {
-  props: ['data', 'title', 'date', 'textcolor'],
+  props: ['data', 'title', 'date', 'textcolor', 'vendors', 'sites', 'vendorDis'],
 
   computed: {
     dateCheck () {
@@ -91,12 +112,18 @@ export default {
   watch: {
     data (val) {
       this.renderTable()
-    }
+    },
+
+    vendor (val) { this.$emit('vendorChange', val) },
+
+    site (val) { this.$emit('siteChange', val) }
   },
 
   data () {
     return {
-      tabulator: null
+      tabulator: null,
+      vendor: '',
+      site: ''
     }
   },
 

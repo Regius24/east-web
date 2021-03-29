@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       routes: [
-        { pathName: 'user-access', label: 'User Access', icon: 'mdi-view-dashboard' }
+        { pathName: 'user-access', label: 'User Access', icon: 'mdi-account-details' }
       ],
       reports: [
         { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-file-chart' }

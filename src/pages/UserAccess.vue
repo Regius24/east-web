@@ -10,8 +10,13 @@
         <SUMMARY
           :data="uamDataSummaryPldt"
           :date="uamDataSummaryPldtDate"
+          :vendors="uamDataSummaryPldtVendors"
+          :vendorDis="profileType === 'admin' ? false : true"
+          :sites="uamDataSummaryPldtSites"
           :title="'PLDT Summary'"
           :textcolor="'text-primary'"
+          @vendorChange="vendorChangePldt"
+          @siteChange="siteChangePldt"
         />
       </div>
 
@@ -24,8 +29,13 @@
         <SUMMARY
           :data="uamDataSummarySmart"
           :date="uamDataSummarySmartDate"
+          :vendors="uamDataSummarySmartVendors"
+          :vendorDis="profileType === 'admin' ? false : true"
+          :sites="uamDataSummarySmartSites"
           :title="'SMART Summary'"
           :textcolor="'text-secondary'"
+          @vendorChange="vendorChangeSmart"
+          @siteChange="siteChangeSmart"
         />
       </div>
 
@@ -72,7 +82,7 @@
 <script>
 import { date } from 'quasar'
 import { mapActions } from 'vuex'
-import { flatten } from 'lodash'
+import { flatten, concat } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
@@ -87,22 +97,37 @@ export default {
 
   computed: {
     // ...mapState('data', ['user', 'userProfile']),
-    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' }
+    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
+    vendorSitePldt () { return { vendor: this.uamDataSummaryPldtVendor, site: this.uamDataSummaryPldtSite } },
+    vendorSiteSmart () { return { vendor: this.uamDataSummarySmartVendor, site: this.uamDataSummarySmartSite } }
   },
 
   data () {
     return {
-      brandList: [],
       profileType: '',
-      showUploader: false,
+      vendorType: '',
+      brandList: [],
+
       uamDataSummaryPldt: [],
       uamDataSummarySmart: [],
       uamDataSummaryPldtDate: null,
       uamDataSummarySmartDate: null,
+
+      uamDataSummaryPldtVendor: '',
+      uamDataSummaryPldtVendors: [],
+      uamDataSummarySmartVendor: '',
+      uamDataSummarySmartVendors: [],
+      uamDataSummaryPldtSite: '',
+      uamDataSummaryPldtSites: [],
+      uamDataSummarySmartSite: '',
+      uamDataSummarySmartSites: [],
+
       uamDataAgentsType: '',
       uamDataAgentsLoad: true,
       uamDataAgentsOptions: [],
       uamDataAgents: [],
+
+      showUploader: false,
       fabPos: [18, 18],
       draggingFab: false
     }
@@ -122,6 +147,19 @@ export default {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
       }
+    },
+
+    vendorSitePldt (val) {
+      const vendor = val.vendor === '' ? '%' : val.vendor
+      const site = val.site === '' ? '%' : val.site
+
+      this.FetchUamDataSummary('Pldt', 'pldt', vendor, site)
+    },
+    vendorSiteSmart (val) {
+      const vendor = val.vendor === '' ? '%' : val.vendor
+      const site = val.site === '' ? '%' : val.site
+
+      this.FetchUamDataSummary('Smart', 'smart', vendor, site)
     }
   },
 
@@ -147,13 +185,10 @@ export default {
       return this.brandList.indexOf(brand) > -1
     },
 
-    async FetchUamDataSummary (brand) {
+    async FetchUamDataSummary (brand, loBrand, vendor, site) {
       try {
-        const loBrand = brand.toLowerCase()
-        const vendor = this.profileType === 'admin' ? '%' : this.user[0].vendor
-
         // QUERY ALL TABLES
-        let { data } = await GetRepo.UamDataSummary2(loBrand, vendor)
+        let { data } = await GetRepo.UamDataSummary2(loBrand, vendor, site)
 
         this[`uamDataSummary${brand}Date`] = data[0]
 
@@ -191,15 +226,41 @@ export default {
       }
     },
 
+    async FetchFilters () {
+      try {
+        const { data: pldtVendor } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'CompanyName')
+        const { data: smartVendor } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Company Name')
+        const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'Site')
+        const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Site')
+
+        this.uamDataSummaryPldtVendors = concat('', pldtVendor.map(m => m.CompanyName))
+        this.uamDataSummarySmartVendors = concat('', smartVendor.map(m => m['Company Name']))
+        this.uamDataSummaryPldtSites = concat('', pldtSite.map(m => m.Site))
+        this.uamDataSummarySmartSites = concat('', smartSite.map(m => m.Site))
+      } catch (err) {
+        const statusText = err.response.statusText
+        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+      }
+    },
+
     fetchData () {
       const _this = this
+      const vendor = _this.profileType === 'admin' ? '%' : _this.vendorType
+      const site = '%'
 
-      if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt')
-      if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart')
+      if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt', 'pldt', vendor, site)
+      if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart', 'smart', vendor, site)
+
+      _this.FetchFilters()
 
       _this.uamDataAgentsType = _this.brandList[0]
       _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
-    }
+    },
+
+    vendorChangePldt (val) { this.uamDataSummaryPldtVendor = val },
+    vendorChangeSmart (val) { this.uamDataSummarySmartVendor = val },
+    siteChangePldt (val) { this.uamDataSummaryPldtSite = val },
+    siteChangeSmart (val) { this.uamDataSummarySmartSite = val }
   },
 
   async beforeMount () {
@@ -208,6 +269,7 @@ export default {
 
       this.brandList = data[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = data[0].profile
+      this.vendorType = data[0].vendor
       this.showUploader = data[0].upload
 
       // this.SET_USERPROFILE(data)
