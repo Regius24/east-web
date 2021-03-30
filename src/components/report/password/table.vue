@@ -5,7 +5,7 @@
       dense
       flat
       bordered
-      title="IRAB List"
+      title="Password Cases List"
       :data="data"
       :columns="columns"
       row-key="name"
