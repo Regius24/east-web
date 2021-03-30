@@ -144,7 +144,7 @@ export default {
         placeholder: 'No Data Set',
         columns: [
           {
-            title: 'Name',
+            title: '',
             field: 'Name',
             sorter: 'string'
           },

@@ -84,7 +84,7 @@ export default {
 
   methods: {
     exportData () {
-      const title = 'IRAB List'
+      const title = 'Password Case List'
       this.export(title, unparse(this.data))
     },
 

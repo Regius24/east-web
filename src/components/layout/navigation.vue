@@ -63,7 +63,8 @@ export default {
         { pathName: 'user-access', label: 'User Access', icon: 'mdi-account-details' }
       ],
       reports: [
-        { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-file-chart' }
+        { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-file-chart' },
+        { pathName: 'report-password', label: 'Password Cases', icon: 'mdi-file-chart' }
       ]
     }
   }

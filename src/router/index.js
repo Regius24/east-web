@@ -33,10 +33,11 @@ export default function ({ store } /* { store, ssrContext } */) {
     if (to.meta.allow) {
       if (store.state.data.allow) {
         const { data } = await GetRepo.UserProfile(LocalStorage.getItem('userAccnt'))
-        const { useraccess, irab } = data[0]
+        const { useraccess, irab, password } = data[0]
 
         if (to.name === 'user-access' && useraccess) next()
         else if (to.name === 'report-irab' && irab) next()
+        else if (to.name === 'report-password' && password) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }
