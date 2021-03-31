@@ -54,7 +54,7 @@ export default {
 
             console.log(data)
 
-            notify('Success', 'file uploaded', 'mdi-check', 'green')
+            notify('Success', 'data has been uploaded', 'mdi-check', 'green')
 
             this.loading = false
             this.hide()
@@ -65,7 +65,7 @@ export default {
           } catch (err) {
             console.log(err)
 
-            notify('Error encountered', 'file not uploaded', 'mdi-alert', 'red')
+            notify('Error encountered', 'data not uploaded', 'mdi-alert', 'red')
 
             this.loading = false
           }

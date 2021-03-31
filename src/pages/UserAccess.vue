@@ -178,6 +178,12 @@ export default {
       this.$q.dialog({
         component: () => import('components/user-access/uploader'),
         parent: this
+      }).onOk(() => {
+        console.log('OK')
+      }).onCancel(() => {
+        console.log('Cancel')
+      }).onDismiss(() => {
+        console.log('Called on OK or Cancel')
       })
     },
 

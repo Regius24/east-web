@@ -99,6 +99,12 @@ export default {
       this.$q.dialog({
         component: () => import('components/report/irab/uploader'),
         parent: this
+      }).onOk(() => {
+        console.log('OK')
+      }).onCancel(() => {
+        console.log('Cancel')
+      }).onDismiss(() => {
+        console.log('Called on OK or Cancel')
       })
     }
   },

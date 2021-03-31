@@ -27,7 +27,6 @@
 <script>
 import Papa from 'papaparse'
 import { notify } from 'boot/notifier'
-import { QSpinnerGears } from 'quasar'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -42,8 +41,6 @@ export default {
     parseFile () {
       this.loading = true
 
-      notify('Processing', 'parsing file', QSpinnerGears, 'accent')
-
       Papa.parse(this.file, {
         header: true,
         skipEmptyLines: true,
@@ -54,20 +51,18 @@ export default {
 
             console.log(data)
 
-            notify('Success', 'file uploaded', 'mdi-check', 'green')
-
             this.loading = false
             this.hide()
+
+            notify('Success', 'data has been uploaded', 'mdi-check', 'green')
 
             setTimeout(() => {
               this.$router.go()
             }, 1200)
           } catch (err) {
             console.log(err)
-
-            notify('Error encountered', 'file not uploaded', 'mdi-alert', 'red')
-
             this.loading = false
+            notify('Error encountered', 'data not uploaded', 'mdi-alert', 'red')
           }
         }
       })
