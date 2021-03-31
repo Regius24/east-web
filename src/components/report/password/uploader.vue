@@ -27,7 +27,6 @@
 <script>
 import Papa from 'papaparse'
 import { notify } from 'boot/notifier'
-import { QSpinnerGears } from 'quasar'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -41,8 +40,6 @@ export default {
   methods: {
     parseFile () {
       this.loading = true
-
-      notify('Processing', 'parsing file', QSpinnerGears, 'accent')
 
       Papa.parse(this.file, {
         header: true,

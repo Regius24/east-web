@@ -9,7 +9,7 @@
           outlined
           counter
           accept=".csv"
-          label="Upload data for IRAB (.csv)"
+          label="Upload data for Blacklist (.csv)"
           v-model="file"
           :disable="loading"
           :loading="loading"
@@ -47,18 +47,14 @@ export default {
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
           try {
-            const { data } = await PostRepo.IrabDataRaw(parsed.data)
+            const { data } = await PostRepo.IrabDataBlacklist(parsed.data)
 
-            console.log(data, parsed.data)
+            this.showBlacklistCard(data)
 
             notify('Success', 'data has been uploaded', 'mdi-check', 'green')
 
             this.loading = false
             this.hide()
-
-            setTimeout(() => {
-              this.$router.go()
-            }, 1200)
           } catch (err) {
             console.log(err)
 
@@ -67,6 +63,14 @@ export default {
             this.loading = false
           }
         }
+      })
+    },
+
+    showBlacklistCard (data) {
+      this.$q.dialog({
+        component: () => import('components/report/irab/blacklist'),
+        parent: this,
+        data: data
       })
     },
 
@@ -87,5 +91,9 @@ export default {
       this.hide()
     }
   }
+
+  // mounted () {
+  //   this.showBlacklistCard()
+  // }
 }
 </script>

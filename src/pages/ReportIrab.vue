@@ -16,20 +16,39 @@
       </div>
     </div>
 
-    <!-- UPLOAD BUTTON -->
+    <!-- MENU BUTTON -->
     <q-page-sticky
       position="bottom-right"
       :offset="fabPos"
     >
-      <q-btn
-        fab
-        icon="mdi-file-upload"
+      <q-fab
+        v-model="fabRight"
+        vertical-actions-align="right"
         color="accent"
+        icon="keyboard_arrow_up"
+        direction="up"
         :disable="draggingFab"
         :style="showUploader ? '' : 'display: none;'"
         v-touch-pan.prevent.mouse="moveFab"
-        @click="openUploader"
-      />
+      >
+        <!-- IRAB UPLOAD -->
+        <q-fab-action
+          label-position="left"
+          color="blue-grey"
+          icon="mdi-file-upload"
+          label="Upload Data"
+          @click="openUploader"
+        />
+
+        <!-- BLACKLIST UPLOAD -->
+        <q-fab-action
+          label-position="left"
+          color="blue-grey"
+          icon="mdi-account-cancel"
+          label="Check for Blacklist"
+          @click="openUploaderBlacklist"
+        />
+      </q-fab>
     </q-page-sticky>
   </q-page>
 </template>
@@ -54,6 +73,7 @@ export default {
       raw: [],
 
       showUploader: false,
+      fabRight: false,
       fabPos: [18, 18],
       draggingFab: false
     }
@@ -98,6 +118,18 @@ export default {
     openUploader () {
       this.$q.dialog({
         component: () => import('components/report/irab/uploader'),
+        parent: this
+      }).onOk(() => {
+        console.log('OK')
+      }).onCancel(() => {
+        console.log('Cancel')
+      }).onDismiss(() => {
+        console.log('Called on OK or Cancel')
+      })
+    },
+    openUploaderBlacklist () {
+      this.$q.dialog({
+        component: () => import('components/report/irab/uploader-blacklist'),
         parent: this
       }).onOk(() => {
         console.log('OK')
