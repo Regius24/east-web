@@ -27,6 +27,7 @@
 import 'tabulator-tables/dist/css/tabulator.min.css'
 import jsonata from 'jsonata'
 import Tabulator from 'tabulator-tables'
+import { isArray } from 'lodash'
 
 export default {
   name: 'Summary',
@@ -84,8 +85,15 @@ export default {
         })
       `)
 
-      this.processedData = expression.evaluate(val)
-      this.renderTable()
+      const procData = expression.evaluate(val)
+
+      if (isArray(procData)) {
+        this.processedData = procData
+        this.renderTable()
+      } else {
+        this.processedData = [procData]
+        this.renderTable()
+      }
     },
     month (val) {
       this.$emit('monthChange', val)
@@ -101,7 +109,7 @@ export default {
         maxHeight: 400,
         data: this.processedData,
         dataTree: true,
-        dataTreeStartExpanded: [true, false],
+        dataTreeStartExpanded: [true],
         index: 'Name',
         placeholder: 'No Data Set',
         columns: [

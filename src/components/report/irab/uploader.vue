@@ -52,16 +52,16 @@ export default {
           try {
             const { data } = await PostRepo.IrabDataRaw(parsed.data)
 
-            console.log(data)
+            console.log(data, parsed.data)
 
             notify('Success', 'file uploaded', 'mdi-check', 'green')
 
             this.loading = false
             this.hide()
 
-            setTimeout(() => {
-              this.$router.go()
-            }, 1200)
+            // setTimeout(() => {
+            //   this.$router.go()
+            // }, 1200)
           } catch (err) {
             console.log(err)
 
