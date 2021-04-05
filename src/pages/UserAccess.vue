@@ -196,6 +196,8 @@ export default {
         // QUERY ALL TABLES
         let { data } = await GetRepo.UamDataSummary2(loBrand, vendor, site)
 
+        console.log(JSON.stringify(data))
+
         this[`uamDataSummary${brand}Date`] = data[0]
 
         // FORMAT JSON
@@ -214,6 +216,7 @@ export default {
                     } ~> $each(function($v3, $k3) {
                         {
                             'Name': $k3,
+                            'LockedFte': $v3.LockedFte,
                             'Agents': $sum($v3.Agents),
                             'Complete': $sum($v3.Complete),
                             'Percent': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)

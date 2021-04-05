@@ -1,12 +1,19 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lff">
     <!-- HEADER -->
-    <q-header>
+    <q-header elevated>
       <TOOLBAR />
     </q-header>
 
     <!-- DRAWER -->
-    <q-drawer v-model="openDrawer">
+    <q-drawer
+      elevated
+      mini-to-overlay
+      v-model="openDrawer"
+      :mini="miniDrawer"
+      @mouseover="miniDrawer = false"
+      @mouseout="miniDrawer = true"
+    >
       <NAVIGATION />
     </q-drawer>
 
@@ -38,6 +45,14 @@ export default {
       },
       set: function (val) {
         this.$store.commit('data/SET_OPENDRAWER', val)
+      }
+    },
+    miniDrawer: {
+      get: function () {
+        return this.$store.state.data.miniDrawer
+      },
+      set: function (val) {
+        this.$store.commit('data/SET_MINIDRAWER', val)
       }
     }
   }

@@ -3,6 +3,7 @@ export default function () {
     allow: false,
     // user: null,
     // userProfile: [],
-    openDrawer: false
+    openDrawer: false,
+    miniDrawer: true
   }
 }
