@@ -131,8 +131,8 @@ export default {
     renderTable () {
       const _this = this
       _this.tabulator = new Tabulator(this.$refs.table, {
-        layout: 'fitDataStretch',
-        maxHeight: 300,
+        layout: 'fitData',
+        maxHeight: 310,
         data: this.data,
         dataTree: true,
         index: 'Name',
@@ -146,7 +146,8 @@ export default {
           {
             title: 'LOB',
             field: 'Name',
-            sorter: 'string'
+            sorter: 'string',
+            width: '30px'
           },
           {
             title: 'Locked FTE',

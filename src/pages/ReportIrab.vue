@@ -25,7 +25,7 @@
         v-model="fabRight"
         vertical-actions-align="right"
         color="accent"
-        icon="keyboard_arrow_up"
+        icon="mdi-menu"
         direction="up"
         :disable="draggingFab"
         :style="showUploader ? '' : 'display: none;'"

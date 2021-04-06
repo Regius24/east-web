@@ -89,7 +89,7 @@ export default {
     },
 
     export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'primary')
+      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
       exportFile(`${name}.csv`, data)
     }
   }

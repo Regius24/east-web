@@ -196,8 +196,6 @@ export default {
         // QUERY ALL TABLES
         let { data } = await GetRepo.UamDataSummary2(loBrand, vendor, site)
 
-        console.log(JSON.stringify(data))
-
         this[`uamDataSummary${brand}Date`] = data[0]
 
         // FORMAT JSON
