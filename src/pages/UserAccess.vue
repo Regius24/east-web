@@ -3,8 +3,8 @@
     <div class="row justify-center q-col-gutter-sm">
       <!-- SUMMARY REPORT PLDT -->
       <div
-        class="col-10 col-sm-10"
-        :class="brandList.length > 1 ? 'col-md-5' : ''"
+        class="col-12 col-sm-12"
+        :class="brandList.length > 1 ? 'col-md-6' : ''"
         v-show="brandCheck('Pldt')"
       >
         <SUMMARY
@@ -22,8 +22,8 @@
 
       <!-- SUMMARY REPORT SMART -->
       <div
-        class="col-10 col-sm-10"
-        :class="brandList.length > 1 ? 'col-md-5' : ''"
+        class="col-12 col-sm-12"
+        :class="brandList.length > 1 ? 'col-md-6' : ''"
         v-show="brandCheck('Smart')"
       >
         <SUMMARY
@@ -40,7 +40,7 @@
       </div>
 
       <!-- AGENT LIST REPORT -->
-      <div class="col-10">
+      <div class="col-12 col-sm-12">
         <q-card>
           <q-card-section>
             <!-- BRAND SELECTOR -->

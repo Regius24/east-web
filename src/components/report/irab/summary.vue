@@ -104,7 +104,7 @@ export default {
     renderTable () {
       const _this = this
       _this.tabulator = new Tabulator(this.$refs.table, {
-        layout: 'fitDataFill',
+        layout: 'fitColumns',
         virtualDomHoz: true,
         maxHeight: 400,
         data: this.processedData,
@@ -114,7 +114,7 @@ export default {
         placeholder: 'No Data Set',
         columns: [
           {
-            title: '',
+            title: 'BRAND',
             field: 'Name',
             sorter: 'string'
           },

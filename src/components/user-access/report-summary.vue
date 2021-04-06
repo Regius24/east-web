@@ -147,7 +147,7 @@ export default {
             title: 'LOB',
             field: 'Name',
             sorter: 'string',
-            width: '30px'
+            width: '26px'
           },
           {
             title: 'Locked FTE',
@@ -167,7 +167,7 @@ export default {
             topCalc: 'sum'
           },
           {
-            title: '% of Agents with Compelete Tools',
+            title: '% Compelete Tools',
             field: 'Percent',
             sorter: 'number',
             formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
@@ -180,19 +180,19 @@ export default {
           }
         ],
         clipboard: true,
-        printAsHtml: true,
-        rowClick: (e, row) => {
-          if (row.getTreeParent()) {
-            const Vendor = row.getIndex()
-            const { Name: Lob, Table } = row.getTreeParent().getData()
+        printAsHtml: true
+        // rowClick: (e, row) => {
+        //   if (row.getTreeParent()) {
+        //     const Vendor = row.getIndex()
+        //     const { Name: Lob, Table } = row.getTreeParent().getData()
 
-            _this.FetchUamDataFiltered(Lob, Vendor, Table)
-          } else {
-            const { Name: Lob, Table } = row.getData()
+        //     _this.FetchUamDataFiltered(Lob, Vendor, Table)
+        //   } else {
+        //     const { Name: Lob, Table } = row.getData()
 
-            _this.FetchUamDataFiltered(Lob, '%', Table)
-          }
-        }
+        //     _this.FetchUamDataFiltered(Lob, '%', Table)
+        //   }
+        // }
       })
 
       this.tabulator.setSort([

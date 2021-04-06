@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-sm">
       <!-- SUMMARY -->
-      <div class="col-10">
+      <div class="col-12">
         <SUMMARY
           :data="summary"
           :months="months"
@@ -11,7 +11,7 @@
       </div>
 
       <!-- TABLE -->
-      <div class="col-10">
+      <div class="col-12">
         <TABLE :data="raw" />
       </div>
     </div>
