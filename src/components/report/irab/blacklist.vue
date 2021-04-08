@@ -21,6 +21,23 @@
           color="accent"
         >
           <template v-slot:top-right>
+            <!-- BUTTONS -->
+            <q-btn-group
+              flat
+              class="q-mr-sm"
+            >
+              <q-btn
+                flat
+                color="accent"
+                label="CSV"
+                @click="exportData"
+              >
+                <q-tooltip content-class="bg-accent">
+                  Download Data
+                </q-tooltip>
+              </q-btn>
+            </q-btn-group>
+
             <!-- SEARCH -->
             <q-input
               borderless
@@ -42,6 +59,9 @@
 
 <script>
 import { first } from 'lodash'
+import { exportFile } from 'quasar'
+import { unparse } from 'papaparse'
+import { notify } from 'boot/notifier'
 
 export default {
   props: ['data'],
@@ -49,7 +69,6 @@ export default {
   data () {
     return {
       filter: ''
-      // columns: []
     }
   },
 
@@ -70,6 +89,16 @@ export default {
   },
 
   methods: {
+    exportData () {
+      const title = 'IRAB BlackList'
+      this.export(title, unparse(this.data))
+    },
+
+    export (name, data) {
+      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
+      exportFile(`${name}.csv`, data)
+    },
+
     show () {
       this.$refs.dialog.show()
     },
