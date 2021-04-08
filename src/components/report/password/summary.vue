@@ -100,7 +100,8 @@ export default {
           {
             title: 'AMOUNT',
             field: 'AMOUNT',
-            sorter: 'number'
+            sorter: 'number',
+            formatter: 'money'
           }
         ]
       })

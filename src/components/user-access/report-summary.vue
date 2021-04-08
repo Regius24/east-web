@@ -86,7 +86,6 @@
 
 <script>
 import 'tabulator-tables/dist/css/tabulator.min.css'
-// import 'tabulator-tables/dist/css/tabulator_midnight.min.css'
 import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
 import { exportFile } from 'quasar'

@@ -82,7 +82,7 @@
 <script>
 import { date } from 'quasar'
 import { mapActions } from 'vuex'
-import { flatten, concat } from 'lodash'
+import { flatten, concat, sortBy, indexOf } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
@@ -195,6 +195,7 @@ export default {
       try {
         // QUERY ALL TABLES
         let { data } = await GetRepo.UamDataSummary2(loBrand, vendor, site)
+        const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
 
         this[`uamDataSummary${brand}Date`] = data[0]
 
@@ -224,7 +225,7 @@ export default {
             })
           })
         `)
-        data = expression.evaluate(data)
+        data = expression.evaluate(sortBy(data, obj => indexOf(tableOrder, obj.Table)))
 
         this[`uamDataSummary${brand}`] = flatten(data)
       } catch (err) {
