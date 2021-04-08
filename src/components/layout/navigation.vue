@@ -66,7 +66,8 @@ export default {
       ],
       reports: [
         { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-account-lock' },
-        { pathName: 'report-password', label: 'Password Cases', icon: 'mdi-lock-clock' }
+        { pathName: 'report-password', label: 'Password Cases', icon: 'mdi-lock-clock' },
+        { pathName: 'report-onehub', label: 'Onehub', icon: 'mdi-ticket-confirmation' }
       ]
     }
   }

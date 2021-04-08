@@ -131,7 +131,7 @@ export default {
     renderTable () {
       const _this = this
       _this.tabulator = new Tabulator(this.$refs.table, {
-        layout: 'fitData',
+        layout: 'fitDataStretch',
         maxHeight: 310,
         data: this.data,
         dataTree: true,
@@ -147,7 +147,7 @@ export default {
             title: 'LOB',
             field: 'Name',
             sorter: 'string',
-            width: '26px'
+            width: '35px'
           },
           {
             title: 'Locked FTE',
@@ -167,7 +167,7 @@ export default {
             topCalc: 'sum'
           },
           {
-            title: '% Compelete Tools',
+            title: 'Score',
             field: 'Percent',
             sorter: 'number',
             formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
