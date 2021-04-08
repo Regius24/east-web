@@ -11,8 +11,8 @@ export default {
   UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataAgentsDetailed: ({ BRAND, LOB, VENDOR, TABLE }) => axios.get(`${resource}UamDataAgentsDetailed?brand=${BRAND}&lob=${LOB}&vendor=${VENDOR}&table=${TABLE}`),
   UamDataAgentsDistinctCol: (BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsDistinctCol?brand=${BRAND}&category=${CATEGORY}`),
-  IrabData: () => axios.get(`${resource}IrabData`),
-  IrabDataSummary: (MONTH) => axios.get(`${resource}IrabDataSummary?month=${MONTH}`),
+  IrabData: (VENDOR) => axios.get(`${resource}IrabData?vendor=${VENDOR}`),
+  IrabDataSummary: (MONTH, VENDOR) => axios.get(`${resource}IrabDataSummary?month=${MONTH}&vendor=${VENDOR}`),
   PasswordData: () => axios.get(`${resource}PasswordData`),
   PasswordDataSummary: (MONTH) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}`)
 }

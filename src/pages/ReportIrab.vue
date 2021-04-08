@@ -72,6 +72,7 @@ export default {
       summary: [],
       raw: [],
 
+      profileType: '',
       showUploader: false,
       fabRight: false,
       fabPos: [18, 18],
@@ -80,21 +81,20 @@ export default {
   },
 
   watch: {
-    async months (val) {
-      const { data: summary } = await GET.IrabDataSummary(first(val))
-      this.summary = summary
+    profileType (val) {
+      this.fetchRaw(val)
+    },
+    months (val) {
+      this.fetchSummary(val)
     }
   },
 
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { data: raw } = await GET.IrabData()
 
-      this.raw = raw
-      this.months = uniq(flatten(raw.map(m => m.MONTH)))
-      this.months.unshift('')
       this.showUploader = first(user).upload
+      this.profileType = first(user).profile
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
@@ -102,6 +102,20 @@ export default {
   },
 
   methods: {
+    async fetchSummary (month) {
+      const vendor = this.profileType === 'admin' ? '%' : this.profileType
+      const { data: summary } = await GET.IrabDataSummary(first(month), vendor)
+      this.summary = summary
+    },
+    async fetchRaw (profile) {
+      const vendor = profile === 'admin' ? '%' : profile
+      const { data: raw } = await GET.IrabData(vendor)
+
+      this.raw = raw
+      this.months = uniq(flatten(raw.map(m => m.MONTH)))
+      this.months.unshift('')
+    },
+
     async monthChange (val) {
       const { data: summary } = await GET.IrabDataSummary(val)
       this.summary = summary
