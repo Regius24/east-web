@@ -85,7 +85,8 @@ export default {
       this.fetchRaw(val)
     },
     months (val) {
-      this.fetchSummary(val)
+      const vendor = this.profileType === 'admin' ? '%' : this.profileType
+      this.fetchSummary(first(val), vendor)
     }
   },
 
@@ -102,9 +103,8 @@ export default {
   },
 
   methods: {
-    async fetchSummary (month) {
-      const vendor = this.profileType === 'admin' ? '%' : this.profileType
-      const { data: summary } = await GET.IrabDataSummary(first(month), vendor)
+    async fetchSummary (month, vendor) {
+      const { data: summary } = await GET.IrabDataSummary(month, vendor)
       this.summary = summary
     },
     async fetchRaw (profile) {
@@ -117,8 +117,8 @@ export default {
     },
 
     async monthChange (val) {
-      const { data: summary } = await GET.IrabDataSummary(val)
-      this.summary = summary
+      const vendor = this.profileType === 'admin' ? '%' : this.profileType
+      this.fetchSummary(val, vendor)
     },
 
     moveFab (ev) {
