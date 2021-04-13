@@ -57,7 +57,7 @@ export default {
     },
     openUploader () {
       this.$q.dialog({
-        component: () => import('components/report/onehub/uploader'),
+        component: () => import('components/report/onehub/uploader2'),
         parent: this
       }).onOk(() => {
         console.log('OK')

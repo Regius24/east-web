@@ -8,8 +8,8 @@
         <q-file
           outlined
           counter
-          accept=".csv"
-          label="Upload a file (.csv)"
+          accept=".xlsx"
+          label="Upload data for Onehub (.xlsx)"
           v-model="file"
           :disable="loading"
           :loading="loading"
@@ -40,7 +40,7 @@ export default {
     async processFile (file) {
       const formData = new FormData()
       formData.append('file', file)
-      const result = await PostRepo.OnehubData(formData)
+      const result = await PostRepo.UploadOnehubFile(formData)
       console.log(result)
     },
 
