@@ -14,5 +14,6 @@ export default {
   IrabData: (VENDOR) => axios.get(`${resource}IrabData?vendor=${VENDOR}`),
   IrabDataSummary: (MONTH, VENDOR) => axios.get(`${resource}IrabDataSummary?month=${MONTH}&vendor=${VENDOR}`),
   PasswordData: () => axios.get(`${resource}PasswordData`),
-  PasswordDataSummary: (MONTH) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}`)
+  PasswordDataSummary: (MONTH) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}`),
+  OnehubData: () => axios.get(`${resource}OnehubData`)
 }

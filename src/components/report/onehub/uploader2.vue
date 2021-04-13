@@ -9,11 +9,11 @@
           outlined
           counter
           accept=".csv"
-          label="Upload data for Onehub (.csv)"
+          label="Upload a file (.csv)"
           v-model="file"
           :disable="loading"
           :loading="loading"
-          @input="parseFile"
+          @input="processFile"
         >
           <template v-slot:prepend>
             <q-icon name="attach_file" />
@@ -25,8 +25,7 @@
 </template>
 
 <script>
-import Papa from 'papaparse'
-import { notify } from 'boot/notifier'
+// import { notify } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -38,36 +37,11 @@ export default {
   },
 
   methods: {
-    parseFile () {
-      this.loading = true
-
-      Papa.parse(this.file, {
-        header: true,
-        skipEmptyLines: true,
-        transformHeader: col => col.split(' ').join('').trim(),
-        complete: async (parsed, file) => {
-          try {
-            const { data } = await PostRepo.OnehubData(parsed.data)
-
-            console.log(data)
-
-            notify('Success', 'data has been uploaded', 'mdi-check', 'green')
-
-            this.loading = false
-            this.hide()
-
-            setTimeout(() => {
-              this.$router.go()
-            }, 1200)
-          } catch (err) {
-            console.log(err)
-
-            notify('Error encountered', 'data not uploaded', 'mdi-alert', 'red')
-
-            this.loading = false
-          }
-        }
-      })
+    async processFile (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+      const result = await PostRepo.OnehubData(formData)
+      console.log(result)
     },
 
     show () {

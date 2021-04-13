@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row justify-center">
       <div class="col-12">
-        <TABLE />
+        <TABLE :data="raw" />
       </div>
     </div>
 
@@ -40,7 +40,9 @@ export default {
     return {
       showUploader: false,
       fabPos: [18, 18],
-      draggingFab: false
+      draggingFab: false,
+
+      raw: []
     }
   },
 
@@ -70,8 +72,10 @@ export default {
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { data: raw } = await GET.OnehubData()
 
       this.showUploader = first(user).upload
+      this.raw = raw
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
