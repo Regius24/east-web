@@ -12,6 +12,7 @@
       separator="vertical"
       :filter="filter"
       color="accent"
+      :loading="data.length > 0 ? false : true"
     >
       <template v-slot:top-right>
         <!-- BUTTONS -->

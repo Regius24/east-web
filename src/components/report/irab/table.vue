@@ -5,13 +5,14 @@
       dense
       flat
       bordered
+      color="accent"
+      separator="vertical"
       title="IRAB List"
       :data="data"
       :columns="columns"
       row-key="name"
-      separator="vertical"
       :filter="filter"
-      color="accent"
+      :loading="data.length > 0 ? false : true"
     >
       <!-- FILTERS -->
       <template v-slot:top-right>

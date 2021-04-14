@@ -5,7 +5,7 @@
       dense
       flat
       bordered
-      title="Password Cases List"
+      title="Onehub List"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -16,6 +16,7 @@
       :pagination.sync="pagination"
       :rows-per-page-options="[0]"
       style="max-height: 80vh;"
+      :loading="data.length > 0 ? false : true"
     >
       <template v-slot:top-right>
         <!-- BUTTONS -->

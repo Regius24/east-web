@@ -1,8 +1,18 @@
 <template>
   <q-page padding>
-    <div class="row justify-center">
+    <div class="row justify-center q-col-gutter-sm">
+      <!-- SMART -->
       <div class="col-12 col-md-6">
         <SUMMARY />
+      </div>
+
+      <!-- PLDT -->
+      <div class="col-12 col-md-6">
+        <SUMMARY />
+      </div>
+
+      <div class="col-12">
+        <TABLE />
       </div>
     </div>
   </q-page>
@@ -20,7 +30,8 @@ export default {
   name: 'UserAccessHistory',
 
   components: {
-    SUMMARY: () => import('components/user-access-history/summary')
+    SUMMARY: () => import('components/user-access-history/summary'),
+    TABLE: () => import('components/user-access-history/table')
   },
 
   mounted () {
