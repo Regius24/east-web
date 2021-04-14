@@ -194,7 +194,7 @@ export default {
     async FetchUamDataSummary (brand, loBrand, vendor, site) {
       try {
         // QUERY ALL TABLES
-        let { data } = await GetRepo.UamDataSummary2(loBrand, vendor, site)
+        let { data } = await GetRepo.UamDataSummary(loBrand, vendor, site)
         const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
 
         this[`uamDataSummary${brand}Date`] = data[0]
