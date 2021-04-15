@@ -113,13 +113,13 @@ export default {
       uamDataSummaryPldtDate: null,
       uamDataSummarySmartDate: null,
 
-      uamDataSummaryPldtVendor: '',
+      uamDataSummaryPldtVendor: 'All',
       uamDataSummaryPldtVendors: [],
-      uamDataSummarySmartVendor: '',
+      uamDataSummarySmartVendor: 'All',
       uamDataSummarySmartVendors: [],
-      uamDataSummaryPldtSite: '',
+      uamDataSummaryPldtSite: 'All',
       uamDataSummaryPldtSites: [],
-      uamDataSummarySmartSite: '',
+      uamDataSummarySmartSite: 'All',
       uamDataSummarySmartSites: [],
 
       uamDataAgentsType: '',
@@ -150,14 +150,14 @@ export default {
     },
 
     vendorSitePldt (val) {
-      const vendor = val.vendor === '' ? '%' : val.vendor
-      const site = val.site === '' ? '%' : val.site
+      const vendor = val.vendor === 'All' ? '%' : val.vendor
+      const site = val.site === 'All' ? '%' : val.site
 
       this.FetchUamDataSummary('Pldt', 'pldt', vendor, site)
     },
     vendorSiteSmart (val) {
-      const vendor = val.vendor === '' ? '%' : val.vendor
-      const site = val.site === '' ? '%' : val.site
+      const vendor = val.vendor === 'All' ? '%' : val.vendor
+      const site = val.site === 'All' ? '%' : val.site
 
       this.FetchUamDataSummary('Smart', 'smart', vendor, site)
     }
@@ -200,31 +200,6 @@ export default {
         this[`uamDataSummary${brand}Date`] = data[0]
 
         // FORMAT JSON
-        // const expression = jsonata(`
-        //   $ { Table: $ } ~> $each(function($v1, $k1){
-        //     $v1 { Lob: $ } ~> $each(function($v2, $k2){
-        //         {
-        //             'Table': $distinct($v2.Table),
-        //             'Date': $distinct($v2.Date),
-        //             'Name': $k2,
-        //             'Agents': $sum($v2.Agents),
-        //             'Complete': $sum($v2.Complete),
-        //             'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
-        //             '_children': $v2 {
-        //                 Vendor: $
-        //             } ~> $each(function($v3, $k3) {
-        //                 {
-        //                     'Name': $k3,
-        //                     'LockedFte': $v3.LockedFte,
-        //                     'Agents': $sum($v3.Agents),
-        //                     'Complete': $sum($v3.Complete),
-        //                     'Percent': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
-        //                 }
-        //             })
-        //         }
-        //     })
-        //   })
-        // `)
         const expression = jsonata(`
           $ { Table: $ } ~> $each(function($v1, $k1){
               {
@@ -271,10 +246,10 @@ export default {
         const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'Site')
         const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Site')
 
-        this.uamDataSummaryPldtVendors = concat('', pldtVendor.map(m => m.CompanyName))
-        this.uamDataSummarySmartVendors = concat('', smartVendor.map(m => m['Company Name']))
-        this.uamDataSummaryPldtSites = concat('', pldtSite.map(m => m.Site))
-        this.uamDataSummarySmartSites = concat('', smartSite.map(m => m.Site))
+        this.uamDataSummaryPldtVendors = concat('All', pldtVendor.map(m => m.CompanyName))
+        this.uamDataSummarySmartVendors = concat('All', smartVendor.map(m => m['Company Name']))
+        this.uamDataSummaryPldtSites = concat('All', pldtSite.map(m => m.Site))
+        this.uamDataSummarySmartSites = concat('All', smartSite.map(m => m.Site))
       } catch (err) {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')

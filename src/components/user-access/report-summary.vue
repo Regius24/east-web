@@ -21,7 +21,7 @@
           outlined
           v-model="vendor"
           :options="vendors"
-          :display-value="`Company Name: ${vendor ? vendor : '*none*'}`"
+          :display-value="`Company Name: ${vendor}`"
           :disable="vendorDis"
         />
       </div>
@@ -32,7 +32,7 @@
           outlined
           v-model="site"
           :options="sites"
-          :display-value="`Site: ${site ? site : '*none*'}`"
+          :display-value="`Site: ${site}`"
         />
       </div>
 
@@ -83,10 +83,11 @@
 import 'tabulator-tables/dist/css/tabulator.min.css'
 import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
-import GetRepo from 'src/repository/get'
-import { notify } from 'boot/notifier'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+
+// import GetRepo from 'src/repository/get'
+// import { notify } from 'boot/notifier'
 
 window.jsPDF = jsPDF
 window.XLSX = XLSX
@@ -117,21 +118,20 @@ export default {
   data () {
     return {
       tabulator: null,
-      vendor: '',
-      site: ''
+      vendor: 'All',
+      site: 'All'
     }
   },
 
   methods: {
     renderTable () {
-      const _this = this
-      _this.tabulator = new Tabulator(this.$refs.table, {
+      this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
         data: this.data,
         dataTree: true,
         dataTreeStartExpanded: false,
-        placeholder: 'No Data Set',
+        placeholder: 'No data to show...',
         columns: [
           {
             title: 'Name',
@@ -192,49 +192,6 @@ export default {
       ])
     },
 
-    async FetchUamDataSummary () {
-      try {
-        const brand = this.title.split(' ')[0]
-        const loBrand = brand.toLowerCase()
-
-        const { data } = await GetRepo.UamDataSummary2(loBrand)
-
-        return data
-      } catch (err) {
-        const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
-      }
-    },
-
-    async FetchUamDataFiltered (lob, vendor, table) {
-      const brand = this.title.split(' ')[0].toUpperCase()
-      const payload = {
-        brand: brand,
-        lob: lob,
-        vendor: vendor,
-        table: table
-      }
-
-      this.$q.loadingBar.start()
-      notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-
-      try {
-        const { data } = await GetRepo.UamDataAgentsDetailed(payload)
-
-        this.$q.dialog({
-          component: () => import('./report-agents-detailed'),
-          parent: this,
-          data: data,
-          title: `${brand} ${lob}`
-        })
-
-        this.$q.loadingBar.stop()
-      } catch (err) {
-        console.log(err)
-        this.$q.loadingBar.stop()
-      }
-    },
-
     xlsxTable () {
       this.tabulator.download('xlsx', `${this.title}.xlsx`)
     },
@@ -252,12 +209,6 @@ export default {
           }
         }
       })
-    },
-
-    htmlTable () {
-      this.tabulator.copyToClipboard()
-      // console.log(this.tabulator.getHtml())
-      // this.tabulator.download('html', 'data.html', { style: true })
     }
   },
 
