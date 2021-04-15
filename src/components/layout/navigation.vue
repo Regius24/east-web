@@ -1,6 +1,5 @@
 <template>
   <q-list>
-
     <!-- NAVIGATION LINKS -->
     <q-item-label
       header
@@ -18,7 +17,7 @@
     >
       <q-item-section avatar>
         <q-icon
-          color="yellow-8"
+          class="exact-active-class"
           :name="route.icon"
         />
       </q-item-section>
@@ -45,7 +44,7 @@
     >
       <q-item-section avatar>
         <q-icon
-          color="yellow-8"
+          class="exact-active-class"
           :name="report.icon"
         />
       </q-item-section>

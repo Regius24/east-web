@@ -5,9 +5,11 @@
       flat
       dense
       round
-      :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
-      icon="menu"
       aria-label="Menu"
+      icon="mdi-chevron-left"
+      :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
+      :class="openDrawer ? 'rotate-0' : 'rotate-180'"
+      style="transition: all ease 0.3s;"
       @click="triggerDrawer"
     />
 

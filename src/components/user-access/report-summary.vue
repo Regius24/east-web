@@ -214,6 +214,7 @@ export default {
 
   mounted () {
     this.renderTable()
+    console.log(this.tabulator)
   }
 }
 </script>
