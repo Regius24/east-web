@@ -82,7 +82,7 @@
 <script>
 import { date } from 'quasar'
 import { mapActions } from 'vuex'
-import { flatten, concat, sortBy, indexOf } from 'lodash'
+import { concat, sortBy, indexOf } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
@@ -200,34 +200,64 @@ export default {
         this[`uamDataSummary${brand}Date`] = data[0]
 
         // FORMAT JSON
+        // const expression = jsonata(`
+        //   $ { Table: $ } ~> $each(function($v1, $k1){
+        //     $v1 { Lob: $ } ~> $each(function($v2, $k2){
+        //         {
+        //             'Table': $distinct($v2.Table),
+        //             'Date': $distinct($v2.Date),
+        //             'Name': $k2,
+        //             'Agents': $sum($v2.Agents),
+        //             'Complete': $sum($v2.Complete),
+        //             'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
+        //             '_children': $v2 {
+        //                 Vendor: $
+        //             } ~> $each(function($v3, $k3) {
+        //                 {
+        //                     'Name': $k3,
+        //                     'LockedFte': $v3.LockedFte,
+        //                     'Agents': $sum($v3.Agents),
+        //                     'Complete': $sum($v3.Complete),
+        //                     'Percent': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
+        //                 }
+        //             })
+        //         }
+        //     })
+        //   })
+        // `)
         const expression = jsonata(`
           $ { Table: $ } ~> $each(function($v1, $k1){
-            $v1 { Lob: $ } ~> $each(function($v2, $k2){ 
-                {
-                    'Table': $distinct($v2.Table),
-                    'Date': $distinct($v2.Date),
-                    'Name': $k2,
-                    'Agents': $sum($v2.Agents),
-                    'Complete': $sum($v2.Complete),
-                    'Percent': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
-                    '_children': $v2 { 
-                        Vendor: $ 
-                    } ~> $each(function($v3, $k3) {
-                        {
-                            'Name': $k3,
-                            'LockedFte': $v3.LockedFte,
-                            'Agents': $sum($v3.Agents),
-                            'Complete': $sum($v3.Complete),
-                            'Percent': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
-                        }
-                    })
-                }
-            })
+              {
+                  'Date': $distinct($v1.Date),
+                  'Name': $k1,
+                  'LockedFte': '',
+                  'Agents': $sum($v1.Agents),
+                  'Complete': $sum($v1.Complete),
+                  'Score': $round(($sum($v1.Complete)/$sum($v1.Agents)) * 100, 2),
+                  '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
+                      {
+                          'Name': $k2,
+                          'LockedFte': '',
+                          'Agents': $sum($v2.Agents),
+                          'Complete': $sum($v2.Complete),
+                          'Score': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
+                          '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
+                              {
+                                  'Name': $k3,
+                                  'LockedFte': $v3.LockedFte,
+                                  'Agents': $sum($v3.Agents),
+                                  'Complete': $sum($v3.Complete),
+                                  'Score': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
+                              }
+                          })
+                      }
+                  })
+              }
           })
         `)
         data = expression.evaluate(sortBy(data, obj => indexOf(tableOrder, obj.Table)))
 
-        this[`uamDataSummary${brand}`] = flatten(data)
+        this[`uamDataSummary${brand}`] = data
       } catch (err) {
         const statusText = err.response.statusText
         notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')

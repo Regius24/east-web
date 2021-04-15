@@ -2,9 +2,7 @@
   <q-card>
     <!-- TABLE -->
     <q-table
-      dense
       flat
-      bordered
       color="accent"
       separator="vertical"
       title="IRAB List"

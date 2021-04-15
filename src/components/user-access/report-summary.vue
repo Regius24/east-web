@@ -15,7 +15,7 @@
 
     <!-- FILTERS -->
     <q-card-section class="row justify-center q-col-gutter-sm">
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-5">
         <q-select
           dense
           outlined
@@ -26,7 +26,7 @@
         />
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-5">
         <q-select
           dense
           outlined
@@ -37,23 +37,34 @@
       </div>
 
       <div class="col-12 col-md-2">
-        <q-btn
+        <q-btn-dropdown
           outline
-          label="XLSX"
           color="accent"
+          dropdown-icon="mdi-file-download"
           class="fit"
-          @click="xlsxTable"
-        />
-      </div>
+        >
+          <q-list>
+            <q-item
+              clickable
+              v-close-popup
+              @click="xlsxTable"
+            >
+              <q-item-section>
+                <q-item-label>XLSX</q-item-label>
+              </q-item-section>
+            </q-item>
 
-      <div class="col-12 col-md-2">
-        <q-btn
-          outline
-          label="PDF"
-          color="accent"
-          class="fit"
-          @click="pdfTable"
-        />
+            <q-item
+              clickable
+              v-close-popup
+              @click="pdfTable"
+            >
+              <q-item-section>
+                <q-item-label>PDF</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </div>
     </q-card-section>
 
@@ -117,19 +128,13 @@ export default {
       _this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
-        index: 'Name',
         data: this.data,
         dataTree: true,
         dataTreeStartExpanded: false,
-        groupBy: 'Table',
-        groupStartOpen: false,
-        groupClosedShowCalcs: true,
-        groupHeader: (value, count) => `${value} (${count} items)`,
-        groupToggleElement: 'header',
         placeholder: 'No Data Set',
         columns: [
           {
-            title: 'LOB',
+            title: 'Name',
             field: 'Name',
             sorter: 'string',
             width: '35px'
@@ -153,7 +158,7 @@ export default {
           },
           {
             title: 'Score',
-            field: 'Percent',
+            field: 'Score',
             sorter: 'number',
             formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
             topCalc: (values, data) => {
@@ -166,7 +171,7 @@ export default {
         ],
         downloadConfig: {
           rowGroups: true,
-          dataTree: false
+          dataTree: true
         }
         // rowClick: (e, row) => {
         //   if (row.getTreeParent()) {

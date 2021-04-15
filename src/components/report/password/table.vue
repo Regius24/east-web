@@ -2,9 +2,7 @@
   <q-card>
     <!-- TABLE -->
     <q-table
-      dense
       flat
-      bordered
       title="Password Cases List"
       :data="data"
       :columns="columns"

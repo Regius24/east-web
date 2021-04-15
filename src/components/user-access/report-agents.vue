@@ -1,8 +1,6 @@
 <template>
   <q-table
-    dense
     flat
-    bordered
     title="Agent List"
     :data="data"
     :columns="columns"
@@ -19,7 +17,7 @@
         class="q-mr-sm"
       >
         <q-btn
-          flat
+          outline
           color="accent"
           label="CSV"
           :disable="loading"

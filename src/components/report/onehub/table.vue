@@ -2,9 +2,7 @@
   <q-card>
     <!-- TABLE -->
     <q-table
-      dense
       flat
-      bordered
       title="Onehub List"
       :data="data"
       :columns="columns"
