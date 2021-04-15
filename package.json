@@ -17,6 +17,8 @@
     "fancy-grid-vue": "^1.0.6",
     "fancygrid": "^1.7.148",
     "jsonata": "^1.8.4",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.14",
     "lodash": "^4.17.20",
     "msal": "^1.4.4",
     "papaparse": "^5.3.0",

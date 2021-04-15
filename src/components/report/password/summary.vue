@@ -76,8 +76,7 @@ export default {
 
   methods: {
     renderTable () {
-      const _this = this
-      _this.tabulator = new Tabulator(this.$refs.table, {
+      this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitColumns',
         virtualDomHoz: true,
         maxHeight: 400,
@@ -101,10 +100,17 @@ export default {
             title: 'AMOUNT',
             field: 'AMOUNT',
             sorter: 'number',
-            formatter: 'money'
+            formatter: 'money',
+            formatterParams: {
+              precision: false
+            }
           }
         ]
       })
+
+      this.tabulator.setSort([
+        { column: 'COUNT', dir: 'desc' }
+      ])
     }
   }
 }

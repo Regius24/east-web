@@ -14,73 +14,57 @@
     </q-card-section>
 
     <!-- FILTERS -->
-    <q-card-section class="row q-col-gutter-sm">
-      <q-select
-        dense
-        outlined
-        class="col-12 col-md-6"
-        v-model="vendor"
-        :options="vendors"
-        :display-value="`Company Name: ${vendor ? vendor : '*none*'}`"
-        :disable="vendorDis"
-      />
-      <q-select
-        dense
-        outlined
-        class="col-12 col-md-6"
-        v-model="site"
-        :options="sites"
-        :display-value="`Site: ${site ? site : '*none*'}`"
-      />
+    <q-card-section class="row justify-center q-col-gutter-sm">
+      <div class="col-12 col-md-4">
+        <q-select
+          dense
+          outlined
+          v-model="vendor"
+          :options="vendors"
+          :display-value="`Company Name: ${vendor ? vendor : '*none*'}`"
+          :disable="vendorDis"
+        />
+      </div>
+
+      <div class="col-12 col-md-4">
+        <q-select
+          dense
+          outlined
+          v-model="site"
+          :options="sites"
+          :display-value="`Site: ${site ? site : '*none*'}`"
+        />
+      </div>
+
+      <div class="col-12 col-md-2">
+        <q-btn
+          outline
+          label="XLSX"
+          color="accent"
+          class="fit"
+          @click="xlsxTable"
+        />
+      </div>
+
+      <div class="col-12 col-md-2">
+        <q-btn
+          outline
+          label="PDF"
+          color="accent"
+          class="fit"
+          @click="pdfTable"
+        />
+      </div>
     </q-card-section>
 
-    <!-- DOWNLOAD BTN -->
-    <q-card-actions align="right">
-      <!-- <q-btn
+    <!-- <q-card-actions align="right">
+      <q-btn
         flat
-        label="CSV"
+        label="PDF"
         color="accent"
-        @click="csvTable"
-      >
-        <q-tooltip content-class="bg-accent">
-          Raw Data
-        </q-tooltip>
-      </q-btn> -->
-
-      <!-- <q-btn
-        flat
-        label="Copy"
-        color="accent"
-        @click="htmlTable"
-      >
-        <q-tooltip content-class="bg-accent">
-          HTML Table
-        </q-tooltip>
-      </q-btn> -->
-
-      <!--<q-btn
-        flat
-        label="XLSX"
-        color="accent"
-        @click="xlsxTable"
-      /> -->
-
-      <!-- COPY BTN -->
-      <!-- <q-btn
-        flat
-        label="copy"
-        color="accent"
-        @click="copyTable"
-      /> -->
-
-      <!-- PRINT BTN -->
-      <!-- <q-btn
-        flat
-        label="print"
-        color="accent"
-        @click="printTable"
-      /> -->
-    </q-card-actions>
+        @click="pdfTable"
+      />
+    </q-card-actions> -->
   </q-card>
 </template>
 
@@ -88,11 +72,12 @@
 import 'tabulator-tables/dist/css/tabulator.min.css'
 import XLSX from 'xlsx/dist/xlsx.full.min.js'
 import Tabulator from 'tabulator-tables'
-import { exportFile } from 'quasar'
-import { unparse } from 'papaparse'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
+window.jsPDF = jsPDF
 window.XLSX = XLSX
 
 export default {
@@ -132,14 +117,15 @@ export default {
       _this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
+        index: 'Name',
         data: this.data,
         dataTree: true,
-        index: 'Name',
         dataTreeStartExpanded: false,
         groupBy: 'Table',
-        groupHeader: (value, count) => `${value} (${count} items)`,
         groupStartOpen: false,
         groupClosedShowCalcs: true,
+        groupHeader: (value, count) => `${value} (${count} items)`,
+        groupToggleElement: 'header',
         placeholder: 'No Data Set',
         columns: [
           {
@@ -178,8 +164,10 @@ export default {
             }
           }
         ],
-        clipboard: true,
-        printAsHtml: true
+        downloadConfig: {
+          rowGroups: true,
+          dataTree: false
+        }
         // rowClick: (e, row) => {
         //   if (row.getTreeParent()) {
         //     const Vendor = row.getIndex()
@@ -242,28 +230,29 @@ export default {
       }
     },
 
-    csvTable () {
-      // this.tabulator.download('csv', 'data.csv')
-      this.FetchUamDataSummary()
-        .then(data => {
-          exportFile(`${this.title} Raw.csv`, unparse(data))
-        })
-    },
-
     xlsxTable () {
       this.tabulator.download('xlsx', `${this.title}.xlsx`)
     },
 
-    copyTable () {
-      this.tabulator.copyToClipboard()
-    },
+    pdfTable () {
+      this.tabulator.setGroupStartOpen(true)
+      this.tabulator.setGroupBy('Table')
 
-    printTable () {
-      this.tabulator.print(false, true)
+      this.tabulator.download('pdf', `${this.title}.pdf`, {
+        orientation: 'landscape',
+        title: `${this.title}`,
+        autoTable: function (doc) {
+          return {
+            includeHiddenHtml: true
+          }
+        }
+      })
     },
 
     htmlTable () {
-      this.tabulator.getHtml()
+      this.tabulator.copyToClipboard()
+      // console.log(this.tabulator.getHtml())
+      // this.tabulator.download('html', 'data.html', { style: true })
     }
   },
 

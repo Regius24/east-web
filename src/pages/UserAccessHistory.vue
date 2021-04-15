@@ -3,12 +3,12 @@
     <div class="row justify-center q-col-gutter-sm">
       <!-- SMART -->
       <div class="col-12 col-md-6">
-        <SUMMARY />
+        <SUMMARY :data="smartSummary" />
       </div>
 
       <!-- PLDT -->
       <div class="col-12 col-md-6">
-        <SUMMARY />
+        <SUMMARY :data="pldtSummart" />
       </div>
 
       <div class="col-12">
