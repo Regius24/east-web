@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="row justify-center q-col-gutter-sm">
+    <div class="row justify-center q-col-gutter-md">
       <!-- PLDT -->
       <div
         class="col-12 col-sm-12"
@@ -45,7 +45,22 @@
 
       <!-- TABLE -->
       <div class="col-12">
-        <TABLE />
+        <q-card>
+          <q-card-section>
+            <q-btn-toggle
+              unelevated
+              class="q-mb-sm"
+              v-model="tableBrand"
+              toggle-color="accent"
+              :options="tableBrands"
+            />
+
+            <TABLE
+              :data="tableData"
+              :loading="tableLoad"
+            />
+          </q-card-section>
+        </q-card>
       </div>
     </div>
   </q-page>
@@ -87,7 +102,12 @@ export default {
       pldtSites: [],
 
       smartSummary: [],
-      pldtSummary: []
+      pldtSummary: [],
+
+      tableBrand: 'pldt',
+      tableBrands: [],
+      tableData: [],
+      tableLoad: false
     }
   },
 
@@ -114,6 +134,10 @@ export default {
       const sit = site === 'All' ? '%' : site
 
       this.fetchSummaryData('smart', ven, sit)
+    },
+
+    tableBrand (val) {
+      this.fetchRawData()
     }
   },
 
@@ -133,13 +157,17 @@ export default {
       this[`${brand}Date`] = first(dates).date
 
       const vendor = brand === 'pldt' ? 'CompanyName' : 'Company Name'
-      const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand.toUpperCase(), vendor)
+      const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, vendor)
       this[`${brand}Vendors`] = concat('All', vendors.map(m => m[vendor]))
 
-      const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand.toUpperCase(), 'Site')
+      const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Site')
       this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
 
       this.fetchSummaryData(brand, this.vendorType, '%')
+
+      if (brand === 'pldt') {
+        this.fetchRawData()
+      }
     },
 
     async fetchSummaryData (brand, vendor, site) {
@@ -181,6 +209,18 @@ export default {
       this[`${brand}Summary`] = summary
     },
 
+    async fetchRawData () {
+      this.tableLoad = true
+
+      const brand = this.tableBrand
+      const date = this[`${brand}Date`]
+      const vendor = this.vendorType
+      const { data } = await GetRepo.UamDataAgentsHistory(date, brand, vendor)
+
+      this.tableData = data
+      this.tableLoad = false
+    },
+
     vendorChange ({ brand, vendor }) { this[`${brand}Vendor`] = vendor },
 
     siteChange ({ brand, site }) { this[`${brand}Site`] = site }
@@ -192,6 +232,7 @@ export default {
     this.brandList = first(user).brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
     this.profileType = first(user).profile
     this.vendorType = first(user).profile === 'admin' ? '%' : first(user).vendor
+    this.tableBrands = this.brandList.map(m => { return { label: m.toUpperCase(), value: m.toLowerCase() } })
 
     this.initFetchData()
   },
