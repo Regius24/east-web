@@ -1,6 +1,8 @@
 <template>
   <q-table
     flat
+    dense
+    bordered
     title="Agent List"
     :data="data"
     :columns="columns"

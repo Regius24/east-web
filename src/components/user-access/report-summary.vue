@@ -137,7 +137,8 @@ export default {
             title: 'Name',
             field: 'Name',
             sorter: 'string',
-            width: '35px'
+            width: '35px',
+            frozen: true
           },
           {
             title: 'Locked FTE',

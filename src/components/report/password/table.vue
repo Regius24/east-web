@@ -1,49 +1,53 @@
 <template>
   <q-card>
-    <!-- TABLE -->
-    <q-table
-      flat
-      title="Password Cases List"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-      separator="vertical"
-      :filter="filter"
-      color="accent"
-      :loading="data.length > 0 ? false : true"
-    >
-      <template v-slot:top-right>
-        <!-- BUTTONS -->
-        <q-btn-group
-          flat
-          class="q-mr-sm"
-        >
-          <q-btn
+    <q-card-section>
+      <!-- TABLE -->
+      <q-table
+        flat
+        dense
+        bordered
+        title="Password Cases List"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+        separator="vertical"
+        :filter="filter"
+        color="accent"
+        :loading="data.length > 0 ? false : true"
+      >
+        <template v-slot:top-right>
+          <!-- BUTTONS -->
+          <q-btn-group
             flat
-            color="accent"
-            label="CSV"
-            @click="exportData"
+            class="q-mr-sm"
           >
-            <q-tooltip content-class="bg-accent">
-              Download Data
-            </q-tooltip>
-          </q-btn>
-        </q-btn-group>
+            <q-btn
+              flat
+              color="accent"
+              label="CSV"
+              @click="exportData"
+            >
+              <q-tooltip content-class="bg-accent">
+                Download Data
+              </q-tooltip>
+            </q-btn>
+          </q-btn-group>
 
-        <!-- SEARCH -->
-        <q-input
-          borderless
-          dense
-          debounce="300"
-          v-model="filter"
-          placeholder="Search"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
-    </q-table>
+          <!-- SEARCH -->
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+      </q-table>
+    </q-card-section>
   </q-card>
 </template>
 
