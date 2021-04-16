@@ -18,11 +18,11 @@
         <template v-slot:top-right>
           <!-- BUTTONS -->
           <q-btn-group
-            flat
+            outline
             class="q-mr-sm"
           >
             <q-btn
-              flat
+              outline
               color="accent"
               label="CSV"
               @click="exportData"

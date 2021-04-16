@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="row justify-center q-col-gutter-sm">
+    <div class="row justify-center q-col-gutter-md">
       <!-- SUMMARY -->
       <div class="col-12">
         <SUMMARY
