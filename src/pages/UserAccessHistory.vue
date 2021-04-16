@@ -153,7 +153,7 @@ export default {
 
     async fetchFilters (brand, type) {
       const { data: dates } = await GetRepo.UamDataHistoryDates(brand, type)
-      this[`${brand}DateList`] = dates
+      this[`${brand}DateList`] = dates.map(m => m.date)
       this[`${brand}Date`] = first(dates).date
 
       const vendor = brand === 'pldt' ? 'CompanyName' : 'Company Name'

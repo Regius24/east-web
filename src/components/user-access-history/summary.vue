@@ -15,25 +15,36 @@
     <!-- FILTERS -->
     <q-card-section class="row justify-center q-col-gutter-sm">
       <!-- VENDORS -->
-      <div class="col-12 col-md-5">
+      <div class="col-12 col-md-3">
         <q-select
           dense
           outlined
           v-model="vendor"
           :options="vendors"
-          :display-value="`Company Name: ${vendor}`"
+          :display-value="`Vendor: ${vendor}`"
           :disable="vendorDis"
         />
       </div>
 
       <!-- SITES -->
-      <div class="col-12 col-md-5">
+      <div class="col-12 col-md-3">
         <q-select
           dense
           outlined
           v-model="site"
           :options="sites"
           :display-value="`Site: ${site}`"
+        />
+      </div>
+
+      <!-- DATES -->
+      <div class="col-12 col-md-4">
+        <q-select
+          dense
+          outlined
+          v-model="date"
+          :options="dates"
+          :display-value="`Date: ${date}`"
         />
       </div>
 
@@ -89,7 +100,8 @@ export default {
     return {
       tabulator: null,
       vendor: 'All',
-      site: 'All'
+      site: 'All',
+      dateChange: ''
     }
   },
 
