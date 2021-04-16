@@ -9,7 +9,7 @@
       <div class="text-caption text-weight-light text-center">updated as of: {{ dateCheck }}</div>
       <div
         ref="table"
-        class="rounded-borders"
+        class="rounded-borders q-mt-sm"
       ></div>
     </q-card-section>
 
@@ -138,7 +138,8 @@ export default {
             field: 'Name',
             sorter: 'string',
             width: '35px',
-            frozen: true
+            frozen: true,
+            formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
           },
           {
             title: 'Locked FTE',
@@ -215,7 +216,6 @@ export default {
 
   mounted () {
     this.renderTable()
-    console.log(this.tabulator)
   }
 }
 </script>

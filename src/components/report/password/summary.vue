@@ -89,7 +89,9 @@ export default {
           {
             title: '',
             field: 'Name',
-            sorter: 'string'
+            sorter: 'string',
+            frozen: true,
+            formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
           },
           {
             title: 'COUNT',
@@ -99,11 +101,11 @@ export default {
           {
             title: 'AMOUNT',
             field: 'AMOUNT',
-            sorter: 'number',
             formatter: 'money',
-            formatterParams: {
-              precision: false
-            }
+            formatterParams: { precision: false },
+            topCalc: 'sum',
+            topCalcFormatter: 'money',
+            topCalcFormatterParams: { precision: false }
           }
         ]
       })

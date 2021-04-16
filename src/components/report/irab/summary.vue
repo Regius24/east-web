@@ -47,6 +47,7 @@ export default {
         $ { BRAND: $ } ~> $each(function($v1, $k1){
             {
                 'Name': $k1,
+                'Agents': $count($distinct($v1.NAME)),
                 'QH': $sum($v1.QH),
                 'QW': $sum($v1.QW),
                 'VH': $sum($v1.VH),
@@ -58,6 +59,7 @@ export default {
                 '_children': $v1 { VENDOR: $ } ~> $each(function($v2, $k2) {
                     {
                         'Name': $k2,
+                        'Agents': $count($distinct($v2.NAME)),
                         'QH': $sum($v2.QH),
                         'QW': $sum($v2.QW),
                         'VH': $sum($v2.VH),
@@ -114,9 +116,17 @@ export default {
         placeholder: 'No Data Set',
         columns: [
           {
-            title: 'BRAND',
+            title: 'Name',
             field: 'Name',
-            sorter: 'string'
+            sorter: 'string',
+            frozen: true,
+            formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
+          },
+          {
+            title: 'Agents',
+            field: 'Agents',
+            sorter: 'number',
+            topCalc: 'sum'
           },
           {
             title: 'QH',
