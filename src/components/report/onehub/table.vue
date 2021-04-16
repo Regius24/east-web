@@ -1,53 +1,54 @@
 <template>
   <q-card>
     <!-- TABLE -->
-    <q-table
-      flat
-      title="Onehub List"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-      separator="vertical"
-      :filter="filter"
-      color="accent"
-      virtual-scroll
-      :pagination.sync="pagination"
-      :rows-per-page-options="[0]"
-      style="max-height: 80vh;"
-      :loading="data.length > 0 ? false : true"
-    >
-      <template v-slot:top-right>
-        <!-- BUTTONS -->
-        <q-btn-group
-          flat
-          class="q-mr-sm"
-        >
-          <q-btn
-            flat
-            color="accent"
-            label="CSV"
-            @click="exportData"
-          >
-            <q-tooltip content-class="bg-accent">
-              Download Data
-            </q-tooltip>
-          </q-btn>
-        </q-btn-group>
+    <q-card-section>
+      <q-table
+        dense
+        flat
+        bordered
+        title="Onehub List"
+        row-key="name"
+        separator="cell"
+        color="accent"
+        virtual-scroll
+        style="max-height: 80vh;"
+        :data="data"
+        :columns="columns"
+        :filter="filter"
+        :pagination.sync="pagination"
+        :rows-per-page-options="[0]"
+        :loading="data.length > 0 ? false : true"
+      >
+        <template v-slot:top-right>
+          <!-- BUTTONS -->
+          <q-btn-group class="q-mr-sm">
+            <q-btn
+              outline
+              color="accent"
+              label="CSV"
+              @click="exportData"
+            >
+              <q-tooltip content-class="bg-accent">
+                Download Data
+              </q-tooltip>
+            </q-btn>
+          </q-btn-group>
 
-        <!-- SEARCH -->
-        <q-input
-          borderless
-          dense
-          debounce="300"
-          v-model="filter"
-          placeholder="Search"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
-    </q-table>
+          <!-- SEARCH -->
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+      </q-table>
+    </q-card-section>
   </q-card>
 </template>
 
@@ -80,7 +81,9 @@ export default {
           return {
             name: col,
             field: col,
-            label: col
+            label: col,
+            style: 'max-width: 300px;',
+            classes: 'ellipsis'
           }
         })
 
