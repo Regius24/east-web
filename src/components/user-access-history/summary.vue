@@ -42,9 +42,10 @@
         <q-select
           dense
           outlined
-          v-model="date"
+          v-model="dateChange"
           :options="dates"
-          :display-value="`Date: ${date}`"
+          :display-value="`Date: ${dateChange}`"
+          @input="dateChanged"
         />
       </div>
 
@@ -109,6 +110,8 @@ export default {
     data (val) {
       this.renderTable()
     },
+
+    date (val) { this.dateChange = val },
 
     vendor (val) { this.$emit('vendorChange', { brand: this.brand, vendor: val }) },
 
@@ -191,6 +194,10 @@ export default {
           }
         }
       })
+    },
+
+    dateChanged () {
+      this.$emit('dateChange', { brand: this.brand, date: this.dateChange })
     }
   },
 

@@ -19,6 +19,7 @@
           :sites="pldtSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
+          @dateChange="dateChange"
         />
       </div>
 
@@ -40,6 +41,7 @@
           :sites="smartSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
+          @dateChange="dateChange"
         />
       </div>
 
@@ -113,11 +115,11 @@ export default {
 
   computed: {
     pldtVendorSite () {
-      return { vendor: this.pldtVendor, site: this.pldtSite }
+      return { vendor: this.pldtVendor, site: this.pldtSite, date: this.pldtDate }
     },
 
     smartVendorSite () {
-      return { vendor: this.smartVendor, site: this.smartSite }
+      return { vendor: this.smartVendor, site: this.smartSite, date: this.smartDate }
     }
   },
 
@@ -223,7 +225,9 @@ export default {
 
     vendorChange ({ brand, vendor }) { this[`${brand}Vendor`] = vendor },
 
-    siteChange ({ brand, site }) { this[`${brand}Site`] = site }
+    siteChange ({ brand, site }) { this[`${brand}Site`] = site },
+
+    dateChange ({ brand, date }) { this[`${brand}Date`] = date }
   },
 
   async beforeMount () {
