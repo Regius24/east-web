@@ -292,7 +292,9 @@ export default {
   methods: {
     exportData () {
       const title = 'IRAB List'
-      this.export(title, unparse(this.data))
+      const filtered = this.data.filter(f => f.STATUS === 'DEACTIVATED')
+
+      this.export(title, unparse(filtered))
     },
 
     export (name, data) {
