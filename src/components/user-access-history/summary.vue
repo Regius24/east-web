@@ -137,11 +137,6 @@ export default {
             formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
           },
           {
-            title: 'Locked FTE',
-            field: 'LockedFte',
-            sorter: 'number'
-          },
-          {
             title: 'Agents',
             field: 'Agents',
             sorter: 'number',
