@@ -62,7 +62,7 @@ export default {
           } catch (err) {
             console.log(err)
             this.loading = false
-            notify('Error encountered', 'data not uploaded', 'mdi-alert', 'red')
+            notify('Error encountered', 'data was not uploaded', 'mdi-alert', 'red')
           }
         }
       })

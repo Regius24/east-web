@@ -25,7 +25,7 @@
 </template>
 
 <script>
-// import { notify } from 'boot/notifier'
+import { notify } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -38,10 +38,27 @@ export default {
 
   methods: {
     async processFile (file) {
-      const formData = new FormData()
-      formData.append('file', file)
-      const result = await PostRepo.UploadOnehubFile(formData)
-      console.log(result)
+      this.loading = true
+
+      try {
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const result = await PostRepo.UploadOnehubFile(formData)
+        console.log(result)
+
+        this.loading = true
+        notify('Success', 'data has been uploaded', 'mdi-check', 'green')
+
+        setTimeout(() => {
+          this.$router.go()
+        }, 1200)
+      } catch (err) {
+        this.loading = true
+
+        console.log(err)
+        notify('Error encountered', 'data was not uploaded', 'mdi-alert', 'red')
+      }
     },
 
     show () {
