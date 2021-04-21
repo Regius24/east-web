@@ -14,6 +14,7 @@
       v-ripple
       exact
       :to="{ name: route.pathName }"
+      active-class="text-green"
     >
       <q-item-section avatar>
         <q-icon
@@ -41,6 +42,7 @@
       v-ripple
       exact
       :to="{ name: report.pathName }"
+      active-class="text-green"
     >
       <q-item-section avatar>
         <q-icon
