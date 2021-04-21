@@ -209,6 +209,10 @@ export default {
                   'Agents': $sum($v1.Agents),
                   'Complete': $sum($v1.Complete),
                   'Score': $round(($sum($v1.Complete)/$sum($v1.Agents)) * 100, 2),
+                  'Table': $k1,
+                  'Brand': $distinct($v1.Brand),
+                  'Lob': '%',
+                  'Vendor': '%',
                   '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
                       {
                           'Name': $k2,
@@ -216,13 +220,21 @@ export default {
                           'Agents': $sum($v2.Agents),
                           'Complete': $sum($v2.Complete),
                           'Score': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
+                          'Table': $k1,
+                          'Brand': $distinct($v2.Brand),
+                          'Lob': $k2,
+                          'Vendor': '%',
                           '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
                               {
                                   'Name': $k3,
                                   'LockedFte': $v3.LockedFte,
                                   'Agents': $sum($v3.Agents),
                                   'Complete': $sum($v3.Complete),
-                                  'Score': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
+                                  'Score': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2),
+                                  'Table': $k1,
+                                  'Brand': $v3.Brand,
+                                  'Lob': $v3.Lob,
+                                  'Vendor': $k3
                               }
                           })
                       }

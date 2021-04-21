@@ -86,7 +86,7 @@ import Tabulator from 'tabulator-tables'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-// import GetRepo from 'src/repository/get'
+import GetRepo from 'src/repository/get'
 // import { notify } from 'boot/notifier'
 
 window.jsPDF = jsPDF
@@ -125,6 +125,7 @@ export default {
 
   methods: {
     renderTable () {
+      const _this = this
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
@@ -174,19 +175,12 @@ export default {
         downloadConfig: {
           rowGroups: true,
           dataTree: true
+        },
+        rowClick: (e, row) => {
+          const { Table, Brand, Lob, Vendor } = row.getData()
+
+          _this.fetchOnehub(Brand, Lob, Vendor, Table)
         }
-        // rowClick: (e, row) => {
-        //   if (row.getTreeParent()) {
-        //     const Vendor = row.getIndex()
-        //     const { Name: Lob, Table } = row.getTreeParent().getData()
-
-        //     _this.FetchUamDataFiltered(Lob, Vendor, Table)
-        //   } else {
-        //     const { Name: Lob, Table } = row.getData()
-
-        //     _this.FetchUamDataFiltered(Lob, '%', Table)
-        //   }
-        // }
       })
 
       this.tabulator.setSort([
@@ -211,6 +205,11 @@ export default {
           }
         }
       })
+    },
+
+    async fetchOnehub (brand, lob, vendor, table) {
+      const res = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
+      console.log(res)
     }
   },
 
