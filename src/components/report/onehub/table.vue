@@ -21,18 +21,14 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
+          <!-- <q-btn-group class="q-mr-sm">
             <q-btn
               outline
               color="accent"
               label="CSV"
               @click="exportData"
-            >
-              <q-tooltip content-class="bg-accent">
-                Download Data
-              </q-tooltip>
-            </q-btn>
-          </q-btn-group>
+            />
+          </q-btn-group> -->
 
           <!-- SEARCH -->
           <q-input

@@ -27,11 +27,7 @@
               label="CSV"
               :disable="loading"
               @click="exportData"
-            >
-              <q-tooltip content-class="bg-accent">
-                Download Data
-              </q-tooltip>
-            </q-btn>
+            />
           </q-btn-group>
 
           <!-- SEARCH -->

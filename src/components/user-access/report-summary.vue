@@ -87,7 +87,7 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 import GetRepo from 'src/repository/get'
-// import { notify } from 'boot/notifier'
+import { notify } from 'boot/notifier'
 
 window.jsPDF = jsPDF
 window.XLSX = XLSX
@@ -177,6 +177,7 @@ export default {
           dataTree: true
         },
         rowClick: (e, row) => {
+          notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
           const { Table, Brand, Lob, Vendor } = row.getData()
 
           _this.fetchOnehub(Brand, Lob, Vendor, Table)
@@ -208,8 +209,20 @@ export default {
     },
 
     async fetchOnehub (brand, lob, vendor, table) {
-      const res = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
-      console.log(res)
+      const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
+
+      this.openAgentsDetailed(data)
+    },
+
+    openAgentsDetailed (data) {
+      this.$q.dialog({
+        component: () => import('components/user-access/report-agents-detailed'),
+        parent: this,
+        agentData: data
+      })
+        .onOk(() => (console.log('OK')))
+        .onCancel(() => (console.log('Cancel')))
+        .onDismiss(() => (console.log('Called on OK or Cancel')))
     }
   },
 
