@@ -177,7 +177,6 @@ export default {
           dataTree: true
         },
         rowClick: (e, row) => {
-          notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
           const { Table, Brand, Lob, Vendor } = row.getData()
 
           _this.fetchOnehub(Brand, Lob, Vendor, Table)
@@ -209,9 +208,14 @@ export default {
     },
 
     async fetchOnehub (brand, lob, vendor, table) {
-      const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
+      try {
+        notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+        const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
 
-      this.openAgentsDetailed(data)
+        this.openAgentsDetailed(data)
+      } catch (err) {
+        notify('Something went wrong', 'Error: no data found', 'mdi-alert', 'red')
+      }
     },
 
     openAgentsDetailed (data) {
