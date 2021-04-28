@@ -1,12 +1,18 @@
 <template>
   <q-card>
-    <q-card-section class="row justify-end">
+    <q-card-section class="row justify-center">
+      <div class="col-10">
+        <div class="text-h6">
+          Currently showing <span class="text-accent">{{ month }}</span> Data:
+        </div>
+      </div>
+
       <!-- FILTER -->
       <q-select
         dense
         outlined
         label="Month Filter"
-        class="col-4 q-mb-sm"
+        class="col-2 q-mb-sm"
         style="max-width: 30%;"
         v-model="month"
         :options="months"
@@ -36,7 +42,7 @@ export default {
 
   data () {
     return {
-      month: '',
+      month: 'All',
       processedData: []
     }
   },
@@ -48,6 +54,7 @@ export default {
             {
                 'Name': $k1,
                 'Agents': $count($distinct($v1.NAME)),
+                'TOTAL': $sum($v1.TOTAL),
                 'QH': $sum($v1.QH),
                 'QW': $sum($v1.QW),
                 'VH': $sum($v1.VH),
@@ -60,6 +67,7 @@ export default {
                     {
                         'Name': $k2,
                         'Agents': $count($distinct($v2.NAME)),
+                        'TOTAL': $sum($v2.TOTAL),
                         'QH': $sum($v2.QH),
                         'QW': $sum($v2.QW),
                         'VH': $sum($v2.VH),
@@ -71,6 +79,7 @@ export default {
                         '_children': $v2 { NAME: $ } ~> $each(function($v3, $k3){
                             {
                                 'Name': $k3,
+                                'TOTAL': $sum($v3.TOTAL),
                                 'QH': $sum($v3.QH),
                                 'QW': $sum($v3.QW),
                                 'VH': $sum($v3.VH),
@@ -125,6 +134,12 @@ export default {
           {
             title: 'Agents',
             field: 'Agents',
+            sorter: 'number',
+            topCalc: 'sum'
+          },
+          {
+            title: 'TOTAL',
+            field: 'TOTAL',
             sorter: 'number',
             topCalc: 'sum'
           },

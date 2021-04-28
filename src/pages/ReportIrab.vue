@@ -113,12 +113,12 @@ export default {
 
       this.raw = raw
       this.months = uniq(flatten(raw.map(m => m.MONTH)))
-      this.months.unshift('')
+      this.months.unshift('All')
     },
 
     async monthChange (val) {
       const vendor = this.profileType === 'admin' ? '%' : this.profileType
-      this.fetchSummary(val, vendor)
+      this.fetchSummary(val === 'All' ? '%' : val, vendor)
     },
 
     moveFab (ev) {

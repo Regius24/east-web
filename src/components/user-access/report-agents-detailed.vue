@@ -185,7 +185,6 @@ export default {
 
     evaluateData () {
       if (this.agentData.length > 0) {
-        console.log(JSON.stringify(this.agentData))
         const expression = jsonata(`
           $ { Stage: $ } ~> $each(function($v1, $k1) {
               {
