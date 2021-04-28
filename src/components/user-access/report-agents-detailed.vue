@@ -12,8 +12,8 @@
         <!-- HEADER -->
         <q-tabs
           v-model="stage"
-          active-color="primary"
-          class="fit text-secondary"
+          active-color="accent"
+          class="fit text-white"
         >
           <q-tab
             v-for="(el, i) in stageList"
@@ -43,8 +43,8 @@
               <template v-slot:before>
                 <q-tabs
                   vertical
-                  active-color="primary"
-                  class="text-secondary"
+                  active-color="accent"
+                  class="text-white"
                   v-model="tool"
                 >
                   <q-tab
@@ -71,7 +71,7 @@
                     :key="i"
                     :name="el"
                     class="overflow-auto"
-                    style="max-height: 400px"
+                    style="max-height: 500px"
                   >
                     <q-list
                       separator
@@ -80,27 +80,23 @@
                       <!-- TICKETS -->
                       <q-expansion-item
                         expand-separator
-                        :label="el2.Number"
-                        :caption="`Count of Agents: ${el2.Count}`"
+                        :icon="el2.Ontime === 'Over' ? 'mdi-alert' : ''"
+                        :header-class="el2.Ontime === 'Over' ? 'text-red' : ''"
+                        :label="`${el2.Number} (${el2.Count})`"
+                        :caption="`${el2.Opened}`"
                         v-for="(el2, i2) in toolData(stage, el)"
                         :key="i2"
                       >
                         <q-card>
                           <q-card-section>
                             <!-- TICKET DATA -->
-                            <q-list
-                              bordered
-                              separator
-                            >
-                              <q-item
-                                v-for="(el3, i3) in el2.Data"
-                                :key="i3"
-                              >
-                                <q-item-section>
-                                  <q-item-label lines="1">{{ el3.First }} {{ el3.Last }}</q-item-label>
-                                </q-item-section>
-                              </q-item>
-                            </q-list>
+                            <q-table
+                              flat
+                              dense
+                              separator="vertical"
+                              :data="el2.Data"
+                              :columns="columns"
+                            />
                           </q-card-section>
                         </q-card>
                       </q-expansion-item>
@@ -147,6 +143,24 @@ export default {
       tool: null,
       toolList: null,
 
+      columns: [
+        {
+          name: 'Agent Name',
+          field: 'Agent Name',
+          label: 'Agent Name'
+        },
+        {
+          name: 'Start Date',
+          field: 'Start Date',
+          label: 'Start Date'
+        },
+        {
+          name: 'Live Date',
+          field: 'Live Date',
+          label: 'Live Date'
+        }
+      ],
+
       splitterModel: 20
     }
   },
@@ -171,6 +185,7 @@ export default {
 
     evaluateData () {
       if (this.agentData.length > 0) {
+        console.log(JSON.stringify(this.agentData))
         const expression = jsonata(`
           $ { Stage: $ } ~> $each(function($v1, $k1) {
               {
@@ -184,6 +199,8 @@ export default {
                               {
                                   'Number': $k3,
                                   'Count': $count($v3),
+                                  'Ontime': $distinct($v3.Ontime),
+                                  'Opened': $distinct($v3.Opened),
                                   'Data': [$v3]
                               }
                           })]
