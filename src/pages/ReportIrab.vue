@@ -113,7 +113,7 @@ export default {
 
       this.raw = raw
       this.months = uniq(flatten(raw.map(m => m.MONTH)))
-      this.months.unshift('All')
+      this.months.unshift('YTD')
     },
 
     async monthChange (val) {

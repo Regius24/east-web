@@ -42,7 +42,7 @@ export default {
 
   data () {
     return {
-      month: 'All',
+      month: 'YTD',
       processedData: []
     }
   },
@@ -125,7 +125,7 @@ export default {
         placeholder: 'No Data Set',
         columns: [
           {
-            title: 'Name',
+            title: 'NAME',
             field: 'Name',
             sorter: 'string',
             frozen: true,
@@ -138,7 +138,7 @@ export default {
             topCalc: 'sum'
           },
           {
-            title: 'TOTAL',
+            title: 'INCIDENTS',
             field: 'TOTAL',
             sorter: 'number',
             topCalc: 'sum'
