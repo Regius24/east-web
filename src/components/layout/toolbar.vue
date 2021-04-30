@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar :class="$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-5'">
+  <q-toolbar :class="$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-12'">
     <!-- DRAWER BTN -->
     <q-btn
       flat
