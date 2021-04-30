@@ -97,9 +97,11 @@ export default {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
       const { data: raw } = await GET.PasswordData()
 
+      console.log(JSON.stringify(raw))
+
       this.raw = raw
       this.months = uniq(flatten(raw.map(m => m.MONTH)))
-      this.months.unshift('')
+      this.months.unshift('YTD')
       this.showUploader = first(user).upload
     } catch (err) {
       console.log(err)
