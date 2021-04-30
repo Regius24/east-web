@@ -27,6 +27,8 @@
 import 'tabulator-tables/dist/css/tabulator.min.css'
 import jsonata from 'jsonata'
 import Tabulator from 'tabulator-tables'
+import { date } from 'quasar'
+import { take } from 'lodash'
 
 export default {
   name: 'Summary',
@@ -36,7 +38,292 @@ export default {
   data () {
     return {
       month: 'YTD',
-      processedData: []
+      processedData: [],
+      columns: [
+        {
+          title: 'JAN',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'JANCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'JANAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'FEB',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'FEBCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'FEBAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'MAR',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'MARCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'MARAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'APR',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'APRCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'APRAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'MAY',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'MAYCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'MAYAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'JUN',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'JUNCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'JUNAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'JUL',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'JULCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'JULAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'AUG',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'AUGCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'AUGAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'SEP',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'SEPCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'SEPAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'OCT',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'OCTCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'OCTAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'NOV',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'NOVCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'NOVAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        },
+        {
+          title: 'DEC',
+          columns: [
+            {
+              title: 'cnt',
+              field: 'DECCo',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            },
+            {
+              title: 'amt',
+              field: 'DECAm',
+              formatter: 'money',
+              formatterParams: { precision: false },
+              topCalc: 'sum',
+              topCalcFormatter: 'money',
+              topCalcFormatterParams: { precision: false }
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  computed: {
+    monthCols () {
+      const monthNo = date.formatDate(Date.now(), 'M')
+      return take(this.columns, monthNo)
     }
   },
 
@@ -149,7 +436,7 @@ export default {
   methods: {
     renderTable () {
       this.tabulator = new Tabulator(this.$refs.table, {
-        layout: 'fitData',
+        layout: 'fitDataFill',
         virtualDomHoz: true,
         maxHeight: 400,
         data: this.processedData,
@@ -170,7 +457,7 @@ export default {
             frozen: true,
             columns: [
               {
-                title: 'CNT',
+                title: 'cnt',
                 field: 'YTDCo',
                 formatter: 'money',
                 formatterParams: { precision: false },
@@ -179,7 +466,7 @@ export default {
                 topCalcFormatterParams: { precision: false }
               },
               {
-                title: 'AMT',
+                title: 'amt',
                 field: 'YTDAm',
                 formatter: 'money',
                 formatterParams: { precision: false },
@@ -189,282 +476,7 @@ export default {
               }
             ]
           },
-          {
-            title: 'JAN',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'JANCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'JANAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'FEB',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'FEBCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'FEBAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'MAR',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'MARCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'MARAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'APR',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'APRCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'APRAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'MAY',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'MAYCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'MAYAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'JUN',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'JUNCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'JUNAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'JUL',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'JULCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'JULAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'AUG',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'AUGCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'AUGAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'SEP',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'SEPCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'SEPAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'OCT',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'OCTCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'OCTAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'NOV',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'NOVCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'NOVAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          },
-          {
-            title: 'DEC',
-            columns: [
-              {
-                title: 'CNT',
-                field: 'DECCo',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              },
-              {
-                title: 'AMT',
-                field: 'DECAm',
-                formatter: 'money',
-                formatterParams: { precision: false },
-                topCalc: 'sum',
-                topCalcFormatter: 'money',
-                topCalcFormatterParams: { precision: false }
-              }
-            ]
-          }
+          ...this.monthCols
         ]
       })
 
