@@ -55,6 +55,25 @@
           </q-item-section>
         </q-item>
 
+        <!-- INVERT COLOR -->
+        <q-item
+          clickable
+          v-close-popup
+          @click="$q.dark.toggle()"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-invert-colors"
+              color="accent"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label v-if="$q.dark.isActive">Light Mode</q-item-label>
+            <q-item-label v-else>Dark Mode</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <!-- FULLSCREEN -->
         <q-item
           clickable
@@ -74,22 +93,21 @@
           </q-item-section>
         </q-item>
 
-        <!-- INVERT COLOR -->
+        <!-- RELEASE NOTES -->
         <q-item
           clickable
           v-close-popup
-          @click="$q.dark.toggle()"
+          @click="showReleaseNotes"
         >
           <q-item-section avatar>
             <q-avatar
-              icon="mdi-invert-colors"
+              icon="mdi-clipboard-text-outline"
               color="accent"
               text-color="white"
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label v-if="$q.dark.isActive">Light Mode</q-item-label>
-            <q-item-label v-else>Dark Mode</q-item-label>
+            <q-item-label>Release Notes</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -123,6 +141,16 @@ export default {
         this.$q.loading.hide()
         this.$router.push({ name: 'login' })
       }, 2500)
+    },
+
+    showReleaseNotes () {
+      this.$q.dialog({
+        component: () => import('components/layout/version-logs'),
+        parent: this
+      })
+        .onOk(() => (console.log('OK')))
+        .onCancel(() => (console.log('Cancel')))
+        .onDismiss(() => (console.log('Called on OK or Cancel')))
     }
   }
 }
