@@ -2,7 +2,7 @@
   <q-card>
     <q-card-section class="row justify-end">
       <!-- FILTER -->
-      <q-select
+      <!-- <q-select
         dense
         outlined
         label="Month Filter"
@@ -10,7 +10,7 @@
         style="max-width: 30%;"
         v-model="month"
         :options="months"
-      />
+      /> -->
 
       <!-- TABLE -->
       <div class="col-12">
