@@ -5,10 +5,10 @@
   >
     <q-card
       class="q-dialog-plugin q-pa-sm"
-      style="min-width: 45%;"
+      style="min-width: 50%;"
     >
       <q-card-section>
-        <q-timeline>
+        <q-timeline layout="comfortable">
           <q-timeline-entry
             v-for="log in logs"
             :key="log.version"
@@ -30,6 +30,25 @@
 
 <script>
 const logs = [
+  {
+    version: '1.0.16',
+    description: 'App Update',
+    timestamp: '05/04/2021',
+    updates: [
+      'Added new pages and components for User Access Tools',
+      'Added new columns for IRAB raw',
+      'Updated IRAB file uploading due to new columns',
+      'Updated database schema and procedures due to new columns',
+      'Updated IRAB Summary',
+      'Updated IRAB fields',
+      'Updated UAM agents UI',
+      'Updated UAM agents detailed component',
+      'Updated Password Cases Layout',
+      'Updated toolbar color when in light mode',
+      'Fixed Password Cases months being shown',
+      'Removed month filter for Password Cases'
+    ]
+  },
   {
     version: '1.0.15',
     description: 'App Update',
