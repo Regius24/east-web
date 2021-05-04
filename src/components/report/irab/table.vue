@@ -109,6 +109,47 @@
             >{{ props.row.STATUS }}</q-td>
 
             <q-td
+              key="ACTION"
+              :props="props"
+            >
+              {{ props.row.ACTION }}
+              <q-popup-edit
+                v-model="props.row.ACTION"
+                title="Update ACTION"
+                buttons
+                @save="updateData(props.row, 'ACTION')"
+                :disable="!disable"
+              >
+                <q-select
+                  v-model="props.row.ACTION"
+                  :options="['TERMINATED', 'SUSPENDED', 'COUNSELLED', 'OTHER']"
+                />
+              </q-popup-edit>
+            </q-td>
+
+            <q-td
+              key="ACTION"
+              :props="props"
+            >
+              {{ props.row.OTHER_ACTION }}
+              <q-popup-edit
+                v-model="props.row.OTHER_ACTION"
+                title="Update OTHER_ACTION"
+                buttons
+                @save="updateData(props.row, 'OTHER_ACTION')"
+                :disable="disable && props.row.ACTION === 'OTHER' ? false : true"
+              >
+                <q-input
+                  dense
+                  counter
+                  autofocus
+                  maxlength="100"
+                  v-model="props.row.OTHER_ACTION"
+                />
+              </q-popup-edit>
+            </q-td>
+
+            <q-td
               key="QH_REMARKS"
               :props="props"
             >
