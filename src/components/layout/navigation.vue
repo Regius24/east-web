@@ -64,6 +64,7 @@ export default {
     return {
       routes: [
         { pathName: 'user-access', label: 'User Access', icon: 'mdi-account-details' },
+        { pathName: 'user-access-tools', label: 'User Access (Tools)', icon: 'mdi-account-details' },
         { pathName: 'user-access-history', label: 'User Access History', icon: 'mdi-account-clock' }
       ],
       reports: [

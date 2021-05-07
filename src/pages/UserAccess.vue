@@ -81,7 +81,6 @@
 
 <script>
 import { date } from 'quasar'
-import { mapActions } from 'vuex'
 import { concat, sortBy, indexOf } from 'lodash'
 import jsonata from 'jsonata'
 import GetRepo from 'src/repository/get'
@@ -164,7 +163,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('data', ['SET_USERPROFILE']),
     moveFab (ev) {
       this.draggingFab = ev.isFirst !== true && ev.isFinal !== true
 
@@ -297,7 +295,6 @@ export default {
       this.vendorType = data[0].vendor
       this.showUploader = data[0].upload
 
-      // this.SET_USERPROFILE(data)
       this.fetchData()
     } catch (err) {
       console.log(err)
