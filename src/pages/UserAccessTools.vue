@@ -83,15 +83,15 @@
 import GetRepo from 'src/repository/get'
 import jsonata from 'jsonata'
 import { date } from 'quasar'
-import { concat, sortBy, indexOf } from 'lodash'
+import { first, concat, sortBy, indexOf } from 'lodash'
 import { notify } from 'boot/notifier'
 
 export default {
   name: 'UserAccessTools',
 
   components: {
-    SUMMARY: () => import('components/user-access/report-summary'),
-    AGENTS: () => import('components/user-access/report-agents')
+    SUMMARY: () => import('components/user-access-tools/summary'),
+    AGENTS: () => import('components/user-access-tools/table')
   },
 
   computed: {
@@ -191,53 +191,40 @@ export default {
     async FetchUamDataSummary (brand, loBrand, vendor, site) {
       try {
         // QUERY ALL TABLES
-        let { data } = await GetRepo.UamDataSummary(loBrand, vendor, site)
+        let { data } = await GetRepo.UamDataSummaryTools(loBrand, vendor, site)
         const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
 
-        console.log(JSON.stringify(data))
-
-        this[`uamDataSummary${brand}Date`] = data[0]
+        this[`uamDataSummary${brand}Date`] = first(data)
 
         // FORMAT JSON
         const expression = jsonata(`
-          $ { Table: $ } ~> $each(function($v1, $k1){
+          $ { Table: $ } ~> $each(function($v1, $k1) {
               {
-                  'Date': $distinct($v1.Date),
-                  'Name': $k1,
-                  'LockedFte': '',
-                  'Agents': $sum($v1.Agents),
-                  'Complete': $sum($v1.Complete),
-                  'Score': $round(($sum($v1.Complete)/$sum($v1.Agents)) * 100, 2),
-                  'Table': $k1,
-                  'Brand': $distinct($v1.Brand),
-                  'Lob': '%',
-                  'Vendor': '%',
-                  '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
-                      {
-                          'Name': $k2,
-                          'LockedFte': '',
-                          'Agents': $sum($v2.Agents),
-                          'Complete': $sum($v2.Complete),
-                          'Score': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
-                          'Table': $k1,
-                          'Brand': $distinct($v2.Brand),
-                          'Lob': $k2,
-                          'Vendor': '%',
-                          '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
-                              {
-                                  'Name': $k3,
-                                  'LockedFte': $v3.LockedFte,
-                                  'Agents': $sum($v3.Agents),
-                                  'Complete': $sum($v3.Complete),
-                                  'Score': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2),
-                                  'Table': $k1,
-                                  'Brand': $v3.Brand,
-                                  'Lob': $v3.Lob,
-                                  'Vendor': $k3
-                              }
-                          })
-                      }
-                  })
+                'Name': $k1,
+                'Agents': $sum($v1.Agents),
+                'Access': $sum($v1.Access),
+                '_children': $v1 { Tools: $ } ~> $each(function($v2, $k2) {
+                    {
+                        'Name': $k2,
+                        'Agents': $sum($v2.Agents),
+                        'Access': $sum($v2.Access),
+                        '_children': $v2 { Lob: $ } ~> $each(function($v3, $k3) {
+                            {
+                              'Name': $k3,
+                              'Agents': $sum($v3.Agents),
+                              'Acces': $sum($v3.Access),
+                              '_children': $v3 { Vendor: $ } ~> $each(function($v4, $k4) {
+                                {
+                                  'Name': $k4,
+                                  'Agents': $sum($v4.Agents),
+                                  'Access': $sum($v4.Access),
+                                  'LockedFte': $distinct($v4.LockedFte)
+                                }
+                              })
+                            }
+                        })
+                    }
+                })
               }
           })
         `)
@@ -245,8 +232,7 @@ export default {
 
         this[`uamDataSummary${brand}`] = data
       } catch (err) {
-        const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
 

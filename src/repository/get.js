@@ -7,14 +7,14 @@ export default {
   UserProfile: (USERNAME) => axios.get(`${resource}UserProfile?username=${USERNAME}`),
 
   UamDataSummary: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummary?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
+  UamDataSummaryHistory: (DATE, BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
+  UamDataSummaryTools: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryTools?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`),
   UamDataAgentsDetailed: (BRAND, LOB, VENDOR, TABLE) => axios.get(`${resource}UamDataAgentsDetailed?brand=${BRAND}&lob=${LOB}&vendor=${VENDOR}&table=${TABLE}`),
   UamDataAgentsDistinctCol: (BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsDistinctCol?brand=${BRAND}&category=${CATEGORY}`),
-
-  UamDataHistoryDates: (BRAND, TYPE) => axios.get(`${resource}UamDataHistoryDates?brand=${BRAND}&type=${TYPE}`),
   UamDataAgentsHistoryDistinctCol: (DATE, BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsHistoryDistinctCol?date=${DATE}&brand=${BRAND}&category=${CATEGORY}`),
-  UamDataSummaryHistory: (DATE, BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataAgentsHistory: (DATE, BRAND, VENDOR) => axios.get(`${resource}UamDataAgentsHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}`),
+  UamDataHistoryDates: (BRAND, TYPE) => axios.get(`${resource}UamDataHistoryDates?brand=${BRAND}&type=${TYPE}`),
 
   IrabData: (VENDOR) => axios.get(`${resource}IrabData?vendor=${VENDOR}`),
   IrabDataSummary: (MONTH, VENDOR) => axios.get(`${resource}IrabDataSummary?month=${MONTH}&vendor=${VENDOR}`),
