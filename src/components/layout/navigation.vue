@@ -1,29 +1,29 @@
 <template>
   <q-list>
-    <!-- NAVIGATION LINKS -->
+    <!-- USER ACCESS LINKS -->
     <q-item-label
       header
       :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
     >
-      Navigation Links
+      User Access
     </q-item-label>
     <q-item
-      v-for="route in routes"
-      :key="route.pathName"
+      v-for="ua in useraccess"
+      :key="ua.pathName"
       clickable
       v-ripple
       exact
-      :to="{ name: route.pathName }"
+      :to="{ name: ua.pathName }"
       active-class="text-green"
     >
       <q-item-section avatar>
         <q-icon
           class="exact-active-class"
-          :name="route.icon"
+          :name="ua.icon"
         />
       </q-item-section>
 
-      <q-item-section>{{ route.label }}</q-item-section>
+      <q-item-section>{{ ua.label }}</q-item-section>
     </q-item>
 
     <q-separator />
@@ -33,7 +33,7 @@
       header
       :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
     >
-      Report Links
+      Reports
     </q-item-label>
     <q-item
       v-for="report in reports"
@@ -62,10 +62,11 @@
 export default {
   data () {
     return {
-      routes: [
-        { pathName: 'user-access', label: 'User Access', icon: 'mdi-account-details' },
-        { pathName: 'user-access-tools', label: 'User Access (Tools)', icon: 'mdi-account-details' },
-        { pathName: 'user-access-history', label: 'User Access History', icon: 'mdi-account-clock' }
+      useraccess: [
+        { pathName: 'user-access', label: 'Per LOBs', icon: 'mdi-account-group' },
+        { pathName: 'user-access-tools', label: 'Per Tools', icon: 'mdi-tools' },
+        { pathName: 'user-access-history', label: 'History', icon: 'mdi-history' },
+        { pathName: 'user-access-audit', label: 'Audit', icon: 'mdi-magnify' }
       ],
       reports: [
         { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-account-lock' },

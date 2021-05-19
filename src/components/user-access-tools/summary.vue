@@ -125,13 +125,13 @@ export default {
 
   methods: {
     renderTable () {
-      const _this = this
+      // const _this = this
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
         data: this.data,
         dataTree: true,
-        dataTreeStartExpanded: false,
+        dataTreeStartExpanded: [true, false],
         placeholder: 'No data to show...',
         columns: [
           {
@@ -163,9 +163,10 @@ export default {
           dataTree: true
         },
         rowClick: (e, row) => {
-          const { Table, Brand, Lob, Vendor } = row.getData()
+          console.log(row.getData())
+          // const { Table, Brand, Lob, Vendor } = row.getData()
 
-          _this.fetchOnehub(Brand, Lob, Vendor, Table)
+          // _this.fetchOnehub(Brand, Lob, Vendor, Table)
         }
       })
 
