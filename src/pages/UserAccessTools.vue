@@ -201,8 +201,8 @@ export default {
           $ { Table: $ } ~> $each(function($v1, $k1) {
               {
                 'Name': $k1,
-                'Agents': $sum($v1.Agents),
-                'Access': $sum($v1.Access),
+                'Agents': '',
+                'Access': '',
                 '_children': $v1 { Tools: $ } ~> $each(function($v2, $k2) {
                     {
                         'Name': $k2,
@@ -212,7 +212,7 @@ export default {
                             {
                               'Name': $k3,
                               'Agents': $sum($v3.Agents),
-                              'Acces': $sum($v3.Access),
+                              'Access': $sum($v3.Access),
                               '_children': $v3 { Vendor: $ } ~> $each(function($v4, $k4) {
                                 {
                                   'Name': $k4,

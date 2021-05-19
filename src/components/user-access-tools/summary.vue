@@ -150,14 +150,12 @@ export default {
           {
             title: 'Agents',
             field: 'Agents',
-            sorter: 'number',
-            topCalc: 'sum'
+            sorter: 'number'
           },
           {
             title: 'With Tools',
             field: 'Access',
-            sorter: 'number',
-            topCalc: 'sum'
+            sorter: 'number'
           }
         ],
         downloadConfig: {
