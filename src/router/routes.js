@@ -13,6 +13,7 @@ const routes = [
       { path: 'user-access', name: 'user-access', component: () => import('pages/UserAccess.vue'), meta: { allow: true } },
       { path: 'user-access-tools', name: 'user-access-tools', component: () => import('pages/UserAccessTools.vue'), meta: { allow: true } },
       { path: 'user-access-history', name: 'user-access-history', component: () => import('pages/UserAccessHistory.vue'), meta: { allow: true } },
+      { path: 'user-access-audit', name: 'user-access-audit', component: () => import('pages/UserAccessAudit.vue'), meta: { allow: true } },
       { path: 'workforce-management', name: 'workforce-management', component: () => import('pages/WorkforceManagement.vue'), meta: { allow: true } },
       { path: 'access-manager', name: 'access-manager', component: () => import('pages/AccessManager.vue'), meta: { allow: true } },
       { path: 'report-irab', name: 'report-irab', component: () => import('pages/ReportIrab.vue'), meta: { allow: true } },

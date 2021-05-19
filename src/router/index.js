@@ -33,11 +33,12 @@ export default function ({ store } /* { store, ssrContext } */) {
     if (to.meta.allow) {
       if (store.state.data.allow) {
         const { data } = await GetRepo.UserProfile(LocalStorage.getItem('userAccnt'))
-        const { useraccess, useraccesstools, useraccesshistory, irab, password, onehub } = data[0]
+        const { useraccess, useraccessaudit, useraccesstools, useraccesshistory, irab, password, onehub } = data[0]
 
         if (to.name === 'user-access' && useraccess) next()
         else if (to.name === 'user-access-tools' && useraccesstools) next()
         else if (to.name === 'user-access-history' && useraccesshistory) next()
+        else if (to.name === 'user-access-audit' && useraccessaudit) next()
         else if (to.name === 'report-irab' && irab) next()
         else if (to.name === 'report-password' && password) next()
         else if (to.name === 'report-onehub' && onehub) next()
