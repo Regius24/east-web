@@ -31,6 +31,17 @@
 <script>
 const logs = [
   {
+    version: '1.0.17',
+    description: 'App Update',
+    timestamp: '05/20/2021',
+    updates: [
+      'Added new pages and components for User Access Audit',
+      'Updated Routes for User Access Audit',
+      'Updated database for User Access Audit',
+      'Fixed Popup onehub tix to show only NA accounts'
+    ]
+  },
+  {
     version: '1.0.16',
     description: 'App Update',
     timestamp: '05/04/2021',
