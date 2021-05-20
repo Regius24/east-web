@@ -41,13 +41,15 @@ export default {
     parseFile () {
       this.loading = true
 
+      console.log(this.file)
+
       Papa.parse(this.file, {
         header: true,
         skipEmptyLines: true,
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
           try {
-            const { data } = await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
+            const { data } = await PostRepo.UamAuditDataRaw(parsed.data)
 
             console.log(data)
 

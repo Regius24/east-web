@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-md">
       <div class="col-12">
-        <SUMMARY />
+        <SUMMARY :data="auditList" />
       </div>
     </div>
 
@@ -43,7 +43,9 @@ export default {
 
       showUploader: false,
       fabPos: [18, 18],
-      draggingFab: false
+      draggingFab: false,
+
+      auditList: []
     }
   },
 
@@ -70,7 +72,11 @@ export default {
       })
     },
 
-    fetchData () { }
+    async fetchData () {
+      const { data } = await GetRepo.UamDataAuditSummary()
+
+      this.auditList = data
+    }
   },
 
   async beforeMount () {
@@ -87,6 +93,10 @@ export default {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
+  },
+
+  mounted () {
+    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
   }
 }
 </script>
