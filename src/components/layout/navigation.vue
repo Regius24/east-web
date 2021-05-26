@@ -65,6 +65,7 @@ export default {
       useraccess: [
         { pathName: 'user-access', label: 'Per LOBs', icon: 'mdi-account-group' },
         { pathName: 'user-access-tools', label: 'Per Tools', icon: 'mdi-tools' },
+        { pathName: 'user-access-summary', label: 'Summary', icon: 'mdi-view-dashboard' },
         { pathName: 'user-access-history', label: 'History', icon: 'mdi-history' },
         { pathName: 'user-access-audit', label: 'Audit', icon: 'mdi-magnify' }
       ],

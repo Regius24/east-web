@@ -12,6 +12,7 @@ const routes = [
     children: [
       { path: 'user-access', name: 'user-access', component: () => import('pages/UserAccess.vue'), meta: { allow: true } },
       { path: 'user-access-tools', name: 'user-access-tools', component: () => import('pages/UserAccessTools.vue'), meta: { allow: true } },
+      { path: 'user-access-summary', name: 'user-access-summary', component: () => import('pages/UserAccessSummary.vue'), meta: { allow: true } },
       { path: 'user-access-history', name: 'user-access-history', component: () => import('pages/UserAccessHistory.vue'), meta: { allow: true } },
       { path: 'user-access-audit', name: 'user-access-audit', component: () => import('pages/UserAccessAudit.vue'), meta: { allow: true } },
       { path: 'workforce-management', name: 'workforce-management', component: () => import('pages/WorkforceManagement.vue'), meta: { allow: true } },
