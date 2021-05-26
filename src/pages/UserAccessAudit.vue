@@ -32,7 +32,7 @@ export default {
   name: 'UserAccessTools',
 
   components: {
-    SUMMARY: () => import('components/user-access-audit/summary')
+    SUMMARY: () => import('components/user-access/audit/summary')
   },
 
   data () {
@@ -61,7 +61,7 @@ export default {
 
     openUploader () {
       this.$q.dialog({
-        component: () => import('components/user-access-audit/uploader'),
+        component: () => import('components/user-access/audit/uploader'),
         parent: this
       }).onOk(() => {
         console.log('OK')

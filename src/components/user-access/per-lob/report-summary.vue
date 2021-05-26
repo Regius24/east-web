@@ -125,13 +125,13 @@ export default {
 
   methods: {
     renderTable () {
-      // const _this = this
+      const _this = this
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
         data: this.data,
         dataTree: true,
-        dataTreeStartExpanded: [true, false],
+        dataTreeStartExpanded: false,
         placeholder: 'No data to show...',
         columns: [
           {
@@ -143,19 +143,33 @@ export default {
             formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
           },
           {
-            title: 'Budgeted',
+            title: 'Locked FTE',
             field: 'LockedFte',
             sorter: 'number'
           },
           {
             title: 'Agents',
             field: 'Agents',
-            sorter: 'number'
+            sorter: 'number',
+            topCalc: 'sum'
           },
           {
-            title: 'With Tools',
-            field: 'Access',
-            sorter: 'number'
+            title: 'Complete',
+            field: 'Complete',
+            sorter: 'number',
+            topCalc: 'sum'
+          },
+          {
+            title: 'Score',
+            field: 'Score',
+            sorter: 'number',
+            formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
+            topCalc: (values, data) => {
+              const Agents = data.reduce((x, y) => x + y.Agents, 0)
+              const Complete = data.reduce((x, y) => x + y.Complete, 0)
+              const Computed = (Complete / Agents) * 100
+              return `${Computed.toFixed(2)}%`
+            }
           }
         ],
         downloadConfig: {
@@ -163,10 +177,9 @@ export default {
           dataTree: true
         },
         rowClick: (e, row) => {
-          console.log(row.getData())
-          // const { Table, Brand, Lob, Vendor } = row.getData()
+          const { Table, Brand, Lob, Vendor } = row.getData()
 
-          // _this.fetchOnehub(Brand, Lob, Vendor, Table)
+          _this.fetchOnehub(Brand, Lob, Vendor, Table)
         }
       })
 
@@ -207,7 +220,7 @@ export default {
 
     openAgentsDetailed (data) {
       this.$q.dialog({
-        component: () => import('components/user-access/report-agents-detailed'),
+        component: () => import('components/user-access/per-lob/report-agents-detailed'),
         parent: this,
         agentData: data
       })

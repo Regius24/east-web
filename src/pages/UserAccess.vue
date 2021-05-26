@@ -90,8 +90,8 @@ export default {
   name: 'UserAccess',
 
   components: {
-    SUMMARY: () => import('components/user-access/report-summary'),
-    AGENTS: () => import('components/user-access/report-agents')
+    SUMMARY: () => import('components/user-access/per-lob/report-summary'),
+    AGENTS: () => import('components/user-access/per-lob/report-agents')
   },
 
   computed: {
@@ -174,7 +174,7 @@ export default {
 
     openUploader () {
       this.$q.dialog({
-        component: () => import('components/user-access/uploader'),
+        component: () => import('components/user-access/per-lob/uploader'),
         parent: this
       }).onOk(() => {
         console.log('OK')

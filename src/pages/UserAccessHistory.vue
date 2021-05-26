@@ -78,8 +78,8 @@ export default {
   name: 'UserAccessHistory',
 
   components: {
-    SUMMARY: () => import('components/user-access-history/summary'),
-    TABLE: () => import('components/user-access-history/table')
+    SUMMARY: () => import('components/user-access/history/summary'),
+    TABLE: () => import('components/user-access/history/table')
   },
 
   data () {
