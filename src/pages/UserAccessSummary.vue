@@ -92,7 +92,6 @@ export default {
       const { data } = await GetRepo.UamDataSummaryAll(brand, vendor, site)
 
       this[`${brand}Data`] = data
-      console.log(this[`${brand}Data`])
     },
 
     fetchData () {

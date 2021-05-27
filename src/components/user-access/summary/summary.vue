@@ -11,13 +11,13 @@
         separator="cell"
         color="accent"
         virtual-scroll
-        style="max-height: 50vh;"
         :data="data"
         :columns="columns"
         :filter="filter"
         :pagination.sync="pagination"
         :rows-per-page-options="[0]"
         :loading="data.length > 0 ? false : true"
+        class="table-style"
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
@@ -99,3 +99,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.table-style {
+  max-height: 50vh;
+}
+</style>
