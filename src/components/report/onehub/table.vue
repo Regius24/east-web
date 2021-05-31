@@ -77,7 +77,7 @@ export default {
           return {
             name: col,
             field: col,
-            label: col,
+            label: col.toUpperCase(),
             style: 'max-width: 300px;',
             classes: 'ellipsis'
           }
