@@ -41,6 +41,7 @@ export default function ({ store } /* { store, ssrContext } */) {
           useraccesshistory,
           irab,
           password,
+          esolve,
           onehub
         } = data[0]
 
@@ -51,6 +52,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'user-access-audit' && useraccessaudit) next()
         else if (to.name === 'report-irab' && irab) next()
         else if (to.name === 'report-password' && password) next()
+        else if (to.name === 'report-esolve' && esolve) next()
         else if (to.name === 'report-onehub' && onehub) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })

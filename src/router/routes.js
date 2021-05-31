@@ -19,6 +19,7 @@ const routes = [
       { path: 'access-manager', name: 'access-manager', component: () => import('pages/AccessManager.vue'), meta: { allow: true } },
       { path: 'report-irab', name: 'report-irab', component: () => import('pages/ReportIrab.vue'), meta: { allow: true } },
       { path: 'report-password', name: 'report-password', component: () => import('pages/ReportPassword.vue'), meta: { allow: true } },
+      { path: 'report-esolve', name: 'report-esolve', component: () => import('pages/ReportEsolve.vue'), meta: { allow: true } },
       { path: 'report-onehub', name: 'report-onehub', component: () => import('pages/ReportOnehub.vue'), meta: { allow: true } }
     ]
   },
