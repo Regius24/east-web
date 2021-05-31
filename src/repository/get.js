@@ -24,5 +24,7 @@ export default {
   PasswordData: () => axios.get(`${resource}PasswordData`),
   PasswordDataSummary: (MONTH) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}`),
 
+  EsolveReportData: () => axios.get(`${resource}EsolveReportData`),
+
   OnehubData: () => axios.get(`${resource}OnehubData`)
 }
