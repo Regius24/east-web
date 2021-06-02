@@ -26,5 +26,7 @@ export default {
 
   EsolveReportData: () => axios.get(`${resource}EsolveReportData`),
 
-  OnehubData: () => axios.get(`${resource}OnehubData`)
+  OnehubData: () => axios.get(`${resource}OnehubData`),
+
+  UserList: () => axios.get(`${resource}UserList`)
 }

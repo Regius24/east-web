@@ -25,6 +25,19 @@ const routes = [
   },
 
   {
+    path: '/settings/',
+    component: () => import('layouts/SettingsLayout.vue'),
+    name: 'settings',
+    children: [
+      { path: 'users', name: 'settings-users', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } },
+      { path: 'users-access', name: 'settings-usersaccess', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } },
+      { path: 'users-profile', name: 'settings-usersprofile', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } }
+    ],
+    meta: { allow: true },
+    redirect: { name: 'settings-users' }
+  },
+
+  {
     path: '/Unauthorized',
     name: 'error401',
     component: () => import('pages/Error401.vue')

@@ -34,6 +34,7 @@ export default function ({ store } /* { store, ssrContext } */) {
       if (store.state.data.allow) {
         const { data } = await GetRepo.UserProfile(LocalStorage.getItem('userAccnt'))
         const {
+          settings,
           useraccess,
           useraccessaudit,
           useraccesstools,
@@ -45,7 +46,10 @@ export default function ({ store } /* { store, ssrContext } */) {
           onehub
         } = data[0]
 
-        if (to.name === 'user-access' && useraccess) next()
+        console.log(to.name.split('-')[0])
+
+        if (to.name.split('-')[0] === 'settings' && settings) next()
+        else if (to.name === 'user-access' && useraccess) next()
         else if (to.name === 'user-access-tools' && useraccesstools) next()
         else if (to.name === 'user-access-summary' && useraccesssummary) next()
         else if (to.name === 'user-access-history' && useraccesshistory) next()

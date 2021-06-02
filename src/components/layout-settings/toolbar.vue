@@ -37,6 +37,24 @@
       :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
       <q-list>
+        <!-- HOME -->
+        <q-item
+          clickable
+          v-close-popup
+          :to="{ name: 'user-access' }"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-home"
+              color="accent"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <!-- LOGOUT -->
         <q-item
           clickable
