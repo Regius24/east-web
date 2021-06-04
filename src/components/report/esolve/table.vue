@@ -78,8 +78,10 @@ export default {
             name: col,
             field: col,
             label: col.toUpperCase(),
+            align: 'center',
             style: 'max-width: 300px;',
-            classes: 'ellipsis'
+            classes: 'ellipsis',
+            headerStyle: 'text-align: center;'
           }
         })
 

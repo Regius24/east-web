@@ -31,6 +31,16 @@
 <script>
 const logs = [
   {
+    version: '1.0.18',
+    description: 'App Update',
+    timestamp: '05/31/2021',
+    updates: [
+      'Added Summary (All) User Access Dashboard',
+      'Added ESolve Report',
+      'Updated navigation icons'
+    ]
+  },
+  {
     version: '1.0.17',
     description: 'App Update',
     timestamp: '05/20/2021',

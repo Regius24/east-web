@@ -7,6 +7,7 @@
         :class="textcolor"
       >{{ title }}</div>
       <div class="text-caption text-weight-light text-center">updated as of: {{ dateCheck }}</div>
+      <div class="text-caption text-weight-light text-center">next update: {{ nextDateCheck }}</div>
       <div
         ref="table"
         class="rounded-borders q-mt-sm"
@@ -88,6 +89,7 @@ import 'jspdf-autotable'
 
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
+import { date } from 'quasar'
 
 window.jsPDF = jsPDF
 window.XLSX = XLSX
@@ -101,6 +103,13 @@ export default {
         return 'N/A'
       } else {
         return this.date.Date
+      }
+    },
+    nextDateCheck () {
+      if (this.date == null) {
+        return 'N/A'
+      } else {
+        return date.formatDate(date.addToDate(this.date.Date, { days: 7 }), 'MMM DD YYYY')
       }
     }
   },

@@ -158,7 +158,7 @@ export default {
       this[`${brand}DateList`] = dates.map(m => m.date)
       this[`${brand}Date`] = first(dates).date
 
-      const vendor = brand === 'pldt' ? 'CompanyName' : 'Company Name'
+      const vendor = 'Company Name' // brand === 'pldt' ? 'Company Name' : 'Company Name'
       const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, vendor)
       this[`${brand}Vendors`] = concat('All', vendors.map(m => m[vendor]))
 

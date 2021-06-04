@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { first } from 'lodash'
+// import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
@@ -62,25 +62,36 @@ export default {
   data () {
     return {
       filter: '',
-      columns: []
+      columns: [
+        { name: 'Subgroup3', field: 'Subgroup3', label: 'Sub Group3', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Company Name', field: 'Company Name', label: 'Company Name', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Site', field: 'Site', label: 'Site', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Employee ID', field: 'Employee ID', label: 'Employee ID', headerStyle: 'text-align: center;' },
+        { name: 'Agent Status', field: 'Agent Status', label: 'Agent Status', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Batch Name', field: 'Batch Name', label: 'Batch Name', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Hired Date', field: 'Hired Date', label: 'Hired Date', headerStyle: 'text-align: center;' },
+        { name: 'End Date', field: 'End Date', label: 'End Date', headerStyle: 'text-align: center;' },
+        { name: 'Job Level', field: 'Job Level', label: 'Job Level', align: 'left', headerStyle: 'text-align: center;' }
+      ]
     }
   },
 
-  watch: {
-    data (val) {
-      const cols = Object
-        .keys(first(val))
-        .map(col => {
-          return {
-            name: col,
-            field: col,
-            label: col
-          }
-        })
+  // watch: {
+  //   data (val) {
+  //     const cols = Object
+  //       .keys(first(val))
+  //       .map(col => {
+  //         return {
+  //           name: col,
+  //           field: col,
+  //           label: col
+  //         }
+  //       })
 
-      this.columns = cols
-    }
-  },
+  //     this.columns = cols
+  //   }
+  // },
 
   methods: {
     exportData () {

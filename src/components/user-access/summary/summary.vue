@@ -76,9 +76,11 @@ export default {
             name: col,
             field: col,
             label: col,
+            align: col === 'LOB' ? 'left' : 'center',
             style: 'max-width: 300px;',
             classes: 'ellipsis',
-            headerClasses: 'text-weight-bolder'
+            headerClasses: 'text-weight-bolder',
+            headerStyle: 'text-align: center;'
           }
         })
 

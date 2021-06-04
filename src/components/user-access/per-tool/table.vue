@@ -55,16 +55,16 @@ export default {
     return {
       filter: '',
       columns: [
-        { name: 'Subgroup1', field: 'Subgroup1', label: 'Sub Group1' },
-        { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name' },
-        { name: 'Company Name', field: 'Company Name', label: 'Company Name' },
-        { name: 'Site', field: 'Site', label: 'Site' },
-        { name: 'Employee ID', field: 'Employee ID', label: 'Employee ID' },
-        { name: 'Agent Status', field: 'Agent Status', label: 'Agent Status' },
-        { name: 'Batch Name', field: 'Batch Name', label: 'Batch Name' },
-        { name: 'Hired Date', field: 'Hired Date', label: 'Hired Date' },
-        { name: 'End Date', field: 'End Date', label: 'End Date' },
-        { name: 'Job Level', field: 'Job Level', label: 'Job Level' }
+        { name: 'Subgroup3', field: 'Subgroup3', label: 'Sub Group3', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Company Name', field: 'Company Name', label: 'Company Name', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Site', field: 'Site', label: 'Site', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Employee ID', field: 'Employee ID', label: 'Employee ID', headerStyle: 'text-align: center;' },
+        { name: 'Agent Status', field: 'Agent Status', label: 'Agent Status', align: 'center', headerStyle: 'text-align: center;' },
+        { name: 'Batch Name', field: 'Batch Name', label: 'Batch Name', align: 'left', headerStyle: 'text-align: center;' },
+        { name: 'Hired Date', field: 'Hired Date', label: 'Hired Date', headerStyle: 'text-align: center;' },
+        { name: 'End Date', field: 'End Date', label: 'End Date', headerStyle: 'text-align: center;' },
+        { name: 'Job Level', field: 'Job Level', label: 'Job Level', align: 'left', headerStyle: 'text-align: center;' }
       ]
     }
   },

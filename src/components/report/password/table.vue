@@ -70,10 +70,32 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
+          let alignment
+
+          switch (col) {
+            case 'USER ID':
+              alignment = 'LEFT'
+              break
+
+            case 'TOOL NAME':
+              alignment = 'LEFT'
+              break
+
+            case 'USERID+TOOL':
+              alignment = 'LEFT'
+              break
+
+            default:
+              alignment = 'center'
+              break
+          }
+
           return {
             name: col,
             field: col,
-            label: col
+            label: col,
+            align: alignment,
+            headerStyle: 'text-align: center;'
           }
         })
 

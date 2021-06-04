@@ -128,7 +128,7 @@
             </q-td>
 
             <q-td
-              key="ACTION"
+              key="OTHER_ACTION"
               :props="props"
             >
               {{ props.row.OTHER_ACTION }}
@@ -315,10 +315,52 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
+          let alignment
+
+          switch (col) {
+            case 'NAME':
+              alignment = 'left'
+              break
+
+            case 'OTHER_ACTION':
+              alignment = 'left'
+              break
+
+            case 'QH_REMARKS':
+              alignment = 'left'
+              break
+
+            case 'QW_REMARKS':
+              alignment = 'left'
+              break
+
+            case 'VH_REMARKS':
+              alignment = 'left'
+              break
+
+            case 'XFERS_REMARKS':
+              alignment = 'left'
+              break
+
+            case 'CORDER_CRITICAL_REMARKS':
+              alignment = 'left'
+              break
+
+            case 'CORDER_NON_CRITICAL_REMARKS':
+              alignment = 'left'
+              break
+
+            default:
+              alignment = 'center'
+              break
+          }
+
           return {
             name: col,
             field: col,
-            label: col
+            label: col,
+            align: alignment,
+            headerStyle: 'text-align: center;'
           }
         })
 
