@@ -10,17 +10,15 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'user-access', name: 'user-access', component: () => import('pages/UserAccess.vue'), meta: { allow: true } },
-      { path: 'user-access-tools', name: 'user-access-tools', component: () => import('pages/UserAccessTools.vue'), meta: { allow: true } },
-      { path: 'user-access-summary', name: 'user-access-summary', component: () => import('pages/UserAccessSummary.vue'), meta: { allow: true } },
-      { path: 'user-access-history', name: 'user-access-history', component: () => import('pages/UserAccessHistory.vue'), meta: { allow: true } },
-      { path: 'user-access-audit', name: 'user-access-audit', component: () => import('pages/UserAccessAudit.vue'), meta: { allow: true } },
-      { path: 'workforce-management', name: 'workforce-management', component: () => import('pages/WorkforceManagement.vue'), meta: { allow: true } },
-      { path: 'access-manager', name: 'access-manager', component: () => import('pages/AccessManager.vue'), meta: { allow: true } },
-      { path: 'report-irab', name: 'report-irab', component: () => import('pages/ReportIrab.vue'), meta: { allow: true } },
-      { path: 'report-password', name: 'report-password', component: () => import('pages/ReportPassword.vue'), meta: { allow: true } },
-      { path: 'report-esolve', name: 'report-esolve', component: () => import('pages/ReportEsolve.vue'), meta: { allow: true } },
-      { path: 'report-onehub', name: 'report-onehub', component: () => import('pages/ReportOnehub.vue'), meta: { allow: true } }
+      { path: 'user-access', name: 'user-access', component: () => import('src/pages/UserAccess/UserAccess.vue'), meta: { allow: true } },
+      { path: 'user-access-tools', name: 'user-access-tools', component: () => import('src/pages/UserAccess/UserAccessTools.vue'), meta: { allow: true } },
+      { path: 'user-access-summary', name: 'user-access-summary', component: () => import('src/pages/UserAccess/UserAccessSummary.vue'), meta: { allow: true } },
+      { path: 'user-access-history', name: 'user-access-history', component: () => import('src/pages/UserAccess/UserAccessHistory.vue'), meta: { allow: true } },
+      { path: 'user-access-audit', name: 'user-access-audit', component: () => import('src/pages/UserAccess/UserAccessAudit.vue'), meta: { allow: true } },
+      { path: 'report-irab', name: 'report-irab', component: () => import('src/pages/Report/ReportIrab.vue'), meta: { allow: true } },
+      { path: 'report-password', name: 'report-password', component: () => import('src/pages/Report/ReportPassword.vue'), meta: { allow: true } },
+      { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },
+      { path: 'report-onehub', name: 'report-onehub', component: () => import('src/pages/Report/ReportOnehub.vue'), meta: { allow: true } }
     ]
   },
 
@@ -29,9 +27,9 @@ const routes = [
     component: () => import('layouts/SettingsLayout.vue'),
     name: 'settings',
     children: [
-      { path: 'users', name: 'settings-users', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } },
-      { path: 'users-access', name: 'settings-usersaccess', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } },
-      { path: 'users-profile', name: 'settings-usersprofile', component: () => import('pages/SettingsUsers.vue'), meta: { allow: true } }
+      { path: 'users', name: 'settings-users', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },
+      { path: 'users-access', name: 'settings-usersaccess', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },
+      { path: 'users-profile', name: 'settings-usersprofile', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } }
     ],
     meta: { allow: true },
     redirect: { name: 'settings-users' }
@@ -40,14 +38,14 @@ const routes = [
   {
     path: '/Unauthorized',
     name: 'error401',
-    component: () => import('pages/Error401.vue')
+    component: () => import('src/pages/Errors/Error401.vue')
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('src/pages/Errors/Error404.vue')
   }
 ]
 
