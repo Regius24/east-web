@@ -7,29 +7,41 @@
       class="q-dialog-plugin q-pa-sm"
       style="min-width: 50%;"
     >
-      <q-card-section>
-        <q-timeline layout="comfortable">
-          <q-timeline-entry
-            v-for="log in logs"
-            :key="log.version"
-            :title="`${log.version} - ${log.timestamp}`"
-            :subtitle="log.description"
-          >
-            <ul>
-              <li
-                v-for="update in log.updates"
-                :key="update"
-              >{{ update }}</li>
-            </ul>
-          </q-timeline-entry>
-        </q-timeline>
-      </q-card-section>
+      <q-scroll-area style="height: 70vh; max-width: 100%;">
+        <q-card-section>
+          <q-timeline layout="comfortable">
+            <q-timeline-entry
+              v-for="log in logs"
+              :key="log.version"
+              :title="`${log.version} - ${log.timestamp}`"
+              :subtitle="log.description"
+            >
+              <ul>
+                <li
+                  v-for="update in log.updates"
+                  :key="update"
+                >{{ update }}</li>
+              </ul>
+            </q-timeline-entry>
+          </q-timeline>
+        </q-card-section>
+      </q-scroll-area>
+
     </q-card>
   </q-dialog>
 </template>
 
 <script>
 const logs = [
+  {
+    version: '1.0.19',
+    description: 'App Update',
+    timestamp: '06/04/2021',
+    updates: [
+      'Added "Next Update" for the Summary',
+      'Updated all table configuration for columns and headers'
+    ]
+  },
   {
     version: '1.0.18',
     description: 'App Update',
