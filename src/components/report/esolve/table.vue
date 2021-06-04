@@ -6,7 +6,7 @@
         dense
         flat
         bordered
-        title="Onehub List"
+        title="ESolve Ticket List"
         row-key="name"
         separator="cell"
         color="accent"
