@@ -43,7 +43,8 @@ export default function ({ store } /* { store, ssrContext } */) {
           irab,
           password,
           esolve,
-          onehub
+          onehub,
+          leavers
         } = data[0]
 
         console.log(to.name.split('-')[0])
@@ -58,6 +59,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'report-password' && password) next()
         else if (to.name === 'report-esolve' && esolve) next()
         else if (to.name === 'report-onehub' && onehub) next()
+        else if (to.name === 'report-leavers-daily' && leavers) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }
