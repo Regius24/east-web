@@ -46,7 +46,7 @@
           <q-item-section avatar>
             <q-avatar
               icon="mdi-power"
-              color="accent"
+              color="grey"
               text-color="white"
             />
           </q-item-section>

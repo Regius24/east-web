@@ -38,7 +38,14 @@ const logs = [
     description: 'App Update',
     timestamp: '06/11/2021',
     updates: [
-      'Updated User Access SMART Resigned formula'
+      'Added Leavers Daily Report and DB Schema',
+      'Updated User Access SMART Resigned formula',
+      'Updated app routing for Leavers Daily Report',
+      'Updated app API for Leavers Daily Report',
+      'Updated Leavers Daily table',
+      'Updated Leavers Daily uploader',
+      'Updated navigation layout',
+      'Fixed reversed columns for User Access Summary'
     ]
   },
   {
