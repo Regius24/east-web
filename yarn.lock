@@ -1043,10 +1043,10 @@
     core-js "^3.6.5"
     core-js-compat "^3.6.5"
 
-"@quasar/cli@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@quasar/cli/-/cli-1.2.0.tgz#fa11adb3039e7cdd90ab70d4070a6fa1978d0022"
-  integrity sha512-tungPBaMrJyo/8gtH0cS7VhxWXrG+az0ZUXpvdWqsN9Ymrm+Ld1GZ3zhZLcMLi76VfMfxvYdQRcAbkweGtrprw==
+"@quasar/cli@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@quasar/cli/-/cli-1.2.1.tgz#4a6d395648f70446158f90479ba069a837ef037f"
+  integrity sha512-WsfsDOlxSpOW8TlCSdmkrSb1Mop54omUlm6clmRuDvlu6Blt7i/ffklfls+3dPNnD/aISy5pPeqB8KNDKChAGg==
   dependencies:
     async "3.2.0"
     chalk "4.1.1"
