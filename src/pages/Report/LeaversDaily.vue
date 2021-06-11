@@ -5,7 +5,7 @@
       <!-- PLDT -->
       <div class="col-12">
         <SUMMARY
-          :title="'Summarized PLDT Data'"
+          :title="'Daily Leavers for PLDT'"
           :titleClass="'text-red'"
           :data="pldtData"
         />
@@ -14,7 +14,7 @@
       <!-- SMART -->
       <div class="col-12">
         <SUMMARY
-          :title="'Summarized SMART Data'"
+          :title="'Daily Leavers for SMART'"
           :titleClass="'text-green'"
           :data="smartData"
         />
@@ -22,19 +22,36 @@
     </div>
 
     <!-- UPLOAD BUTTON -->
+    <!-- MENU BUTTON -->
     <q-page-sticky
       position="bottom-right"
       :offset="fabPos"
     >
-      <q-btn
-        fab
-        icon="mdi-file-upload"
+      <q-fab
+        v-model="fabRight"
+        vertical-actions-align="right"
         color="accent"
+        icon="mdi-menu"
+        direction="up"
         :disable="draggingFab"
         :style="showUploader ? '' : 'display: none;'"
         v-touch-pan.prevent.mouse="moveFab"
-        @click="openUploader"
-      />
+      >
+        <q-fab-action
+          label-position="left"
+          color="red"
+          icon="mdi-file-upload"
+          label="Upload data for PLDT"
+          @click="openUploader('pldt')"
+        />
+        <q-fab-action
+          label-position="left"
+          color="green"
+          icon="mdi-file-upload"
+          label="Upload data for SMART"
+          @click="openUploader('smart')"
+        />
+      </q-fab>
     </q-page-sticky>
   </q-page>
 </template>
@@ -47,7 +64,7 @@ export default {
   name: 'UserAccessSummary',
 
   components: {
-    SUMMARY: () => import('components/user-access/summary/summary')
+    SUMMARY: () => import('components/report/leavers-daily/table')
   },
 
   data () {
@@ -57,6 +74,7 @@ export default {
       brandList: [],
 
       showUploader: false,
+      fabRight: false,
       fabPos: [18, 18],
       draggingFab: false,
 
@@ -75,10 +93,11 @@ export default {
       ]
     },
 
-    openUploader () {
+    openUploader (brand) {
       this.$q.dialog({
-        component: () => import('components/user-access/per-lob/uploader'),
-        parent: this
+        component: () => import('components/report/leavers-daily/uploader.vue'),
+        parent: this,
+        brand: brand
       }).onOk(() => {
         console.log('OK')
       }).onCancel(() => {
@@ -88,18 +107,15 @@ export default {
       })
     },
 
-    async initializeData (brand, vendor, site) {
-      const { data } = await GetRepo.UamDataSummaryAll(brand, vendor, site)
+    async initializeData (brand) {
+      const { data } = await GetRepo.LeaversDaily(brand)
 
       this[`${brand}Data`] = data
     },
 
     fetchData () {
-      const vendor = this.profileType === 'admin' ? '%' : this.vendorType
-      const site = '%'
-
       this.brandList.forEach(brand => {
-        this.initializeData(brand.toLowerCase(), vendor, site)
+        this.initializeData(brand.toLowerCase())
       })
     }
   },

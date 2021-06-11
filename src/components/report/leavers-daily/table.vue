@@ -21,14 +21,14 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
+          <!-- <q-btn-group class="q-mr-sm">
             <q-btn
               outline
               color="accent"
               label="CSV"
               @click="exportData"
             />
-          </q-btn-group>
+          </q-btn-group> -->
 
           <!-- SEARCH -->
           <q-input
@@ -96,7 +96,7 @@ export default {
 
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
-      exportFile(`${name}.csv`, data)
+      exportFile(`${name}.xlsx`, data)
     }
   }
 }

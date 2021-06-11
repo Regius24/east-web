@@ -9,7 +9,7 @@
           outlined
           counter
           accept=".xlsx"
-          label="Upload data for Leavers Daily (.xlsx)"
+          :label="`Upload data for ${brand} Leavers Daily (.xlsx)`"
           v-model="file"
           :disable="loading"
           :loading="loading"
@@ -29,6 +29,8 @@ import { notify } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
+  props: ['brand'],
+
   data () {
     return {
       file: null,
@@ -44,7 +46,7 @@ export default {
         const formData = new FormData()
         formData.append('file', file)
 
-        const result = await PostRepo.UploadLeaverDailyFile(formData)
+        const result = await PostRepo.UploadLeaverDailyFile(this.brand, formData)
         console.log(result)
 
         this.loading = true

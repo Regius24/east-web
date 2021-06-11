@@ -1,10 +1,11 @@
 <template>
   <q-scroll-area style="height: 100%;">
     <q-list>
-      <!-- USER ACCESS LINKS -->
+      <!-- USER ACCESS -->
       <q-item-label
         header
         :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
+        class="text-weight-bold text-uppercase"
       >
         User Access
       </q-item-label>
@@ -27,12 +28,13 @@
         <q-item-section>{{ item.label }}</q-item-section>
       </q-item>
 
-      <q-separator />
+      <q-separator size="4px" />
 
-      <!-- REPORT LINKS -->
+      <!-- REPORT -->
       <q-item-label
         header
         :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
+        class="text-weight-bold text-uppercase"
       >
         Reports
       </q-item-label>
@@ -57,7 +59,7 @@
 
       <q-separator inset="item" />
 
-      <!-- LEAVERS LINKS -->
+      <!-- LEAVERS -->
       <q-item-label
         header
         :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
@@ -83,12 +85,13 @@
         <q-item-section>{{ item.label }}</q-item-section>
       </q-item>
 
-      <q-separator />
+      <q-separator size="4px" />
 
-      <!-- REPORT LINKS -->
+      <!-- OTHER REPORT -->
       <q-item-label
         header
         :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
+        class="text-weight-bold text-uppercase"
       >
         Other Reports
       </q-item-label>

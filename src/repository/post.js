@@ -10,5 +10,5 @@ export default {
   PasswordDataRaw: (PAYLOAD) => axios.post(resource + 'PasswordDataRaw', PAYLOAD),
   OnehubData: (PAYLOAD) => axios.post(resource + 'OnehubDataRaw', PAYLOAD),
   UploadOnehubFile: (PAYLOAD) => axios.post(resource + 'UploadToOnehub', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  UploadLeaverDailyFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversDaily', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } })
+  UploadLeaverDailyFile: (BRAND, PAYLOAD) => axios.post(resource + `UploadToLeaversDaily?brand=${BRAND}`, PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } })
 }
