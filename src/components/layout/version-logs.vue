@@ -34,6 +34,14 @@
 <script>
 const logs = [
   {
+    version: '1.0.20',
+    description: 'App Update',
+    timestamp: '06/11/2021',
+    updates: [
+      'Updated User Access SMART Resigned formula'
+    ]
+  },
+  {
     version: '1.0.19',
     description: 'App Update',
     timestamp: '06/04/2021',
