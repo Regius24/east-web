@@ -9,7 +9,7 @@
     >
       <q-scroll-area style="height: 70vh; max-width: 100%;">
         <q-card-section>
-          <q-timeline layout="comfortable">
+          <q-timeline>
             <q-timeline-entry
               v-for="log in logs"
               :key="log.version"
@@ -33,6 +33,21 @@
 
 <script>
 const logs = [
+  {
+    version: '1.0.21',
+    description: 'App Update',
+    timestamp: '06/15/2021',
+    updates: [
+      'Added Leavers Monthly Report for PLDT and SMART',
+      'Added Leavers Monthly Report DB Schema for PLDT and SMART',
+      'Added Leavers Monthly Report Backend API for PLDT and SMART',
+      'Updated IRAB for filtering DEACTIVATED only',
+      'Updated ESolve Report to show non-resolved tickets',
+      'Updated ESolve Report to include new columns',
+      'Updated Password Cases Report Summary headers',
+      'Updated layout toolbar dropdown menu'
+    ]
+  },
   {
     version: '1.0.20',
     description: 'App Update',

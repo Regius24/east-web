@@ -55,6 +55,8 @@
           </q-item-section>
         </q-item>
 
+        <q-separator />
+
         <!-- INVERT COLOR -->
         <q-item
           clickable
@@ -93,6 +95,8 @@
           </q-item-section>
         </q-item>
 
+        <q-separator />
+
         <!-- RELEASE NOTES -->
         <q-item
           clickable
@@ -102,7 +106,7 @@
           <q-item-section avatar>
             <q-avatar
               icon="mdi-clipboard-text-outline"
-              color="accent"
+              color="orange"
               text-color="white"
             />
           </q-item-section>
