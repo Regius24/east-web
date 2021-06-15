@@ -74,13 +74,26 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
+          let alignment, style
+
+          switch (col) {
+            case 'Justification':
+              alignment = 'LEFT'
+              style = 'white-space: normal !important;'
+              break
+
+            default:
+              alignment = 'center'
+              break
+          }
+
           return {
             name: col,
             field: col,
             label: col.toUpperCase(),
-            align: 'center',
-            style: 'max-width: 300px;',
-            classes: 'ellipsis',
+            align: alignment,
+            style: 'max-width: 300px;' + style,
+            // classes: 'ellipsis',
             headerStyle: 'text-align: center;'
           }
         })
