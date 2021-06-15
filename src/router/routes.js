@@ -19,7 +19,8 @@ const routes = [
       { path: 'report-password', name: 'report-password', component: () => import('src/pages/Report/ReportPassword.vue'), meta: { allow: true } },
       { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },
       { path: 'report-onehub', name: 'report-onehub', component: () => import('src/pages/Report/ReportOnehub.vue'), meta: { allow: true } },
-      { path: 'report-leavers-daily', name: 'report-leavers-daily', component: () => import('src/pages/Report/LeaversDaily.vue'), meta: { allow: true } }
+      { path: 'report-leavers-daily', name: 'report-leavers-daily', component: () => import('src/pages/Report/LeaversDaily.vue'), meta: { allow: true } },
+      { path: 'report-leavers-monthly', name: 'report-leavers-monthly', component: () => import('src/pages/Report/LeaversMonthly.vue'), meta: { allow: true } }
     ]
   },
 

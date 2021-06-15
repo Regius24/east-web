@@ -29,6 +29,7 @@ export default {
   OnehubData: () => axios.get(`${resource}OnehubData`),
 
   LeaversDaily: (BRAND) => axios.get(`${resource}LeaversDaily?brand=${BRAND}`),
+  LeaversMonthly: (BRAND) => axios.get(`${resource}LeaversMonthly?brand=${BRAND}`),
 
   UserList: () => axios.get(`${resource}UserList`)
 }

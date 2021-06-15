@@ -135,7 +135,8 @@ export default {
         { pathName: 'report-password', label: 'Password Cases', icon: 'mdi-lock-alert' }
       ],
       leavers: [
-        { pathName: 'report-leavers-daily', label: 'Daily', icon: 'mdi-account-minus' }
+        { pathName: 'report-leavers-daily', label: 'Daily', icon: 'mdi-account-minus' },
+        { pathName: 'report-leavers-monthly', label: 'Monthly', icon: 'mdi-account-multiple-minus' }
       ],
       otherReports: [
         { pathName: 'report-esolve', label: 'ESolve', icon: 'mdi-ticket-outline' },

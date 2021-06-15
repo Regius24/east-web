@@ -60,6 +60,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'report-esolve' && esolve) next()
         else if (to.name === 'report-onehub' && onehub) next()
         else if (to.name === 'report-leavers-daily' && leavers) next()
+        else if (to.name === 'report-leavers-monthly' && leavers) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }
