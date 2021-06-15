@@ -43,11 +43,20 @@
         <!-- BLACKLIST UPLOAD -->
         <q-fab-action
           label-position="left"
-          color="blue-grey"
+          color="blue-grey-7"
           icon="mdi-account-cancel"
           label="Check for Blacklist"
           @click="openUploaderBlacklist"
         />
+
+        <q-fab-action color="blue-grey-8">
+          <q-toggle
+            dense
+            v-model="deactivatedOnly"
+            label="DEACTIVATED"
+            color="orange"
+          />
+        </q-fab-action>
       </q-fab>
     </q-page-sticky>
   </q-page>
@@ -68,6 +77,7 @@ export default {
 
   data () {
     return {
+      deactivatedOnly: false,
       months: [],
       summary: [],
       raw: [],
@@ -83,10 +93,20 @@ export default {
   watch: {
     profileType (val) {
       this.fetchRaw(val)
+      this.deactivatedOnly = false
     },
     months (val) {
       const vendor = this.profileType === 'admin' ? '%' : this.profileType
       this.fetchSummary(first(val), vendor)
+      this.deactivatedOnly = false
+    },
+    deactivatedOnly (val) {
+      if (val) {
+        this.summary = this.summary.filter(f => f.DEACTIVATED === 1)
+        this.raw = this.raw.filter(f => f.STATUS === 'DEACTIVATED')
+      } else {
+        this.fetchRaw(this.profileType)
+      }
     }
   },
 
