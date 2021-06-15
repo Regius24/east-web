@@ -25,8 +25,19 @@ const routes = [
   },
 
   {
+    path: '/knowledge-base/',
+    component: () => import('layouts/KnowledgeBaseLayout.vue'),
+    name: 'knowledge-base',
+    children: [
+      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: false } }
+    ],
+    meta: { allow: false },
+    redirect: { name: 'kb-user-access-tools' }
+  },
+
+  {
     path: '/settings/',
-    component: () => import('layouts/SettingsLayout.vue'),
+    component: () => import('layouts/KnowledgeBaseLayout.vue'),
     name: 'settings',
     children: [
       { path: 'users', name: 'settings-users', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },

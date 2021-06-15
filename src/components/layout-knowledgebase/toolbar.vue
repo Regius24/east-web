@@ -57,21 +57,21 @@
 
         <q-separator />
 
-        <!-- KNOWLEDGE BASE -->
+        <!-- UAM Dashboard -->
         <q-item
           clickable
           v-close-popup
-          :to="{ name: 'knowledge-base' }"
+          :to="{ name: 'user-access' }"
         >
           <q-item-section avatar>
             <q-avatar
-              icon="mdi-sitemap"
+              icon="mdi-view-dashboard"
               color="accent"
               text-color="white"
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Knowledge Base</q-item-label>
+            <q-item-label>UAM Dashboard</q-item-label>
           </q-item-section>
         </q-item>
 
