@@ -44,7 +44,7 @@ export default {
           title: 'JAN',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'JANCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -53,7 +53,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'JANAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -67,7 +67,7 @@ export default {
           title: 'FEB',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'FEBCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -76,7 +76,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'FEBAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -90,7 +90,7 @@ export default {
           title: 'MAR',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'MARCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -99,7 +99,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'MARAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -113,7 +113,7 @@ export default {
           title: 'APR',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'APRCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -122,7 +122,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'APRAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -136,7 +136,7 @@ export default {
           title: 'MAY',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'MAYCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -145,7 +145,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'MAYAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -159,7 +159,7 @@ export default {
           title: 'JUN',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'JUNCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -168,7 +168,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'JUNAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -182,7 +182,7 @@ export default {
           title: 'JUL',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'JULCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -191,7 +191,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'JULAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -205,7 +205,7 @@ export default {
           title: 'AUG',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'AUGCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -214,7 +214,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'AUGAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -228,7 +228,7 @@ export default {
           title: 'SEP',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'SEPCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -237,7 +237,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'SEPAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -251,7 +251,7 @@ export default {
           title: 'OCT',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'OCTCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -260,7 +260,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'OCTAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -274,7 +274,7 @@ export default {
           title: 'NOV',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'NOVCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -283,7 +283,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'NOVAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -297,7 +297,7 @@ export default {
           title: 'DEC',
           columns: [
             {
-              title: 'cnt',
+              title: 'CNT',
               field: 'DECCo',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -306,7 +306,7 @@ export default {
               topCalcFormatterParams: { precision: false }
             },
             {
-              title: 'amt',
+              title: 'AMT',
               field: 'DECAm',
               formatter: 'money',
               formatterParams: { precision: false },
@@ -457,7 +457,7 @@ export default {
             frozen: true,
             columns: [
               {
-                title: 'cnt',
+                title: 'CNT',
                 field: 'YTDCo',
                 formatter: 'money',
                 formatterParams: { precision: false },
@@ -466,7 +466,7 @@ export default {
                 topCalcFormatterParams: { precision: false }
               },
               {
-                title: 'amt',
+                title: 'AMT',
                 field: 'YTDAm',
                 formatter: 'money',
                 formatterParams: { precision: false },
