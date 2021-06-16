@@ -47,8 +47,6 @@ export default function ({ store } /* { store, ssrContext } */) {
           leavers
         } = data[0]
 
-        console.log(to.name.split('-')[0])
-
         if (to.name.split('-')[0] === 'settings' && settings) next()
         else if (to.name === 'user-access' && useraccess) next()
         else if (to.name === 'user-access-tools' && useraccesstools) next()

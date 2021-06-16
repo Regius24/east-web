@@ -203,22 +203,38 @@ export default {
                 'Name': $k1,
                 'Agents': '',
                 'Access': '',
+                'Table': $k1,
+                'Brand': $distinct($v1.Brand),
+                'Lob': '%',
+                'Vendor': '%',
                 '_children': $v1 { Tools: $ } ~> $each(function($v2, $k2) {
                     {
                         'Name': $k2,
                         'Agents': $sum($v2.Agents),
                         'Access': $sum($v2.Access),
+                        'Table': $k1,
+                        'Brand': $distinct($v2.Brand),
+                        'Lob': '%',
+                        'Vendor': '%',
                         '_children': $v2 { Lob: $ } ~> $each(function($v3, $k3) {
                             {
                               'Name': $k3,
                               'Agents': $sum($v3.Agents),
                               'Access': $sum($v3.Access),
+                              'Table': $k1,
+                              'Brand': $distinct($v3.Brand),
+                              'Lob': $distinct($v3.Lob),
+                              'Vendor': '%',
                               '_children': $v3 { Vendor: $ } ~> $each(function($v4, $k4) {
                                 {
                                   'Name': $k4,
                                   'Agents': $sum($v4.Agents),
                                   'Access': $sum($v4.Access),
-                                  'LockedFte': $distinct($v4.LockedFte)
+                                  'LockedFte': $distinct($v4.LockedFte),
+                                  'Table': $k1,
+                                  'Brand': $distinct($v4.Brand),
+                                  'Lob': $distinct($v4.Lob),
+                                  'Vendor': $distinct($v4.Vendor)
                                 }
                               })
                             }

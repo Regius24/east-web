@@ -134,7 +134,7 @@ export default {
 
   methods: {
     renderTable () {
-      // const _this = this
+      const _this = this
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitDataStretch',
         maxHeight: 310,
@@ -172,10 +172,9 @@ export default {
           dataTree: true
         },
         rowClick: (e, row) => {
-          console.log(row.getData())
-          // const { Table, Brand, Lob, Vendor } = row.getData()
+          const { Table, Brand, Lob, Vendor } = row.getData()
 
-          // _this.fetchOnehub(Brand, Lob, Vendor, Table)
+          _this.fetchOnehub(Brand, Lob, Vendor, Table)
         }
       })
 
@@ -215,14 +214,14 @@ export default {
     },
 
     openAgentsDetailed (data) {
-      // this.$q.dialog({
-      //   component: () => import('components/user-access/report-agents-detailed'),
-      //   parent: this,
-      //   agentData: data
-      // })
-      //   .onOk(() => (console.log('OK')))
-      //   .onCancel(() => (console.log('Cancel')))
-      //   .onDismiss(() => (console.log('Called on OK or Cancel')))
+      this.$q.dialog({
+        component: () => import('components/user-access/per-tool/report-agents-detailed'),
+        parent: this,
+        agentData: data
+      })
+        .onOk(() => (console.log('OK')))
+        .onCancel(() => (console.log('Cancel')))
+        .onDismiss(() => (console.log('Called on OK or Cancel')))
     }
   },
 
