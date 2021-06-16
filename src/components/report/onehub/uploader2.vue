@@ -5,6 +5,9 @@
   >
     <q-card class="q-dialog-plugin overflow-hidden">
       <q-card-section>
+        <div class="text-weight-medium text-caption text-justify text-deep-orange q-mb-sm">
+          *Be advised that the uploader is <span class="text-weight-bold">case</span>, <span class="text-weight-bold">spelling</span> and <span class="text-weight-bold">column</span> sensitive.
+        </div>
         <q-file
           outlined
           counter

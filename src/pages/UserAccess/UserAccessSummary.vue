@@ -22,7 +22,7 @@
     </div>
 
     <!-- UPLOAD BUTTON -->
-    <q-page-sticky
+    <!-- <q-page-sticky
       position="bottom-right"
       :offset="fabPos"
     >
@@ -35,7 +35,7 @@
         v-touch-pan.prevent.mouse="moveFab"
         @click="openUploader"
       />
-    </q-page-sticky>
+    </q-page-sticky> -->
   </q-page>
 </template>
 

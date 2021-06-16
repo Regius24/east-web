@@ -21,7 +21,10 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
+          <q-btn-group
+            outline
+            class="q-mr-sm"
+          >
             <q-btn
               outline
               color="accent"
