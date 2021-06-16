@@ -179,13 +179,13 @@ export default {
                 return `${cell.getValue().toFixed(2)}%`
               }
             },
-            topCalc: 'avg'
-            // topCalc: (values, data) => {
-            //   const Agents = data.reduce((x, y) => x + y.Agents, 0)
-            //   const Complete = data.reduce((x, y) => x + y.Complete, 0)
-            //   const Computed = (Complete / Agents) * 100
-            //   return `${Computed.toFixed(2)}%`
-            // }
+            // topCalc: 'avg'
+            topCalc: (values, data) => {
+              const Agents = data.reduce((x, y) => x + y.Agents, 0)
+              const Complete = data.reduce((x, y) => x + y.Complete, 0)
+              const Computed = (Complete / Agents) * 100
+              return `${Computed.toFixed(2)}%`
+            }
           }
         ],
         downloadConfig: {
