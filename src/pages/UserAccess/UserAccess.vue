@@ -256,7 +256,7 @@ export default {
         const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'Site')
         const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Site')
 
-        this.uamDataSummaryPldtVendors = concat('All', pldtVendor.map(m => m.CompanyName))
+        this.uamDataSummaryPldtVendors = concat('All', pldtVendor.map(m => m['Company Name']))
         this.uamDataSummarySmartVendors = concat('All', smartVendor.map(m => m['Company Name']))
         this.uamDataSummaryPldtSites = concat('All', pldtSite.map(m => m.Site))
         this.uamDataSummarySmartSites = concat('All', smartSite.map(m => m.Site))

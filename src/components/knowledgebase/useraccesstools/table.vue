@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { first } from 'lodash'
+// import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
@@ -62,40 +62,18 @@ export default {
   data () {
     return {
       filter: '',
-      columns: [],
+      columns: [
+        { name: 'Position', field: 'Position', label: 'POSITION', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Subgroup1', field: 'Subgroup1', label: 'SUBGROUP1', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Subgroup2', field: 'Subgroup2', label: 'SUBGROUP2', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Subgroup4', field: 'Subgroup4', label: 'SUBGROUP4', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Subgroup5', field: 'Subgroup5', label: 'SUBGROUP5', align: 'center', headerStyle: 'text-align: center;', sortable: true },
+        { name: 'Primary', field: 'Primary', label: 'PRIMARY', align: 'left', headerStyle: 'text-align: center;' }
+      ],
       pagination: {
         rowsPerPage: 0
       }
-    }
-  },
-
-  watch: {
-    data (val) {
-      const cols = Object
-        .keys(first(val))
-        .map(col => {
-          let alignment
-
-          switch (col) {
-            case 'Primary':
-              alignment = 'LEFT'
-              break
-
-            default:
-              alignment = 'center'
-              break
-          }
-
-          return {
-            name: col,
-            field: col,
-            label: col.toUpperCase(),
-            align: alignment,
-            headerStyle: 'text-align: center;'
-          }
-        })
-
-      this.columns = cols
     }
   },
 
