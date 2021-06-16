@@ -18,17 +18,25 @@
         :rows-per-page-options="[0]"
         :loading="data.length > 0 ? false : true"
         class="table-style"
+        :id="title"
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <!-- <q-btn-group class="q-mr-sm">
+          <q-btn-group class="q-mr-sm">
             <q-btn
               outline
               color="accent"
               label="CSV"
               @click="exportData"
             />
-          </q-btn-group> -->
+
+            <q-btn
+              outline
+              color="accent"
+              label="XLSX"
+              @click="exportData2"
+            />
+          </q-btn-group>
 
           <!-- SEARCH -->
           <q-input
@@ -52,7 +60,10 @@
 import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
+import XLSX from 'xlsx'
 import { notify } from 'boot/notifier'
+
+window.XLSX = XLSX
 
 export default {
   props: ['title', 'titleClass', 'data'],
@@ -96,7 +107,20 @@ export default {
 
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
-      exportFile(`${name}.xlsx`, data)
+      exportFile(`${name}.csv`, data)
+    },
+
+    exportData2 () {
+      const title = `Leavers Daily for ${this.title}`
+      this.exportXLSX2(title, this.data)
+    },
+
+    exportXLSX2 (name, data) {
+      const wb = XLSX.utils.book_new()
+      const ws = XLSX.utils.json_to_sheet(data)
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+      XLSX.writeFile(wb, `${name}.xlsx`)
     }
   }
 }

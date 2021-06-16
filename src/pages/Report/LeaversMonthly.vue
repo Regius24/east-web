@@ -64,7 +64,7 @@ export default {
   name: 'UserAccessSummary',
 
   components: {
-    SUMMARY: () => import('components/report/leavers-daily/table')
+    SUMMARY: () => import('components/report/leavers-monthly/table')
   },
 
   data () {
