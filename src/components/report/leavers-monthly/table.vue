@@ -26,13 +26,6 @@
             <q-btn
               outline
               color="accent"
-              label="CSV"
-              @click="exportData"
-            />
-
-            <q-btn
-              outline
-              color="accent"
               label="XLSX"
               @click="exportData2"
             />
