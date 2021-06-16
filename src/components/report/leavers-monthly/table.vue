@@ -56,8 +56,6 @@ import { unparse } from 'papaparse'
 import XLSX from 'xlsx'
 import { notify } from 'boot/notifier'
 
-window.XLSX = XLSX
-
 export default {
   props: ['title', 'titleClass', 'data'],
 
@@ -94,7 +92,7 @@ export default {
 
   methods: {
     exportData () {
-      const title = `Leavers Daily for ${this.title}`
+      const title = `Monthly Leavers for ${this.title}`
       this.export(title, unparse(this.data))
     },
 
@@ -104,7 +102,7 @@ export default {
     },
 
     exportData2 () {
-      const title = `Leavers Daily for ${this.title}`
+      const title = `Monthly Leavers for ${this.title}`
       this.exportXLSX2(title, this.data)
     },
 

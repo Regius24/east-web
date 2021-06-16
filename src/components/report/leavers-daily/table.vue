@@ -21,14 +21,14 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <!-- <q-btn-group class="q-mr-sm">
+          <q-btn-group class="q-mr-sm">
             <q-btn
               outline
               color="accent"
-              label="CSV"
-              @click="exportData"
+              label="XLSX"
+              @click="exportData2"
             />
-          </q-btn-group> -->
+          </q-btn-group>
 
           <!-- SEARCH -->
           <q-input
@@ -53,6 +53,7 @@ import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
+import XLSX from 'xlsx'
 
 export default {
   props: ['title', 'titleClass', 'data'],
@@ -90,13 +91,26 @@ export default {
 
   methods: {
     exportData () {
-      const title = `Leavers Daily for ${this.title}`
+      const title = `Daily Leavers for ${this.title}`
       this.export(title, unparse(this.data))
     },
 
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
       exportFile(`${name}.xlsx`, data)
+    },
+
+    exportData2 () {
+      const title = `Daily Leavers for ${this.title}`
+      this.exportXLSX2(title, this.data)
+    },
+
+    exportXLSX2 (name, data) {
+      const wb = XLSX.utils.book_new()
+      const ws = XLSX.utils.json_to_sheet(data)
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+      XLSX.writeFile(wb, `${name}.xlsx`)
     }
   }
 }
