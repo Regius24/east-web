@@ -5,7 +5,7 @@
       <!-- PLDT -->
       <div class="col-12">
         <SUMMARY
-          :title="'Daily Leavers for PLDT'"
+          :title="'Monthly Leavers for PLDT'"
           :titleClass="'text-red'"
           :data="pldtData"
         />
@@ -14,7 +14,7 @@
       <!-- SMART -->
       <div class="col-12">
         <SUMMARY
-          :title="'Daily Leavers for SMART'"
+          :title="'Monthly Leavers for SMART'"
           :titleClass="'text-green'"
           :data="smartData"
         />

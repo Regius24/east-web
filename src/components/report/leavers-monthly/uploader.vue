@@ -46,10 +46,7 @@ export default {
         const formData = new FormData()
         formData.append('file', file)
 
-        // const result = await PostRepo[`UploadLeaverMonthly${this.brand}File`](formData)
-        // console.log(result)
-
-        const result = await PostRepo.UploadLeaverMonthlySmartFile(formData)
+        const result = await PostRepo[`UploadLeaverMonthly${this.brand}File`](formData)
         console.log(result)
 
         this.loading = true
