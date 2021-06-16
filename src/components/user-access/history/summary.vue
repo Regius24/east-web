@@ -152,13 +152,20 @@ export default {
             title: 'Score',
             field: 'Score',
             sorter: 'number',
-            formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
-            topCalc: (values, data) => {
-              const Agents = data.reduce((x, y) => x + y.Agents, 0)
-              const Complete = data.reduce((x, y) => x + y.Complete, 0)
-              const Computed = (Complete / Agents) * 100
-              return `${Computed.toFixed(2)}%`
-            }
+            formatter: (cell) => {
+              if (cell.getRow().getData().Table === 'RESIGNED') {
+                return `${(100 - cell.getValue()).toFixed(2)}%`
+              } else {
+                return `${cell.getValue().toFixed(2)}%`
+              }
+            },
+            topCalc: 'avg'
+            // topCalc: (values, data) => {
+            //   const Agents = data.reduce((x, y) => x + y.Agents, 0)
+            //   const Complete = data.reduce((x, y) => x + y.Complete, 0)
+            //   const Computed = (Complete / Agents) * 100
+            //   return `${Computed.toFixed(2)}%`
+            // }
           }
         ],
         downloadConfig: {
