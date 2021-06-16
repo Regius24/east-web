@@ -38,13 +38,15 @@ const logs = [
     description: 'App Update',
     timestamp: '06/16/2021',
     updates: [
+      'Added popup ticket list for User Access Per Tool',
       'Updated all uploaders with notes',
-      'Fixed monthly leavers\' report uploader',
-      'Fixed monthly leavers report table',
+      'Fixed Monthly Leavers\' report uploader',
+      'Fixed Monthly Leavers\' report table',
       'Fixed User Access and Knowledge Base',
       'Fixed backend API for monthly leavers',
       'Fixed DB schema for monthly leavers',
       'Fixed User Access summary table company name filter',
+      'Fixed all table alignment',
       'Reverted User Access\'s Resigned query to previous version due to performance impact'
     ]
   },
