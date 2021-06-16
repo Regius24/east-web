@@ -70,32 +70,21 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let alignment
+          let align, headerStyle
 
           switch (col) {
-            case 'USER ID':
-              alignment = 'LEFT'
-              break
-
-            case 'TOOL NAME':
-              alignment = 'LEFT'
-              break
-
-            case 'USERID+TOOL':
-              alignment = 'LEFT'
-              break
-
             default:
-              alignment = 'center'
+              align = 'left'
+              headerStyle = 'left'
               break
           }
 
           return {
             name: col,
             field: col,
-            label: col,
-            align: alignment,
-            headerStyle: 'text-align: center;'
+            label: col.toUpperCase(),
+            align: align,
+            headerStyle: headerStyle
           }
         })
 

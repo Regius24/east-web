@@ -315,43 +315,12 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let alignment
+          let align, headerStyle
 
           switch (col) {
-            case 'NAME':
-              alignment = 'left'
-              break
-
-            case 'OTHER_ACTION':
-              alignment = 'left'
-              break
-
-            case 'QH_REMARKS':
-              alignment = 'left'
-              break
-
-            case 'QW_REMARKS':
-              alignment = 'left'
-              break
-
-            case 'VH_REMARKS':
-              alignment = 'left'
-              break
-
-            case 'XFERS_REMARKS':
-              alignment = 'left'
-              break
-
-            case 'CORDER_CRITICAL_REMARKS':
-              alignment = 'left'
-              break
-
-            case 'CORDER_NON_CRITICAL_REMARKS':
-              alignment = 'left'
-              break
-
             default:
-              alignment = 'center'
+              align = 'left'
+              headerStyle = 'text-align: left;'
               break
           }
 
@@ -359,8 +328,8 @@ export default {
             name: col,
             field: col,
             label: col,
-            align: alignment,
-            headerStyle: 'text-align: center;'
+            align: align,
+            headerStyle: headerStyle
           }
         })
 

@@ -55,16 +55,16 @@ export default {
     return {
       filter: '',
       columns: [
-        { name: 'Subgroup3', field: 'Subgroup3', label: 'Sub Group3', align: 'left', headerStyle: 'text-align: center;' },
-        { name: 'Agent Name', field: 'Agent Name', label: 'Agent Name', align: 'left', headerStyle: 'text-align: center;' },
-        { name: 'Company Name', field: 'Company Name', label: 'Company Name', align: 'center', headerStyle: 'text-align: center;' },
-        { name: 'Site', field: 'Site', label: 'Site', align: 'center', headerStyle: 'text-align: center;' },
-        { name: 'Employee ID', field: 'Employee ID', label: 'Employee ID', headerStyle: 'text-align: center;' },
-        { name: 'Agent Status', field: 'Agent Status', label: 'Agent Status', align: 'center', headerStyle: 'text-align: center;' },
-        { name: 'Batch Name', field: 'Batch Name', label: 'Batch Name', align: 'left', headerStyle: 'text-align: center;' },
-        { name: 'Hired Date', field: 'Hired Date', label: 'Hired Date', headerStyle: 'text-align: center;' },
-        { name: 'End Date', field: 'End Date', label: 'End Date', headerStyle: 'text-align: center;' },
-        { name: 'Job Level', field: 'Job Level', label: 'Job Level', align: 'left', headerStyle: 'text-align: center;' }
+        { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Agent Name', field: 'Agent Name', label: 'AGENT NAME', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Company Name', field: 'Company Name', label: 'COMPANY NAME', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Site', field: 'Site', label: 'SITE', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Employee ID', field: 'Employee ID', label: 'EMPLOYEE ID', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Agent Status', field: 'Agent Status', label: 'AGENT STATUS', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Batch Name', field: 'Batch Name', label: 'BATCH NAME', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Hired Date', field: 'Hired Date', label: 'HIRED DATE', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'End Date', field: 'End Date', label: 'END DATE', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Job Level', field: 'Job Level', label: 'JOB LEVEL', align: 'left', headerStyle: 'text-align: left;' }
       ]
     }
   },

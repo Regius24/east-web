@@ -6,7 +6,7 @@
         dense
         flat
         bordered
-        title="ESolve Ticket List"
+        title="User Access Tools Mapping"
         row-key="name"
         separator="cell"
         color="accent"
@@ -63,13 +63,13 @@ export default {
     return {
       filter: '',
       columns: [
-        { name: 'Position', field: 'Position', label: 'POSITION', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Subgroup1', field: 'Subgroup1', label: 'SUBGROUP1', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Subgroup2', field: 'Subgroup2', label: 'SUBGROUP2', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Subgroup4', field: 'Subgroup4', label: 'SUBGROUP4', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Subgroup5', field: 'Subgroup5', label: 'SUBGROUP5', align: 'center', headerStyle: 'text-align: center;', sortable: true },
-        { name: 'Primary', field: 'Primary', label: 'PRIMARY', align: 'left', headerStyle: 'text-align: center;' }
+        { name: 'Position', field: 'Position', label: 'POSITION', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Subgroup1', field: 'Subgroup1', label: 'SUBGROUP1', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Subgroup2', field: 'Subgroup2', label: 'SUBGROUP2', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Subgroup4', field: 'Subgroup4', label: 'SUBGROUP4', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Subgroup5', field: 'Subgroup5', label: 'SUBGROUP5', align: 'left', headerStyle: 'text-align: left;', sortable: true },
+        { name: 'Primary', field: 'Primary', label: 'PRIMARY', align: 'left', headerStyle: 'text-align: left;' }
       ],
       pagination: {
         rowsPerPage: 0

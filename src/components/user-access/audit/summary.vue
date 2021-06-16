@@ -71,27 +71,12 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let alignment
+          let align, headerStyle
 
           switch (col) {
-            case 'WEEK':
-              alignment = 'center'
-              break
-
-            case 'BRAND':
-              alignment = 'center'
-              break
-
-            case 'VENDOR':
-              alignment = 'center'
-              break
-
-            case 'USERS':
-              alignment = 'center'
-              break
-
             default:
-              alignment = 'left'
+              align = 'left'
+              headerStyle = 'text-align: left;'
               break
           }
 
@@ -99,10 +84,10 @@ export default {
             name: col,
             field: col,
             label: col,
-            align: alignment,
+            align: align,
             style: 'max-width: 300px;',
             classes: 'ellipsis',
-            headerStyle: 'text-align: center;'
+            headerStyle: headerStyle
           }
         })
 

@@ -147,17 +147,26 @@ export default {
         {
           name: 'Agent Name',
           field: 'Agent Name',
-          label: 'Agent Name'
+          label: 'AGENT NAME',
+          align: 'left',
+          headerStyle: 'text-align: left;',
+          style: 'max-width: 100px;'
         },
         {
           name: 'Start Date',
           field: 'Start Date',
-          label: 'Start Date'
+          label: 'START DATE',
+          align: 'left',
+          headerStyle: 'text-align: left;',
+          style: 'max-width: 100px;'
         },
         {
           name: 'Live Date',
           field: 'Live Date',
-          label: 'Live Date'
+          label: 'LIVE DATE',
+          align: 'left',
+          headerStyle: 'text-align: left;',
+          style: 'max-width: 100px;'
         }
       ],
 

@@ -80,11 +80,11 @@ export default {
             name: col,
             field: col,
             label: col,
-            align: 'center',
+            align: 'left',
             style: 'max-width: 300px;',
             classes: 'ellipsis',
             headerClasses: 'text-weight-bolder',
-            headerStyle: 'text-align: center;'
+            headerStyle: 'text-align: left;'
           }
         })
 

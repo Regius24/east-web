@@ -74,15 +74,11 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let alignment
+          let align
 
           switch (col) {
-            case 'Item':
-              alignment = 'left'
-              break
-
             default:
-              alignment = 'center'
+              align = 'left'
               break
           }
 
@@ -90,10 +86,10 @@ export default {
             name: col,
             field: col,
             label: col.toUpperCase(),
-            align: alignment,
+            align: align,
             style: 'max-width: 300px;',
             classes: 'ellipsis',
-            headerStyle: 'text-align: center;'
+            headerStyle: 'text-align: left;'
           }
         })
 
