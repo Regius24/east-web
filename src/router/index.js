@@ -52,6 +52,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'user-access-tools' && useraccesstools) next()
         else if (to.name === 'user-access-summary' && useraccesssummary) next()
         else if (to.name === 'user-access-history' && useraccesshistory) next()
+        else if (to.name === 'user-access-history-monthly' && useraccesshistory) next()
         else if (to.name === 'user-access-audit' && useraccessaudit) next()
         else if (to.name === 'report-irab' && irab) next()
         else if (to.name === 'report-password' && password) next()
