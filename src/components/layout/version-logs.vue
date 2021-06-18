@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.23',
+    description: 'App Update',
+    timestamp: '06/18/2021',
+    updates: [
+      'Added components for User Access History Monthly; SMART and PLDT',
+      'Added DB schema for User Access History Monthly; SMART and PLDT',
+      'Added backend API for schema User Access History Monthly; SMART and PLDT',
+      'Updated navigation for User Access History Monthly',
+      'Updated routes for User Access History Monthly'
+    ]
+  },
+  {
     version: '1.0.22',
     description: 'App Update',
     timestamp: '06/16/2021',
