@@ -28,6 +28,34 @@
         <q-item-section>{{ item.label }}</q-item-section>
       </q-item>
 
+      <q-separator inset="item" />
+
+      <!-- USER ACCESS -->
+      <q-item-label
+        header
+        :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
+      >
+        History
+      </q-item-label>
+      <q-item
+        v-for="item in userAccessHistory"
+        :key="item.pathName"
+        clickable
+        v-ripple
+        exact
+        :to="{ name: item.pathName }"
+        active-class="text-green"
+      >
+        <q-item-section avatar>
+          <q-icon
+            class="exact-active-class"
+            :name="item.icon"
+          />
+        </q-item-section>
+
+        <q-item-section>{{ item.label }}</q-item-section>
+      </q-item>
+
       <q-separator size="4px" />
 
       <!-- REPORT -->
@@ -127,8 +155,11 @@ export default {
         { pathName: 'user-access', label: 'Per LOB', icon: 'mdi-account-group' },
         { pathName: 'user-access-tools', label: 'Per Tool', icon: 'mdi-tools' },
         { pathName: 'user-access-summary', label: 'Summary', icon: 'mdi-view-dashboard' },
-        { pathName: 'user-access-history', label: 'History', icon: 'mdi-history' },
         { pathName: 'user-access-audit', label: 'Audit', icon: 'mdi-magnify' }
+      ],
+      userAccessHistory: [
+        { pathName: 'user-access-history', label: 'Weekly', icon: 'mdi-calendar-range' },
+        { pathName: 'user-access-history-monthly', label: 'Monthly', icon: 'mdi-calendar-month' }
       ],
       reports: [
         { pathName: 'report-irab', label: 'IRAB', icon: 'mdi-account-lock' },
