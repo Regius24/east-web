@@ -8,7 +8,7 @@
         v-show="brandCheck('Pldt')"
       >
         <SUMMARY
-          title="PLDT Summary"
+          title="PLDT Weekly Summary"
           txtColor="text-primary"
           brand="pldt"
           :data="pldtSummary"
@@ -30,7 +30,7 @@
         v-show="brandCheck('Pldt')"
       >
         <SUMMARY
-          title="SMART Summary"
+          title="SMART Weekly Summary"
           txtColor="text-secondary"
           brand="smart"
           :data="smartSummary"
