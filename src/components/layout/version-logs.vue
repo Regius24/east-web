@@ -34,6 +34,19 @@
 <script>
 const logs = [
   {
+    version: '1.0.24',
+    description: 'App Update',
+    timestamp: '06/22/2021',
+    updates: [
+      'Added loading when clicking for User Access Summary table',
+      'Updated table for User Access Summary All',
+      'Updated click to double click for User Access Summary table',
+      'Updated API to handle long query execution',
+      'Updated ticket popup to include ESolve tickets (previously onehub only)',
+      'Updated Password Cases export and removed MONTH column'
+    ]
+  },
+  {
     version: '1.0.23',
     description: 'App Update',
     timestamp: '06/18/2021',
