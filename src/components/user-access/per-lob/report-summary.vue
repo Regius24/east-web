@@ -200,7 +200,7 @@ export default {
           rowGroups: true,
           dataTree: true
         },
-        rowClick: (e, row) => {
+        rowDblClick: (e, row) => {
           const { Table, Brand, Lob, Vendor } = row.getData()
 
           _this.fetchOnehub(Brand.toLowerCase(), Lob, Vendor, Table)
