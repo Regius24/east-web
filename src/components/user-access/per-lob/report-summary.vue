@@ -77,6 +77,13 @@
         @click="pdfTable"
       />
     </q-card-actions> -->
+
+    <q-inner-loading :showing="showLoading">
+      <q-spinner-gears
+        size="50px"
+        color="grey-10"
+      />
+    </q-inner-loading>
   </q-card>
 </template>
 
@@ -128,7 +135,8 @@ export default {
     return {
       tabulator: null,
       vendor: 'All',
-      site: 'All'
+      site: 'All',
+      showLoading: false
     }
   },
 
@@ -195,7 +203,7 @@ export default {
         rowClick: (e, row) => {
           const { Table, Brand, Lob, Vendor } = row.getData()
 
-          _this.fetchOnehub(Brand, Lob, Vendor, Table)
+          _this.fetchOnehub(Brand.toLowerCase(), Lob, Vendor, Table)
         }
       })
 
@@ -224,13 +232,16 @@ export default {
     },
 
     async fetchOnehub (brand, lob, vendor, table) {
+      this.showLoading = true
       try {
         notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
         const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
 
         this.openAgentsDetailed(data)
+        this.showLoading = false
       } catch (err) {
         notify('Something went wrong', 'Error: no data found', 'mdi-alert', 'red')
+        this.showLoading = false
       }
     },
 
