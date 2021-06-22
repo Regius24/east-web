@@ -5,7 +5,7 @@
         dense
         flat
         bordered
-        title="User Access Audit List"
+        title="User Access Weekly Audit List"
         row-key="name"
         separator="cell"
         color="accent"

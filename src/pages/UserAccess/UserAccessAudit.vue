@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-md">
       <div class="col-12">
-        <SUMMARY :data="auditList" />
+        <SUMMARY :data="weeklyAuditList" />
       </div>
     </div>
 
@@ -45,7 +45,7 @@ export default {
       fabPos: [18, 18],
       draggingFab: false,
 
-      auditList: []
+      weeklyAuditList: []
     }
   },
 
@@ -73,9 +73,9 @@ export default {
     },
 
     async fetchData () {
-      const { data } = await GetRepo.UamDataAuditSummary()
+      const { data: weekly } = await GetRepo.UamDataAuditSummary('WEEKLY')
 
-      this.auditList = data
+      this.weeklyAuditList = weekly
     }
   },
 
