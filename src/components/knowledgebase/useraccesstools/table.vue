@@ -6,7 +6,7 @@
         dense
         flat
         bordered
-        title="User Access Tools Mapping"
+        :title="title"
         row-key="name"
         separator="cell"
         color="accent"
@@ -21,14 +21,14 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <!-- <q-btn-group class="q-mr-sm">
+          <q-btn-group class="q-mr-sm">
             <q-btn
               outline
               color="accent"
-              label="CSV"
-              @click="exportData"
+              label="XLSX"
+              @click="exportData2"
             />
-          </q-btn-group> -->
+          </q-btn-group>
 
           <!-- SEARCH -->
           <q-input
@@ -53,11 +53,12 @@
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
+import XLSX from 'xlsx'
 
 export default {
   name: 'Table',
 
-  props: ['data'],
+  props: ['title', 'data'],
 
   data () {
     return {
@@ -86,6 +87,19 @@ export default {
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
       exportFile(`${name}.csv`, data)
+    },
+
+    exportData2 () {
+      const title = `${this.title}`
+      this.exportXLSX2(title, this.data)
+    },
+
+    exportXLSX2 (name, data) {
+      const wb = XLSX.utils.book_new()
+      const ws = XLSX.utils.json_to_sheet(data)
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+      XLSX.writeFile(wb, `${name}.xlsx`)
     }
   }
 }

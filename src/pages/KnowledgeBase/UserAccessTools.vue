@@ -2,7 +2,10 @@
   <q-page padding>
     <div class="row justify-center">
       <div class="col-12">
-        <TABLE :data="raw" />
+        <TABLE
+          :title="'User Access Tools Mapping'"
+          :data="raw"
+        />
       </div>
     </div>
   </q-page>
