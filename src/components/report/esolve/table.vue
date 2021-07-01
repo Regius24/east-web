@@ -74,7 +74,7 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let align, style
+          let align
 
           switch (col) {
             default:
@@ -87,7 +87,6 @@ export default {
             field: col,
             label: col.toUpperCase(),
             align: align,
-            style: 'max-width: 300px;' + style,
             // classes: 'ellipsis',
             headerStyle: 'text-align: left;'
           }
