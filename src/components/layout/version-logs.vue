@@ -34,6 +34,16 @@
 <script>
 const logs = [
   {
+    version: '1.0.25',
+    description: 'App Update',
+    timestamp: '07/01/2021',
+    updates: [
+      'Added download button for knowledge base User Access Tools',
+      'Updated ticket popup table column widths',
+      'Updated ESolve table columns'
+    ]
+  },
+  {
     version: '1.0.24',
     description: 'App Update',
     timestamp: '06/22/2021',
