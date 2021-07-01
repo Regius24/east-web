@@ -150,7 +150,7 @@ export default {
           label: 'AGENT NAME',
           align: 'left',
           headerStyle: 'text-align: left;',
-          style: 'max-width: 100px;'
+          style: 'max-width: 80px;'
         },
         {
           name: 'Start Date',
@@ -158,7 +158,7 @@ export default {
           label: 'START DATE',
           align: 'left',
           headerStyle: 'text-align: left;',
-          style: 'max-width: 100px;'
+          style: 'max-width: 80px;'
         },
         {
           name: 'Live Date',
@@ -166,7 +166,7 @@ export default {
           label: 'LIVE DATE',
           align: 'left',
           headerStyle: 'text-align: left;',
-          style: 'max-width: 100px;'
+          style: 'max-width: 80px;'
         }
       ],
 
