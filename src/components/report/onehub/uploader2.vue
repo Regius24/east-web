@@ -50,14 +50,14 @@ export default {
         const result = await PostRepo.UploadOnehubFile(formData)
         console.log(result)
 
-        this.loading = true
+        this.loading = false
         notify('Success', 'data has been uploaded', 'mdi-check', 'green')
 
         setTimeout(() => {
           this.$router.go()
         }, 1200)
       } catch (err) {
-        this.loading = true
+        this.loading = false
 
         console.log(err)
         notify('Error encountered', 'data was not uploaded', 'mdi-alert', 'red')
