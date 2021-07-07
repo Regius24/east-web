@@ -116,7 +116,7 @@ export default {
       if (this.date == null) {
         return 'N/A'
       } else {
-        return date.formatDate(date.addToDate(this.date.Date, { days: 7 }), 'MMM DD YYYY')
+        return date.formatDate(date.addToDate(this.date.Date, { days: 8 - date.getDayOfWeek(this.date.Date) }), 'MMM DD YYYY')
       }
     }
   },
