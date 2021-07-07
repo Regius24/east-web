@@ -7,7 +7,7 @@
         :class="textcolor"
       >{{ title }}</div>
       <div class="text-caption text-weight-light text-center">updated as of: {{ dateCheck }}</div>
-      <div class="text-caption text-weight-light text-center">next update: {{ nextDateCheck }}</div>
+      <div class="text-caption text-weight-light text-center">next update on: {{ nextDateCheck }}</div>
       <div
         ref="table"
         class="rounded-borders q-mt-sm"
@@ -116,7 +116,7 @@ export default {
       if (this.date == null) {
         return 'N/A'
       } else {
-        return date.formatDate(date.addToDate(this.date.Date, { days: 7 }), 'MMM DD YYYY')
+        return date.formatDate(date.addToDate(this.date.Date, { days: 8 - date.getDayOfWeek(this.date.Date) }), 'MMM DD YYYY')
       }
     }
   },
