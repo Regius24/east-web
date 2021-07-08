@@ -443,7 +443,7 @@ export default {
         dataTree: true,
         dataTreeStartExpanded: [true, false],
         index: 'Name',
-        placeholder: 'No Data Set',
+        placeholder: 'No data to show...',
         columns: [
           {
             title: 'NAME',

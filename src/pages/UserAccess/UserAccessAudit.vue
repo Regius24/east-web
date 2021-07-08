@@ -1,8 +1,26 @@
 <template>
   <q-page padding>
     <div class="row justify-center q-col-gutter-md">
+      <div class="col-12 col-md-6">
+        <SUMMARY
+          :title="'PLDT Audit Summary'"
+          :data="pldtSummary"
+          :textcolor="'text-primary'"
+          v-show="brandCheck('Pldt')"
+        />
+      </div>
+
+      <div class="col-12 col-md-6">
+        <SUMMARY
+          :title="'SMART Audit Summary'"
+          :data="smartSummary"
+          :textcolor="'text-secondary'"
+          v-show="brandCheck('Pldt')"
+        />
+      </div>
+
       <div class="col-12">
-        <SUMMARY :data="weeklyAuditList" />
+        <TABLE :data="weeklyAuditList" />
       </div>
     </div>
 
@@ -32,7 +50,8 @@ export default {
   name: 'UserAccessTools',
 
   components: {
-    SUMMARY: () => import('components/user-access/audit/summary')
+    SUMMARY: () => import('components/user-access/audit/summary'),
+    TABLE: () => import('components/user-access/audit/table')
   },
 
   data () {
@@ -45,6 +64,8 @@ export default {
       fabPos: [18, 18],
       draggingFab: false,
 
+      pldtSummary: [],
+      smartSummary: [],
       weeklyAuditList: []
     }
   },
@@ -72,8 +93,18 @@ export default {
       })
     },
 
-    async fetchData () {
-      const { data: weekly } = await GetRepo.UamDataAuditSummary('WEEKLY')
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
+    },
+
+    async fetchSummaryData (brand) {
+      const { data } = await GetRepo.UamDataAuditSummary(brand)
+
+      this[`${brand.toLowerCase()}Summary`] = data
+    },
+
+    async fetchWeeklyData () {
+      const { data: weekly } = await GetRepo.UamDataAuditWeekly()
 
       this.weeklyAuditList = weekly
     }
@@ -88,7 +119,11 @@ export default {
       this.vendorType = data[0].vendor
       this.showUploader = data[0].upload
 
-      this.fetchData()
+      this.brandList.forEach(brand => {
+        this.fetchSummaryData(brand.toUpperCase())
+      })
+
+      this.fetchWeeklyData()
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')

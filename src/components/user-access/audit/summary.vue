@@ -1,110 +1,131 @@
 <template>
-  <q-card>
+  <q-card class="overflow-hidden">
+    <!-- TABLE -->
     <q-card-section>
-      <q-table
-        dense
-        flat
-        bordered
-        title="User Access Weekly Audit List"
-        row-key="name"
-        separator="cell"
-        color="accent"
-        virtual-scroll
-        style="max-height: 80vh;"
-        :data="data"
-        :columns="columns"
-        :filter="filter"
-        :pagination.sync="pagination"
-        :rows-per-page-options="[0]"
-        :loading="data.length > 0 ? false : true"
-      >
-        <template v-slot:top-right>
-          <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
-            <q-btn
-              outline
-              color="accent"
-              label="CSV"
-              @click="exportData"
-            />
-          </q-btn-group>
-
-          <!-- SEARCH -->
-          <q-input
-            borderless
-            dense
-            debounce="300"
-            v-model="filter"
-            placeholder="Search"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </template>
-      </q-table>
+      <div
+        class="text-h5 text-weight-light text-center"
+        :class="textcolor"
+      >{{ title }}</div>
+      <div
+        ref="table"
+        class="rounded-borders q-mt-sm"
+      ></div>
     </q-card-section>
+
+    <!-- <q-card-actions align="right">
+      <q-btn
+        flat
+        label="PDF"
+        color="accent"
+        @click="pdfTable"
+      />
+    </q-card-actions> -->
+
+    <q-inner-loading :showing="showLoading">
+      <q-spinner-gears
+        size="50px"
+        color="grey-10"
+      />
+    </q-inner-loading>
   </q-card>
 </template>
 
 <script>
-import { first } from 'lodash'
-import { exportFile } from 'quasar'
-import { unparse } from 'papaparse'
-import { notify } from 'boot/notifier'
+import 'tabulator-tables/dist/css/tabulator.min.css'
+import XLSX from 'xlsx/dist/xlsx.full.min.js'
+import Tabulator from 'tabulator-tables'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+window.jsPDF = jsPDF
+window.XLSX = XLSX
 
 export default {
-  props: ['data'],
-
-  data () {
-    return {
-      columns: [],
-      filter: '',
-      pagination: {
-        rowsPerPage: 0
-      }
-    }
-  },
+  props: ['data', 'title', 'textcolor'],
 
   watch: {
     data (val) {
-      const cols = Object
-        .keys(first(val))
-        .map(col => {
-          let align, headerStyle
+      this.renderTable()
+    }
+  },
 
-          switch (col) {
-            default:
-              align = 'left'
-              headerStyle = 'text-align: left;'
-              break
-          }
-
-          return {
-            name: col,
-            field: col,
-            label: col,
-            align: align,
-            style: 'max-width: 300px;',
-            classes: 'ellipsis',
-            headerStyle: headerStyle
-          }
-        })
-
-      this.columns = cols
+  data () {
+    return {
+      tabulator: null,
+      showLoading: true
     }
   },
 
   methods: {
-    exportData () {
-      const title = 'User Access Audit List'
-      this.export(title, unparse(this.data))
+    renderTable () {
+      this.tabulator = new Tabulator(this.$refs.table, {
+        layout: 'fitDataFill',
+        maxheight: 240,
+        data: this.data,
+        dataTree: true,
+        dataTreeStartExpanded: false,
+        placeholder: 'No data to show...',
+        columns: [
+          {
+            title: 'VENDOR',
+            field: 'VENDOR',
+            sorter: 'string'
+          },
+          {
+            title: 'ACTIVE AGENTS',
+            field: 'ACTIVE AGENTS',
+            sorter: 'number',
+            topCalc: 'sum'
+          },
+          {
+            title: 'USERS W/ CORRECTION',
+            field: 'USERS W/ CORRECTION',
+            sorter: 'number',
+            topCalc: 'sum'
+          },
+          {
+            title: 'ACCURACY',
+            field: 'ACCURACY',
+            sorter: 'number',
+            topCalc: 'avg',
+            formatter: (cell) => cell.getValue().toFixed(2)
+          }
+        ],
+        downloadConfig: {
+          rowGroups: true,
+          dataTree: true
+        }
+      })
+
+      // this.tabulator.setSort([
+      //   { column: 'Table', dir: 'asc' }
+      // ])
+
+      this.showLoading = false
     },
 
-    export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
-      exportFile(`${name}.csv`, data)
+    xlsxTable () {
+      this.tabulator.download('xlsx', `${this.title}.xlsx`)
+    },
+
+    pdfTable () {
+      this.tabulator.setGroupStartOpen(true)
+      this.tabulator.setGroupBy('Table')
+
+      this.tabulator.download('pdf', `${this.title}.pdf`, {
+        orientation: 'landscape',
+        title: `${this.title}`,
+        autoTable: function (doc) {
+          return {
+            includeHiddenHtml: true
+          }
+        }
+      })
     }
+  },
+
+  mounted () {
+    this.renderTable()
   }
 }
 </script>

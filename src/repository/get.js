@@ -19,7 +19,8 @@ export default {
   UamDataAgentsHistory: (DATE, BRAND, VENDOR) => axios.get(`${resource}UamDataAgentsHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}`),
   UamDataHistoryDates: (BRAND, TYPE) => axios.get(`${resource}UamDataHistoryDates?brand=${BRAND}&type=${TYPE}`),
 
-  UamDataAuditSummary: (TABLE) => axios.get(`${resource}UamDataAuditSummary?table=${TABLE}`),
+  UamDataAuditSummary: (BRAND) => axios.get(`${resource}UamDataAuditSummary?brand=${BRAND}`),
+  UamDataAuditWeekly: () => axios.get(`${resource}UamDataAuditWeekly`),
 
   UamDataAgentsHistoryMonths: (BRAND) => axios.get(`${resource}UamDataAgentsHistoryMonths?brand=${BRAND}`),
   UamDataAgentsHistoryMonthlyDistinctCol: (MONTH, BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsHistoryMonthlyDistinctCol?month=${MONTH}&brand=${BRAND}&category=${CATEGORY}`),
