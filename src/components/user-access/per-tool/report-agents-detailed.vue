@@ -130,7 +130,7 @@
 
 <script>
 import jsonata from 'jsonata'
-import { isArray, first } from 'lodash'
+import { isArray, first, sortBy, indexOf } from 'lodash'
 
 export default {
   props: ['agentData'],
@@ -220,7 +220,8 @@ export default {
         let data = expression.evaluate(this.agentData)
         data = isArray(data) ? data : [data]
 
-        this.stageList = data.map(m => m.Stage)
+        const stageOrder = ['Immediate Head Approval', 'IAO Approval', 'For Implementation', 'Resolved', 'Close with No Action', 'Request Cancelled', 'Cancelled']
+        this.stageList = sortBy(data.map(m => m.Stage), [o => indexOf(stageOrder, o)])
         this.stage = first(this.stageList)
         this.dataList = data
       }
