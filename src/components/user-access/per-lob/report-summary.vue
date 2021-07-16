@@ -97,6 +97,7 @@ import 'jspdf-autotable'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
 import { date } from 'quasar'
+import { remove } from 'lodash'
 
 window.jsPDF = jsPDF
 window.XLSX = XLSX
@@ -235,7 +236,11 @@ export default {
       this.showLoading = true
       try {
         notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-        const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
+
+        var { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
+
+        remove(data, f => f.Stage === 'Close with No Action' && f.Access !== 'NA')
+        remove(data, f => f.Stage === 'Resolved' && f.Opened < new Date(date.subtractFromDate(new Date(), { days: date.getDayOfWeek(new Date()) - 1 })).toLocaleDateString())
 
         this.openAgentsDetailed(data)
         this.showLoading = false

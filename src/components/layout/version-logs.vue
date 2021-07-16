@@ -34,6 +34,26 @@
 <script>
 const logs = [
   {
+    version: '1.0.27',
+    description: 'App Update',
+    timestamp: '07/1?/2021',
+    updates: [
+      'Fixed popup ticket stage sequence'
+    ]
+  },
+  {
+    version: '1.0.26',
+    description: 'App Update',
+    timestamp: '07/11/2021',
+    updates: [
+      'Added new Summary tables for User Access Audit',
+      'Fixed User Access next update to count only by Mondays',
+      'Fixed popup ticket slow data loading',
+      'Fixed popup ticket PLDT data not showing',
+      'Fixed ESolve table outline for Justification'
+    ]
+  },
+  {
     version: '1.0.25',
     description: 'App Update',
     timestamp: '07/01/2021',
