@@ -12,6 +12,61 @@
       ></div>
     </q-card-section>
 
+    <!-- FILTERS -->
+    <q-card-section class="row justify-center q-col-gutter-sm">
+      <div class="col-12 col-md-6">
+        <q-select
+          dense
+          outlined
+          v-model="category"
+          :options="categories"
+          :display-value="`Category: ${category}`"
+        />
+      </div>
+
+      <div class="col-12 col-md-6">
+        <q-select
+          dense
+          outlined
+          v-model="catVal"
+          :options="catValues"
+          :display-value="`Value: ${catVal}`"
+          :disable="category === 'All'"
+        />
+      </div>
+
+      <!-- <div class="col-12 col-md-2">
+        <q-btn-dropdown
+          outline
+          color="accent"
+          dropdown-icon="mdi-file-download"
+          class="fit"
+        >
+          <q-list>
+            <q-item
+              clickable
+              v-close-popup
+              @click="xlsxTable"
+            >
+              <q-item-section>
+                <q-item-label>XLSX</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
+              clickable
+              v-close-popup
+              @click="pdfTable"
+            >
+              <q-item-section>
+                <q-item-label>PDF</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+      </div> -->
+    </q-card-section>
+
     <!-- <q-card-actions align="right">
       <q-btn
         flat
@@ -41,18 +96,35 @@ window.jsPDF = jsPDF
 window.XLSX = XLSX
 
 export default {
-  props: ['data', 'title', 'textcolor'],
+  props: ['data', 'months', 'weeks', 'title', 'textcolor'],
 
   watch: {
     data (val) {
       this.renderTable()
+    },
+
+    filters (val) { this.$emit('filterChange', val) }
+  },
+
+  computed: {
+    catValues () {
+      if (this.category === 'Monthly') { return this.months } else if (this.category === 'Weekly') { return this.weeks } else return []
+    },
+
+    filters () {
+      return { brand: this.title.split(' ')[0], category: this.category, value: this.catVal }
     }
   },
 
   data () {
     return {
       tabulator: null,
-      showLoading: true
+      showLoading: true,
+
+      category: 'All',
+      categories: ['All', 'Monthly', 'Weekly'],
+
+      catVal: 'All'
     }
   },
 

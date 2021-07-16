@@ -5,8 +5,11 @@
         <SUMMARY
           :title="'PLDT Audit Summary'"
           :data="pldtSummary"
+          :months="pldtMonths"
+          :weeks="pldtWeeks"
           :textcolor="'text-primary'"
           v-show="brandCheck('Pldt')"
+          @filterChange="filterChange"
         />
       </div>
 
@@ -14,8 +17,11 @@
         <SUMMARY
           :title="'SMART Audit Summary'"
           :data="smartSummary"
+          :months="smartMonths"
+          :weeks="smartWeeks"
           :textcolor="'text-secondary'"
           v-show="brandCheck('Pldt')"
+          @filterChange="filterChange"
         />
       </div>
 
@@ -45,6 +51,7 @@
 <script>
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
+import { filter, uniq, map } from 'lodash'
 
 export default {
   name: 'UserAccessTools',
@@ -66,7 +73,13 @@ export default {
 
       pldtSummary: [],
       smartSummary: [],
-      weeklyAuditList: []
+      weeklyAuditList: [],
+
+      // FILTERS
+      pldtMonths: [],
+      smartMonths: [],
+      pldtWeeks: [],
+      smartWeeks: []
     }
   },
 
@@ -97,8 +110,8 @@ export default {
       return this.brandList.indexOf(brand) > -1
     },
 
-    async fetchSummaryData (brand) {
-      const { data } = await GetRepo.UamDataAuditSummary(brand)
+    async fetchSummaryData (brand, week) {
+      const { data } = await GetRepo.UamDataAuditSummary(brand, week)
 
       this[`${brand.toLowerCase()}Summary`] = data
     },
@@ -107,6 +120,24 @@ export default {
       const { data: weekly } = await GetRepo.UamDataAuditWeekly()
 
       this.weeklyAuditList = weekly
+
+      this.pldtMonths = uniq(filter(weekly, { BRAND: 'PLDT' }).map(m => m.WEEK.split('-')[1]))
+      this.smartMonths = uniq(filter(weekly, { BRAND: 'SMART' }).map(m => m.WEEK.split('-')[1]))
+      this.pldtMonths.unshift('All')
+      this.smartMonths.unshift('All')
+
+      this.pldtWeeks = uniq(map(filter(weekly, { BRAND: 'PLDT' }), 'WEEK'))
+      this.smartWeeks = uniq(map(filter(weekly, { BRAND: 'SMART' }), 'WEEK'))
+      this.pldtWeeks.unshift('All')
+      this.smartWeeks.unshift('All')
+    },
+
+    filterChange ({ brand, category, value }) {
+      if (category !== 'All') {
+        const val = value === 'All' ? '%' : value
+        const week = category === 'Monthly' ? `%${val}%` : val
+        this.fetchSummaryData(brand, week)
+      }
     }
   },
 
@@ -119,9 +150,7 @@ export default {
       this.vendorType = data[0].vendor
       this.showUploader = data[0].upload
 
-      this.brandList.forEach(brand => {
-        this.fetchSummaryData(brand.toUpperCase())
-      })
+      this.brandList.forEach(brand => (this.fetchSummaryData(brand.toUpperCase(), '%')))
 
       this.fetchWeeklyData()
     } catch (err) {
