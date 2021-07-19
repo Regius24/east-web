@@ -165,7 +165,7 @@ export default {
       const { data: sites } = await GetRepo.UamDataAgentsHistoryMonthlyDistinctCol(this[`${brand}Date`], brand, 'Site')
       this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
 
-      this.fetchSummaryData(brand, this.vendorType, '%')
+      // this.fetchSummaryData(brand, this.vendorType, '%')
 
       if (brand === 'pldt') {
         this.fetchRawData()
@@ -175,30 +175,32 @@ export default {
     async fetchSummaryData (brand, vendor, site) {
       let { data: summary } = await GetRepo.UamDataSummaryHistoryMonthly(this[`${brand}Date`], brand, vendor, site)
 
+      console.log(JSON.stringify(summary))
+
       const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
       const expression = jsonata(`
           $ { Table: $ } ~> $each(function($v1, $k1){
               {
-                  'Date': $distinct($v1.Date),
+                  'Date': $distinct($v1.Month),
                   'Name': $k1,
                   'LockedFte': '',
-                  'Agents': $sum($v1.Agents),
-                  'Complete': $sum($v1.Complete),
-                  'Score': $round(($sum($v1.Complete)/$sum($v1.Agents)) * 100, 2),
+                  'Agents': $round($average($v1.Agents), 2),
+                  'Complete': $round($average($v1.Complete), 2),
+                  'Score': $round(($average($v1.Complete)/$average($v1.Agents)) * 100, 2),
                   '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
                       {
                           'Name': $k2,
                           'LockedFte': '',
-                          'Agents': $sum($v2.Agents),
-                          'Complete': $sum($v2.Complete),
-                          'Score': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
+                          'Agents': $round($average($v2.Agents), 2),
+                          'Complete': $round($average($v2.Complete), 2),
+                          'Score': $round(($average($v2.Complete)/$average($v2.Agents)) * 100, 2),
                           '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
                               {
                                   'Name': $k3,
                                   'LockedFte': $v3.LockedFte,
-                                  'Agents': $sum($v3.Agents),
-                                  'Complete': $sum($v3.Complete),
-                                  'Score': $round(($sum($v3.Complete)/$sum($v3.Agents)) * 100, 2)
+                                  'Agents': $round($average($v3.Agents), 2),
+                                  'Complete': $round($average($v3.Complete), 2),
+                                  'Score': $round(($average($v3.Complete)/$average($v3.Agents)) * 100, 2)
                               }
                           })
                       }

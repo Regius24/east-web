@@ -38,7 +38,9 @@ const logs = [
     description: 'App Update',
     timestamp: '07/1?/2021',
     updates: [
-      'Fixed popup ticket stage sequence'
+      'Added filters for User Access Audit Summary table',
+      'Fixed popup ticket stage sequence',
+      'Fixed onehub uploading to accommodate new column'
     ]
   },
   {
