@@ -36,7 +36,7 @@ const logs = [
   {
     version: '1.0.27',
     description: 'App Update',
-    timestamp: '07/1?/2021',
+    timestamp: '07/19/2021',
     updates: [
       'Added filters for User Access Audit Summary table',
       'Fixed popup ticket stage sequence',
