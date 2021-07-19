@@ -3,7 +3,7 @@
     <!-- SUMMARIES -->
     <div class="row justify-center q-col-gutter-md">
       <!-- PLDT -->
-      <div class="col-12">
+      <div class="col-10">
         <SUMMARY
           :title="'Summarized PLDT Data'"
           :titleClass="'text-red'"
@@ -12,7 +12,7 @@
       </div>
 
       <!-- SMART -->
-      <div class="col-12">
+      <div class="col-10">
         <SUMMARY
           :title="'Summarized SMART Data'"
           :titleClass="'text-green'"

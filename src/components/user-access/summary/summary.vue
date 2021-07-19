@@ -72,15 +72,17 @@ export default {
       const cols = Object
         .keys(first(val))
         .map(col => {
-          let headerStyle
+          let headerStyle, style
 
           switch (col) {
             case 'LOB':
               headerStyle = 'text-align: left;'
+              style = 'width: 170px;'
               break
 
             default:
               headerStyle = 'text-align: center;'
+              style = 'width: 90px;'
               break
           }
 
@@ -89,7 +91,7 @@ export default {
             field: col,
             label: col,
             align: col === 'LOB' ? 'left' : 'center',
-            style: 'max-width: 300px;',
+            style: style,
             classes: 'ellipsis',
             headerClasses: 'text-weight-bolder',
             headerStyle: headerStyle
