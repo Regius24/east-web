@@ -137,6 +137,8 @@ export default {
         const val = value === 'All' ? '%' : value
         const week = category === 'Monthly' ? `%${val}%` : val
         this.fetchSummaryData(brand, week)
+      } else {
+        this.fetchSummaryData(brand, '%')
       }
     }
   },
