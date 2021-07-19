@@ -40,7 +40,8 @@ const logs = [
     updates: [
       'Added filters for User Access Audit Summary table',
       'Fixed popup ticket stage sequence',
-      'Fixed onehub uploading to accommodate new column'
+      'Fixed onehub uploading to accommodate new column',
+      'Fixed user access history monthly computation'
     ]
   },
   {
