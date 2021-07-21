@@ -42,6 +42,7 @@ export default {
       columns: [
         {
           title: 'JAN',
+          // style: 'text-align: center;',
           columns: [
             {
               title: 'CNT',

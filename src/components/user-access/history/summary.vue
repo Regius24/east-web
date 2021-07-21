@@ -140,17 +140,17 @@ export default {
             title: 'Agents',
             field: 'Agents',
             sorter: 'number',
-            topCalc: 'sum',
-            formatter: (cell) => cell.getValue().toFixed(2),
-            topCalcFormatter: (cell) => cell.getValue().toFixed(2)
+            topCalc: 'sum'
+            // formatter: (cell) => cell.getValue().toFixed(2),
+            // topCalcFormatter: (cell) => cell.getValue().toFixed(2)
           },
           {
             title: 'Complete',
             field: 'Complete',
             sorter: 'number',
-            topCalc: 'sum',
-            formatter: (cell) => cell.getValue().toFixed(2),
-            topCalcFormatter: (cell) => cell.getValue().toFixed(2)
+            topCalc: 'sum'
+            // formatter: (cell) => cell.getValue().toFixed(2),
+            // topCalcFormatter: (cell) => cell.getValue().toFixed(2)
           },
           {
             title: 'Score',

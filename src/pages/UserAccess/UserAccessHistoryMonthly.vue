@@ -184,23 +184,23 @@ export default {
                   'Date': $distinct($v1.Month),
                   'Name': $k1,
                   'LockedFte': '',
-                  'Agents': $round($average($v1.Agents), 2),
-                  'Complete': $round($average($v1.Complete), 2),
-                  'Score': $round(($average($v1.Complete)/$average($v1.Agents)) * 100, 2),
+                  'Agents': $round($average($v1.Agents)),
+                  'Complete': $round($average($v1.Complete)),
+                  'Score': $round(($average($v1.Complete)/$average($v1.Agents)) * 100),
                   '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
                       {
                           'Name': $k2,
                           'LockedFte': '',
-                          'Agents': $round($average($v2.Agents), 2),
-                          'Complete': $round($average($v2.Complete), 2),
-                          'Score': $round(($average($v2.Complete)/$average($v2.Agents)) * 100, 2),
+                          'Agents': $round($average($v2.Agents)),
+                          'Complete': $round($average($v2.Complete)),
+                          'Score': $round(($average($v2.Complete)/$average($v2.Agents)) * 100),
                           '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
                               {
                                   'Name': $k3,
                                   'LockedFte': $v3.LockedFte,
-                                  'Agents': $round($average($v3.Agents), 2),
-                                  'Complete': $round($average($v3.Complete), 2),
-                                  'Score': $round(($average($v3.Complete)/$average($v3.Agents)) * 100, 2)
+                                  'Agents': $round($average($v3.Agents)),
+                                  'Complete': $round($average($v3.Complete)),
+                                  'Score': $round(($average($v3.Complete)/$average($v3.Agents)) * 100)
                               }
                           })
                       }
