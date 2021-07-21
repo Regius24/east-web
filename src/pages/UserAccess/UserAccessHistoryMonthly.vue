@@ -184,23 +184,23 @@ export default {
                   'Date': $distinct($v1.Month),
                   'Name': $k1,
                   'LockedFte': '',
-                  'Agents': $round($average($v1.Agents)),
-                  'Complete': $round($average($v1.Complete)),
-                  'Score': $round(($average($v1.Complete)/$average($v1.Agents)) * 100),
+                  'Agents': $round($average($v1 { Date: $ } ~> $each(function($v11, $k11) { $sum($v11.Agents) }))),
+                  'Complete': $round($average($v1 { Date: $ } ~> $each(function($v11, $k11) { $sum($v11.Complete) }))),
+                  'Score': $round(($round($average($v1 { Date: $ } ~> $each(function($v11, $k11) { $sum($v11.Complete) }))) / $round($average($v1 { Date: $ } ~> $each(function($v11, $k11) { $sum($v11.Agents) })))) * 100, 2),
                   '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
                       {
                           'Name': $k2,
                           'LockedFte': '',
-                          'Agents': $round($average($v2.Agents)),
-                          'Complete': $round($average($v2.Complete)),
-                          'Score': $round(($average($v2.Complete)/$average($v2.Agents)) * 100),
+                          'Agents': $round($average($v2 { Date: $ } ~> $each(function($v22, $k22) { $sum($v22.Agents) }))),
+                          'Complete': $round($average($v2 { Date: $ } ~> $each(function($v22, $k22) { $sum($v22.Complete) }))),
+                          'Score': $round(($round($average($v2 { Date: $ } ~> $each(function($v22, $k22) { $sum($v22.Complete) }))) / $round($average($v2 { Date: $ } ~> $each(function($v22, $k22) { $sum($v22.Agents) })))) * 100, 2),
                           '_children': $v2 { Vendor: $ } ~> $each(function($v3, $k3) {
                               {
                                   'Name': $k3,
                                   'LockedFte': $v3.LockedFte,
-                                  'Agents': $round($average($v3.Agents)),
-                                  'Complete': $round($average($v3.Complete)),
-                                  'Score': $round(($average($v3.Complete)/$average($v3.Agents)) * 100)
+                                  'Agents': $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Agents) }))),
+                                  'Complete': $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Complete) }))),
+                                  'Score': $round(($round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Complete) }))) / $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Agents) })))) * 100, 2)
                               }
                           })
                       }

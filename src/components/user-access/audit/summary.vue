@@ -12,9 +12,10 @@
       ></div>
     </q-card-section>
 
-    <!-- FILTERS -->
+    <!-- INTERACTIONS -->
     <q-card-section class="row justify-center q-col-gutter-sm">
-      <div class="col-12 col-md-6">
+      <!-- FILTERS -->
+      <div class="col-12 col-md-5">
         <q-select
           dense
           outlined
@@ -24,7 +25,7 @@
         />
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-5">
         <q-select
           dense
           outlined
@@ -35,7 +36,8 @@
         />
       </div>
 
-      <!-- <div class="col-12 col-md-2">
+      <!-- DOWNLOAD -->
+      <div class="col-12 col-md-2">
         <q-btn-dropdown
           outline
           color="accent"
@@ -64,17 +66,8 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
-      </div> -->
+      </div>
     </q-card-section>
-
-    <!-- <q-card-actions align="right">
-      <q-btn
-        flat
-        label="PDF"
-        color="accent"
-        @click="pdfTable"
-      />
-    </q-card-actions> -->
 
     <q-inner-loading :showing="showLoading">
       <q-spinner-gears
@@ -160,7 +153,8 @@ export default {
             field: 'ACCURACY',
             sorter: 'number',
             topCalc: 'avg',
-            formatter: (cell) => cell.getValue().toFixed(2)
+            formatter: (cell) => `${cell.getValue().toFixed(2)}%`,
+            topCalcFormatter: (cell) => `${cell.getValue()}%`
           }
         ],
         downloadConfig: {

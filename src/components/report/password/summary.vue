@@ -42,7 +42,7 @@ export default {
       columns: [
         {
           title: 'JAN',
-          // style: 'text-align: center;',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -66,6 +66,7 @@ export default {
         },
         {
           title: 'FEB',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -89,6 +90,7 @@ export default {
         },
         {
           title: 'MAR',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -112,6 +114,7 @@ export default {
         },
         {
           title: 'APR',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -135,6 +138,7 @@ export default {
         },
         {
           title: 'MAY',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -158,6 +162,7 @@ export default {
         },
         {
           title: 'JUN',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -181,6 +186,7 @@ export default {
         },
         {
           title: 'JUL',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -204,6 +210,7 @@ export default {
         },
         {
           title: 'AUG',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -227,6 +234,7 @@ export default {
         },
         {
           title: 'SEP',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -250,6 +258,7 @@ export default {
         },
         {
           title: 'OCT',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -273,6 +282,7 @@ export default {
         },
         {
           title: 'NOV',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -296,6 +306,7 @@ export default {
         },
         {
           title: 'DEC',
+          headerHozAlign: 'center',
           columns: [
             {
               title: 'CNT',
@@ -455,6 +466,7 @@ export default {
           },
           {
             title: 'YTD',
+            headerHozAlign: 'center',
             frozen: true,
             columns: [
               {

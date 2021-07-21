@@ -86,6 +86,8 @@ export default {
               break
           }
 
+          console.log(col)
+
           return {
             name: col,
             field: col,

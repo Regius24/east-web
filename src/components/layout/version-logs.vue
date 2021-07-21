@@ -34,6 +34,20 @@
 <script>
 const logs = [
   {
+    version: '1.0.28',
+    description: 'App Update',
+    timestamp: '07/21/2021',
+    updates: [
+      'Added download button for User Access Audit Summary Table',
+      'Updated User Access Summary (All) table and column width',
+      'Updated ESolve stage column',
+      'Fixed User Access Audit Summary Accuracy with %',
+      'Fixed Password Cases Summary Table Merged Cells to be Centered',
+      'Fixed User Access Monthly Historical Computation',
+      'Fixed popup ticket loading to load data faster'
+    ]
+  },
+  {
     version: '1.0.27',
     description: 'App Update',
     timestamp: '07/19/2021',
