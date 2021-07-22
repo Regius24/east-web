@@ -88,7 +88,7 @@ export default {
           }
         })
 
-      this.columns = cols
+      this.columns = cols.filter(f => f.field !== 'Complete Name')
     }
   },
 

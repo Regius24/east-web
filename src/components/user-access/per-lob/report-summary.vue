@@ -97,7 +97,7 @@ import 'jspdf-autotable'
 import GetRepo from 'src/repository/get'
 import { notify } from 'boot/notifier'
 import { date } from 'quasar'
-import { remove } from 'lodash'
+// import { remove } from 'lodash'
 
 window.jsPDF = jsPDF
 window.XLSX = XLSX
@@ -202,9 +202,11 @@ export default {
           dataTree: true
         },
         rowDblClick: (e, row) => {
-          const { Table, Brand, Lob, Vendor } = row.getData()
+          const { Table, Brand, Lob, Vendor, Score } = row.getData()
 
-          _this.fetchOnehub(Brand.toLowerCase(), Lob, Vendor, Table)
+          if (Score < 100) {
+            _this.fetchOnehub(Brand.toLowerCase(), Lob, Vendor, Table)
+          }
         }
       })
 
@@ -239,8 +241,8 @@ export default {
 
         var { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
 
-        remove(data, f => f.Stage === 'Close with No Action' && f.Access !== 'NA')
-        remove(data, f => f.Stage === 'Resolved' && f.Opened < new Date(date.subtractFromDate(new Date(), { days: date.getDayOfWeek(new Date()) - 1 })).toLocaleDateString())
+        // remove(data, f => f.Stage === 'Close with No Action' && f.Access !== 'NA')
+        // remove(data, f => f.Stage === 'Resolved' && f.Opened < new Date(date.subtractFromDate(new Date(), { days: date.getDayOfWeek(new Date()) - 1 })).toLocaleDateString())
 
         this.openAgentsDetailed(data)
         this.showLoading = false

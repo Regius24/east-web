@@ -1,12 +1,27 @@
 <template>
   <q-dialog
+    persistent
     ref="dialog"
     @hide="onDialogHide"
   >
     <q-card
-      class="q-dialog-plugin q-pa-sm"
+      class="q-dialog-plugin"
       style="min-width: 75%;"
     >
+      <!-- TOOLBAR -->
+      <q-bar>
+        <q-space />
+
+        <q-btn
+          dense
+          flat
+          icon="close"
+          v-close-popup
+        >
+          <q-tooltip class="bg-white text-primary">Close</q-tooltip>
+        </q-btn>
+      </q-bar>
+
       <!-- HAS DATA -->
       <div v-if="dataList.length > 0">
         <!-- HEADER -->

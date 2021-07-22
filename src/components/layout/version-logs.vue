@@ -34,6 +34,20 @@
 <script>
 const logs = [
   {
+    version: '1.0.29',
+    description: 'App Update',
+    timestamp: '07/2?/2021',
+    updates: [
+      'Added persistance to ticket popups',
+      'Added ticket popup block when score is 100',
+      'Updated columns for leavers report',
+      'Updated Leavers -> Leavers (R2) from the navigation panel',
+      'Updated agent table columns',
+      'Fixed popup tickets to load only data from the previous and up',
+      'Removed column visibility for daily leavers report'
+    ]
+  },
+  {
     version: '1.0.28',
     description: 'App Update',
     timestamp: '07/21/2021',

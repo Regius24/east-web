@@ -92,7 +92,7 @@
         header
         :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
       >
-        Leavers
+        Leavers (R1)
       </q-item-label>
       <q-item
         v-for="item in leavers"

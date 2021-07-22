@@ -56,10 +56,10 @@ export default {
       filter: '',
       columns: [
         { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Agent Name', field: 'Agent Name', label: 'AGENT NAME', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Company Name', field: 'Company Name', label: 'COMPANY NAME', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'First', field: 'First', label: 'First Name', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Last', field: 'Last', label: 'Last Name', align: 'left', headerStyle: 'text-align: left;' },
+        { name: 'Company', field: 'Company Name', label: 'Company', align: 'left', headerStyle: 'text-align: left;' },
         { name: 'Site', field: 'Site', label: 'SITE', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Employee ID', field: 'Employee ID', label: 'EMPLOYEE ID', align: 'left', headerStyle: 'text-align: left;' },
         { name: 'Agent Status', field: 'Agent Status', label: 'AGENT STATUS', align: 'left', headerStyle: 'text-align: left;' },
         { name: 'Batch Name', field: 'Batch Name', label: 'BATCH NAME', align: 'left', headerStyle: 'text-align: left;' },
         { name: 'Hired Date', field: 'Hired Date', label: 'HIRED DATE', align: 'left', headerStyle: 'text-align: left;' },
