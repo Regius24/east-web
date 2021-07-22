@@ -36,7 +36,7 @@ const logs = [
   {
     version: '1.0.29',
     description: 'App Update',
-    timestamp: '07/2?/2021',
+    timestamp: '07/22/2021',
     updates: [
       'Added persistance to ticket popups',
       'Added ticket popup block when score is 100',
