@@ -36,7 +36,7 @@ export default {
   name: 'MainLayout',
 
   components: {
-    NAVIGATION: () => import('components/layout/navigation'),
+    NAVIGATION: () => import('components/layout/navigation2'),
     TOOLBAR: () => import('components/layout/toolbar')
   },
 

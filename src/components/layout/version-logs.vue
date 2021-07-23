@@ -34,6 +34,14 @@
 <script>
 const logs = [
   {
+    version: '1.0.30',
+    description: 'App Update',
+    timestamp: '07/2?/2021',
+    updates: [
+      ''
+    ]
+  },
+  {
     version: '1.0.29',
     description: 'App Update',
     timestamp: '07/22/2021',
