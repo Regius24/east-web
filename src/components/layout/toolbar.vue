@@ -58,7 +58,7 @@
         <q-separator />
 
         <!-- KNOWLEDGE BASE -->
-        <q-item
+        <!-- <q-item
           clickable
           v-close-popup
           :to="{ name: 'knowledge-base' }"
@@ -75,7 +75,7 @@
           </q-item-section>
         </q-item>
 
-        <q-separator />
+        <q-separator /> -->
 
         <!-- INVERT COLOR -->
         <q-item

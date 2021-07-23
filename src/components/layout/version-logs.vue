@@ -38,7 +38,7 @@ const logs = [
     description: 'App Update',
     timestamp: '07/2?/2021',
     updates: [
-      ''
+      'Updated navigation'
     ]
   },
   {
