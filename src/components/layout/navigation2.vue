@@ -105,12 +105,15 @@ export default {
           ]
         },
         {
-          grouped: false,
+          grouped: true,
           opened: false,
           icon: 'mdi-sitemap',
           label: 'Knowledge Base',
           caption: '',
-          path: 'knowledge-base'
+          path: 'knowledge-base',
+          sub: [
+            { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-user-access-tools' }
+          ]
         }
       ]
     }
