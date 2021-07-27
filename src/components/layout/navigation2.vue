@@ -84,7 +84,7 @@ export default {
           grouped: true,
           opened: false,
           icon: 'mdi-minus-circle',
-          label: 'Leavers (R2)',
+          label: 'Leavers (R1)',
           caption: '',
           sub: [
             { icon: 'mdi-account-minus', label: 'Daily', path: 'report-leavers-daily' },
