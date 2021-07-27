@@ -43,13 +43,67 @@
             </template>
           </q-input>
         </template>
+
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td
+              key="LOB"
+              :props="props"
+            >
+              {{ props.row.LOB }}
+            </q-td>
+
+            <q-td
+              key="AGENTS"
+              :props="props"
+            >
+              {{ props.row.AGENTS }}
+            </q-td>
+
+            <q-td
+              key="AGENT TOOLS"
+              :props="props"
+            >
+              {{ props.row['AGENT TOOLS'] }}
+            </q-td>
+
+            <q-td
+              key="AGENT ACCESSES"
+              :props="props"
+              :class="props.row['AGENT CHECK'] === 'true' ? 'text-red' : ''"
+            >
+              {{ props.row['AGENT ACCESSES'] }}
+            </q-td>
+
+            <q-td
+              key="TLs"
+              :props="props"
+            >
+              {{ props.row.TLs }}
+            </q-td>
+
+            <q-td
+              key="TL TOOLS"
+              :props="props"
+            >
+              {{ props.row['TL TOOLS'] }}
+            </q-td>
+
+            <q-td
+              key="TL ACCESSES"
+              :props="props"
+              :class="props.row['TL CHECK'] === 'true' ? 'text-red' : ''"
+            >
+              {{ props.row['TL ACCESSES'] }}
+            </q-td>
+          </q-tr>
+        </template>
       </q-table>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
-import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
@@ -59,48 +113,19 @@ export default {
 
   data () {
     return {
-      columns: [],
+      columns: [
+        { name: 'LOB', field: 'LOB', label: 'LOB', align: 'left', style: 'width: 170px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: left;' },
+        { name: 'AGENTS', field: 'AGENTS', label: 'AGENTS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'AGENT TOOLS', field: 'AGENT TOOLS', label: 'AGENT TOOLS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'AGENT ACCESSES', field: 'AGENT ACCESSES', label: 'AGENT ACCESSES', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'TLs', field: 'AGENTS', label: 'AGENTS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'TL TOOLS', field: 'AGENT TOOLS', label: 'AGENT TOOLS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'TL ACCESSES', field: 'AGENT ACCESSES', label: 'AGENT ACCESSES', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' }
+      ],
       filter: '',
       pagination: {
         rowsPerPage: 0
       }
-    }
-  },
-
-  watch: {
-    data (val) {
-      const cols = Object
-        .keys(first(val))
-        .map(col => {
-          let headerStyle, style
-
-          switch (col) {
-            case 'LOB':
-              headerStyle = 'text-align: left;'
-              style = 'width: 170px;'
-              break
-
-            default:
-              headerStyle = 'text-align: center;'
-              style = 'width: 90px;'
-              break
-          }
-
-          console.log(col)
-
-          return {
-            name: col,
-            field: col,
-            label: col,
-            align: col === 'LOB' ? 'left' : 'center',
-            style: style,
-            classes: 'ellipsis',
-            headerClasses: 'text-weight-bolder',
-            headerStyle: headerStyle
-          }
-        })
-
-      this.columns = cols
     }
   },
 

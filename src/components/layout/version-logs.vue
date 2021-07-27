@@ -38,7 +38,9 @@ const logs = [
     description: 'App Update',
     timestamp: '07/2?/2021',
     updates: [
-      'Updated navigation'
+      'Added color checking for user access summary (all) when access are less',
+      'Updated navigation',
+      'Fixed Knowledge Base User Access Tools Page routing'
     ]
   },
   {
