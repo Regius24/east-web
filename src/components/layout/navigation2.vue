@@ -6,7 +6,8 @@
         <q-expansion-item
           expand-separator
           group="wowMaGroup"
-          content-inset-level="1"
+          v-model="item.opened"
+          :header-class="item.opened ? 'text-secondary' : ''"
           :default-opened="item.opened"
           :icon="item.icon"
           :label="item.label"
@@ -15,10 +16,12 @@
           v-if="item.grouped"
         >
           <q-item
+            exact
             clickable
             v-ripple
-            exact
+            inset-level="1"
             active-class="bg-green"
+            class="text-weight-thin"
             v-for="(subitem, i2) in item.sub"
             :key="i2"
             :to="{ name: subitem.path }"
