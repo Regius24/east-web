@@ -160,6 +160,12 @@ export default {
             formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
           },
           {
+            title: 'Tool',
+            field: 'Tool',
+            sorter: 'string',
+            visible: false
+          },
+          {
             title: 'Budgeted',
             field: 'LockedFte',
             sorter: 'number'
@@ -181,6 +187,8 @@ export default {
         },
         rowDblClick: (e, row) => {
           const { Table, Brand, Lob, Vendor } = row.getData()
+
+          console.log(row.getData())
 
           _this.fetchOnehub(Brand, Lob, Vendor, Table)
         }

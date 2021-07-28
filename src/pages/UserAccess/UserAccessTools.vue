@@ -210,6 +210,7 @@ export default {
                 '_children': $v1 { Tools: $ } ~> $each(function($v2, $k2) {
                     {
                         'Name': $k2,
+                        'Tool': $k2,
                         'Agents': $sum($v2.Agents),
                         'Access': $sum($v2.Access),
                         'Table': $k1,

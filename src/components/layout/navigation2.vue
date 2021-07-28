@@ -19,12 +19,12 @@
             exact
             clickable
             v-ripple
-            inset-level="1"
             active-class="bg-green"
             class="text-weight-thin"
             v-for="(subitem, i2) in item.sub"
             :key="i2"
             :to="{ name: subitem.path }"
+            :inset-level="1"
           >
             <q-item-section avatar>
               <q-icon
