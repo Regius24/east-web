@@ -36,7 +36,7 @@ const logs = [
   {
     version: '1.0.30',
     description: 'App Update',
-    timestamp: '07/2?/2021',
+    timestamp: '07/27/2021',
     updates: [
       'Added color checking for user access summary (all) when access are less',
       'Updated navigation',
