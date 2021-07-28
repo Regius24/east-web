@@ -175,8 +175,6 @@ export default {
     async fetchSummaryData (brand, vendor, site) {
       let { data: summary } = await GetRepo.UamDataSummaryHistoryMonthly(this[`${brand}Date`], brand, vendor, site)
 
-      console.log(JSON.stringify(summary))
-
       const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
       const expression = jsonata(`
           $ { Table: $ } ~> $each(function($v1, $k1){
