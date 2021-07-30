@@ -56,9 +56,9 @@ export default {
         this.loading = true
         notify('Success', 'data has been uploaded', 'mdi-check', 'green')
 
-        // setTimeout(() => {
-        //   this.$router.go()
-        // }, 1200)
+        setTimeout(() => {
+          this.$router.go()
+        }, 1200)
       } catch (err) {
         this.loading = true
 
