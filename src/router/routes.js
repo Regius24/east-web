@@ -16,13 +16,16 @@ const routes = [
       { path: 'user-access-history', name: 'user-access-history', component: () => import('src/pages/UserAccess/UserAccessHistory.vue'), meta: { allow: true } },
       { path: 'user-access-history-monthly', name: 'user-access-history-monthly', component: () => import('src/pages/UserAccess/UserAccessHistoryMonthly.vue'), meta: { allow: true } },
       { path: 'user-access-audit', name: 'user-access-audit', component: () => import('src/pages/UserAccess/UserAccessAudit.vue'), meta: { allow: true } },
+
       { path: 'report-irab', name: 'report-irab', component: () => import('src/pages/Report/ReportIrab.vue'), meta: { allow: true } },
       { path: 'report-password', name: 'report-password', component: () => import('src/pages/Report/ReportPassword.vue'), meta: { allow: true } },
       { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },
       { path: 'report-onehub', name: 'report-onehub', component: () => import('src/pages/Report/ReportOnehub.vue'), meta: { allow: true } },
       { path: 'report-leavers-daily', name: 'report-leavers-daily', component: () => import('src/pages/Report/LeaversDaily.vue'), meta: { allow: true } },
       { path: 'report-leavers-monthly', name: 'report-leavers-monthly', component: () => import('src/pages/Report/LeaversMonthly.vue'), meta: { allow: true } },
-      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: false } }
+
+      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: false } },
+      { path: 'kb-username-password-guidelines', name: 'kb-username-password-guidelines', component: () => import('src/pages/KnowledgeBase/UsernamePasswordGuidelines.vue'), meta: { allow: false } }
     ]
   },
 

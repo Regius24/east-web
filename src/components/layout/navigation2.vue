@@ -115,7 +115,8 @@ export default {
           caption: '',
           path: 'knowledge-base',
           sub: [
-            { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-user-access-tools' }
+            { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-user-access-tools' },
+            { icon: 'mdi-lock-question', label: 'Username & Password', path: 'kb-username-password-guidelines' }
           ]
         }
       ]
