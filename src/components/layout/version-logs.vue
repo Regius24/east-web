@@ -39,6 +39,7 @@ const logs = [
     timestamp: '07/30/2021',
     updates: [
       'Added weekly breakdown for each vendor for user access monthly historical',
+      'Added Username and Password Guidelines for Knowledge Base',
       'Updated EAST icon'
     ]
   },
