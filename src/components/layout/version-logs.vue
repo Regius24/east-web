@@ -34,13 +34,23 @@
 <script>
 const logs = [
   {
+    version: '1.0.31',
+    description: 'App Update',
+    timestamp: '07/30/2021',
+    updates: [
+      'Added weekly breakdown for each vendor for user access monthly historical'
+    ]
+  },
+  {
     version: '1.0.30',
     description: 'App Update',
     timestamp: '07/27/2021',
     updates: [
       'Added color checking for user access summary (all) when access are less',
-      'Updated navigation',
-      'Fixed Knowledge Base User Access Tools Page routing'
+      'Updated navigation interface',
+      'Moved Knowledge Base from dropdown menu to navigation',
+      'Fixed Knowledge Base User Access Tools Page routing',
+      'Fixed Leavers (R2) -> Leavers (R1)'
     ]
   },
   {

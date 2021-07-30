@@ -198,7 +198,16 @@ export default {
                                   'LockedFte': $v3.LockedFte,
                                   'Agents': $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Agents) }))),
                                   'Complete': $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Complete) }))),
-                                  'Score': $round(($round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Complete) }))) / $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Agents) })))) * 100, 2)
+                                  'Score': $round(($round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Complete) }))) / $round($average($v3 { Date: $ } ~> $each(function($v33, $k33) { $sum($v33.Agents) })))) * 100, 2),
+                                  '_children': $v3 { Date: $ } ~> $each(function($v4, $k4) {
+                                    {
+                                        'Name': $k4,
+                                        'LockedFte': '',
+                                        'Agents': $v4.Agents,
+                                        'Complete': $v4.Complete,
+                                        'Score': $round(($v4.Complete / $v4.Agents) * 100, 2)
+                                    }
+                                })
                               }
                           })
                       }
