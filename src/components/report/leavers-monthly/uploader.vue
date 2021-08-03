@@ -13,7 +13,7 @@
           outlined
           counter
           accept=".xlsx"
-          :label="`Upload data for ${brand} Leavers Daily (.xlsx)`"
+          :label="`Upload data for ${brand} Leavers Monthly (.xlsx)`"
           v-model="file"
           :disable="loading"
           :loading="loading"

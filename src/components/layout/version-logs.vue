@@ -34,6 +34,14 @@
 <script>
 const logs = [
   {
+    version: '1.0.32',
+    description: 'App Update',
+    timestamp: '08/03/2021',
+    updates: [
+      'Fixed leavers monthly uploader label'
+    ]
+  },
+  {
     version: '1.0.31',
     description: 'App Update',
     timestamp: '07/30/2021',
