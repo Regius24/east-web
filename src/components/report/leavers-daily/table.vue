@@ -10,12 +10,9 @@
         row-key="name"
         separator="cell"
         color="accent"
-        virtual-scroll
         :data="data"
         :columns="columns"
         :filter="filter"
-        :pagination.sync="pagination"
-        :rows-per-page-options="[0]"
         :loading="data.length > 0 ? false : true"
         class="table-style"
       >
@@ -81,7 +78,7 @@ export default {
             field: col,
             label: col,
             align: 'left',
-            style: 'max-width: 300px;',
+            style: 'min-width: 150px;',
             classes: 'ellipsis',
             headerClasses: 'text-weight-bolder',
             headerStyle: 'text-align: left;'
