@@ -38,6 +38,7 @@ const logs = [
     description: 'App Update',
     timestamp: '08/03/2021',
     updates: [
+      'Updated leavers monthly table',
       'Fixed leavers monthly uploader label'
     ]
   },
