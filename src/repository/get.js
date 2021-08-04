@@ -41,6 +41,8 @@ export default {
   LeaversDaily: (BRAND) => axios.get(`${resource}LeaversDaily?brand=${BRAND}`),
   LeaversMonthly: (BRAND) => axios.get(`${resource}LeaversMonthly?brand=${BRAND}`),
 
+  Medallia: (BRAND) => axios.get(`${resource}Medallia?brand=${BRAND}`),
+
   // KNOWLEDGE BASE
   KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData`),
 

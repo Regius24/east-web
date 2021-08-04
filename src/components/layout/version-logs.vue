@@ -38,6 +38,11 @@ const logs = [
     description: 'App Update',
     timestamp: '08/04/2021',
     updates: [
+      'Added a new page for Medallia report',
+      'Added a new component for Medallia page',
+      'Added a new routing for Medallia report',
+      'Added a new navigation guard for Medallia report',
+      'Added a new repository for Medallia report',
       'Added navigation guards for Knowledgebase',
       'Updated routing when error page encountered',
       'Fixed navigation width and typography'
