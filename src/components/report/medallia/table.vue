@@ -84,7 +84,7 @@ export default {
           return {
             name: col,
             field: col,
-            label: col.toUpperCase(),
+            label: col,
             align: 'left',
             style: style,
             classes: 'ellipsis',
@@ -99,7 +99,7 @@ export default {
 
   methods: {
     exportData () {
-      const title = `Daily Leavers for ${this.title}`
+      const title = `Medallia Report for ${this.title}`
       this.export(title, unparse(this.data))
     },
 
@@ -109,7 +109,7 @@ export default {
     },
 
     exportData2 () {
-      const title = `Daily Leavers for ${this.title}`
+      const title = `Medallia Report for ${this.title}`
       this.exportXLSX2(title, this.data)
     },
 
@@ -126,6 +126,6 @@ export default {
 
 <style lang="scss" scoped>
 .table-style {
-  max-height: 50vh;
+  max-height: 60vh;
 }
 </style>
