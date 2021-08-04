@@ -44,7 +44,8 @@ export default function ({ store } /* { store, ssrContext } */) {
           password,
           esolve,
           onehub,
-          leavers
+          leavers,
+          knowledgebase
         } = data[0]
 
         if (to.name.split('-')[0] === 'settings' && settings) next()
@@ -60,6 +61,8 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'report-onehub' && onehub) next()
         else if (to.name === 'report-leavers-daily' && leavers) next()
         else if (to.name === 'report-leavers-monthly' && leavers) next()
+        else if (to.name === 'kb-user-access-tools' && knowledgebase) next()
+        else if (to.name === 'kb-username-password-guidelines' && knowledgebase) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }

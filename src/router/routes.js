@@ -24,8 +24,8 @@ const routes = [
       { path: 'report-leavers-daily', name: 'report-leavers-daily', component: () => import('src/pages/Report/LeaversDaily.vue'), meta: { allow: true } },
       { path: 'report-leavers-monthly', name: 'report-leavers-monthly', component: () => import('src/pages/Report/LeaversMonthly.vue'), meta: { allow: true } },
 
-      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: false } },
-      { path: 'kb-username-password-guidelines', name: 'kb-username-password-guidelines', component: () => import('src/pages/KnowledgeBase/UsernamePasswordGuidelines.vue'), meta: { allow: false } }
+      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: true } },
+      { path: 'kb-username-password-guidelines', name: 'kb-username-password-guidelines', component: () => import('src/pages/KnowledgeBase/UsernamePasswordGuidelines.vue'), meta: { allow: true } }
     ]
   },
 
