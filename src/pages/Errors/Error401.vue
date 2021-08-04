@@ -13,13 +13,13 @@
       </div>
 
       <q-btn
-        class="q-mt-xl"
+        no-caps
+        unelevated
+        label="Go Back"
         color="white"
         text-color="blue"
-        unelevated
-        to="/"
-        label="Go Home"
-        no-caps
+        class="q-mt-xl"
+        @click="$router.go(-1)"
       />
     </div>
   </div>
