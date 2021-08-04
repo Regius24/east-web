@@ -47,7 +47,8 @@ const logs = [
       'Added navigation to settings page',
       'Updated routing when error page encountered',
       'Fixed navigation width and typography',
-      'Fixed fetching of user data from all pages'
+      'Fixed fetching of user data from all pages',
+      'Fixed routing to settings page and vice versa'
     ]
   },
   {

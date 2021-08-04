@@ -37,24 +37,6 @@
       :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
       <q-list>
-        <!-- HOME -->
-        <q-item
-          clickable
-          v-close-popup
-          :to="{ name: 'user-access' }"
-        >
-          <q-item-section avatar>
-            <q-avatar
-              icon="mdi-home"
-              color="accent"
-              text-color="white"
-            />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
-          </q-item-section>
-        </q-item>
-
         <!-- LOGOUT -->
         <q-item
           clickable
@@ -64,7 +46,7 @@
           <q-item-section avatar>
             <q-avatar
               icon="mdi-power"
-              color="accent"
+              color="grey"
               text-color="white"
             />
           </q-item-section>
@@ -72,6 +54,25 @@
             <q-item-label>Logout</q-item-label>
           </q-item-section>
         </q-item>
+
+        <!-- DASHBOARD -->
+        <q-item
+          clickable
+          :to="{ name: 'user-access' }"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-home"
+              color="blue-grey"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-separator />
 
         <!-- INVERT COLOR -->
         <q-item
@@ -111,6 +112,8 @@
           </q-item-section>
         </q-item>
 
+        <q-separator />
+
         <!-- RELEASE NOTES -->
         <q-item
           clickable
@@ -120,7 +123,7 @@
           <q-item-section avatar>
             <q-avatar
               icon="mdi-clipboard-text-outline"
-              color="accent"
+              color="orange"
               text-color="white"
             />
           </q-item-section>
@@ -144,6 +147,13 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   computed: mapState('data', ['openDrawer']),
+
+  data () {
+    return {
+      profileType: '',
+      settings: false
+    }
+  },
 
   methods: {
     ...mapActions('data', ['SET_OPENDRAWER', 'SET_ALLOW']),

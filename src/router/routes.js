@@ -43,7 +43,7 @@ const routes = [
 
   {
     path: '/settings/',
-    component: () => import('layouts/KnowledgeBaseLayout.vue'),
+    component: () => import('layouts/SettingsLayout.vue'),
     name: 'settings',
     children: [
       { path: 'users', name: 'settings-users', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },
