@@ -9,6 +9,7 @@
       <!-- DRAWER -->
       <q-drawer
         elevated
+        width="320"
         mini-to-overlay
         v-model="openDrawer"
         :mini="miniDrawer"

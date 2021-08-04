@@ -4,9 +4,9 @@
       <template v-for="(item, i) in items">
         <!-- IF ITEM HAS GROUP -->
         <q-expansion-item
-          expand-separator
           group="wowMaGroup"
           v-model="item.opened"
+          class="text-weight-medium text-uppercase"
           :header-class="item.opened ? 'text-secondary' : ''"
           :default-opened="item.opened"
           :icon="item.icon"

@@ -38,7 +38,8 @@ const logs = [
     description: 'App Update',
     timestamp: '08/04/2021',
     updates: [
-      'Updated routing when error page encountered'
+      'Updated routing when error page encountered',
+      'Fixed navigation width and typography'
     ]
   },
   {
