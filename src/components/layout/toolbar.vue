@@ -55,6 +55,24 @@
           </q-item-section>
         </q-item>
 
+        <!-- SETTINGS -->
+        <q-item
+          clickable
+          :class="settings === true ? '' : 'hidden'"
+          :to="{ name: 'settings' }"
+        >
+          <q-item-section avatar>
+            <q-avatar
+              icon="mdi-cog"
+              color="blue-grey"
+              text-color="white"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Settings</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-separator />
 
         <!-- KNOWLEDGE BASE -->
@@ -146,10 +164,19 @@
 </template>
 
 <script>
+import GetRepo from 'src/repository/get'
+import { first } from 'lodash'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   computed: mapState('data', ['openDrawer']),
+
+  data () {
+    return {
+      profileType: '',
+      settings: false
+    }
+  },
 
   methods: {
     ...mapActions('data', ['SET_OPENDRAWER', 'SET_ALLOW']),
@@ -176,6 +203,18 @@ export default {
         .onOk(() => (console.log('OK')))
         .onCancel(() => (console.log('Cancel')))
         .onDismiss(() => (console.log('Called on OK or Cancel')))
+    }
+  },
+
+  async beforeMount () {
+    try {
+      const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { profile, settings } = first(data)
+
+      this.profileType = profile
+      this.settings = settings
+    } catch (err) {
+      console.log(err)
     }
   }
 }

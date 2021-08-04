@@ -32,8 +32,6 @@ export default {
     try {
       const { data: raw } = await GET.KBUserAccessTools()
 
-      console.log(raw)
-
       this.raw = raw
     } catch (err) {
       console.log(err)

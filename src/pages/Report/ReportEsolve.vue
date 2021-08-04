@@ -30,16 +30,14 @@ export default {
     }
   },
 
-  methods: {
-
-  },
-
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
       const { data: raw } = await GET.EsolveReportData()
 
-      this.showUploader = first(user).upload
+      const { upload } = first(user)
+
+      this.showUploader = upload
       this.raw = raw
     } catch (err) {
       console.log(err)

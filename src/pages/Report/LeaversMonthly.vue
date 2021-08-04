@@ -58,6 +58,7 @@
 
 <script>
 import GetRepo from 'src/repository/get'
+import { first } from 'lodash'
 import { notify } from 'boot/notifier'
 
 export default {
@@ -123,11 +124,12 @@ export default {
   async beforeMount () {
     try {
       const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { brand, profile, vendor, upload } = first(data)
 
-      this.brandList = data[0].brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
-      this.profileType = data[0].profile
-      this.vendorType = data[0].vendor
-      this.showUploader = data[0].upload
+      this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      this.profileType = profile
+      this.vendorType = vendor
+      this.showUploader = upload
 
       this.fetchData()
     } catch (err) {

@@ -241,10 +241,11 @@ export default {
 
   async beforeMount () {
     const { data: user } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+    const { brand, profile, vendor } = first(user)
 
-    this.brandList = first(user).brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
-    this.profileType = first(user).profile
-    this.vendorType = first(user).profile === 'admin' ? '%' : first(user).vendor
+    this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+    this.profileType = profile
+    this.vendorType = profile === 'admin' ? '%' : vendor
     this.tableBrands = this.brandList.map(m => { return { label: m.toUpperCase(), value: m.toLowerCase() } })
 
     this.initFetchData()

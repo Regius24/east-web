@@ -40,13 +40,13 @@ export default function ({ store } /* { store, ssrContext } */) {
           useraccesstools,
           useraccesssummary,
           useraccesshistory,
+          medallia,
           irab,
           password,
           esolve,
           onehub,
           leavers,
-          knowledgebase,
-          medallia
+          knowledgebase
         } = data[0]
 
         if (to.name.split('-')[0] === 'settings' && settings) next()

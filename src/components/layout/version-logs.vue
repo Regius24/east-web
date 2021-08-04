@@ -44,8 +44,10 @@ const logs = [
       'Added a new navigation guard for Medallia report',
       'Added a new repository for Medallia report',
       'Added navigation guards for Knowledgebase',
+      'Added navigation to settings page',
       'Updated routing when error page encountered',
-      'Fixed navigation width and typography'
+      'Fixed navigation width and typography',
+      'Fixed fetching of user data from all pages'
     ]
   },
   {
