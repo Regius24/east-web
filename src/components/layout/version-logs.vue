@@ -38,6 +38,7 @@ const logs = [
     description: 'App Update',
     timestamp: '08/04/2021',
     updates: [
+      'Added navigation guards for Knowledgebase',
       'Updated routing when error page encountered',
       'Fixed navigation width and typography'
     ]

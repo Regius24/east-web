@@ -17,6 +17,7 @@ const routes = [
       { path: 'user-access-history-monthly', name: 'user-access-history-monthly', component: () => import('src/pages/UserAccess/UserAccessHistoryMonthly.vue'), meta: { allow: true } },
       { path: 'user-access-audit', name: 'user-access-audit', component: () => import('src/pages/UserAccess/UserAccessAudit.vue'), meta: { allow: true } },
 
+      { path: 'report-medallia', name: 'report-medallia', component: () => import('src/pages/Report/Medallia.vue'), meta: { allow: true } },
       { path: 'report-irab', name: 'report-irab', component: () => import('src/pages/Report/ReportIrab.vue'), meta: { allow: true } },
       { path: 'report-password', name: 'report-password', component: () => import('src/pages/Report/ReportPassword.vue'), meta: { allow: true } },
       { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },

@@ -45,7 +45,8 @@ export default function ({ store } /* { store, ssrContext } */) {
           esolve,
           onehub,
           leavers,
-          knowledgebase
+          knowledgebase,
+          medallia
         } = data[0]
 
         if (to.name.split('-')[0] === 'settings' && settings) next()
@@ -55,6 +56,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'user-access-history' && useraccesshistory) next()
         else if (to.name === 'user-access-history-monthly' && useraccesshistory) next()
         else if (to.name === 'user-access-audit' && useraccessaudit) next()
+        else if (to.name === 'report-medallia' && medallia) next()
         else if (to.name === 'report-irab' && irab) next()
         else if (to.name === 'report-password' && password) next()
         else if (to.name === 'report-esolve' && esolve) next()

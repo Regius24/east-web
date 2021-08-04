@@ -101,6 +101,7 @@ export default {
           label: 'Reports',
           caption: '',
           sub: [
+            { icon: 'mdi-badge-account-horizontal', label: 'Medallia', path: 'report-medallia' },
             { icon: 'mdi-account', label: 'IRAB', path: 'report-irab' },
             { icon: 'mdi-tools', label: 'Password Cases', path: 'report-password' },
             { icon: 'mdi-ticket-outline', label: 'ESolve', path: 'report-esolve' },
