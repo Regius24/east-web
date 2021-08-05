@@ -38,7 +38,8 @@ const logs = [
     description: 'App Update',
     timestamp: '08/05/2021',
     updates: [
-      'Made some adjustment for routing pages and permissions'
+      'Adjusted page routings due to changes in profilings',
+      'Adjusted permissions due to changes in profilings'
     ]
   },
   {
