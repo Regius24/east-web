@@ -74,9 +74,9 @@ export default {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
       const { data: raw } = await GET.OnehubData()
 
-      const { upload } = first(user)
+      const { uOnehub } = first(user)
 
-      this.showUploader = upload
+      this.showUploader = uOnehub
       this.raw = raw
     } catch (err) {
       console.log(err)

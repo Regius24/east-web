@@ -58,7 +58,7 @@
         <!-- DASHBOARD -->
         <q-item
           clickable
-          :to="{ name: 'user-access' }"
+          :to="{ name: 'user-access-lob' }"
         >
           <q-item-section avatar>
             <q-avatar

@@ -10,10 +10,10 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'user-access', name: 'user-access', component: () => import('src/pages/UserAccess/UserAccess.vue'), meta: { allow: true } },
+      { path: 'user-access-lob', name: 'user-access-lob', component: () => import('src/pages/UserAccess/UserAccess.vue'), meta: { allow: true } },
       { path: 'user-access-tools', name: 'user-access-tools', component: () => import('src/pages/UserAccess/UserAccessTools.vue'), meta: { allow: true } },
       { path: 'user-access-summary', name: 'user-access-summary', component: () => import('src/pages/UserAccess/UserAccessSummary.vue'), meta: { allow: true } },
-      { path: 'user-access-history', name: 'user-access-history', component: () => import('src/pages/UserAccess/UserAccessHistory.vue'), meta: { allow: true } },
+      { path: 'user-access-history-weekly', name: 'user-access-history-weekly', component: () => import('src/pages/UserAccess/UserAccessHistory.vue'), meta: { allow: true } },
       { path: 'user-access-history-monthly', name: 'user-access-history-monthly', component: () => import('src/pages/UserAccess/UserAccessHistoryMonthly.vue'), meta: { allow: true } },
       { path: 'user-access-audit', name: 'user-access-audit', component: () => import('src/pages/UserAccess/UserAccessAudit.vue'), meta: { allow: true } },
 
@@ -29,17 +29,6 @@ const routes = [
       { path: 'kb-username-password-guidelines', name: 'kb-username-password-guidelines', component: () => import('src/pages/KnowledgeBase/UsernamePasswordGuidelines.vue'), meta: { allow: true } }
     ]
   },
-
-  // {
-  //   path: '/knowledge-base/',
-  //   component: () => import('layouts/KnowledgeBaseLayout.vue'),
-  //   name: 'knowledge-base',
-  //   children: [
-  //     { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: false } }
-  //   ],
-  //   meta: { allow: false },
-  //   redirect: { name: 'kb-user-access-tools' }
-  // },
 
   {
     path: '/settings/',

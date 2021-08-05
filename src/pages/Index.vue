@@ -245,7 +245,7 @@ export default {
 
         setTimeout(() => {
           this.$q.loading.hide()
-          this.$router.push({ name: 'user-access' })
+          this.$router.push({ name: 'user-access-lob' })
         }, 2500)
       } catch (err) {
         console.log(err)

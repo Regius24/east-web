@@ -57,9 +57,9 @@ export default {
       vendorType: '',
       brandList: [],
 
-      showUploader: false,
-      fabPos: [18, 18],
-      draggingFab: false,
+      // showUploader: false,
+      // fabPos: [18, 18],
+      // draggingFab: false,
 
       pldtData: [],
       smartData: []
@@ -108,12 +108,12 @@ export default {
   async beforeMount () {
     try {
       const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { brand, profile, vendor, upload } = first(data)
+      const { brand, profile, vendor } = first(data)
 
       this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
       this.vendorType = vendor
-      this.showUploader = upload
+      // this.showUploader = upload
 
       this.fetchData()
     } catch (err) {

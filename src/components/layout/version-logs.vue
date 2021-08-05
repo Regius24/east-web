@@ -34,6 +34,14 @@
 <script>
 const logs = [
   {
+    version: '1.0.34',
+    description: 'App Update',
+    timestamp: '08/05/2021',
+    updates: [
+      'Made some adjustment for routing pages and permissions'
+    ]
+  },
+  {
     version: '1.0.33',
     description: 'App Update',
     timestamp: '08/04/2021',

@@ -75,11 +75,11 @@ export default {
           label: 'User Access',
           caption: '',
           sub: [
-            { icon: 'mdi-account', label: 'Per LOB', path: 'user-access' },
+            { icon: 'mdi-account', label: 'Per LOB', path: 'user-access-lob' },
             { icon: 'mdi-tools', label: 'Per Tool', path: 'user-access-tools' },
             { icon: 'mdi-view-dashboard', label: 'Summary', path: 'user-access-summary' },
             { icon: 'mdi-magnify', label: 'Audit', path: 'user-access-audit' },
-            { icon: 'mdi-calendar-range', label: 'Weekly', path: 'user-access-history' },
+            { icon: 'mdi-calendar-range', label: 'Weekly', path: 'user-access-history-weekly' },
             { icon: 'mdi-calendar-month', label: 'Monthly', path: 'user-access-history-monthly' }
           ]
         },

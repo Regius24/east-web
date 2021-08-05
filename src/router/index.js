@@ -35,36 +35,36 @@ export default function ({ store } /* { store, ssrContext } */) {
         const { data } = await GetRepo.UserProfile(LocalStorage.getItem('userAccnt'))
         const {
           settings,
-          useraccess,
-          useraccessaudit,
-          useraccesstools,
-          useraccesssummary,
-          useraccesshistory,
-          medallia,
-          irab,
-          password,
-          esolve,
-          onehub,
-          leavers,
-          knowledgebase
+          pUALob,
+          pUATools,
+          pUASummary,
+          pUAHistory,
+          pUAAudit,
+          pLeavers,
+          pMedallia,
+          pIrab,
+          pPassword,
+          pEsolve,
+          pOnehub,
+          pKB
         } = data[0]
 
         if (to.name.split('-')[0] === 'settings' && settings) next()
-        else if (to.name === 'user-access' && useraccess) next()
-        else if (to.name === 'user-access-tools' && useraccesstools) next()
-        else if (to.name === 'user-access-summary' && useraccesssummary) next()
-        else if (to.name === 'user-access-history' && useraccesshistory) next()
-        else if (to.name === 'user-access-history-monthly' && useraccesshistory) next()
-        else if (to.name === 'user-access-audit' && useraccessaudit) next()
-        else if (to.name === 'report-medallia' && medallia) next()
-        else if (to.name === 'report-irab' && irab) next()
-        else if (to.name === 'report-password' && password) next()
-        else if (to.name === 'report-esolve' && esolve) next()
-        else if (to.name === 'report-onehub' && onehub) next()
-        else if (to.name === 'report-leavers-daily' && leavers) next()
-        else if (to.name === 'report-leavers-monthly' && leavers) next()
-        else if (to.name === 'kb-user-access-tools' && knowledgebase) next()
-        else if (to.name === 'kb-username-password-guidelines' && knowledgebase) next()
+        else if (to.name === 'user-access-lob' && pUALob) next()
+        else if (to.name === 'user-access-tools' && pUATools) next()
+        else if (to.name === 'user-access-summary' && pUASummary) next()
+        else if (to.name === 'user-access-history-weekly' && pUAHistory) next()
+        else if (to.name === 'user-access-history-monthly' && pUAHistory) next()
+        else if (to.name === 'user-access-audit' && pUAAudit) next()
+        else if (to.name === 'report-leavers-daily' && pLeavers) next()
+        else if (to.name === 'report-leavers-monthly' && pLeavers) next()
+        else if (to.name === 'report-medallia' && pMedallia) next()
+        else if (to.name === 'report-irab' && pIrab) next()
+        else if (to.name === 'report-password' && pPassword) next()
+        else if (to.name === 'report-esolve' && pEsolve) next()
+        else if (to.name === 'report-onehub' && pOnehub) next()
+        else if (to.name === 'kb-user-access-tools' && pKB) next()
+        else if (to.name === 'kb-username-password-guidelines' && pKB) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }

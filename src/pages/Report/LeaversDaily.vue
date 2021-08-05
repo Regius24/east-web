@@ -124,12 +124,12 @@ export default {
   async beforeMount () {
     try {
       const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { brand, profile, vendor, upload } = first(data)
+      const { brand, profile, vendor, uLeavers } = first(data)
 
       this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
       this.vendorType = vendor
-      this.showUploader = upload
+      this.showUploader = uLeavers
 
       this.fetchData()
     } catch (err) {

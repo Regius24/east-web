@@ -113,9 +113,9 @@ export default {
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { upload, profile } = first(user)
+      const { uIrab, profile } = first(user)
 
-      this.showUploader = upload
+      this.showUploader = uIrab
       this.profileType = profile
     } catch (err) {
       console.log(err)
