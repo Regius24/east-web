@@ -12,5 +12,7 @@ export default {
   UploadOnehubFile: (PAYLOAD) => axios.post(resource + 'UploadToOnehub', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverDailyFile: (BRAND, PAYLOAD) => axios.post(resource + `UploadToLeaversDaily?brand=${BRAND}`, PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverMonthlyPldtFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlyPldt', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  UploadLeaverMonthlySmartFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlySmart', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } })
+  UploadLeaverMonthlySmartFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlySmart', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
+
+  Userz: (DOMAIN, PROFILEID) => axios.post(resource + `Userz?domain=${DOMAIN}&id=${PROFILEID}`)
 }

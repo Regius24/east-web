@@ -35,9 +35,9 @@ const routes = [
     component: () => import('layouts/SettingsLayout.vue'),
     name: 'settings',
     children: [
-      { path: 'users', name: 'settings-users', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },
-      { path: 'users-access', name: 'settings-usersaccess', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } },
-      { path: 'users-profile', name: 'settings-usersprofile', component: () => import('src/pages/Settings/SettingsUsers.vue'), meta: { allow: true } }
+      { path: 'users', name: 'settings-users', component: () => import('src/pages/Settings/Users.vue'), meta: { allow: true } },
+      { path: 'users-access', name: 'settings-usersaccess', component: () => import('src/pages/Settings/UsersAccess.vue'), meta: { allow: true } },
+      { path: 'users-profile', name: 'settings-usersprofile', component: () => import('src/pages/Settings/UsersProfile.vue'), meta: { allow: true } }
     ],
     meta: { allow: true },
     redirect: { name: 'settings-users' }

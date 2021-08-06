@@ -123,7 +123,7 @@
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Notes</q-item-label>
+            <q-item-label>Releases</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

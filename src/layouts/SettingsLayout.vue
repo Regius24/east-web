@@ -1,31 +1,33 @@
 <template>
   <q-layout view="hHh Lpr lff">
-    <!-- HEADER -->
-    <q-header elevated>
-      <TOOLBAR />
-    </q-header>
+    <q-scroll-area style="height: 100vh;">
+      <!-- HEADER -->
+      <q-header elevated>
+        <TOOLBAR />
+      </q-header>
 
-    <!-- DRAWER -->
-    <q-drawer
-      elevated
-      mini-to-overlay
-      v-model="openDrawer"
-      :mini="miniDrawer"
-      @mouseover="miniDrawer = false"
-      @mouseout="miniDrawer = true"
-    >
-      <NAVIGATION />
-    </q-drawer>
-
-    <!-- PAGES -->
-    <q-page-container :class="$q.dark.isActive ? '' : 'bg-grey-3'">
-      <transition
-        name="fade"
-        mode="out-in"
+      <!-- DRAWER -->
+      <q-drawer
+        elevated
+        mini-to-overlay
+        v-model="openDrawer"
+        :mini="miniDrawer"
+        @mouseover="miniDrawer = false"
+        @mouseout="miniDrawer = true"
       >
-        <router-view />
-      </transition>
-    </q-page-container>
+        <NAVIGATION />
+      </q-drawer>
+
+      <!-- PAGES -->
+      <q-page-container :class="$q.dark.isActive ? '' : 'bg-grey-3'">
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <router-view />
+        </transition>
+      </q-page-container>
+    </q-scroll-area>
   </q-layout>
 </template>
 

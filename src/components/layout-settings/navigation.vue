@@ -1,12 +1,5 @@
 <template>
   <q-list>
-    <!-- USER ACCESS LINKS -->
-    <q-item-label
-      header
-      :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
-    >
-      App Related
-    </q-item-label>
     <q-item
       v-for="link in links"
       :key="link.pathName"

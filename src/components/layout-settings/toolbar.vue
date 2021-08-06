@@ -36,18 +36,17 @@
       label="misc"
       :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
-      <q-list>
+      <q-list dense>
         <!-- LOGOUT -->
         <q-item
           clickable
           v-close-popup
           @click="logOut"
         >
-          <q-item-section avatar>
+          <q-item-section thumbnail>
             <q-avatar
               icon="mdi-power"
-              color="grey"
-              text-color="white"
+              text-color="deep-orange"
             />
           </q-item-section>
           <q-item-section>
@@ -60,11 +59,10 @@
           clickable
           :to="{ name: 'user-access-lob' }"
         >
-          <q-item-section avatar>
+          <q-item-section thumbnail>
             <q-avatar
               icon="mdi-home"
-              color="blue-grey"
-              text-color="white"
+              text-color="teal"
             />
           </q-item-section>
           <q-item-section>
@@ -80,16 +78,14 @@
           v-close-popup
           @click="$q.dark.toggle()"
         >
-          <q-item-section avatar>
+          <q-item-section thumbnail>
             <q-avatar
               icon="mdi-invert-colors"
-              color="accent"
-              text-color="white"
+              :text-color="$q.dark.isActive ? 'grey-1' : 'dark'"
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label v-if="$q.dark.isActive">Light Mode</q-item-label>
-            <q-item-label v-else>Dark Mode</q-item-label>
+            <q-item-label>Invert</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -99,11 +95,10 @@
           v-close-popup
           @click="$q.fullscreen.toggle()"
         >
-          <q-item-section avatar>
+          <q-item-section thumbnail>
             <q-avatar
               :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-              color="accent"
-              text-color="white"
+              text-color="accent"
             />
           </q-item-section>
           <q-item-section>
@@ -120,15 +115,14 @@
           v-close-popup
           @click="showReleaseNotes"
         >
-          <q-item-section avatar>
+          <q-item-section thumbnail>
             <q-avatar
               icon="mdi-clipboard-text-outline"
-              color="orange"
-              text-color="white"
+              text-color="orange"
             />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Release Notes</q-item-label>
+            <q-item-label>Releases</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

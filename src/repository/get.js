@@ -47,5 +47,6 @@ export default {
   KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData`),
 
   // SETTINGS
-  UserList: () => axios.get(`${resource}UserList`)
+  UserList: () => axios.get(`${resource}UserList`),
+  ProfileList: () => axios.get(`${resource}ProfileList`)
 }
