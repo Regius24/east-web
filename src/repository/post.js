@@ -14,5 +14,5 @@ export default {
   UploadLeaverMonthlyPldtFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlyPldt', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverMonthlySmartFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlySmart', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
 
-  Userz: (DOMAIN, PROFILEID) => axios.post(resource + `Userz?domain=${DOMAIN}&id=${PROFILEID}`)
+  InsertUserz: (DOMAIN, PROFILEID) => axios.post(resource + `Userz?domain=${DOMAIN}&id=${PROFILEID}`)
 }

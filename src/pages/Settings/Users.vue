@@ -148,7 +148,7 @@
 <script>
 import GET from 'src/repository/get'
 import POST from 'src/repository/post'
-import PUT from 'src/repository/PUT'
+import PUT from 'src/repository/put'
 import DELETE from 'src/repository/delete'
 import { notify } from 'boot/notifier'
 import { sortBy } from 'lodash'
@@ -206,7 +206,7 @@ export default {
       try {
         const domain = this.userForm.domain
         const profileId = this.userForm.profileId.value
-        const res = await POST.Userz(domain, profileId)
+        const res = await POST.InsertUserz(domain, profileId)
 
         console.log(res)
         notify('User has been added', '', 'mdi-check', 'green')
@@ -222,7 +222,7 @@ export default {
     async updateProfile ({ domain, profile }) {
       try {
         const { value } = this.profiles.find(f => f.label === profile)
-        const res = await PUT.Userz(domain, value)
+        const res = await PUT.UpdateUserz(domain, value)
 
         console.log(res)
         notify('User profile has been updated', '', 'mdi-check', 'green')

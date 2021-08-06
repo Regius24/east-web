@@ -4,5 +4,5 @@ const resource = 'api/put/'
 
 export default {
   IrabDataRaw: (PAYLOAD) => axios.put(resource + 'IrabDataRaw', PAYLOAD),
-  Userz: (DOMAIN, PROFILEID) => axios.put(resource + `Userz?domain=${DOMAIN}&profile=${PROFILEID}`)
+  UpdateUserz: (DOMAIN, PROFILEID) => axios.put(resource + `Userz?domain=${DOMAIN}&profile=${PROFILEID}`)
 }
