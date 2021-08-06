@@ -38,7 +38,8 @@ const logs = [
     description: 'App Update',
     timestamp: '08/06/2021',
     updates: [
-      'Fixed fetching user data due to changes from profilings'
+      'Fixed fetching user data due to changes from profilings',
+      'Updated UI for toolbar menu'
     ]
   },
   {
