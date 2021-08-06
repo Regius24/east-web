@@ -236,7 +236,7 @@ export default {
 
     this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
     this.profileType = profile
-    this.vendorType = vendor === null ? '%' : vendor
+    this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     this.tableBrands = this.brandList.map(m => { return { label: m.toUpperCase(), value: m.toLowerCase() } })
 
     this.initFetchData()

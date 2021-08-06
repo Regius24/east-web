@@ -51,6 +51,8 @@ export default {
       summary: [],
       raw: [],
 
+      profileType: '',
+      vendorType: '',
       showUploader: false,
       fabPos: [18, 18],
       draggingFab: false
@@ -97,12 +99,14 @@ export default {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
       const { data: raw } = await GET.PasswordData()
 
-      const { uPassword } = first(user)
+      const { uPassword, profile, vendor } = first(user)
 
       this.raw = raw
       this.months = uniq(flatten(raw.map(m => m.MONTH)))
       this.months.unshift('YTD')
       this.showUploader = uPassword
+      this.profileType = profile
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')

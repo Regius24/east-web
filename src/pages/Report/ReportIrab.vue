@@ -83,6 +83,7 @@ export default {
       raw: [],
 
       profileType: '',
+      vendorType: '',
       showUploader: false,
       fabRight: false,
       fabPos: [18, 18],
@@ -113,10 +114,11 @@ export default {
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { uIrab, profile } = first(user)
+      const { uIrab, profile, vendor } = first(user)
 
       this.showUploader = uIrab
       this.profileType = profile
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')

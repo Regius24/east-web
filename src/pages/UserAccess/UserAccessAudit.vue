@@ -150,7 +150,7 @@ export default {
 
       this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
-      this.vendorType = vendor
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
       this.showUploader = uUAAudit
 
       this.brandList.forEach(brand => (this.fetchSummaryData(brand.toUpperCase(), '%')))

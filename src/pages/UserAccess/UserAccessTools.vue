@@ -137,7 +137,7 @@ export default {
       this.uamDataAgentsLoad = true
 
       try {
-        const vendor = this.profileType === 'admin' ? '%' : this.profileType
+        const vendor = this.vendorType
         const { data } = await GetRepo.UamDataAgents(val, vendor)
 
         this.uamDataAgents = data
@@ -298,7 +298,7 @@ export default {
 
       this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
-      this.vendorType = vendor
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
       this.showUploader = uUATools
 
       this.fetchData()

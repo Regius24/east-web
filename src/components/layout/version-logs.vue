@@ -34,6 +34,14 @@
 <script>
 const logs = [
   {
+    version: '1.0.35',
+    description: 'App Update',
+    timestamp: '08/06/2021',
+    updates: [
+      'Fixed fetching user data due to changes from profilings'
+    ]
+  },
+  {
     version: '1.0.34',
     description: 'App Update',
     timestamp: '08/05/2021',
