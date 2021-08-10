@@ -38,6 +38,7 @@ const logs = [
     description: 'App Update',
     timestamp: '08/10/2021',
     updates: [
+      'Added a prompt to refresh if a new app update is available',
       'Hidden navigations tabs based on profiles',
       'Hidden release note option based on profiles',
       'Fixed historical summary table for smart even in pldt profile',

@@ -259,8 +259,8 @@ export default {
   },
 
   mounted () {
-    localStorage.clear()
     sessionStorage.clear()
+    localStorage.removeItem('userAccnt')
 
     this.initParticleJs()
   }
