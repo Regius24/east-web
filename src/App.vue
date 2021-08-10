@@ -29,6 +29,8 @@ export default {
             label: 'update',
             color: 'white',
             handler: () => {
+              this.$q.localStorage.set('appVer', version)
+
               window.location.reload()
             }
           }
