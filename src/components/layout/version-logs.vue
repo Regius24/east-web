@@ -34,6 +34,17 @@
 <script>
 const logs = [
   {
+    version: '1.0.36',
+    description: 'App Update',
+    timestamp: '08/10/2021',
+    updates: [
+      'Hidden navigations tabs based on profiles',
+      'Hidden release note option based on profiles',
+      'Fixed historical summary table for smart even in pldt profile',
+      'Fixed IRAB not correctly using profile data for filtering data'
+    ]
+  },
+  {
     version: '1.0.35',
     description: 'App Update',
     timestamp: '08/06/2021',

@@ -115,6 +115,7 @@
           clickable
           v-close-popup
           @click="showReleaseNotes"
+          :style="releasenotes ? '' : 'display: none;'"
         >
           <q-item-section thumbnail>
             <q-avatar
@@ -138,7 +139,7 @@
 </template>
 
 <script>
-import GetRepo from 'src/repository/get'
+import GET from 'src/repository/get'
 import { first } from 'lodash'
 import { mapState, mapActions } from 'vuex'
 
@@ -148,7 +149,8 @@ export default {
   data () {
     return {
       profileType: '',
-      settings: false
+      settings: false,
+      releasenotes: false
     }
   },
 
@@ -182,11 +184,12 @@ export default {
 
   async beforeMount () {
     try {
-      const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { profile, settings } = first(data)
+      const { data } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { profile, settings, releasenotes } = first(data)
 
       this.profileType = profile
       this.settings = settings
+      this.releasenotes = releasenotes
     } catch (err) {
       console.log(err)
     }

@@ -93,11 +93,11 @@ export default {
 
   watch: {
     profileType (val) {
-      this.fetchRaw(val)
+      this.fetchRaw()
       this.deactivatedOnly = false
     },
     months (val) {
-      const vendor = this.profileType === 'admin' ? '%' : this.profileType
+      const vendor = this.vendorType
       this.fetchSummary(first(val), vendor)
       this.deactivatedOnly = false
     },
@@ -106,22 +106,8 @@ export default {
         this.summary = this.summary.filter(f => f.DEACTIVATED === 1)
         this.raw = this.raw.filter(f => f.STATUS === 'DEACTIVATED')
       } else {
-        this.fetchRaw(this.profileType)
+        this.fetchRaw()
       }
-    }
-  },
-
-  async beforeMount () {
-    try {
-      const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { uIrab, profile, vendor } = first(user)
-
-      this.showUploader = uIrab
-      this.profileType = profile
-      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
-    } catch (err) {
-      console.log(err)
-      notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },
 
@@ -130,8 +116,8 @@ export default {
       const { data: summary } = await GET.IrabDataSummary(month, vendor)
       this.summary = summary
     },
-    async fetchRaw (profile) {
-      const vendor = profile === 'admin' ? '%' : profile
+    async fetchRaw () {
+      const vendor = this.vendorType
       const { data: raw } = await GET.IrabData(vendor)
 
       this.raw = raw
@@ -175,6 +161,20 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    }
+  },
+
+  async beforeMount () {
+    try {
+      const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { uIrab, profile, vendor } = first(user)
+
+      this.showUploader = uIrab
+      this.profileType = profile
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
+    } catch (err) {
+      console.log(err)
+      notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },
 

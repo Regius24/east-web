@@ -27,7 +27,7 @@
       <div
         class="col-12 col-sm-12"
         :class="brandList.length > 1 ? 'col-md-6' : ''"
-        v-show="brandCheck('Pldt')"
+        v-show="brandCheck('Smart')"
       >
         <SUMMARY
           title="SMART Weekly Summary"

@@ -251,10 +251,10 @@ export default {
 
     async FetchFilters () {
       try {
-        const { data: pldtVendor } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'Company Name')
-        const { data: smartVendor } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Company Name')
-        const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('PLDT', 'Site')
-        const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('SMART', 'Site')
+        const { data: pldtVendor } = await GetRepo.UamDataAgentsDistinctCol('pldt', 'Company Name')
+        const { data: smartVendor } = await GetRepo.UamDataAgentsDistinctCol('smart', 'Company Name')
+        const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('pldt', 'Site')
+        const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('smart', 'Site')
 
         this.uamDataSummaryPldtVendors = concat('All', pldtVendor.map(m => m['Company Name']))
         this.uamDataSummarySmartVendors = concat('All', smartVendor.map(m => m['Company Name']))
