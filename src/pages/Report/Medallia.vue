@@ -7,6 +7,7 @@
           :title="'PLDT Medallia'"
           :titleClass="'text-primary'"
           :data="pldtData"
+          v-show="brandCheck('Pldt')"
         />
       </div>
 
@@ -16,6 +17,7 @@
           :title="'SMART Medallia'"
           :titleClass="'text-secondary'"
           :data="smartData"
+          v-show="brandCheck('Smart')"
         />
       </div>
     </div>
@@ -46,6 +48,10 @@ export default {
   },
 
   methods: {
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
+    },
+
     async initializeData (brand) {
       const { data } = await GetRepo.Medallia(brand)
 

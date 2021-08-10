@@ -126,6 +126,6 @@ export default {
 
 <style lang="scss" scoped>
 .table-style {
-  max-height: 60vh;
+  max-height: 80vh;
 }
 </style>

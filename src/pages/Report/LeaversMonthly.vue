@@ -8,6 +8,7 @@
           :title="'Monthly Leavers for PLDT'"
           :titleClass="'text-red'"
           :data="pldtData"
+          v-show="brandCheck('Pldt')"
         />
       </div>
 
@@ -17,6 +18,7 @@
           :title="'Monthly Leavers for SMART'"
           :titleClass="'text-green'"
           :data="smartData"
+          v-show="brandCheck('Smart')"
         />
       </div>
     </div>
@@ -42,6 +44,7 @@
           color="red"
           icon="mdi-file-upload"
           label="Upload data for PLDT"
+          v-show="brandCheck('Pldt')"
           @click="openUploader('Pldt')"
         />
         <q-fab-action
@@ -49,6 +52,7 @@
           color="green"
           icon="mdi-file-upload"
           label="Upload data for SMART"
+          v-show="brandCheck('Smart')"
           @click="openUploader('Smart')"
         />
       </q-fab>
@@ -106,6 +110,10 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    },
+
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
     },
 
     async initializeData (brand) {

@@ -8,6 +8,7 @@
           :title="'Daily Leavers for PLDT'"
           :titleClass="'text-red'"
           :data="pldtData"
+          v-show="brandCheck('Pldt')"
         />
       </div>
 
@@ -17,6 +18,7 @@
           :title="'Daily Leavers for SMART'"
           :titleClass="'text-green'"
           :data="smartData"
+          v-show="brandCheck('Smart')"
         />
       </div>
     </div>
@@ -42,6 +44,7 @@
           color="red"
           icon="mdi-file-upload"
           label="Upload data for PLDT"
+          v-show="brandCheck('Pldt')"
           @click="openUploader('pldt')"
         />
         <q-fab-action
@@ -49,6 +52,7 @@
           color="green"
           icon="mdi-file-upload"
           label="Upload data for SMART"
+          v-show="brandCheck('Smart')"
           @click="openUploader('smart')"
         />
       </q-fab>
@@ -92,6 +96,10 @@ export default {
         this.fabPos[0] - ev.delta.x,
         this.fabPos[1] - ev.delta.y
       ]
+    },
+
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
     },
 
     openUploader (brand) {
