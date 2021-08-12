@@ -28,7 +28,6 @@
         icon="mdi-menu"
         direction="up"
         :disable="draggingFab"
-        :style="showUploader ? '' : 'display: none;'"
         v-touch-pan.prevent.mouse="moveFab"
       >
         <!-- IRAB UPLOAD -->
@@ -38,6 +37,7 @@
           icon="mdi-file-upload"
           label="Upload Data"
           @click="openUploader"
+          v-show="showUploader"
         />
 
         <!-- BLACKLIST UPLOAD -->
@@ -49,6 +49,7 @@
           @click="openUploaderBlacklist"
         />
 
+        <!-- SHOW DEACTIVATED ONLY -->
         <q-fab-action color="blue-grey-8">
           <q-toggle
             dense
@@ -83,6 +84,7 @@ export default {
       raw: [],
 
       profileType: '',
+      brandList: [],
       vendorType: '',
       showUploader: false,
       fabRight: false,
@@ -97,8 +99,7 @@ export default {
       this.deactivatedOnly = false
     },
     months (val) {
-      const vendor = this.vendorType
-      this.fetchSummary(first(val), vendor)
+      this.fetchSummary(first(val), this.vendorType)
       this.deactivatedOnly = false
     },
     deactivatedOnly (val) {
@@ -113,21 +114,33 @@ export default {
 
   methods: {
     async fetchSummary (month, vendor) {
+      console.log(month, vendor)
       const { data: summary } = await GET.IrabDataSummary(month, vendor)
-      this.summary = summary
+
+      console.log(summary)
+
+      if (this.brandList.length > 1) {
+        this.summary = summary
+      } else {
+        this.summary = summary.filter(f => f.BRAND === first(this.brandList).toUpperCase())
+      }
     },
     async fetchRaw () {
       const vendor = this.vendorType
       const { data: raw } = await GET.IrabData(vendor)
 
-      this.raw = raw
+      if (this.brandList.length > 1) {
+        this.raw = raw
+      } else {
+        this.raw = raw.filter(f => f.BRAND === first(this.brandList).toUpperCase())
+      }
+
       this.months = uniq(flatten(raw.map(m => m.MONTH)))
       this.months.unshift('YTD')
     },
 
     async monthChange (val) {
-      const vendor = this.profileType === 'admin' ? '%' : this.profileType
-      this.fetchSummary(val === 'All' ? '%' : val, vendor)
+      this.fetchSummary(val, this.vendorType)
     },
 
     moveFab (ev) {
@@ -167,9 +180,10 @@ export default {
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { uIrab, profile, vendor } = first(user)
+      const { uIrab, profile, brand, vendor } = first(user)
 
       this.showUploader = uIrab
+      this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
       this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     } catch (err) {

@@ -195,7 +195,7 @@ export default {
         let { data } = await GetRepo.UamDataSummary(loBrand, vendor, site)
         const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
 
-        this[`uamDataSummary${brand}Date`] = data[0]
+        this[`uamDataSummary${brand}Date`] = first(data)
 
         // FORMAT JSON
         const expression = jsonata(`

@@ -342,7 +342,7 @@ export default {
   watch: {
     data (val) {
       const expression = jsonata(`
-        $ { ENTITY: $ } ~> $each(function($v1, $k1){
+        [$ { ENTITY: $ } ~> $each(function($v1, $k1){
             {
                 'NAME': $k1,
                 'YTDCo': $sum($v1.YTDCo),
@@ -434,10 +434,11 @@ export default {
                     }
                 })
             }
-        })
+        })]
       `)
 
       this.processedData = expression.evaluate(val)
+
       this.renderTable()
     },
     month (val) {

@@ -53,7 +53,7 @@ export default {
     },
 
     async initializeData (brand) {
-      const { data } = await GetRepo.Medallia(brand)
+      const { data } = await GetRepo.Medallia(brand, this.vendorType)
 
       this[`${brand}Data`] = data
     },

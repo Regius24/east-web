@@ -166,7 +166,7 @@ export default {
             visible: false
           },
           {
-            title: 'Budgeted',
+            title: 'Locked FTE',
             field: 'LockedFte',
             sorter: 'number'
           },

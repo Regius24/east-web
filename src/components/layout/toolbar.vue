@@ -29,11 +29,19 @@
       </div>
     </q-toolbar-title>
 
+    <div class="q-mr-md">{{ profileType }}</div>
+
+    <q-separator
+      inset
+      vertical
+      spaced
+    />
+
     <!-- DROPDOWN TOOLS -->
     <q-btn-dropdown
-      stretch
       flat
-      label="misc"
+      stretch
+      label="MISC"
       :color="$q.dark.isActive ? 'grey-5' : 'grey-8'"
     >
       <q-list dense>

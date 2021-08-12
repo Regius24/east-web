@@ -5,12 +5,13 @@
         dense
         flat
         bordered
+        hide-bottom
+        virtual-scroll
+        separator="cell"
+        color="accent"
         :title="title"
         :title-class="titleClass"
         row-key="name"
-        separator="cell"
-        color="accent"
-        virtual-scroll
         :data="data"
         :columns="columns"
         :filter="filter"
@@ -118,9 +119,9 @@ export default {
         { name: 'AGENTS', field: 'AGENTS', label: 'AGENTS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
         { name: 'AGENT TOOLS', field: 'AGENT TOOLS', label: 'AGENT TOOLS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
         { name: 'AGENT ACCESSES', field: 'AGENT ACCESSES', label: 'AGENT ACCESSES', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
-        { name: 'TLs', field: 'AGENTS', label: 'AGENTS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
-        { name: 'TL TOOLS', field: 'AGENT TOOLS', label: 'AGENT TOOLS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
-        { name: 'TL ACCESSES', field: 'AGENT ACCESSES', label: 'AGENT ACCESSES', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' }
+        { name: 'TLs', field: 'TLs', label: 'TLs', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'TL TOOLS', field: 'TL TOOLS', label: 'TL TOOLS', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' },
+        { name: 'TL ACCESSES', field: 'TL ACCESSES', label: 'TL ACCESSES', align: 'center', style: 'width: 90px;', headerClasses: 'text-weight-bolder', headerStyle: 'text-align: center;' }
       ],
       filter: '',
       pagination: {
@@ -145,6 +146,6 @@ export default {
 
 <style lang="scss" scoped>
 .table-style {
-  max-height: 50vh;
+  max-height: 60vh;
 }
 </style>

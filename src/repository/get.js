@@ -31,8 +31,8 @@ export default {
   IrabData: (VENDOR) => axios.get(`${resource}IrabData?vendor=${VENDOR}`),
   IrabDataSummary: (MONTH, VENDOR) => axios.get(`${resource}IrabDataSummary?month=${MONTH}&vendor=${VENDOR}`),
 
-  PasswordData: () => axios.get(`${resource}PasswordData`),
-  PasswordDataSummary: (MONTH) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}`),
+  PasswordData: (BRAND, VENDOR) => axios.get(`${resource}PasswordData?brand=${BRAND}&vendor=${VENDOR}`),
+  PasswordDataSummary: (MONTH, BRAND, VENDOR) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}&brand=${BRAND}&vendor=${VENDOR}`),
 
   EsolveReportData: () => axios.get(`${resource}EsolveReportData`),
 
@@ -41,7 +41,7 @@ export default {
   LeaversDaily: (BRAND) => axios.get(`${resource}LeaversDaily?brand=${BRAND}`),
   LeaversMonthly: (BRAND) => axios.get(`${resource}LeaversMonthly?brand=${BRAND}`),
 
-  Medallia: (BRAND) => axios.get(`${resource}Medallia?brand=${BRAND}`),
+  Medallia: (BRAND, VENDOR) => axios.get(`${resource}Medallia?brand=${BRAND}&vendor=${VENDOR}`),
 
   // KNOWLEDGE BASE
   KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData`),

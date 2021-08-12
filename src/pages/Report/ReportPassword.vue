@@ -51,6 +51,7 @@ export default {
       summary: [],
       raw: [],
 
+      brandList: [],
       profileType: '',
       vendorType: '',
       showUploader: false,
@@ -61,15 +62,56 @@ export default {
 
   watch: {
     async months (val) {
-      const { data: summary } = await GET.PasswordDataSummary(first(val))
-      this.summary = summary
+      try {
+        if (this.brandList.length > 1) {
+          const { data: summary } = await GET.PasswordDataSummary(first(val), '%', this.vendorType)
+          this.summary = summary
+        } else {
+          const { data: summary } = await GET.PasswordDataSummary(first(val), first(this.brandList), this.vendorType)
+          this.summary = summary
+        }
+      } catch (err) {
+        console.log(err)
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+      }
     }
   },
 
   methods: {
     async monthChange (val) {
-      const { data: summary } = await GET.PasswordDataSummary(val)
-      this.summary = summary
+      try {
+        if (this.brandList.length > 1) {
+          const { data: summary } = await GET.PasswordDataSummary(val, '%', this.vendorType)
+          this.summary = summary
+        } else {
+          const { data: summary } = await GET.PasswordDataSummary(val, first(this.brandList), this.vendorType)
+          this.summary = summary
+        }
+      } catch (err) {
+        console.log(err)
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+      }
+    },
+
+    async FetchRaw (vendor) {
+      try {
+        if (this.brandList.length > 1) {
+          const { data: raw } = await GET.PasswordData('%', vendor)
+
+          this.raw = raw
+          this.months = uniq(flatten(raw.map(m => m.MONTH)))
+          this.months.unshift('YTD')
+        } else {
+          const { data: raw } = await GET.PasswordData(first(this.brandList), vendor)
+
+          this.raw = raw
+          this.months = uniq(flatten(raw.map(m => m.MONTH)))
+          this.months.unshift('YTD')
+        }
+      } catch (err) {
+        console.log(err)
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+      }
     },
 
     moveFab (ev) {
@@ -97,16 +139,14 @@ export default {
   async beforeMount () {
     try {
       const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-      const { data: raw } = await GET.PasswordData()
+      const { uPassword, profile, brand, vendor } = first(user)
 
-      const { uPassword, profile, vendor } = first(user)
-
-      this.raw = raw
-      this.months = uniq(flatten(raw.map(m => m.MONTH)))
-      this.months.unshift('YTD')
       this.showUploader = uPassword
+      this.brandList = brand.split(',').map(m => m.toUpperCase())
       this.profileType = profile
       this.vendorType = vendor === '' || vendor === null ? '%' : vendor
+
+      this.FetchRaw(this.vendorType)
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')

@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.37',
+    description: 'App Update',
+    timestamp: '08/12/2021',
+    updates: [
+      'Added profile label in toolbar',
+      'Fixed UAM Summary (All) TL columns',
+      'Fixed IRAB brand and vendor data filtering',
+      'Fixed IRAB to hide only the upload if not allowed',
+      'Fixed Password Cases brand and vendor data filtering'
+    ]
+  },
+  {
     version: '1.0.36-3',
     description: 'App Update',
     timestamp: '08/10/2021',
