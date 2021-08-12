@@ -22,7 +22,8 @@
           outline
           color="accent"
           label="CSV"
-          :disable="loading"
+          :loading="downloading"
+          :disable="loading || downloading"
           @click="exportData"
         />
       </q-btn-group>
@@ -44,15 +45,17 @@
 </template>
 
 <script>
+import GET from 'src/repository/get'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
 
 export default {
-  props: ['brand', 'data', 'loading'],
+  props: ['brand', 'vendor', 'data', 'loading'],
 
   data () {
     return {
+      downloading: false,
       filter: '',
       columns: [
         { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'left', headerStyle: 'text-align: left;' },
@@ -70,14 +73,26 @@ export default {
   },
 
   methods: {
-    exportData () {
-      const title = `${this.brand} Agent List`
-      this.export(title, unparse(this.data))
+    async exportData () {
+      this.downloading = true
+      try {
+        const { data } = await GET.UamDataAgents(this.brand, 'all', this.vendor)
+        const title = `${this.brand} Agent List`
+
+        this.export(title, unparse(data))
+      } catch (err) {
+        console.log(err)
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+
+        this.downloading = false
+      }
     },
 
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
       exportFile(`${name}.csv`, data)
+
+      this.downloading = false
     }
   }
 }

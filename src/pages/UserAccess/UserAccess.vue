@@ -54,6 +54,7 @@
 
             <AGENTS
               :brand="uamDataAgentsType"
+              :vendor="vendorType"
               :data="uamDataAgents"
               :loading="uamDataAgentsLoad"
             />
@@ -138,7 +139,7 @@ export default {
 
       try {
         const vendor = this.vendorType
-        const { data } = await GetRepo.UamDataAgents(val, vendor)
+        const { data } = await GetRepo.UamDataAgents(val, 'display', vendor)
 
         this.uamDataAgents = data
         this.uamDataAgentsLoad = false

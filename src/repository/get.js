@@ -10,7 +10,7 @@ export default {
   UamDataSummary: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummary?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataSummaryTools: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryTools?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataSummaryAll: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryAll?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
-  UamDataAgents: (BRAND, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&vendor=${VENDOR}`),
+  UamDataAgents: (BRAND, TYPE, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&type=${TYPE}&vendor=${VENDOR}`),
   UamDataAgentsDetailed: (BRAND, LOB, VENDOR, TABLE) => axios.get(`${resource}UamDataAgentsDetailed?brand=${BRAND}&lob=${LOB}&vendor=${VENDOR}&table=${TABLE}`),
 
   UamDataSummaryHistory: (DATE, BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
