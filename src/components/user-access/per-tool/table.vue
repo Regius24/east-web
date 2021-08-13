@@ -30,8 +30,8 @@
 
       <!-- SEARCH -->
       <q-input
-        borderless
         dense
+        standout
         debounce="300"
         v-model="filter"
         placeholder="Search"

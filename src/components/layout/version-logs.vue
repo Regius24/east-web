@@ -34,7 +34,7 @@
 <script>
 const logs = [
   {
-    version: '1.0.38:3',
+    version: '1.0.38:4',
     description: 'App Update',
     timestamp: '08/13/2021',
     updates: [
@@ -43,6 +43,7 @@ const logs = [
       'Added Navigation for Non Usage',
       'Updated routing and permisions for Non Usage',
       'Updated navigation UI and labels',
+      'Updated all tables search input attributes',
       'Fixed fetching of filters for UA Per LOB',
       'Fixed fetching of filters for UA Per Tool',
       'Fixed fetching of filters for UA Weekly Historyical',
