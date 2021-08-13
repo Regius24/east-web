@@ -34,7 +34,7 @@
 <script>
 const logs = [
   {
-    version: '1.0.38:4',
+    version: '1.0.38:5',
     description: 'App Update',
     timestamp: '08/13/2021',
     updates: [
@@ -48,9 +48,12 @@ const logs = [
       'Fixed fetching of filters for UA Per Tool',
       'Fixed fetching of filters for UA Weekly Historyical',
       'Fixed fetching of filters for UA Monthly Historyical',
+      'Fixed data update when changing filter value for UA Historicals',
       'Fixed fechting of data for Daily Leavers',
       'Fixed fetching of data for Monthly Leavers',
-      'Fixed fetching of data for Knowledge Base Tool Mapping'
+      'Fixed fetching of data for Knowledge Base Tool Mapping',
+      'Fixed IRAB table edit permission',
+      'Fixed Toolbar text colors for dark and light mode'
     ]
   },
   {

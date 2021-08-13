@@ -29,7 +29,10 @@
       </div>
     </q-toolbar-title>
 
-    <div class="q-mr-md">{{ profileType }}</div>
+    <div
+      class="q-mr-md"
+      :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'"
+    >{{ profileType }}</div>
 
     <q-separator
       inset

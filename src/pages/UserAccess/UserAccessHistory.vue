@@ -15,7 +15,7 @@
           :date="pldtDate"
           :dates="pldtDateList"
           :vendors="pldtVendors"
-          :vendorDis="profileType === 'admin' ? false : true"
+          :vendorDis="pldtVendors.length > 1 ? false : true"
           :sites="pldtSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
@@ -37,7 +37,7 @@
           :date="smartDate"
           :dates="smartDateList"
           :vendors="smartVendors"
-          :vendorDis="profileType === 'admin' ? false : true"
+          :vendorDis="smartVendors.length > 1 ? false : true"
           :sites="smartSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
@@ -124,18 +124,22 @@ export default {
   },
 
   watch: {
-    pldtVendorSite ({ vendor, site }) {
-      const ven = vendor === 'All' ? '%' : vendor
-      const sit = site === 'All' ? '%' : site
+    pldtVendorSite ({ vendor, site }, { date }) {
+      if (date !== '') {
+        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const sit = site === 'All' ? '%' : site
 
-      this.fetchSummaryData('pldt', ven, sit)
+        this.fetchSummaryData('pldt', ven, sit)
+      }
     },
 
-    smartVendorSite ({ vendor, site }) {
-      const ven = vendor === 'All' ? '%' : vendor
-      const sit = site === 'All' ? '%' : site
+    smartVendorSite ({ vendor, site }, { date }) {
+      if (date !== '') {
+        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const sit = site === 'All' ? '%' : site
 
-      this.fetchSummaryData('smart', ven, sit)
+        this.fetchSummaryData('smart', ven, sit)
+      }
     },
 
     tableBrand (val) {
@@ -154,29 +158,39 @@ export default {
     },
 
     async fetchFilters (brand, type) {
-      const { data: dates } = await GetRepo.UamDataHistoryDates(brand, type)
-      this[`${brand}DateList`] = dates.map(m => m.date)
-      this[`${brand}Date`] = first(dates).date
+      try {
+        const { data: dates } = await GetRepo.UamDataHistoryDates(brand, type)
+        this[`${brand}DateList`] = dates.map(m => m.date)
+        this[`${brand}Date`] = first(dates).date
 
-      const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Company Name', this.vendorType)
-      this[`${brand}Vendors`] = concat('All', vendors.map(m => m['Company Name']))
+        const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Company Name', this.vendorType)
+        const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Site', this.vendorType)
 
-      const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Site', this.vendorType)
-      this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
+        if (this.vendorType !== '%') {
+          this[`${brand}Sites`] = sites.map(m => m.Site)
+          this[`${brand}Vendors`] = vendors.map(m => m['Company Name'])
+        } else {
+          this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
+          this[`${brand}Vendors`] = concat('All', vendors.map(m => m['Company Name']))
+        }
 
-      this.fetchSummaryData(brand, this.vendorType, '%')
+        this.fetchSummaryData(brand, this.vendorType, '%')
 
-      if (brand === 'pldt') {
-        this.fetchRawData()
+        if (brand === 'pldt') {
+          this.fetchRawData()
+        }
+      } catch (err) {
+        notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
 
     async fetchSummaryData (brand, vendor, site) {
-      let { data: summary } = await GetRepo.UamDataSummaryHistory(this[`${brand}Date`], brand, vendor, site)
+      try {
+        let { data: summary } = await GetRepo.UamDataSummaryHistory(this[`${brand}Date`], brand, vendor, site)
 
-      const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
-      const expression = jsonata(`
-          $ { Table: $ } ~> $each(function($v1, $k1){
+        const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
+        const expression = jsonata(`
+          [$ { Table: $ } ~> $each(function($v1, $k1){
               {
                   'Date': $distinct($v1.Date),
                   'Name': $k1,
@@ -203,23 +217,31 @@ export default {
                       }
                   })
               }
-          })
+          })]
         `)
-      summary = expression.evaluate(sortBy(summary, obj => indexOf(tableOrder, obj.Table)))
+        summary = expression.evaluate(sortBy(summary, obj => indexOf(tableOrder, obj.Table)))
 
-      this[`${brand}Summary`] = summary
+        this[`${brand}Summary`] = summary
+      } catch (err) {
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+      }
     },
 
     async fetchRawData () {
       this.tableLoad = true
 
-      const brand = this.tableBrand
-      const date = this[`${brand}Date`]
-      const vendor = this.vendorType
-      const { data } = await GetRepo.UamDataAgentsHistory(date, brand, vendor)
+      try {
+        const brand = this.tableBrand
+        const date = this[`${brand}Date`]
+        const vendor = this.vendorType
+        const { data } = await GetRepo.UamDataAgentsHistory(date, brand, vendor)
 
-      this.tableData = data
-      this.tableLoad = false
+        this.tableData = data
+        this.tableLoad = false
+      } catch (err) {
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+        this.tableLoad = false
+      }
     },
 
     vendorChange ({ brand, vendor }) { this[`${brand}Vendor`] = vendor },
@@ -230,15 +252,19 @@ export default {
   },
 
   async beforeMount () {
-    const { data: user } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-    const { brand, profile, vendor } = first(user)
+    try {
+      const { data: user } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { brand, profile, vendor } = first(user)
 
-    this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
-    this.profileType = profile
-    this.vendorType = vendor === '' || vendor === null ? '%' : vendor
-    this.tableBrands = this.brandList.map(m => { return { label: m.toUpperCase(), value: m.toLowerCase() } })
+      this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      this.profileType = profile
+      this.vendorType = vendor === '' || vendor === null ? '%' : vendor
+      this.tableBrands = this.brandList.map(m => { return { label: m.toUpperCase(), value: m.toLowerCase() } })
 
-    this.initFetchData()
+      this.initFetchData()
+    } catch (err) {
+      notify('Something went wrong', '', 'mdi-alert', 'red')
+    }
   },
 
   mounted () {

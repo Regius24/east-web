@@ -7,7 +7,7 @@
           group="wowMaGroup"
           v-model="item.opened"
           class="text-weight-medium"
-          :header-class="item.opened ? 'bg-secondary text-uppercase' : 'text-uppercase'"
+          :header-class="item.opened ? 'bg-secondary text-white text-uppercase' : 'text-uppercase'"
           :default-opened="item.opened"
           :icon="item.icon"
           :label="item.label"

@@ -370,7 +370,7 @@ export default {
 
   async beforeMount () {
     const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
-    this.disable = first(data).irabedit
+    this.disable = first(data).eIrab
   }
 }
 </script>

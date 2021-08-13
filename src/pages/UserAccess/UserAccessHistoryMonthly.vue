@@ -124,18 +124,22 @@ export default {
   },
 
   watch: {
-    pldtVendorSite ({ vendor, site }) {
-      const ven = vendor === 'All' ? '%' : vendor
-      const sit = site === 'All' ? '%' : site
+    pldtVendorSite ({ vendor, site }, { date }) {
+      if (date !== '') {
+        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const sit = site === 'All' ? '%' : site
 
-      this.fetchSummaryData('pldt', ven, sit)
+        this.fetchSummaryData('pldt', ven, sit)
+      }
     },
 
-    smartVendorSite ({ vendor, site }) {
-      const ven = vendor === 'All' ? '%' : vendor
-      const sit = site === 'All' ? '%' : site
+    smartVendorSite ({ vendor, site }, { date }) {
+      if (date !== '') {
+        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const sit = site === 'All' ? '%' : site
 
-      this.fetchSummaryData('smart', ven, sit)
+        this.fetchSummaryData('smart', ven, sit)
+      }
     },
 
     tableBrand (val) {
@@ -159,12 +163,17 @@ export default {
       this[`${brand}Date`] = first(dates).Month
 
       const { data: vendors } = await GetRepo.UamDataAgentsHistoryMonthlyDistinctCol(this[`${brand}Date`], brand, 'Company Name', this.vendorType)
-      this[`${brand}Vendors`] = concat('All', vendors.map(m => m['Company Name']))
-
       const { data: sites } = await GetRepo.UamDataAgentsHistoryMonthlyDistinctCol(this[`${brand}Date`], brand, 'Site', this.vendorType)
-      this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
 
-      // this.fetchSummaryData(brand, this.vendorType, '%')
+      if (this.vendorType !== '%') {
+        this[`${brand}Sites`] = sites.map(m => m.Site)
+        this[`${brand}Vendors`] = vendors.map(m => m['Company Name'])
+      } else {
+        this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
+        this[`${brand}Vendors`] = concat('All', vendors.map(m => m['Company Name']))
+      }
+
+      this.fetchSummaryData(brand, this.vendorType, '%')
 
       if (brand === 'pldt') {
         this.fetchRawData()
@@ -176,7 +185,7 @@ export default {
 
       const tableOrder = ['ACTIVE', 'TRAINEES', 'INACTIVE', 'RESIGNED']
       const expression = jsonata(`
-          $ { Table: $ } ~> $each(function($v1, $k1){
+          [$ { Table: $ } ~> $each(function($v1, $k1){
               {
                   'Date': $distinct($v1.Month),
                   'Name': $k1,
@@ -212,8 +221,9 @@ export default {
                       }
                   })
               }
-          })
+          })]
         `)
+
       summary = expression.evaluate(sortBy(summary, obj => indexOf(tableOrder, obj.Table)))
 
       this[`${brand}Summary`] = summary
