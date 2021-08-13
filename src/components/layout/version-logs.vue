@@ -5,9 +5,9 @@
   >
     <q-card
       class="q-dialog-plugin q-pa-sm"
-      style="min-width: 50%;"
+      style="min-width: 45%;"
     >
-      <q-scroll-area style="height: 70vh; max-width: 100%;">
+      <q-scroll-area style="height: 70vh; min-width: 100%;">
         <q-card-section>
           <q-timeline>
             <q-timeline-entry
@@ -34,21 +34,35 @@
 <script>
 const logs = [
   {
-    version: '1.0.37-2',
+    version: '1.0.38:2',
+    description: 'App Update',
+    timestamp: '08/13/2021',
+    updates: [
+      'Fixed fetching of filters for UA Per LOB',
+      'Fixed fetching of filters for UA Per Tool',
+      'Fixed fetching of filters for UA Weekly Historyical',
+      'Fixed fetching of filters for UA Monthly Historyical',
+      'Fixed fechting of data for Daily Leavers',
+      'Fixed fetching of data for Monthly Leavers',
+      'Fixed fetching of data for Knowledge Base Tool Mapping'
+    ]
+  },
+  {
+    version: '1.0.37:2',
     description: 'App Update',
     timestamp: '08/12/2021',
     updates: [
       'Added profile label in toolbar',
-      'Fixed UAM Per LOB agents data loading and export',
-      'Fixed UAM Per Tool agents data loading and export',
-      'Fixed UAM Summary (All) TL columns',
+      'Fixed UA Per LOB agents data loading and export',
+      'Fixed UA Per Tool agents data loading and export',
+      'Fixed UA Summary (All) TL columns',
       'Fixed IRAB brand and vendor data filtering',
       'Fixed IRAB to hide only the upload if not allowed',
       'Fixed Password Cases brand and vendor data filtering'
     ]
   },
   {
-    version: '1.0.36-3',
+    version: '1.0.36:3',
     description: 'App Update',
     timestamp: '08/10/2021',
     updates: [
@@ -311,8 +325,8 @@ const logs = [
       'Updated database schema and procedures due to new columns',
       'Updated IRAB Summary',
       'Updated IRAB fields',
-      'Updated UAM agents UI',
-      'Updated UAM agents detailed component',
+      'Updated UA agents UI',
+      'Updated UA agents detailed component',
       'Updated Password Cases Layout',
       'Updated toolbar color when in light mode',
       'Fixed Password Cases months being shown',
@@ -324,11 +338,11 @@ const logs = [
     description: 'App Update',
     timestamp: '04/22/2021',
     updates: [
-      'Updated UAM agents popup',
+      'Updated UA agents popup',
       'Updated navigation colors',
-      'Fixed UAM summary click/popup feature',
+      'Fixed UA summary click/popup feature',
       'Fixed IRAB download for deactivated only',
-      'Fixed date change for UAM history',
+      'Fixed date change for UA history',
       'Fixed OneHub uploader',
       'Removed tooltip for all tables'
     ]
@@ -338,16 +352,16 @@ const logs = [
     description: 'App Update',
     timestamp: '04/16/2021',
     updates: [
-      'Added UAM history page',
+      'Added UA history page',
       'Added loading for table reports',
       'Added new columns for IRAB unique agents',
       'Updated routes',
-      'Updated UAM history',
-      'Updated UAM history agents table',
+      'Updated UA history',
+      'Updated UA history agents table',
       'Updated table settings',
       'Updated layout',
-      'Fixed UAM sumamry report',
-      'Fixed UAM date mapping',
+      'Fixed UA sumamry report',
+      'Fixed UA date mapping',
       'Fixed table issues'
     ]
   },
@@ -370,10 +384,10 @@ const logs = [
       'Added uploader for OneHub report',
       'Added profiling for IRAB report',
       'Added .csv download for IRAB blacklist',
-      'Updated UAM summary report',
+      'Updated UA summary report',
       'Updated IRAB report',
       'Updated UI layout',
-      'Fixed UAM data sorting'
+      'Fixed UA data sorting'
     ]
   },
   {
@@ -383,10 +397,10 @@ const logs = [
     updates: [
       'Added month filter for IRAB report',
       'Added IRAB blacklisting',
-      'Added site and vendor filters for UAM summary report',
+      'Added site and vendor filters for UA summary report',
       'Updated IRAB report',
       'Updated routings',
-      'Updated UAM data processing',
+      'Updated UA data processing',
       'Updated global/theme colors',
       'Fixed IRAB data filter issue',
       'Fixed uploader notifications',
@@ -398,9 +412,9 @@ const logs = [
     description: 'App Update',
     timestamp: '03/16/2021',
     updates: [
-      'Added as of for UAM report summary',
-      'Updated UAM summary formula',
-      'Updated UAM agents report loading',
+      'Added as of for UA report summary',
+      'Updated UA summary formula',
+      'Updated UA agents report loading',
       'Updated profile checking',
       'Updated login page for interactivity',
       'Updated WEST logo to EAST logo',
@@ -413,7 +427,7 @@ const logs = [
     timestamp: '02/05/2021',
     updates: [
       'Updated login syntax',
-      'Updated UAM summary report',
+      'Updated UA summary report',
       'Updated app layout'
     ]
   },
@@ -422,8 +436,8 @@ const logs = [
     description: 'App Update',
     timestamp: '01/29/2021',
     updates: [
-      'Updated UAM data loading sequence',
-      'Updated UAM report summary',
+      'Updated UA data loading sequence',
+      'Updated UA report summary',
       'Updated global notifications'
     ]
   },
@@ -433,8 +447,8 @@ const logs = [
     timestamp: '01/27/2021',
     updates: [
       'Added app navigation guards',
-      'Updated UAM summary report',
-      'Updated UAM summary notification'
+      'Updated UA summary report',
+      'Updated UA summary notification'
     ]
   },
   {
@@ -443,9 +457,9 @@ const logs = [
     timestamp: '01/25/2021',
     updates: [
       'Updated login functions',
-      'Updated UAM summary report',
-      'Updated UAM uploader',
-      'Updated UAM agent report',
+      'Updated UA summary report',
+      'Updated UA uploader',
+      'Updated UA agent report',
       'Updated login page'
     ]
   },
@@ -454,7 +468,7 @@ const logs = [
     description: 'App Update',
     timestamp: '01/22/2021',
     updates: [
-      'Updated UAM summary report'
+      'Updated UA summary report'
     ]
   },
   {
@@ -462,7 +476,7 @@ const logs = [
     description: 'App Update',
     timestamp: '01/19/2021',
     updates: [
-      'Updated UAM dashboard'
+      'Updated UA dashboard'
     ]
   },
   {
@@ -472,8 +486,8 @@ const logs = [
     updates: [
       'Updated layout',
       'Updated routes',
-      'Added UAM page',
-      'Added UAM file uploader',
+      'Added UA page',
+      'Added UA file uploader',
       'Added fullscreen mode'
     ]
   },

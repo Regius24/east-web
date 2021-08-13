@@ -158,11 +158,10 @@ export default {
       this[`${brand}DateList`] = dates.map(m => m.date)
       this[`${brand}Date`] = first(dates).date
 
-      const vendor = 'Company Name' // brand === 'pldt' ? 'Company Name' : 'Company Name'
-      const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, vendor)
-      this[`${brand}Vendors`] = concat('All', vendors.map(m => m[vendor]))
+      const { data: vendors } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Company Name', this.vendorType)
+      this[`${brand}Vendors`] = concat('All', vendors.map(m => m['Company Name']))
 
-      const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Site')
+      const { data: sites } = await GetRepo.UamDataAgentsHistoryDistinctCol(this[`${brand}Date`], brand, 'Site', this.vendorType)
       this[`${brand}Sites`] = concat('All', sites.map(m => m.Site))
 
       this.fetchSummaryData(brand, this.vendorType, '%')

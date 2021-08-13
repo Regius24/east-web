@@ -117,7 +117,7 @@ export default {
     },
 
     async initializeData (brand) {
-      const { data } = await GetRepo.LeaversDaily(brand)
+      const { data } = await GetRepo.LeaversDaily(brand, this.vendorType)
 
       this[`${brand}Data`] = data
     },

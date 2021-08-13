@@ -14,6 +14,7 @@
 <script>
 import GET from 'src/repository/get'
 import { notify } from 'boot/notifier'
+import { first } from 'lodash'
 
 export default {
   name: 'UserAccessTools',
@@ -24,15 +25,33 @@ export default {
 
   data () {
     return {
+      brandList: [],
+
       raw: []
+    }
+  },
+
+  methods: {
+    async fetchData () {
+      try {
+        const { data: raw } = await GET.KBUserAccessTools(first(this.brandList))
+
+        this.raw = raw
+      } catch (err) {
+        console.log(err)
+        notify('Something went wrong', '', 'mdi-alert', 'red')
+      }
     }
   },
 
   async beforeMount () {
     try {
-      const { data: raw } = await GET.KBUserAccessTools()
+      const { data: user } = await GET.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { brand } = first(user)
 
-      this.raw = raw
+      this.brandList = brand.split(',')
+
+      this.fetchData()
     } catch (err) {
       console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')

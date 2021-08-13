@@ -14,8 +14,8 @@ export default {
   UamDataAgentsDetailed: (BRAND, LOB, VENDOR, TABLE) => axios.get(`${resource}UamDataAgentsDetailed?brand=${BRAND}&lob=${LOB}&vendor=${VENDOR}&table=${TABLE}`),
 
   UamDataSummaryHistory: (DATE, BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
-  UamDataAgentsDistinctCol: (BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsDistinctCol?brand=${BRAND}&category=${CATEGORY}`),
-  UamDataAgentsHistoryDistinctCol: (DATE, BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsHistoryDistinctCol?date=${DATE}&brand=${BRAND}&category=${CATEGORY}`),
+  UamDataAgentsDistinctCol: (BRAND, CATEGORY, VENDOR) => axios.get(`${resource}UamDataAgentsDistinctCol?brand=${BRAND}&category=${CATEGORY}&vendor=${VENDOR}`),
+  UamDataAgentsHistoryDistinctCol: (DATE, BRAND, CATEGORY, VENDOR) => axios.get(`${resource}UamDataAgentsHistoryDistinctCol?date=${DATE}&brand=${BRAND}&category=${CATEGORY}&vendor=${VENDOR}`),
   UamDataAgentsHistory: (DATE, BRAND, VENDOR) => axios.get(`${resource}UamDataAgentsHistory?date=${DATE}&brand=${BRAND}&vendor=${VENDOR}`),
   UamDataHistoryDates: (BRAND, TYPE) => axios.get(`${resource}UamDataHistoryDates?brand=${BRAND}&type=${TYPE}`),
 
@@ -23,7 +23,7 @@ export default {
   UamDataAuditWeekly: () => axios.get(`${resource}UamDataAuditWeekly`),
 
   UamDataAgentsHistoryMonths: (BRAND) => axios.get(`${resource}UamDataAgentsHistoryMonths?brand=${BRAND}`),
-  UamDataAgentsHistoryMonthlyDistinctCol: (MONTH, BRAND, CATEGORY) => axios.get(`${resource}UamDataAgentsHistoryMonthlyDistinctCol?month=${MONTH}&brand=${BRAND}&category=${CATEGORY}`),
+  UamDataAgentsHistoryMonthlyDistinctCol: (MONTH, BRAND, CATEGORY, VENDOR) => axios.get(`${resource}UamDataAgentsHistoryMonthlyDistinctCol?month=${MONTH}&brand=${BRAND}&category=${CATEGORY}&vendor=${VENDOR}`),
   UamDataSummaryHistoryMonthly: (MONTH, BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryHistoryMonthly?month=${MONTH}&brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataAgentsHistoryMonthly: (MONTH, BRAND, VENDOR) => axios.get(`${resource}UamDataAgentsHistoryMonthly?month=${MONTH}&brand=${BRAND}&vendor=${VENDOR}`),
 
@@ -38,13 +38,13 @@ export default {
 
   OnehubData: () => axios.get(`${resource}OnehubData`),
 
-  LeaversDaily: (BRAND) => axios.get(`${resource}LeaversDaily?brand=${BRAND}`),
-  LeaversMonthly: (BRAND) => axios.get(`${resource}LeaversMonthly?brand=${BRAND}`),
+  LeaversDaily: (BRAND, VENDOR) => axios.get(`${resource}LeaversDaily?brand=${BRAND}&vendor=${VENDOR}`),
+  LeaversMonthly: (BRAND, VENDOR) => axios.get(`${resource}LeaversMonthly?brand=${BRAND}&vendor=${VENDOR}`),
 
   Medallia: (BRAND, VENDOR) => axios.get(`${resource}Medallia?brand=${BRAND}&vendor=${VENDOR}`),
 
   // KNOWLEDGE BASE
-  KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData`),
+  KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData?brand=${BRAND}`),
 
   // SETTINGS
   UserList: () => axios.get(`${resource}UserList`),
