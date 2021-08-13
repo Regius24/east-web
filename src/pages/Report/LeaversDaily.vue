@@ -107,12 +107,6 @@ export default {
         component: () => import('components/report/leavers-daily/uploader.vue'),
         parent: this,
         brand: brand
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     },
 
@@ -141,7 +135,6 @@ export default {
 
       this.fetchData()
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

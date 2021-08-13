@@ -6,8 +6,8 @@
         <q-expansion-item
           group="wowMaGroup"
           v-model="item.opened"
-          class="text-weight-medium text-uppercase"
-          :header-class="item.opened ? 'text-secondary' : ''"
+          class="text-weight-medium"
+          :header-class="item.opened ? 'bg-secondary text-uppercase' : 'text-uppercase'"
           :default-opened="item.opened"
           :icon="item.icon"
           :label="item.label"
@@ -19,8 +19,8 @@
             exact
             clickable
             v-ripple
-            active-class="bg-green"
-            class="text-weight-thin"
+            active-class="text-secondary text-weight-medium"
+            class="text-weight-light"
             v-for="(subitem, i2) in item.sub"
             :key="i2"
             :to="{ name: subitem.path }"
@@ -70,6 +70,7 @@ export default {
   data () {
     return {
       items: [
+        // USER ACCESS
         {
           grouped: true,
           opened: true,
@@ -77,25 +78,15 @@ export default {
           label: 'User Access',
           caption: '',
           sub: [
-            { icon: 'mdi-account', label: 'Per LOB', path: 'user-access-lob', code: 'pUALob', show: true },
-            { icon: 'mdi-tools', label: 'Per Tool', path: 'user-access-tools', code: 'pUATools', show: true },
-            { icon: 'mdi-view-dashboard', label: 'Summary', path: 'user-access-summary', code: 'pUASummary', show: true },
-            { icon: 'mdi-magnify', label: 'Audit', path: 'user-access-audit', code: 'pUAAudit', show: true },
-            { icon: 'mdi-calendar-range', label: 'Weekly', path: 'user-access-history-weekly', code: 'pUAHistory', show: true },
-            { icon: 'mdi-calendar-month', label: 'Monthly', path: 'user-access-history-monthly', code: 'pUAHistory', show: true }
+            { icon: 'mdi-account', label: 'Provisioned Accesses', path: 'user-access-lob', code: 'pUALob', show: true },
+            { icon: 'mdi-tools', label: 'Tools Inventory', path: 'user-access-tools', code: 'pUATools', show: true },
+            { icon: 'mdi-view-dashboard', label: 'Tools Summary', path: 'user-access-summary', code: 'pUASummary', show: true },
+            { icon: 'mdi-calendar-range', label: 'Weekly DB', path: 'user-access-history-weekly', code: 'pUAHistory', show: true },
+            { icon: 'mdi-calendar-month', label: 'Monthly DB', path: 'user-access-history-monthly', code: 'pUAHistory', show: true }
           ]
         },
-        {
-          grouped: true,
-          opened: false,
-          icon: 'mdi-minus-circle',
-          label: 'Leavers (R1)',
-          caption: '',
-          sub: [
-            { icon: 'mdi-account-minus', label: 'Daily', path: 'report-leavers-daily', code: 'pLeavers', show: true },
-            { icon: 'mdi-account-multiple-minus', label: 'Monthly', path: 'report-leavers-monthly', code: 'pLeavers', show: true }
-          ]
-        },
+
+        // REPORTS
         {
           grouped: true,
           opened: false,
@@ -104,12 +95,21 @@ export default {
           caption: '',
           sub: [
             { icon: 'mdi-badge-account-horizontal', label: 'Medallia', path: 'report-medallia', code: 'pMedallia', show: true },
-            { icon: 'mdi-account', label: 'IRAB', path: 'report-irab', code: 'pIrab', show: true },
-            { icon: 'mdi-tools', label: 'Password Cases', path: 'report-password', code: 'pPassword', show: true },
+            { icon: 'mdi-account', label: 'Call Refusal Incidents', path: 'report-irab', code: 'pIrab', show: true },
+            { icon: 'mdi-tools', label: 'Password Resetting', path: 'report-password', code: 'pPassword', show: true },
+
+            { icon: 'mdi-account-minus', label: 'Daily Leavers', path: 'report-leavers-daily', code: 'pLeavers', show: true },
+            { icon: 'mdi-account-multiple-minus', label: 'Monthly Leavers (R1)', path: 'report-leavers-monthly', code: 'pLeavers', show: true },
+            { icon: 'mdi-account-alert', label: 'Non-Usage (R2)', path: 'report-non-usage', code: 'pNonUsage', show: true },
+
+            { icon: 'mdi-magnify', label: 'UAM Audit', path: 'user-access-audit', code: 'pUAAudit', show: true },
+
             { icon: 'mdi-ticket-outline', label: 'ESolve', path: 'report-esolve', code: 'pEsolve', show: true },
-            { icon: 'mdi-ticket-account', label: 'Onehub', path: 'report-onehub', code: 'pOnehub', show: true }
+            { icon: 'mdi-ticket-account', label: 'OneHub', path: 'report-onehub', code: 'pOnehub', show: true }
           ]
         },
+
+        // KNOWLEDGE BASE
         {
           grouped: true,
           opened: false,
@@ -119,7 +119,7 @@ export default {
           path: 'knowledge-base',
           sub: [
             { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-user-access-tools', code: 'pKB', show: true },
-            { icon: 'mdi-lock-question', label: 'Username & Password', path: 'kb-username-password-guidelines', code: 'pKB', show: true }
+            { icon: 'mdi-lock-question', label: 'Usernames & Passwords', path: 'kb-username-password-guidelines', code: 'pKB', show: true }
           ]
         }
       ]

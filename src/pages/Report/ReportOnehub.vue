@@ -59,12 +59,6 @@ export default {
       this.$q.dialog({
         component: () => import('components/report/onehub/uploader2'),
         parent: this
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     }
   },
@@ -79,7 +73,6 @@ export default {
       this.showUploader = uOnehub
       this.raw = raw
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

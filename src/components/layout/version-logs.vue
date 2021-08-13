@@ -34,10 +34,15 @@
 <script>
 const logs = [
   {
-    version: '1.0.38:2',
+    version: '1.0.38:3',
     description: 'App Update',
     timestamp: '08/13/2021',
     updates: [
+      'Added page for Non Usage',
+      'Added components for Non Usage',
+      'Added Navigation for Non Usage',
+      'Updated routing and permisions for Non Usage',
+      'Updated navigation UI and labels',
       'Fixed fetching of filters for UA Per LOB',
       'Fixed fetching of filters for UA Per Tool',
       'Fixed fetching of filters for UA Weekly Historyical',

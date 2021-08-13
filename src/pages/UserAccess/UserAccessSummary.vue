@@ -80,12 +80,6 @@ export default {
       this.$q.dialog({
         component: () => import('components/user-access/per-lob/uploader'),
         parent: this
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     },
 
@@ -117,7 +111,6 @@ export default {
 
       this.fetchData()
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

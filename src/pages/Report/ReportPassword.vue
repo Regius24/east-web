@@ -71,7 +71,6 @@ export default {
           this.summary = summary
         }
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     }
@@ -88,7 +87,6 @@ export default {
           this.summary = summary
         }
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
@@ -109,7 +107,6 @@ export default {
           this.months.unshift('YTD')
         }
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
@@ -126,12 +123,6 @@ export default {
       this.$q.dialog({
         component: () => import('components/report/password/uploader'),
         parent: this
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     }
   },
@@ -148,7 +139,6 @@ export default {
 
       this.FetchRaw(this.vendorType)
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

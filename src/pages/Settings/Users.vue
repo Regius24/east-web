@@ -194,10 +194,7 @@ export default {
 
         this.users = sortBy(users, 'domain')
         this.profiles = sortBy(profiles.map(m => { return { value: m.id, label: m.profile } }), 'label')
-
-        console.log(this.profiles)
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
@@ -206,15 +203,14 @@ export default {
       try {
         const domain = this.userForm.domain
         const profileId = this.userForm.profileId.value
-        const res = await POST.InsertUserz(domain, profileId)
 
-        console.log(res)
+        await POST.InsertUserz(domain, profileId)
+
         notify('User has been added', '', 'mdi-check', 'green')
 
         this.userDialog = false
         this.fetchData()
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
@@ -222,12 +218,11 @@ export default {
     async updateProfile ({ domain, profile }) {
       try {
         const { value } = this.profiles.find(f => f.label === profile)
-        const res = await PUT.UpdateUserz(domain, value)
 
-        console.log(res)
+        await PUT.UpdateUserz(domain, value)
+
         notify('User profile has been updated', '', 'mdi-check', 'green')
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     },
@@ -241,14 +236,12 @@ export default {
       })
         .onOk(async () => {
           try {
-            const res = await DELETE.Userz(domain)
+            await DELETE.Userz(domain)
 
-            console.log(res)
             notify('User has been removed', '', 'mdi-check', 'green')
 
             this.fetchData()
           } catch (err) {
-            console.log(err)
             notify('Something went wrong', '', 'mdi-alert', 'red')
           }
         })

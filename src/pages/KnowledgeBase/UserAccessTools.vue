@@ -34,11 +34,16 @@ export default {
   methods: {
     async fetchData () {
       try {
-        const { data: raw } = await GET.KBUserAccessTools(first(this.brandList))
+        if (this.brandList.length > 1) {
+          const { data: raw } = await GET.KBUserAccessTools('%')
 
-        this.raw = raw
+          this.raw = raw
+        } else {
+          const { data: raw } = await GET.KBUserAccessTools(first(this.brandList))
+
+          this.raw = raw
+        }
       } catch (err) {
-        console.log(err)
         notify('Something went wrong', '', 'mdi-alert', 'red')
       }
     }
@@ -53,7 +58,6 @@ export default {
 
       this.fetchData()
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

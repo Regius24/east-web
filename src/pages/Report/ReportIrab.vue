@@ -114,10 +114,7 @@ export default {
 
   methods: {
     async fetchSummary (month, vendor) {
-      console.log(month, vendor)
       const { data: summary } = await GET.IrabDataSummary(month, vendor)
-
-      console.log(summary)
 
       if (this.brandList.length > 1) {
         this.summary = summary
@@ -155,24 +152,12 @@ export default {
       this.$q.dialog({
         component: () => import('components/report/irab/uploader'),
         parent: this
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     },
     openUploaderBlacklist () {
       this.$q.dialog({
         component: () => import('components/report/irab/uploader-blacklist'),
         parent: this
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
       })
     }
   },
@@ -187,7 +172,6 @@ export default {
       this.profileType = profile
       this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

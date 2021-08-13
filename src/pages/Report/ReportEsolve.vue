@@ -31,7 +31,6 @@ export default {
 
       this.raw = raw
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },

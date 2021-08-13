@@ -76,7 +76,6 @@ export default {
 
       this.fetchData()
     } catch (err) {
-      console.log(err)
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },
