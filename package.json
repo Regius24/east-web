@@ -1,6 +1,6 @@
 {
   "name": "east",
-  "version": "1.0.38:5",
+  "version": "1.0.39",
   "description": "Empowering Access and System Tracker",
   "productName": "EAST",
   "author": "Alfonso Tristan Jay Arias <AMArias@smart.com.ph>",
@@ -27,6 +27,7 @@
     "particles.js": "^2.0.0",
     "quasar": "^1.15.1",
     "tabulator-tables": "^4.9.3",
+    "v-viewer": "^1.6.4",
     "vuex-persistedstate": "^4.0.0-beta.3",
     "xlsx": "^0.16.9"
   },

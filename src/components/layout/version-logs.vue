@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.39',
+    description: 'App Update',
+    timestamp: '08/19/2021',
+    updates: [
+      'Added page for Tools Table',
+      'Added components and needed libraries for Tools Table',
+      'Added page for Transaction Flow',
+      'Updated routing and permissions for Knowledge Base'
+    ]
+  },
+
+  {
     version: '1.0.38:5',
     description: 'App Update',
     timestamp: '08/13/2021',
@@ -56,6 +68,7 @@ const logs = [
       'Fixed Toolbar text colors for dark and light mode'
     ]
   },
+
   {
     version: '1.0.37:2',
     description: 'App Update',
@@ -70,6 +83,7 @@ const logs = [
       'Fixed Password Cases brand and vendor data filtering'
     ]
   },
+
   {
     version: '1.0.36:3',
     description: 'App Update',
@@ -83,6 +97,7 @@ const logs = [
       'Fixed UI visibility issues for some reports due to profiling'
     ]
   },
+
   {
     version: '1.0.35',
     description: 'App Update',
@@ -97,6 +112,7 @@ const logs = [
       'Fixed fetching user data due to changes from profilings'
     ]
   },
+
   {
     version: '1.0.34',
     description: 'App Update',
@@ -106,6 +122,7 @@ const logs = [
       'Adjusted permissions due to changes in profilings'
     ]
   },
+
   {
     version: '1.0.33',
     description: 'App Update',
@@ -124,6 +141,7 @@ const logs = [
       'Fixed routing to settings page and vice versa'
     ]
   },
+
   {
     version: '1.0.32',
     description: 'App Update',
@@ -134,6 +152,7 @@ const logs = [
       'Fixed leavers monthly uploader label'
     ]
   },
+
   {
     version: '1.0.31',
     description: 'App Update',
@@ -144,6 +163,7 @@ const logs = [
       'Updated EAST icon'
     ]
   },
+
   {
     version: '1.0.30',
     description: 'App Update',
@@ -156,6 +176,7 @@ const logs = [
       'Fixed Leavers (R2) -> Leavers (R1)'
     ]
   },
+
   {
     version: '1.0.29',
     description: 'App Update',
@@ -170,6 +191,7 @@ const logs = [
       'Removed column visibility for daily leavers report'
     ]
   },
+
   {
     version: '1.0.28',
     description: 'App Update',
@@ -184,6 +206,7 @@ const logs = [
       'Fixed popup ticket loading to load data faster'
     ]
   },
+
   {
     version: '1.0.27',
     description: 'App Update',
@@ -196,6 +219,7 @@ const logs = [
       'Fixed user access history monthly computation'
     ]
   },
+
   {
     version: '1.0.26',
     description: 'App Update',
@@ -208,6 +232,7 @@ const logs = [
       'Fixed ESolve table outline for Justification'
     ]
   },
+
   {
     version: '1.0.25',
     description: 'App Update',
@@ -218,6 +243,7 @@ const logs = [
       'Updated ESolve table columns'
     ]
   },
+
   {
     version: '1.0.24',
     description: 'App Update',

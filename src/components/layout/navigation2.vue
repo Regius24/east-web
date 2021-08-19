@@ -118,8 +118,10 @@ export default {
           caption: '',
           path: 'knowledge-base',
           sub: [
-            { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-user-access-tools', code: 'pKB', show: true },
-            { icon: 'mdi-lock-question', label: 'Usernames & Passwords', path: 'kb-username-password-guidelines', code: 'pKB', show: true }
+            { icon: 'mdi-table', label: 'Tools Table', path: 'kb-tools-table', code: 'pKBToolTable', show: true },
+            { icon: 'mdi-transit-connection', label: 'Tools Mapping', path: 'kb-tools-mapping', code: 'pKBToolMap', show: true },
+            { icon: 'mdi-directions', label: 'Transaction Flow', path: 'kb-transaction-flow', code: 'pKBTransacFlow', show: true },
+            { icon: 'mdi-lock-question', label: 'Usernames & Passwords', path: 'kb-username-password-guidelines', code: 'pKBUnamePass', show: true }
           ]
         }
       ]

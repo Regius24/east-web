@@ -46,8 +46,11 @@ export default function ({ store } /* { store, ssrContext } */) {
           pPassword,
           pEsolve,
           pOnehub,
-          pKB,
-          pNonUsage
+          pNonUsage,
+          pKBToolTable,
+          pKBToolMap,
+          pKBTransacFlow,
+          pKBUnamePass
         } = data[0]
 
         if (to.name.split('-')[0] === 'settings' && settings) next()
@@ -65,8 +68,10 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'report-esolve' && pEsolve) next()
         else if (to.name === 'report-onehub' && pOnehub) next()
         else if (to.name === 'report-non-usage' && pNonUsage) next()
-        else if (to.name === 'kb-user-access-tools' && pKB) next()
-        else if (to.name === 'kb-username-password-guidelines' && pKB) next()
+        else if (to.name === 'kb-tools-table' && pKBToolTable) next()
+        else if (to.name === 'kb-tools-mapping' && pKBToolMap) next()
+        else if (to.name === 'kb-transaction-flow' && pKBTransacFlow) next()
+        else if (to.name === 'kb-username-password-guidelines' && pKBUnamePass) next()
         else next({ name: 'error401' })
       } else next({ name: 'error401' })
     }

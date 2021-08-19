@@ -26,7 +26,9 @@ const routes = [
       { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },
       { path: 'report-onehub', name: 'report-onehub', component: () => import('src/pages/Report/ReportOnehub.vue'), meta: { allow: true } },
 
-      { path: 'kb-user-access-tools', name: 'kb-user-access-tools', component: () => import('src/pages/KnowledgeBase/UserAccessTools.vue'), meta: { allow: true } },
+      { path: 'kb-tools-table', name: 'kb-tools-table', component: () => import('src/pages/KnowledgeBase/ToolsTable.vue'), meta: { allow: true } },
+      { path: 'kb-tools-mapping', name: 'kb-tools-mapping', component: () => import('src/pages/KnowledgeBase/ToolsMapping.vue'), meta: { allow: true } },
+      { path: 'kb-transaction-flow', name: 'kb-transaction-flow', component: () => import('src/pages/KnowledgeBase/TransactionFlow.vue'), meta: { allow: true } },
       { path: 'kb-username-password-guidelines', name: 'kb-username-password-guidelines', component: () => import('src/pages/KnowledgeBase/UsernamePasswordGuidelines.vue'), meta: { allow: true } }
     ]
   },

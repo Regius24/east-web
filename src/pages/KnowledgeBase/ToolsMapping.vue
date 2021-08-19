@@ -17,7 +17,7 @@ import { notify } from 'boot/notifier'
 import { first } from 'lodash'
 
 export default {
-  name: 'UserAccessTools',
+  name: 'ToolsMappingPage',
 
   components: {
     TABLE: () => import('components/knowledgebase/useraccesstools/table.vue')
