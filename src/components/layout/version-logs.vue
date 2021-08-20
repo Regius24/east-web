@@ -34,6 +34,17 @@
 <script>
 const logs = [
   {
+    version: '1.0.40',
+    description: 'App Update',
+    timestamp: '08/19/2021',
+    updates: [
+      'Added images for Transaction Flow',
+      'Added components and filters for Transaction Flow',
+      'Fixed overlay issue for photo viewer the side navigation'
+    ]
+  },
+
+  {
     version: '1.0.39',
     description: 'App Update',
     timestamp: '08/19/2021',

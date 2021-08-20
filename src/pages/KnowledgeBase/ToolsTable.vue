@@ -67,6 +67,10 @@ export default {
       imageList.push(this.$refs[`${brand}Image`].currentSrc)
 
       viewerApi({
+        options: {
+          zIndex: 10000,
+          navbar: false
+        },
         images: imageList
       })
     }
