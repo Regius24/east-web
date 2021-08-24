@@ -9,10 +9,12 @@ export default {
   IrabDataBlacklist: (PAYLOAD) => axios.post(resource + 'IrabDataBlacklist', PAYLOAD),
   PasswordDataRaw: (PAYLOAD) => axios.post(resource + 'PasswordDataRaw', PAYLOAD),
   OnehubData: (PAYLOAD) => axios.post(resource + 'OnehubDataRaw', PAYLOAD),
+
   UploadOnehubFile: (PAYLOAD) => axios.post(resource + 'UploadToOnehub', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverDailyFile: (BRAND, PAYLOAD) => axios.post(resource + `UploadToLeaversDaily?brand=${BRAND}`, PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverMonthlyPldtFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlyPldt', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
   UploadLeaverMonthlySmartFile: (PAYLOAD) => axios.post(resource + 'UploadToLeaversMonthlySmart', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  UploadPasswordResettingFile: (PAYLOAD) => axios.post(resource + 'UploadToPasswordResetting', PAYLOAD, { headers: { 'Content-Type': 'multipart/form-data' } }),
 
   InsertUserz: (DOMAIN, PROFILEID) => axios.post(resource + `Userz?domain=${DOMAIN}&id=${PROFILEID}`)
 }

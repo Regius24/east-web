@@ -24,8 +24,8 @@
             <q-btn
               flat
               color="accent"
-              label="CSV"
-              @click="exportData"
+              label="XLSX"
+              @click="exportData2"
             />
           </q-btn-group>
 
@@ -52,6 +52,7 @@ import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { notify } from 'boot/notifier'
+import XLSX from 'xlsx'
 
 export default {
   name: 'Table',
@@ -94,13 +95,26 @@ export default {
 
   methods: {
     exportData () {
-      const title = 'Password Case List'
+      const title = 'Password Resetting List'
       this.export(title, unparse(this.data))
     },
 
     export (name, data) {
       notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
       exportFile(`${name}.csv`, data)
+    },
+
+    exportData2 () {
+      const title = 'Password Resetting List'
+      this.exportXLSX2(title, this.data)
+    },
+
+    exportXLSX2 (name, data) {
+      const wb = XLSX.utils.book_new()
+      const ws = XLSX.utils.json_to_sheet(data)
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+      XLSX.writeFile(wb, `${name}.xlsx`)
     }
   }
 }

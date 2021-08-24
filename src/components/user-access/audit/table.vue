@@ -11,6 +11,7 @@
         color="accent"
         virtual-scroll
         style="max-height: 50vh;"
+        hide-bottom
         :data="data"
         :columns="columns"
         :filter="filter"
@@ -20,7 +21,10 @@
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
+          <q-btn-group
+            unelevated
+            class="q-mr-sm"
+          >
             <q-btn
               outline
               color="accent"

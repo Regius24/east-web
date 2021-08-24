@@ -126,7 +126,7 @@ export default {
   watch: {
     pldtVendorSite ({ vendor, site }, { date }) {
       if (date !== '') {
-        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const ven = vendor === 'All' ? '%' : vendor
         const sit = site === 'All' ? '%' : site
 
         this.fetchSummaryData('pldt', ven, sit)
@@ -135,7 +135,7 @@ export default {
 
     smartVendorSite ({ vendor, site }, { date }) {
       if (date !== '') {
-        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const ven = vendor === 'All' ? '%' : vendor
         const sit = site === 'All' ? '%' : site
 
         this.fetchSummaryData('smart', ven, sit)

@@ -34,6 +34,22 @@
 <script>
 const logs = [
   {
+    version: '1.0.41',
+    description: 'App Update',
+    timestamp: '08/24/2021',
+    updates: [
+      'Updated Password Resetting file for uploading',
+      'Updated backend for handling new Password Resetting file schema for uploading',
+      'Updated Password Resetting database schema based on new file',
+      'Updated formulas for computing summary of Password Resetting',
+      'Updated export table for Password Resetting to XLSX',
+      'Fixed table select to standout',
+      'Fixed UAM Audit table export to unelavated',
+      'Fixed vendor filtering for Summary Weekly and Monthly DB'
+    ]
+  },
+
+  {
     version: '1.0.40',
     description: 'App Update',
     timestamp: '08/19/2021',

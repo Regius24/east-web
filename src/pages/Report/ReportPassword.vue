@@ -64,10 +64,10 @@ export default {
     async months (val) {
       try {
         if (this.brandList.length > 1) {
-          const { data: summary } = await GET.PasswordDataSummary(first(val), '%', this.vendorType)
+          const { data: summary } = await GET.PasswordDataSummary('%', this.vendorType)
           this.summary = summary
         } else {
-          const { data: summary } = await GET.PasswordDataSummary(first(val), first(this.brandList), this.vendorType)
+          const { data: summary } = await GET.PasswordDataSummary(first(this.brandList), this.vendorType)
           this.summary = summary
         }
       } catch (err) {
@@ -121,7 +121,7 @@ export default {
     },
     openUploader () {
       this.$q.dialog({
-        component: () => import('components/report/password/uploader'),
+        component: () => import('components/report/password/uploader2'),
         parent: this
       })
     }

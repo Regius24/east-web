@@ -19,7 +19,7 @@
       <div class="col-12 col-md-5">
         <q-select
           dense
-          outlined
+          standout
           v-model="vendor"
           :options="vendors"
           :display-value="`Company Name: ${vendor}`"
@@ -30,7 +30,7 @@
       <div class="col-12 col-md-5">
         <q-select
           dense
-          outlined
+          standout
           v-model="site"
           :options="sites"
           :display-value="`Site: ${site}`"

@@ -342,7 +342,7 @@ export default {
   watch: {
     data (val) {
       const expression = jsonata(`
-        [$ { ENTITY: $ } ~> $each(function($v1, $k1){
+        [$ { BRAND: $ } ~> $each(function($v1, $k1){
             {
                 'NAME': $k1,
                 'YTDCo': $sum($v1.YTDCo),
@@ -371,7 +371,7 @@ export default {
                 'OCTAm': $sum($v1.OctAm),
                 'NOVAm': $sum($v1.NovAm),
                 'DECAm': $sum($v1.DecAm),
-                '_children': $v1 { \`COMPANY NAME\`: $ } ~> $each(function($v2, $k2) {
+                '_children': $v1 { \`VENDOR\`: $ } ~> $each(function($v2, $k2) {
                     {
                         'NAME': $k2,
                         'YTDCo': $sum($v2.YTDCo),
@@ -399,38 +399,7 @@ export default {
                         'SEPAm': $sum($v2.SepAm),
                         'OCTAm': $sum($v2.OctAm),
                         'NOVAm': $sum($v2.NovAm),
-                        'DECAm': $sum($v2.DecAm),
-                        '_children': $v2 { \`TOOL NAME\`: $ } ~> $each(function($v3, $k3) {
-                            {
-                                'NAME': $k3,
-                                'YTDCo': $sum($v3.YTDCo),
-                                'JANCo': $sum($v3.JanCo),
-                                'FEBCo': $sum($v3.FebCo),
-                                'MARCo': $sum($v3.MarCo),
-                                'APRCo': $sum($v3.AprCo),
-                                'MAYCo': $sum($v3.MayCo),
-                                'JUNCo': $sum($v3.JunCo),
-                                'JULCo': $sum($v3.JulCo),
-                                'AUGCo': $sum($v3.AugCo),
-                                'SEPCo': $sum($v3.SepCo),
-                                'OCTCo': $sum($v3.OctCo),
-                                'NOVCo': $sum($v3.NovCo),
-                                'DECCo': $sum($v3.DecCo),
-                                'YTDAm': $sum($v3.YTDAm),
-                                'JANAm': $sum($v3.JanAm),
-                                'FEBAm': $sum($v3.FebAm),
-                                'MARAm': $sum($v3.MarAm),
-                                'APRAm': $sum($v3.AprAm),
-                                'MAYAm': $sum($v3.MayAm),
-                                'JUNAm': $sum($v3.JunAm),
-                                'JULAm': $sum($v3.JulAm),
-                                'AUGAm': $sum($v3.AugAm),
-                                'SEPAm': $sum($v3.SepAm),
-                                'OCTAm': $sum($v3.OctAm),
-                                'NOVAm': $sum($v3.NovAm),
-                                'DECAm': $sum($v3.DecAm)
-                            }
-                        })
+                        'DECAm': $sum($v2.DecAm)
                     }
                 })
             }

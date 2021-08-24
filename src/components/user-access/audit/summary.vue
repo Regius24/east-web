@@ -18,7 +18,7 @@
       <div class="col-12 col-md-5">
         <q-select
           dense
-          outlined
+          standout
           v-model="category"
           :options="categories"
           :display-value="`Category: ${category}`"
@@ -28,7 +28,7 @@
       <div class="col-12 col-md-5">
         <q-select
           dense
-          outlined
+          standout
           v-model="catVal"
           :options="catValues"
           :display-value="`Value: ${catVal}`"

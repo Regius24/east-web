@@ -15,7 +15,7 @@
           :date="pldtDate"
           :dates="pldtDateList"
           :vendors="pldtVendors"
-          :vendorDis="profileType === 'admin' ? false : true"
+          :vendorDis="vendorType === '%' ? false : true"
           :sites="pldtSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
@@ -37,7 +37,7 @@
           :date="smartDate"
           :dates="smartDateList"
           :vendors="smartVendors"
-          :vendorDis="profileType === 'admin' ? false : true"
+          :vendorDis="vendorType === '%' ? false : true"
           :sites="smartSites"
           @vendorChange="vendorChange"
           @siteChange="siteChange"
@@ -126,7 +126,7 @@ export default {
   watch: {
     pldtVendorSite ({ vendor, site }, { date }) {
       if (date !== '') {
-        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const ven = vendor === 'All' ? '%' : vendor
         const sit = site === 'All' ? '%' : site
 
         this.fetchSummaryData('pldt', ven, sit)
@@ -135,7 +135,7 @@ export default {
 
     smartVendorSite ({ vendor, site }, { date }) {
       if (date !== '') {
-        const ven = vendor === 'All' && this.vendorType !== '%' ? this.vendorType : vendor
+        const ven = vendor === 'All' ? '%' : vendor
         const sit = site === 'All' ? '%' : site
 
         this.fetchSummaryData('smart', ven, sit)

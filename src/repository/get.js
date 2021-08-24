@@ -32,7 +32,7 @@ export default {
   IrabDataSummary: (MONTH, VENDOR) => axios.get(`${resource}IrabDataSummary?month=${MONTH}&vendor=${VENDOR}`),
 
   PasswordData: (BRAND, VENDOR) => axios.get(`${resource}PasswordData?brand=${BRAND}&vendor=${VENDOR}`),
-  PasswordDataSummary: (MONTH, BRAND, VENDOR) => axios.get(`${resource}PasswordDataSummary?month=${MONTH}&brand=${BRAND}&vendor=${VENDOR}`),
+  PasswordDataSummary: (BRAND, VENDOR) => axios.get(`${resource}PasswordDataSummary?brand=${BRAND}&vendor=${VENDOR}`),
 
   EsolveReportData: () => axios.get(`${resource}EsolveReportData`),
 
