@@ -34,6 +34,17 @@
 <script>
 const logs = [
   {
+    version: '1.0.42',
+    description: 'App Update',
+    timestamp: '08/25/2021',
+    updates: [
+      'Added popup Banner message for simple advisories/notifications',
+      'Added Banner details for backend API handling',
+      'Added Banner to settings page for updating/modification'
+    ]
+  },
+
+  {
     version: '1.0.41',
     description: 'App Update',
     timestamp: '08/24/2021',

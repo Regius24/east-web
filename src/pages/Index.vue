@@ -1,10 +1,12 @@
 <template>
   <div class="window-height page_bg">
+    <!-- LOGIN FORM -->
     <div class="flex flex-center fit">
       <div
         id="particles-js"
         class="fit"
-      ></div>
+      />
+
       <q-card
         flat
         class="q-pa-md text-center card_bg absolute"
@@ -255,7 +257,23 @@ export default {
           notify('Something went wrong', '', 'mdi-alert', 'red')
         }, 2500)
       }
+    },
+
+    async fetchBannerMessage () {
+      const { data } = await GetRepo.BannerMessage()
+      const { show } = data
+
+      if (show) {
+        this.$q.dialog({
+          component: () => import('components/misc/banner'),
+          parent: this
+        })
+      }
     }
+  },
+
+  beforeMount () {
+    this.fetchBannerMessage()
   },
 
   mounted () {

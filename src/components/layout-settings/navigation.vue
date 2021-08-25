@@ -27,6 +27,7 @@ export default {
   data () {
     return {
       links: [
+        { pathName: 'settings-banner', label: 'Banner', icon: 'mdi-chat-alert' },
         { pathName: 'settings-users', label: 'Users', icon: 'mdi-account-group' },
         { pathName: 'settings-usersaccess', label: 'Users Access', icon: 'mdi-account-key' },
         { pathName: 'settings-usersprofile', label: 'Users Profile', icon: 'mdi-account-edit' }

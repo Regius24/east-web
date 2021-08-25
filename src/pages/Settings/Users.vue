@@ -154,7 +154,7 @@ import { notify } from 'boot/notifier'
 import { sortBy } from 'lodash'
 
 export default {
-  name: 'UsersPage',
+  name: 'UsersSettingsPage',
 
   data () {
     return {

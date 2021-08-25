@@ -48,5 +48,6 @@ export default {
 
   // SETTINGS
   UserList: () => axios.get(`${resource}UserList`),
-  ProfileList: () => axios.get(`${resource}ProfileList`)
+  ProfileList: () => axios.get(`${resource}ProfileList`),
+  BannerMessage: () => axios.get(`${resource}BannerMessage`)
 }
