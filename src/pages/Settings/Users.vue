@@ -201,7 +201,7 @@ export default {
 
     async addUser () {
       try {
-        const domain = this.userForm.domain
+        const domain = this.userForm.domain.toLowerCase()
         const profileId = this.userForm.profileId.value
 
         await POST.InsertUserz(domain, profileId)

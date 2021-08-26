@@ -1,35 +1,61 @@
 <template>
   <q-page
     padding
-    class="row justify-center content-center items-center q-col-gutter-md"
+    class="row justify-center q-col-gutter-md"
   >
-    <div class="col-4">
-      <q-card
-        v-ripple
-        class="cursor-pointer"
-        @click="showViewer('pldt')"
-      >
+    <!-- PLDT -->
+    <div
+      class="col-12 col-md-6"
+      v-show="brandCheck('pldt')"
+    >
+      <q-card>
         <q-card-section class="text-center text-weight-medium text-primary text-h5">PLDT TOOLS TABLE</q-card-section>
-        <q-img
-          ref="pldtImage"
-          src="~assets/others/tools description and matrix pldt.jpg"
-          :ratio="16/9"
-        />
+
+        <q-card-section
+          style="height: 70vh;"
+          class="overflow-auto q-py-none cursor-pointer"
+          @click="showDesc('pldt')"
+        >
+          <q-scroll-area class="fit">
+            <q-img src="~assets/others/tools table/pldt desc.jpg" />
+          </q-scroll-area>
+        </q-card-section>
+
+        <q-card-actions vertical>
+          <q-btn
+            outline
+            label="View Matrix"
+            @click="showMatrix('pldt')"
+          />
+        </q-card-actions>
       </q-card>
     </div>
 
-    <div class="col-4">
-      <q-card
-        v-ripple
-        class="cursor-pointer"
-        @click="showViewer('smart')"
-      >
+    <!-- SMART -->
+    <div
+      class="col-12 col-md-6"
+      v-show="brandCheck('smart')"
+    >
+      <q-card>
         <q-card-section class="text-center text-weight-medium text-secondary text-h5">SMART TOOLS TABLE</q-card-section>
-        <q-img
-          ref="smartImage"
-          src="~assets/others/tools description and matrix smart.jpg"
-          :ratio="16/9"
-        />
+
+        <q-card-section
+          style="height: 70vh;"
+          class="overflow-auto q-py-none cursor-pointer"
+          @click="showDesc('smart')"
+        >
+          <q-scroll-area class="fit">
+            <q-img src="~assets/others/tools table/smart desc.jpg" />
+          </q-scroll-area>
+        </q-card-section>
+
+        <q-card-actions vertical>
+          <q-btn
+            outline
+            label="View Matrix"
+            @click="showMatrix('pldt')"
+          />
+        </q-card-actions>
       </q-card>
     </div>
   </q-page>
@@ -62,9 +88,26 @@ export default {
       openURL(image.currentSrc)
     },
 
-    showViewer (brand) {
+    showDesc (brand) {
       const imageList = []
-      imageList.push(this.$refs[`${brand}Image`].currentSrc)
+
+      if (brand === 'pldt') imageList.push(require('../../assets/others/tools table/pldt desc.jpg'))
+      if (brand === 'smart') imageList.push(require('../../assets/others/tools table/smart desc.jpg'))
+
+      viewerApi({
+        options: {
+          zIndex: 10000,
+          navbar: false
+        },
+        images: imageList
+      })
+    },
+
+    showMatrix (brand) {
+      const imageList = []
+
+      if (brand === 'pldt') imageList.push(require('../../assets/others/tools table/pldt matrix.jpg'))
+      if (brand === 'smart') imageList.push(require('../../assets/others/tools table/smart matrix.jpg'))
 
       viewerApi({
         options: {
@@ -87,8 +130,6 @@ export default {
     }
   },
 
-  mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-  }
+  mounted () { notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange') }
 }
 </script>

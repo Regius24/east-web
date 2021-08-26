@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.43',
+    description: 'App Update',
+    timestamp: '08/26/2021',
+    updates: [
+      'Fixed Tools Table (KB) trimmed images for description and matrix'
+    ]
+  },
+
+  {
     version: '1.0.42',
     description: 'App Update',
     timestamp: '08/25/2021',
