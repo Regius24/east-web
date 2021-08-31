@@ -72,7 +72,7 @@ const logs = [
   {
     version: '1.0.40',
     description: 'App Update',
-    timestamp: '08/19/2021',
+    timestamp: '08/20/2021',
     updates: [
       'Added images for Transaction Flow',
       'Added components and filters for Transaction Flow',
