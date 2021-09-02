@@ -1,28 +1,29 @@
 <template>
   <q-card>
+    <!-- TABLE -->
     <q-card-section>
-      <!-- TABLE -->
       <q-table
-        flat
         dense
+        flat
         bordered
-        title="Password Resetting List"
+        :title="title"
+        row-key="name"
+        separator="cell"
+        color="accent"
+        virtual-scroll
+        style="max-height: 80vh;"
         :data="data"
         :columns="columns"
-        row-key="name"
-        separator="vertical"
         :filter="filter"
-        color="accent"
+        :pagination.sync="pagination"
+        :rows-per-page-options="[0]"
         :loading="data.length > 0 ? false : true"
       >
         <template v-slot:top-right>
           <!-- BUTTONS -->
-          <q-btn-group
-            flat
-            class="q-mr-sm"
-          >
+          <q-btn-group class="q-mr-sm">
             <q-btn
-              flat
+              outline
               color="accent"
               label="XLSX"
               @click="exportData2"
@@ -57,35 +58,41 @@ import XLSX from 'xlsx'
 export default {
   name: 'Table',
 
-  props: ['data'],
+  props: ['title', 'data'],
 
   data () {
     return {
       filter: '',
-      columns: []
+      columns: [],
+      pagination: {
+        rowsPerPage: 0
+      }
     }
   },
 
   watch: {
     data (val) {
-      const cols = Object.keys(first(val)).map(col => {
-        let align, headerStyle
+      const cols = Object
+        .keys(first(val))
+        .map(col => {
+          let align
 
-        switch (col) {
-          default:
-            align = 'left'
-            headerStyle = 'left'
-            break
-        }
+          switch (col) {
+            default:
+              align = 'left'
+              break
+          }
 
-        return {
-          name: col,
-          field: col,
-          label: col.toUpperCase(),
-          align: align,
-          headerStyle: headerStyle
-        }
-      })
+          return {
+            name: col,
+            field: col,
+            label: col.toUpperCase(),
+            align: align,
+            style: 'max-width: 300px;',
+            classes: 'ellipsis',
+            headerStyle: 'text-align: left;'
+          }
+        })
 
       this.columns = cols
     }
@@ -93,7 +100,7 @@ export default {
 
   methods: {
     exportData () {
-      const title = 'Password Resetting List'
+      const title = 'Onehub List'
       this.export(title, unparse(this.data))
     },
 
@@ -103,7 +110,7 @@ export default {
     },
 
     exportData2 () {
-      const title = 'Password Resetting List'
+      const title = `${this.title}`
       this.exportXLSX2(title, this.data)
     },
 

@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.44',
+    description: 'App Update',
+    timestamp: '09/02/2021',
+    updates: [
+      'Removed Tools Mapping from navigation',
+      'Renamed Tools Table -> Tools Mapping',
+      'Updated Tools Mapping fetching of data',
+      'Added components for Tools Mapping for data presentation'
+    ]
+  },
+
+  {
     version: '1.0.43',
     description: 'App Update',
     timestamp: '08/26/2021',

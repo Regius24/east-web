@@ -1,12 +1,28 @@
 <template>
-  <q-page padding>
-    <div class="row justify-center">
-      <div class="col-12">
-        <TABLE
-          :title="'User Access Tools Mapping'"
-          :data="raw"
-        />
-      </div>
+  <q-page
+    padding
+    class="row justify-center q-col-gutter-md"
+  >
+    <!-- PLDT -->
+    <div
+      class="col-12 col-md-6"
+      v-show="brandCheck('pldt')"
+    >
+      <TABLE
+        :title="'PLDT Tools Mapping'"
+        :data="pldtData"
+      />
+    </div>
+
+    <!-- SMART -->
+    <div
+      class="col-12 col-md-6"
+      v-show="brandCheck('smart')"
+    >
+      <TABLE
+        :title="'SMART Tools Mapping'"
+        :data="smartData"
+      />
     </div>
   </q-page>
 </template>
@@ -16,36 +32,31 @@ import GET from 'src/repository/get'
 import { notify } from 'boot/notifier'
 import { first } from 'lodash'
 
+import 'viewerjs/dist/viewer.min.css'
+
 export default {
-  name: 'ToolsMappingPage',
+  name: 'ToolsTablePage',
 
   components: {
-    TABLE: () => import('components/knowledgebase/useraccesstools/table.vue')
+    TABLE: () => import('components/knowledgebase/toolsmapping/table.vue')
   },
 
   data () {
     return {
       brandList: [],
 
-      raw: []
+      pldtData: [],
+      smartData: []
     }
   },
 
   methods: {
-    async fetchData () {
-      try {
-        if (this.brandList.length > 1) {
-          const { data: raw } = await GET.KBUserAccessTools('%')
+    brandCheck (brand) { return this.brandList.indexOf(brand) > -1 },
 
-          this.raw = raw
-        } else {
-          const { data: raw } = await GET.KBUserAccessTools(first(this.brandList))
+    async fetchData (brand) {
+      const { data } = await GET.KBToolsMapping(brand)
 
-          this.raw = raw
-        }
-      } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
-      }
+      this[`${brand}Data`] = data
     }
   },
 
@@ -56,14 +67,13 @@ export default {
 
       this.brandList = brand.split(',')
 
-      this.fetchData()
+      if (this.brandCheck('pldt')) this.fetchData('pldt')
+      if (this.brandCheck('smart')) this.fetchData('smart')
     } catch (err) {
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
   },
 
-  mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-  }
+  mounted () { notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange') }
 }
 </script>

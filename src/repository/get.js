@@ -44,7 +44,7 @@ export default {
   Medallia: (BRAND, VENDOR) => axios.get(`${resource}Medallia?brand=${BRAND}&vendor=${VENDOR}`),
 
   // KNOWLEDGE BASE
-  KBUserAccessTools: (BRAND) => axios.get(`${resource}UamToolsData?brand=${BRAND}`),
+  KBToolsMapping: (BRAND) => axios.get(`${resource}KBToolsMapping?brand=${BRAND}`),
 
   // SETTINGS
   UserList: () => axios.get(`${resource}UserList`),

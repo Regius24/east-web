@@ -133,9 +133,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'WEST2',
-        short_name: 'WEST2',
-        description: 'WEST2',
+        name: 'EAST',
+        short_name: 'EAST',
+        description: 'Empowering Access & System Tracker',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
