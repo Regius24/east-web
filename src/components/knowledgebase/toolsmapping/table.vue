@@ -1,125 +1,89 @@
 <template>
   <q-card>
-    <!-- TABLE -->
-    <q-card-section>
-      <q-table
-        dense
-        flat
-        bordered
-        :title="title"
-        row-key="name"
-        separator="cell"
-        color="accent"
-        virtual-scroll
-        style="max-height: 80vh;"
-        :data="data"
-        :columns="columns"
-        :filter="filter"
-        :pagination.sync="pagination"
-        :rows-per-page-options="[0]"
-        :loading="data.length > 0 ? false : true"
-      >
-        <template v-slot:top-right>
-          <!-- BUTTONS -->
-          <q-btn-group class="q-mr-sm">
-            <q-btn
-              outline
-              color="accent"
-              label="XLSX"
-              @click="exportData2"
-            />
-          </q-btn-group>
-
-          <!-- SEARCH -->
-          <q-input
-            dense
-            standout
-            debounce="300"
-            v-model="filter"
-            placeholder="Search"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </template>
-      </q-table>
+    <q-card-section
+      :class="color"
+      class="text-h5 text-center"
+    >
+      {{ title }}
     </q-card-section>
+
+    <q-card-section class="q-pt-none">
+      <div ref="table" />
+    </q-card-section>
+
+    <q-card-actions align="right">
+      <q-btn
+        outline
+        label="Download"
+        color="amber"
+        @click="exportXLSX"
+      />
+
+      <q-btn
+        outline
+        label="View Matrix"
+        color="blue"
+        @click="openMatrixTable"
+      />
+    </q-card-actions>
   </q-card>
 </template>
 
 <script>
-import { first } from 'lodash'
-import { exportFile } from 'quasar'
-import { unparse } from 'papaparse'
-import { notify } from 'boot/notifier'
+import 'tabulator-tables/dist/css/tabulator.min.css'
+import Tabulator from 'tabulator-tables'
 import XLSX from 'xlsx'
 
 export default {
   name: 'Table',
 
-  props: ['title', 'data'],
-
-  data () {
-    return {
-      filter: '',
-      columns: [],
-      pagination: {
-        rowsPerPage: 0
-      }
-    }
-  },
+  props: ['title', 'data', 'color'],
 
   watch: {
-    data (val) {
-      const cols = Object
-        .keys(first(val))
-        .map(col => {
-          let align
-
-          switch (col) {
-            default:
-              align = 'left'
-              break
-          }
-
-          return {
-            name: col,
-            field: col,
-            label: col.toUpperCase(),
-            align: align,
-            style: 'max-width: 300px;',
-            classes: 'ellipsis',
-            headerStyle: 'text-align: left;'
-          }
-        })
-
-      this.columns = cols
-    }
+    data (val) { this.renderTable() }
   },
 
   methods: {
-    exportData () {
-      const title = 'Onehub List'
-      this.export(title, unparse(this.data))
+    renderTable () {
+      this.tabulator = new Tabulator(this.$refs.table, {
+        layout: 'fitColumns',
+        maxHeight: 450,
+        data: this.data,
+        placeholder: 'No data to show...',
+        columns: [
+          {
+            field: 'tools',
+            title: 'TOOLS',
+            formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`,
+            frozen: true
+          },
+          {
+            title: 'DESCRIPTION',
+            field: 'description',
+            formatter: 'textarea'
+          }
+        ]
+      })
+
+      this.tabulator.setSort([
+        { column: 'tools', dir: 'asc' }
+      ])
     },
 
-    export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
-      exportFile(`${name}.csv`, data)
-    },
-
-    exportData2 () {
-      const title = `${this.title}`
-      this.exportXLSX2(title, this.data)
-    },
-
-    exportXLSX2 (name, data) {
+    exportXLSX () {
       const wb = XLSX.utils.book_new()
-      const ws = XLSX.utils.json_to_sheet(data)
+      const ws = XLSX.utils.json_to_sheet(this.data)
 
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
-      XLSX.writeFile(wb, `${name}.xlsx`)
+      XLSX.writeFile(wb, `${this.title}.xlsx`)
+    },
+
+    openMatrixTable () {
+      this.$q.dialog({
+        component: () => import('components/knowledgebase/toolsmapping/tableMatrix.vue'),
+        parent: this,
+        data: this.data
+      })
     }
   }
 }

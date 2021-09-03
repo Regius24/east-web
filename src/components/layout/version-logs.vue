@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.45',
+    description: 'App Update',
+    timestamp: '09/03/2021',
+    updates: [
+      'Fixed components for Tools Mapping for rendering data',
+      'Added download button for raw data for Tools Mapping',
+      'Added actual table to render description data for Tools Mapping',
+      'Added actual table to render matrix data for Tools Mapping'
+    ]
+  },
+
+  {
     version: '1.0.44',
     description: 'App Update',
     timestamp: '09/02/2021',

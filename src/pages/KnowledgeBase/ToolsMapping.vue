@@ -11,6 +11,7 @@
       <TABLE
         :title="'PLDT Tools Mapping'"
         :data="pldtData"
+        :color="'text-primary'"
       />
     </div>
 
@@ -22,6 +23,7 @@
       <TABLE
         :title="'SMART Tools Mapping'"
         :data="smartData"
+        :color="'text-secondary'"
       />
     </div>
   </q-page>
@@ -67,8 +69,8 @@ export default {
 
       this.brandList = brand.split(',')
 
-      if (this.brandCheck('pldt')) this.fetchData('pldt')
-      if (this.brandCheck('smart')) this.fetchData('smart')
+      if (this.brandCheck('pldt')) { this.fetchData('pldt') }
+      if (this.brandCheck('smart')) { this.fetchData('smart') }
     } catch (err) {
       notify('Something went wrong', '', 'mdi-alert', 'red')
     }
