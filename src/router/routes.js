@@ -23,6 +23,7 @@ const routes = [
       { path: 'report-leavers-monthly', name: 'report-leavers-monthly', component: () => import('src/pages/Report/LeaversMonthly.vue'), meta: { allow: true } },
       { path: 'report-non-usage', name: 'report-non-usage', component: () => import('src/pages/Report/NonUsage.vue'), meta: { allow: true } },
       { path: 'user-access-audit', name: 'user-access-audit', component: () => import('src/pages/UserAccess/UserAccessAudit.vue'), meta: { allow: true } },
+      { path: 'fte-alloc', name: 'fte-alloc', component: () => import('src/pages/Report/FTEAlloc/Index.vue'), meta: { allow: true } },
       { path: 'report-esolve', name: 'report-esolve', component: () => import('src/pages/Report/ReportEsolve.vue'), meta: { allow: true } },
       { path: 'report-onehub', name: 'report-onehub', component: () => import('src/pages/Report/ReportOnehub.vue'), meta: { allow: true } },
 

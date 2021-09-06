@@ -43,6 +43,8 @@ export default {
 
   Medallia: (BRAND, VENDOR) => axios.get(`${resource}Medallia?brand=${BRAND}&vendor=${VENDOR}`),
 
+  FTEAlloc: (BRAND) => axios.get(`${resource}FteAlloc?brand=${BRAND}`),
+
   // KNOWLEDGE BASE
   KBToolsMapping: (BRAND) => axios.get(`${resource}KBToolsMapping?brand=${BRAND}`),
 

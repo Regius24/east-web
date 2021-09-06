@@ -40,6 +40,7 @@ export default function ({ store } /* { store, ssrContext } */) {
           pUASummary,
           pUAHistory,
           pUAAudit,
+          pFTEAlloc,
           pLeavers,
           pMedallia,
           pIrab,
@@ -59,6 +60,7 @@ export default function ({ store } /* { store, ssrContext } */) {
         else if (to.name === 'user-access-history-weekly' && pUAHistory) next()
         else if (to.name === 'user-access-history-monthly' && pUAHistory) next()
         else if (to.name === 'user-access-audit' && pUAAudit) next()
+        else if (to.name === 'fte-alloc' && pFTEAlloc) next()
         else if (to.name === 'report-leavers-daily' && pLeavers) next()
         else if (to.name === 'report-leavers-monthly' && pLeavers) next()
         else if (to.name === 'report-medallia' && pMedallia) next()

@@ -103,6 +103,7 @@ export default {
             { icon: 'mdi-account-alert', label: 'Non-Usage (R2)', path: 'report-non-usage', code: 'pNonUsage', show: true },
 
             { icon: 'mdi-magnify', label: 'UAM Audit', path: 'user-access-audit', code: 'pUAAudit', show: true },
+            { icon: 'mdi-chart-bar', label: 'FTE Alloc', path: 'fte-alloc', code: 'pFTEAlloc', show: true },
 
             { icon: 'mdi-ticket-outline', label: 'ESolve', path: 'report-esolve', code: 'pEsolve', show: true },
             { icon: 'mdi-ticket-account', label: 'OneHub', path: 'report-onehub', code: 'pOnehub', show: true }
