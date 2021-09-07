@@ -2,7 +2,19 @@
   <q-page padding>
     <div class="row justify-center q-col-gutter-sm">
       <div class="col-12">
-        <TABLE :data="pldtData" />
+        <TABLE
+          :title="'PLDT FTE Allocation'"
+          :textColor="'text-primary'"
+          :data="pldtData"
+        />
+      </div>
+
+      <div class="col-12">
+        <TABLE
+          :title="'SMART FTE Allocation'"
+          :textColor="'text-secondary'"
+          :data="smartData"
+        />
       </div>
     </div>
   </q-page>
@@ -17,7 +29,7 @@ export default {
   name: 'FTEAllocPage',
 
   components: {
-    TABLE: () => import('components/report/ftealloc/table4')
+    TABLE: () => import('components/report/ftealloc/table5')
   },
 
   data () {
