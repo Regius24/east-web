@@ -34,15 +34,16 @@
 <script>
 const logs = [
   {
-    version: '1.0.46',
+    version: '1.0.46:2',
     description: 'App Update',
-    timestamp: '09/06/2021',
+    timestamp: '09/07/2021',
     updates: [
       'Added page for FTE Alloc',
       'Added components for FTE Alloc',
       'Updated routings and permissions for FTE Alloc',
       'Updated API for data fetching for FTE Alloc',
-      'Updated API Repository for initializing backend API'
+      'Updated API Repository for initializing backend API',
+      'Fixed table for FTE Alloc'
     ]
   },
 

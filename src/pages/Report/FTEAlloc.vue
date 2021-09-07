@@ -1,6 +1,10 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <div class="row justify-center q-col-gutter-sm">
+      <div class="col-12">
+        <TABLE :data="pldtData" />
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -11,6 +15,10 @@ import { notify } from 'boot/notifier'
 
 export default {
   name: 'FTEAllocPage',
+
+  components: {
+    TABLE: () => import('components/report/ftealloc/table4')
+  },
 
   data () {
     return {
@@ -48,18 +56,12 @@ export default {
     async fetchData (brand) {
       const { data } = await GetRepo.FTEAlloc(brand)
 
-      console.log(JSON.stringify(data))
-
       this[`${brand}Data`] = data
     }
   },
 
-  beforeMount () {
-    this.fetchUserDetails()
-  },
+  beforeMount () { this.fetchUserDetails() },
 
-  mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
-  }
+  mounted () { notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange') }
 }
 </script>
