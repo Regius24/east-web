@@ -3,7 +3,7 @@
     <div class="row justify-center q-col-gutter-sm">
       <div
         class="col-12"
-        v-show="brandCheck('PLDT')"
+        v-show="brandCheck('Pldt')"
       >
         <TABLE
           :title="'PLDT FTE Allocation'"

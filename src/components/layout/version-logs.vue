@@ -47,7 +47,9 @@ const logs = [
       'Added Percentage column based on Agents for FTE Allocation',
       'Added Export for FTE Allocation',
       'Updated navigation labels',
-      'Updated Tools Matrix columns width'
+      'Updated Tools Matrix columns width',
+      'Fixed brand component filtering',
+      'Remove drafted FTE Allocation table templates'
     ]
   },
 
