@@ -55,7 +55,8 @@ export default {
             field: 'tools',
             title: 'TOOLS',
             formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`,
-            frozen: true
+            frozen: true,
+            width: 200
           },
           {
             title: 'DESCRIPTION',

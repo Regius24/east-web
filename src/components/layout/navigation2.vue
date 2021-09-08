@@ -103,7 +103,7 @@ export default {
             { icon: 'mdi-account-alert', label: 'Non-Usage (R2)', path: 'report-non-usage', code: 'pNonUsage', show: true },
 
             { icon: 'mdi-magnify', label: 'UAM Audit', path: 'user-access-audit', code: 'pUAAudit', show: true },
-            { icon: 'mdi-chart-bar', label: 'FTE Alloc', path: 'fte-alloc', code: 'pFTEAlloc', show: true },
+            { icon: 'mdi-chart-bar', label: 'FTE Allocation', path: 'fte-alloc', code: 'pFTEAlloc', show: true },
 
             { icon: 'mdi-ticket-outline', label: 'ESolve', path: 'report-esolve', code: 'pEsolve', show: true },
             { icon: 'mdi-ticket-account', label: 'OneHub', path: 'report-onehub', code: 'pOnehub', show: true }
@@ -119,7 +119,7 @@ export default {
           caption: '',
           path: 'knowledge-base',
           sub: [
-            { icon: 'mdi-table', label: 'Tools Mapping', path: 'kb-tools-mapping', code: 'pKBToolsMapping', show: true },
+            { icon: 'mdi-table', label: 'Tools Matrix', path: 'kb-tools-mapping', code: 'pKBToolsMapping', show: true },
             { icon: 'mdi-directions', label: 'Transaction Flow', path: 'kb-transaction-flow', code: 'pKBTransacFlow', show: true },
             { icon: 'mdi-lock-question', label: 'Usernames & Passwords', path: 'kb-username-password-guidelines', code: 'pKBUnamePass', show: true }
           ]

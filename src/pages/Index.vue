@@ -239,7 +239,7 @@ export default {
       this.$q.loading.show()
 
       try {
-        const { data } = await GetRepo.ValidateUser(this.domain, this.password)
+        const { data } = await GetRepo.ValidateUser(this.domain, encodeURIComponent(this.password))
 
         this.$q.localStorage.set('userAccnt', data)
 

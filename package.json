@@ -1,6 +1,6 @@
 {
   "name": "east",
-  "version": "1.0.46:3",
+  "version": "1.0.46:4",
   "description": "Empowering Access and System Tracker",
   "productName": "EAST",
   "author": "Alfonso Tristan Jay Arias <AMArias@smart.com.ph>",
@@ -19,6 +19,8 @@
     "core-js": "^3.6.5",
     "devextreme": "21.1",
     "devextreme-vue": "21.1",
+    "exceljs": "^4.3.0",
+    "file-saver": "^2.0.5",
     "file-saverjs": "^1.3.6",
     "jqwidgets-scripts": "^12.1.2",
     "jsonata": "^1.8.4",

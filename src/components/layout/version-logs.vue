@@ -34,16 +34,20 @@
 <script>
 const logs = [
   {
-    version: '1.0.46:3',
+    version: '1.0.46:4',
     description: 'App Update',
     timestamp: '09/08/2021',
     updates: [
-      'Added page for FTE Alloc',
-      'Added components for FTE Alloc',
-      'Updated routings and permissions for FTE Alloc',
+      'Added page for FTE Allocation',
+      'Added components for FTE Allocation',
+      'Updated routings and permissions for FTE Allocation',
       'Updated API for data fetching for FTE Alloc',
       'Updated API Repository for initializing backend API',
-      'Fixed table for FTE Alloc'
+      'Fixed table for FTE Allocation',
+      'Added Percentage column based on Agents for FTE Allocation',
+      'Added Export for FTE Allocation',
+      'Updated navigation labels',
+      'Updated Tools Matrix columns width'
     ]
   },
 
