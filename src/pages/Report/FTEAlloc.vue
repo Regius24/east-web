@@ -1,7 +1,10 @@
 <template>
   <q-page padding>
     <div class="row justify-center q-col-gutter-sm">
-      <div class="col-12">
+      <div
+        class="col-12"
+        v-show="brandCheck('PLDT')"
+      >
         <TABLE
           :title="'PLDT FTE Allocation'"
           :textColor="'text-primary'"
@@ -9,7 +12,10 @@
         />
       </div>
 
-      <div class="col-12">
+      <div
+        class="col-12"
+        v-show="brandCheck('Smart')"
+      >
         <TABLE
           :title="'SMART FTE Allocation'"
           :textColor="'text-secondary'"
@@ -44,6 +50,10 @@ export default {
   },
 
   methods: {
+    brandCheck (brand) {
+      return this.brandList.indexOf(brand) > -1
+    },
+
     async fetchUserDetails () {
       try {
         const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
