@@ -119,7 +119,7 @@ export default {
           caption: '',
           path: 'knowledge-base',
           sub: [
-            { icon: 'mdi-table', label: 'Tools Matrix', path: 'kb-tools-mapping', code: 'pKBToolsMapping', show: true },
+            { icon: 'mdi-table', label: 'Tools Matrix', path: 'kb-tools-matrix', code: 'pKBToolsMatrix', show: true },
             { icon: 'mdi-directions', label: 'Transaction Flow', path: 'kb-transaction-flow', code: 'pKBTransacFlow', show: true },
             { icon: 'mdi-lock-question', label: 'Usernames & Passwords', path: 'kb-username-password-guidelines', code: 'pKBUnamePass', show: true }
           ]

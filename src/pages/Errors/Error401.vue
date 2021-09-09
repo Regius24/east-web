@@ -1,9 +1,7 @@
 <template>
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
-      <div style="font-size: 30vh">
-        401
-      </div>
+      <div style="font-size: 30vh">401</div>
 
       <div
         class="text-h2"
@@ -15,11 +13,11 @@
       <q-btn
         no-caps
         unelevated
-        label="Go Back"
+        label="Return to Login"
         color="white"
         text-color="blue"
         class="q-mt-xl"
-        @click="$router.go(-1)"
+        :to="{ name: 'login' }"
       />
     </div>
   </div>

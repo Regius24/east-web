@@ -61,7 +61,8 @@ export default {
           {
             title: 'DESCRIPTION',
             field: 'description',
-            formatter: 'textarea'
+            formatter: 'textarea',
+            cssClass: 'text-justify'
           }
         ]
       })
@@ -72,8 +73,18 @@ export default {
     },
 
     exportXLSX () {
+      const data = this.data.map(m => {
+        for (const i in m) {
+          if (i !== 'tools' && i !== 'description' && m[i] === '#66bb6a') m[i] = 'primary'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#ffee58') m[i] = 'secondary'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#757575') m[i] = 'na'
+        }
+
+        return m
+      })
+
       const wb = XLSX.utils.book_new()
-      const ws = XLSX.utils.json_to_sheet(this.data)
+      const ws = XLSX.utils.json_to_sheet(data)
 
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
       XLSX.writeFile(wb, `${this.title}.xlsx`)

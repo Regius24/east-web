@@ -30,7 +30,7 @@ export default {
     renderTable () {
       const cols = keys(first(this.data))
         .filter(f => f !== 'description' && f !== 'tools')
-        .map(m => { return { field: m, title: m, formatter: 'color' } })
+        .map(m => { return { field: m, title: m, formatter: 'color', width: '200' } })
 
       this.$nextTick(() => {
         this.tabulator2 = new Tabulator(this.$refs.table, {

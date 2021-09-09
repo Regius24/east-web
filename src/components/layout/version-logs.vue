@@ -34,6 +34,22 @@
 <script>
 const logs = [
   {
+    version: '1.0.47',
+    description: 'App Update',
+    timestamp: '09/09/2021',
+    updates: [
+      'Added sum of LockedFTE per LOB level',
+      'Fixed column width for tools matrix',
+      'Updated routing for tools mapping -> tools matrix',
+      'Updated navigations for tools mapping -> tools matrix',
+      'Updated Error page re-routing to Login page',
+      'Fixed tools matrix description to justify',
+      'Updated tools matrix data extracted to show primary/secondary/na',
+      'Updated tools matrix colors'
+    ]
+  },
+
+  {
     version: '1.0.46:4',
     description: 'App Update',
     timestamp: '09/08/2021',

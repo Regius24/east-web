@@ -15,11 +15,11 @@
       <q-btn
         no-caps
         unelevated
-        label="Go Back"
+        label="Return to Login"
         color="white"
         text-color="blue"
         class="q-mt-xl"
-        @click="$router.go(-1)"
+        :to="{ name: 'login' }"
       />
     </div>
   </div>

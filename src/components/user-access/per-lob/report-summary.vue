@@ -123,9 +123,7 @@ export default {
   },
 
   watch: {
-    data (val) {
-      this.renderTable()
-    },
+    data (val) { this.renderTable() },
 
     vendor (val) { this.$emit('vendorChange', val) },
 
@@ -215,9 +213,7 @@ export default {
       ])
     },
 
-    xlsxTable () {
-      this.tabulator.download('xlsx', `${this.title}.xlsx`)
-    },
+    xlsxTable () { this.tabulator.download('xlsx', `${this.title}.xlsx`) },
 
     pdfTable () {
       this.tabulator.setGroupStartOpen(true)
@@ -264,8 +260,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.renderTable()
-  }
+  mounted () { this.renderTable() }
 }
 </script>

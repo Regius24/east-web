@@ -209,7 +209,7 @@ export default {
                   '_children': $v1 { Lob: $ } ~> $each(function($v2, $k2) {
                       {
                           'Name': $k2,
-                          'LockedFte': '',
+                          'LockedFte': $sum($v2.LockedFte),
                           'Agents': $sum($v2.Agents),
                           'Complete': $sum($v2.Complete),
                           'Score': $round(($sum($v2.Complete)/$sum($v2.Agents)) * 100, 2),
