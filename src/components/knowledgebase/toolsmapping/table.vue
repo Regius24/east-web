@@ -4,7 +4,7 @@
       :class="color"
       class="text-h5 text-center"
     >
-      {{ title }}
+      {{ title }} {{ showDesription }}
     </q-card-section>
 
     <q-card-section class="q-pt-none">
@@ -33,11 +33,18 @@
 import 'tabulator-tables/dist/css/tabulator.min.css'
 import Tabulator from 'tabulator-tables'
 import XLSX from 'xlsx'
+import { first, keys } from 'lodash'
 
 export default {
   name: 'Table',
 
   props: ['title', 'data', 'color'],
+
+  data () {
+    return {
+      showDesription: true
+    }
+  },
 
   watch: {
     data (val) { this.renderTable() }
@@ -45,6 +52,10 @@ export default {
 
   methods: {
     renderTable () {
+      const cols = keys(first(this.data))
+        .filter(f => f !== 'description' && f !== 'tools')
+        .map(m => { return { field: m, title: m, formatter: 'color', width: '120', headerSort: false, visible: !this.showDesription } })
+
       this.tabulator = new Tabulator(this.$refs.table, {
         layout: 'fitColumns',
         maxHeight: 450,
@@ -56,14 +67,16 @@ export default {
             title: 'TOOLS',
             formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`,
             frozen: true,
-            width: 200
+            width: 180
           },
           {
             title: 'DESCRIPTION',
             field: 'description',
             formatter: 'textarea',
-            cssClass: 'text-justify'
-          }
+            cssClass: 'text-justify',
+            visible: this.showDesription
+          },
+          ...cols
         ]
       })
 
@@ -75,9 +88,9 @@ export default {
     exportXLSX () {
       const data = this.data.map(m => {
         for (const i in m) {
-          if (i !== 'tools' && i !== 'description' && m[i] === '#66bb6a') m[i] = 'primary'
-          if (i !== 'tools' && i !== 'description' && m[i] === '#ffee58') m[i] = 'secondary'
-          if (i !== 'tools' && i !== 'description' && m[i] === '#757575') m[i] = 'na'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#6ab04c') m[i] = '1'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#f9ca24') m[i] = '2'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#4b4b4b') m[i] = 'na'
         }
 
         return m
@@ -91,11 +104,14 @@ export default {
     },
 
     openMatrixTable () {
-      this.$q.dialog({
-        component: () => import('components/knowledgebase/toolsmapping/tableMatrix.vue'),
-        parent: this,
-        data: this.data
-      })
+      // this.$q.dialog({
+      //   component: () => import('components/knowledgebase/toolsmapping/tableMatrix.vue'),
+      //   parent: this,
+      //   data: this.data
+      // })
+
+      this.showDesription = !this.showDesription
+      this.renderTable()
     }
   }
 }

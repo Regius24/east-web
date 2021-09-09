@@ -46,7 +46,8 @@ const logs = [
       'Fixed tools matrix description to justify',
       'Updated tools matrix data extracted to show primary/secondary/na',
       'Updated tools matrix colors',
-      'Added ESPort routing to MISC options'
+      'Added ESPort routing to MISC options',
+      'Fixed tools matrix\'s matrix columns'
     ]
   },
 

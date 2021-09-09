@@ -3,17 +3,12 @@
     ref="dialog"
     @hide="onDialogHide"
   >
-    <q-card
-      class="q-dialog-plugin overflow-auto"
-      style="min-width: 80%; height: 60vh;"
-    >
-      <q-card-section class="fit">
-        <div
-          ref="table"
-          class="fit"
-          style="padding-bottom: 2.1em;"
-        ></div>
-      </q-card-section>
+    <q-card class="q-dialog-plugin">
+      <div
+        ref="table"
+        class="fit"
+        style="padding-bottom: 2.1em;"
+      ></div>
     </q-card>
   </q-dialog>
 </template>
@@ -30,20 +25,21 @@ export default {
     renderTable () {
       const cols = keys(first(this.data))
         .filter(f => f !== 'description' && f !== 'tools')
-        .map(m => { return { field: m, title: m, formatter: 'color', width: '200' } })
+        .map(m => { return { field: m, title: m, formatter: 'color', width: '100', headerVertical: true } })
 
       this.$nextTick(() => {
         this.tabulator2 = new Tabulator(this.$refs.table, {
-          height: 'auto',
-          layout: 'fitDataStretch',
+          height: '300px',
+          layout: 'fitColumns',
           data: this.data,
           placeholder: 'No data to show...',
           columns: [
             {
               field: 'tools',
               title: 'TOOLS',
-              formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`,
-              frozen: true
+              frozen: true,
+              width: 150,
+              formatter: (cell) => `<span class="text-weight-medium">${cell.getValue()}</span>`
             },
             ...cols
           ]

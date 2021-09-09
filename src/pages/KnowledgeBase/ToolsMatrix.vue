@@ -5,7 +5,7 @@
   >
     <!-- PLDT -->
     <div
-      class="col-12 col-md-6"
+      class="col-12"
       v-show="brandCheck('pldt')"
     >
       <TABLE
@@ -17,7 +17,7 @@
 
     <!-- SMART -->
     <div
-      class="col-12 col-md-6"
+      class="col-12"
       v-show="brandCheck('smart')"
     >
       <TABLE
