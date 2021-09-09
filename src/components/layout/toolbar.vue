@@ -110,7 +110,7 @@
           <q-item-section thumbnail>
             <q-avatar
               :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-              text-color="accent"
+              text-color="purple"
             />
           </q-item-section>
           <q-item-section>
@@ -120,6 +120,23 @@
         </q-item>
 
         <q-separator />
+
+        <!-- ESPORT -->
+        <q-item
+          clickable
+          v-close-popup
+          @click="openESPort"
+        >
+          <q-item-section thumbnail>
+            <q-avatar
+              icon="mdi-anchor"
+              text-color="blue"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>ESPort</q-item-label>
+          </q-item-section>
+        </q-item>
 
         <!-- RELEASE NOTES -->
         <q-item
@@ -153,6 +170,7 @@
 import GET from 'src/repository/get'
 import { first } from 'lodash'
 import { mapState, mapActions } from 'vuex'
+import { openURL } from 'quasar'
 
 export default {
   computed: mapState('data', ['openDrawer']),
@@ -168,9 +186,7 @@ export default {
   methods: {
     ...mapActions('data', ['SET_OPENDRAWER', 'SET_ALLOW']),
 
-    triggerDrawer () {
-      this.SET_OPENDRAWER(!this.openDrawer)
-    },
+    triggerDrawer () { this.SET_OPENDRAWER(!this.openDrawer) },
 
     logOut () {
       this.$q.loading.show()
@@ -181,6 +197,8 @@ export default {
         this.$router.push({ name: 'login' })
       }, 2500)
     },
+
+    openESPort () { openURL('http://10.122.8.191/esport') },
 
     showReleaseNotes () {
       this.$q.dialog({

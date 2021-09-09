@@ -34,7 +34,7 @@
 <script>
 const logs = [
   {
-    version: '1.0.47',
+    version: '1.0.47:2',
     description: 'App Update',
     timestamp: '09/09/2021',
     updates: [
@@ -45,7 +45,8 @@ const logs = [
       'Updated Error page re-routing to Login page',
       'Fixed tools matrix description to justify',
       'Updated tools matrix data extracted to show primary/secondary/na',
-      'Updated tools matrix colors'
+      'Updated tools matrix colors',
+      'Added ESPort routing to MISC options'
     ]
   },
 
