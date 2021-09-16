@@ -4,7 +4,7 @@
       :class="color"
       class="text-h5 text-center"
     >
-      {{ title }} {{ showDesription }}
+      {{ title }}
     </q-card-section>
 
     <q-card-section class="q-pt-none">
@@ -88,8 +88,8 @@ export default {
     exportXLSX () {
       const data = this.data.map(m => {
         for (const i in m) {
-          if (i !== 'tools' && i !== 'description' && m[i] === '#6ab04c') m[i] = '1'
-          if (i !== 'tools' && i !== 'description' && m[i] === '#f9ca24') m[i] = '2'
+          if (i !== 'tools' && i !== 'description' && m[i] === '#6ab04c') m[i] = 1
+          if (i !== 'tools' && i !== 'description' && m[i] === '#f9ca24') m[i] = 2
           if (i !== 'tools' && i !== 'description' && m[i] === '#4b4b4b') m[i] = 'na'
         }
 

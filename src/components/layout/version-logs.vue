@@ -34,6 +34,16 @@
 <script>
 const logs = [
   {
+    version: '1.0.48',
+    description: 'App Update',
+    timestamp: '09/16/2021',
+    updates: [
+      'Fixed table title for Tools Matrix',
+      'Fixed data export for number data being a string'
+    ]
+  },
+
+  {
     version: '1.0.47:2',
     description: 'App Update',
     timestamp: '09/09/2021',

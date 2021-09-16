@@ -9,7 +9,7 @@
       v-show="brandCheck('pldt')"
     >
       <TABLE
-        :title="'PLDT Tools Mapping'"
+        :title="'PLDT Tools Matrix'"
         :data="pldtData"
         :color="'text-primary'"
       />
@@ -21,7 +21,7 @@
       v-show="brandCheck('smart')"
     >
       <TABLE
-        :title="'SMART Tools Mapping'"
+        :title="'SMART Tools Matrix'"
         :data="smartData"
         :color="'text-secondary'"
       />
