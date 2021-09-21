@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.49',
+    description: 'App Update',
+    timestamp: '09/21/2021',
+    updates: [
+      'Added a new pop-up for User Access agents table to show only support'
+    ]
+  },
+
+  {
     version: '1.0.48',
     description: 'App Update',
     timestamp: '09/16/2021',

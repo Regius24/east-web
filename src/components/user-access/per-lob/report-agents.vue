@@ -15,9 +15,20 @@
     <template v-slot:top-right>
       <!-- BUTTONS -->
       <q-btn-group
-        flat
+        outline
         class="q-mr-sm"
       >
+        <q-btn
+          outline
+          color="accent"
+          label="SUPPORT"
+          :loading="downloading"
+          :disable="loading || downloading"
+          @click="getSupportAgents"
+        >
+          <q-tooltip> Check for Agents with <b>Support</b> Position </q-tooltip>
+        </q-btn>
+
         <q-btn
           outline
           color="accent"
@@ -58,25 +69,99 @@ export default {
       downloading: false,
       filter: '',
       columns: [
-        { name: 'Subgroup3', field: 'Subgroup3', label: 'SUBGROUP3', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'First', field: 'First', label: 'First Name', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Last', field: 'Last', label: 'Last Name', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Company', field: 'Company Name', label: 'Company', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Site', field: 'Site', label: 'SITE', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Agent Status', field: 'Agent Status', label: 'AGENT STATUS', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Batch Name', field: 'Batch Name', label: 'BATCH NAME', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Hired Date', field: 'Hired Date', label: 'HIRED DATE', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'End Date', field: 'End Date', label: 'END DATE', align: 'left', headerStyle: 'text-align: left;' },
-        { name: 'Job Level', field: 'Job Level', label: 'JOB LEVEL', align: 'left', headerStyle: 'text-align: left;' }
+        {
+          name: 'Subgroup3',
+          field: 'Subgroup3',
+          label: 'SUBGROUP3',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'First',
+          field: 'First',
+          label: 'First Name',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Last',
+          field: 'Last',
+          label: 'Last Name',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Company',
+          field: 'Company Name',
+          label: 'Company',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Site',
+          field: 'Site',
+          label: 'SITE',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Agent Status',
+          field: 'Agent Status',
+          label: 'AGENT STATUS',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Batch Name',
+          field: 'Batch Name',
+          label: 'BATCH NAME',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Hired Date',
+          field: 'Hired Date',
+          label: 'HIRED DATE',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'End Date',
+          field: 'End Date',
+          label: 'END DATE',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        },
+        {
+          name: 'Job Level',
+          field: 'Job Level',
+          label: 'JOB LEVEL',
+          align: 'left',
+          headerStyle: 'text-align: left;'
+        }
       ]
     }
   },
 
   methods: {
+    async getSupportAgents () {
+      const { data } = await GET.UamSupportAgents(this.brand, this.vendor)
+
+      this.$q.dialog({
+        component: () => import('./agent-support-tbl.vue'),
+        parent: this,
+        data: data
+      })
+    },
+
     async exportData () {
       this.downloading = true
       try {
-        const { data } = await GET.UamDataAgents(this.brand, 'all', this.vendor)
+        const { data } = await GET.UamDataAgents(
+          this.brand,
+          'all',
+          this.vendor
+        )
         const title = `${this.brand} Agent List`
 
         this.export(title, unparse(data))

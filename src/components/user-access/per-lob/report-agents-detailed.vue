@@ -127,7 +127,7 @@
       <!-- NO DATA -->
       <div
         v-else
-        class="q-ma-auto"
+        class="q-ma-auto q-pa-md"
       >
 
         <div class="q-ml-sm text-h5">
