@@ -39,7 +39,8 @@ const logs = [
     timestamp: '09/29/2021',
     updates: [
       'Updated DB formula for User Access Summary',
-      'Added a new component for testing new formula for User Access Summary'
+      'Added a new component for testing new formula for User Access Summary',
+      'Updated table schema for both smart and pldt for User Access'
     ]
   },
 

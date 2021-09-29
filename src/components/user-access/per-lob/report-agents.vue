@@ -18,7 +18,7 @@
         outline
         class="q-mr-sm"
       >
-        <q-btn
+        <!-- <q-btn
           outline
           color="accent"
           label="SUPPORT"
@@ -27,7 +27,7 @@
           @click="getSupportAgents"
         >
           <q-tooltip> Check for Agents with <b>Support</b> Position </q-tooltip>
-        </q-btn>
+        </q-btn> -->
 
         <q-btn
           outline
