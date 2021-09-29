@@ -97,9 +97,21 @@ export default {
 
   computed: {
     // ...mapState('data', ['user', 'userProfile']),
-    currentDay () { return date.formatDate(Date.now(), 'ddd') === 'Mon' },
-    vendorSitePldt () { return { vendor: this.uamDataSummaryPldtVendor, site: this.uamDataSummaryPldtSite } },
-    vendorSiteSmart () { return { vendor: this.uamDataSummarySmartVendor, site: this.uamDataSummarySmartSite } }
+    currentDay () {
+      return date.formatDate(Date.now(), 'ddd') === 'Mon'
+    },
+    vendorSitePldt () {
+      return {
+        vendor: this.uamDataSummaryPldtVendor,
+        site: this.uamDataSummaryPldtSite
+      }
+    },
+    vendorSiteSmart () {
+      return {
+        vendor: this.uamDataSummarySmartVendor,
+        site: this.uamDataSummarySmartSite
+      }
+    }
   },
 
   data () {
@@ -145,7 +157,12 @@ export default {
         this.uamDataAgentsLoad = false
       } catch (err) {
         const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        notify(
+          'Something went wrong',
+          `Error: ${statusText}`,
+          'mdi-alert',
+          'red'
+        )
       }
     },
 
@@ -167,10 +184,7 @@ export default {
     moveFab (ev) {
       this.draggingFab = ev.isFirst !== true && ev.isFinal !== true
 
-      this.fabPos = [
-        this.fabPos[0] - ev.delta.x,
-        this.fabPos[1] - ev.delta.y
-      ]
+      this.fabPos = [this.fabPos[0] - ev.delta.x, this.fabPos[1] - ev.delta.y]
     },
 
     openUploader () {
@@ -235,29 +249,69 @@ export default {
               }
           })
         `)
-        data = expression.evaluate(sortBy(data, obj => indexOf(tableOrder, obj.Table)))
+        data = expression.evaluate(
+          sortBy(data, obj => indexOf(tableOrder, obj.Table))
+        )
 
         this[`uamDataSummary${brand}`] = data
       } catch (err) {
         const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        notify(
+          'Something went wrong',
+          `Error: ${statusText}`,
+          'mdi-alert',
+          'red'
+        )
       }
     },
 
     async FetchFilters () {
       try {
-        const { data: pldtVendor } = await GetRepo.UamDataAgentsDistinctCol('pldt', 'Company Name', this.vendorType)
-        const { data: smartVendor } = await GetRepo.UamDataAgentsDistinctCol('smart', 'Company Name', this.vendorType)
-        const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol('pldt', 'Site', this.vendorType)
-        const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol('smart', 'Site', this.vendorType)
+        const { data: pldtVendor } = await GetRepo.UamDataAgentsDistinctCol(
+          'pldt',
+          'Company Name',
+          this.vendorType
+        )
+        const { data: smartVendor } = await GetRepo.UamDataAgentsDistinctCol(
+          'smart',
+          'Company Name',
+          this.vendorType
+        )
+        const { data: pldtSite } = await GetRepo.UamDataAgentsDistinctCol(
+          'pldt',
+          'Site',
+          this.vendorType
+        )
+        const { data: smartSite } = await GetRepo.UamDataAgentsDistinctCol(
+          'smart',
+          'Site',
+          this.vendorType
+        )
 
-        this.uamDataSummaryPldtVendors = concat('All', pldtVendor.map(m => m['Company Name']))
-        this.uamDataSummarySmartVendors = concat('All', smartVendor.map(m => m['Company Name']))
-        this.uamDataSummaryPldtSites = concat('All', pldtSite.map(m => m.Site))
-        this.uamDataSummarySmartSites = concat('All', smartSite.map(m => m.Site))
+        this.uamDataSummaryPldtVendors = concat(
+          'All',
+          pldtVendor.map(m => m['Company Name'])
+        )
+        this.uamDataSummarySmartVendors = concat(
+          'All',
+          smartVendor.map(m => m['Company Name'])
+        )
+        this.uamDataSummaryPldtSites = concat(
+          'All',
+          pldtSite.map(m => m.Site)
+        )
+        this.uamDataSummarySmartSites = concat(
+          'All',
+          smartSite.map(m => m.Site)
+        )
       } catch (err) {
         const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        notify(
+          'Something went wrong',
+          `Error: ${statusText}`,
+          'mdi-alert',
+          'red'
+        )
       }
     },
 
@@ -266,13 +320,20 @@ export default {
       const vendor = _this.profileType === 'admin' ? '%' : _this.vendorType
       const site = '%'
 
-      if (_this.brandCheck('Pldt')) _this.FetchUamDataSummary('Pldt', 'pldt', vendor, site)
-      if (_this.brandCheck('Smart')) _this.FetchUamDataSummary('Smart', 'smart', vendor, site)
+      if (_this.brandCheck('Pldt')) {
+        _this.FetchUamDataSummary('Pldt', 'pldt', vendor, site)
+      }
+      if (_this.brandCheck('Smart')) {
+        _this.FetchUamDataSummary('Smart', 'smart', vendor, site)
+      }
 
       _this.FetchFilters()
 
       _this.uamDataAgentsType = _this.brandList[0]
-      _this.uamDataAgentsOptions = _this.brandList.map(m => ({ label: m.toUpperCase(), value: m }))
+      _this.uamDataAgentsOptions = _this.brandList.map(m => ({
+        label: m.toUpperCase(),
+        value: m
+      }))
     },
 
     vendorChangePldt (val) { this.uamDataSummaryPldtVendor = val },
@@ -283,10 +344,14 @@ export default {
 
   async beforeMount () {
     try {
-      const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
+      const { data } = await GetRepo.UserProfile(
+        this.$q.localStorage.getItem('userAccnt')
+      )
       const { brand, profile, vendor, uUALob } = first(data)
 
-      this.brandList = brand.split(',').map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      this.brandList = brand
+        .split(',')
+        .map(m => m.replace(/(^|\s)\S/g, l => l.toUpperCase()))
       this.profileType = profile
       this.vendorType = vendor === '' || vendor === null ? '%' : vendor
       this.showUploader = uUALob
@@ -298,7 +363,12 @@ export default {
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    notify(
+      'Fetching Data',
+      'Please wait while data loads',
+      'mdi-timer-sand',
+      'orange'
+    )
   }
 }
 </script>

@@ -1,79 +1,88 @@
 <template>
-  <div class="window-height page_bg">
-    <!-- LOGIN FORM -->
-    <div class="flex flex-center fit">
-      <div
-        id="particles-js"
-        class="fit"
-      />
+  <div class="window-height">
+    <div class="fit page_bg">
+      <!-- LOGIN FORM -->
+      <div class="flex flex-center fit">
+        <div
+          id="particles-js"
+          class="fit"
+        />
 
-      <q-card
-        flat
-        class="q-pa-md text-center card_bg absolute"
-        style="width: 40%;"
-      >
-        <!-- LOGO -->
-        <q-card-section>
-          <q-img
-            v-if="$q.dark.isActive"
-            src="~assets/logo/east_light.png"
-            width="300px"
-          />
-          <q-img
-            v-else
-            src="~assets/logo/east_dark.png"
-            width="300px"
-          />
-        </q-card-section>
+        <transition
+          appear
+          enter-active-class="animated fadeIn"
+        >
+          <q-card
+            flat
+            class="q-pa-md text-center card_bg absolute"
+            style="width: 40%;"
+          >
+            <!-- LOGO -->
+            <q-card-section>
+              <q-img
+                v-if="$q.dark.isActive"
+                src="~assets/logo/east_light.png"
+                width="300px"
+              />
+              <q-img
+                v-else
+                src="~assets/logo/east_dark.png"
+                width="300px"
+              />
+            </q-card-section>
 
-        <!-- INPUTS -->
-        <q-form @submit.prevent="signMeIn">
-          <q-card-section class="q-gutter-sm">
-            <q-input
-              filled
-              color="grey"
-              label="Username"
-              v-model="domain"
-            >
-              <template v-slot:prepend>
-                <q-icon name="mdi-account" />
-              </template>
-            </q-input>
+            <!-- INPUTS -->
+            <q-form @submit.prevent="signMeIn">
+              <q-card-section class="q-gutter-sm">
+                <q-input
+                  filled
+                  color="grey"
+                  label="Username"
+                  v-model="domain"
+                  key="username"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="mdi-account" />
+                  </template>
+                </q-input>
 
-            <q-input
-              filled
-              color="grey"
-              label="Password"
-              :type="isPwd ? 'password' : 'text'"
-              v-model="password"
-            >
-              <template v-slot:prepend>
-                <q-icon name="mdi-lock" />
-              </template>
+                <q-input
+                  filled
+                  color="grey"
+                  label="Password"
+                  :type="isPwd ? 'password' : 'text'"
+                  v-model="password"
+                  key="password"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="mdi-lock" />
+                  </template>
 
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </q-input>
+              </q-card-section>
+
+              <!-- BUTTON -->
+              <q-card-actions>
+                <q-btn
+                  type="submit"
+                  label="sign in"
+                  color="red"
+                  class="full-width"
+                  :disable="disable"
                 />
-              </template>
-            </q-input>
-          </q-card-section>
+              </q-card-actions>
 
-          <!-- BUTTON -->
-          <q-card-actions>
-            <q-btn
-              type="submit"
-              label="sign in"
-              color="red"
-              class="full-width"
-              :disable="disable"
-            />
-          </q-card-actions>
-
-        </q-form>
-      </q-card>
+            </q-form>
+          </q-card>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
