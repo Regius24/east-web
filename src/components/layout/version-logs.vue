@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.51',
+    description: 'App Update',
+    timestamp: '10/01/2021',
+    updates: [
+      'Updated table title for User Access Tools\' Inventory'
+    ]
+  },
+
+  {
     version: '1.0.50',
     description: 'App Update',
     timestamp: '09/29/2021',
