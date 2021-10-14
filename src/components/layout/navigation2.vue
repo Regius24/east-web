@@ -135,6 +135,7 @@ export default {
       pUATools,
       pUASummary,
       pUAAudit,
+      pFTEAlloc,
       pUAHistory,
       pLeavers,
       pMedallia,
@@ -152,6 +153,7 @@ export default {
         if (sub.code === 'pUASummary') sub.show = pUASummary
         if (sub.code === 'pUAAudit') sub.show = pUAAudit
         if (sub.code === 'pUAHistory') sub.show = pUAHistory
+        if (sub.code === 'pFTEAlloc') sub.show = pFTEAlloc
         if (sub.code === 'pLeavers') sub.show = pLeavers
         if (sub.code === 'pMedallia') sub.show = pMedallia
         if (sub.code === 'pIrab') sub.show = pIrab
