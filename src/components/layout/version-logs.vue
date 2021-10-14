@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.52',
+    description: 'App Update',
+    timestamp: '10/14/2021',
+    updates: [
+      'Updated navigation to filter out FTE Allocation as well'
+    ]
+  },
+
+  {
     version: '1.0.51',
     description: 'App Update',
     timestamp: '10/01/2021',
