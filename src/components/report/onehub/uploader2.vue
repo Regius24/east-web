@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { notify } from 'boot/notifier'
+import { positive, negative } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -51,7 +51,7 @@ export default {
         console.log(result)
 
         this.loading = false
-        notify('Success', 'data has been uploaded', 'mdi-check', 'green')
+        positive('Success', 'data has been uploaded')
 
         setTimeout(() => {
           this.$router.go()
@@ -60,7 +60,7 @@ export default {
         this.loading = false
 
         console.log(err)
-        notify('Error encountered', 'data was not uploaded', 'mdi-alert', 'red')
+        negative('Error encountered', 'data was not uploaded')
       }
     },
 

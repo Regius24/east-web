@@ -30,7 +30,7 @@
 
 <script>
 import Papa from 'papaparse'
-import { notify } from 'boot/notifier'
+import { positive, negative } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -55,7 +55,7 @@ export default {
 
             console.log(data, parsed.data)
 
-            notify('Success', 'data has been uploaded', 'mdi-check', 'green')
+            positive('Success', 'data has been uploaded')
 
             this.loading = false
             this.hide()
@@ -66,7 +66,7 @@ export default {
           } catch (err) {
             console.log(err)
 
-            notify('Error encountered', 'data not uploaded', 'mdi-alert', 'red')
+            negative('Error encountered', 'data not uploaded')
 
             this.loading = false
           }

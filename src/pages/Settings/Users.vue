@@ -150,7 +150,7 @@ import GET from 'src/repository/get'
 import POST from 'src/repository/post'
 import PUT from 'src/repository/put'
 import DELETE from 'src/repository/delete'
-import { notify } from 'boot/notifier'
+import { info, positive, negative } from 'boot/notifier'
 import { sortBy } from 'lodash'
 
 export default {
@@ -195,7 +195,7 @@ export default {
         this.users = sortBy(users, 'domain')
         this.profiles = sortBy(profiles.map(m => { return { value: m.id, label: m.profile } }), 'label')
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -206,12 +206,12 @@ export default {
 
         await POST.InsertUserz(domain, profileId)
 
-        notify('User has been added', '', 'mdi-check', 'green')
+        positive('User has been added', '')
 
         this.userDialog = false
         this.fetchData()
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -221,9 +221,9 @@ export default {
 
         await PUT.UpdateUserz(domain, value)
 
-        notify('User profile has been updated', '', 'mdi-check', 'green')
+        positive('User profile has been updated', '')
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -238,11 +238,11 @@ export default {
           try {
             await DELETE.Userz(domain)
 
-            notify('User has been removed', '', 'mdi-check', 'green')
+            positive('User has been removed', '')
 
             this.fetchData()
           } catch (err) {
-            notify('Something went wrong', '', 'mdi-alert', 'red')
+            negative('Something went wrong', '')
           }
         })
     }
@@ -253,7 +253,7 @@ export default {
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

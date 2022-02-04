@@ -50,14 +50,14 @@
         />
 
         <!-- SHOW DEACTIVATED ONLY -->
-        <q-fab-action color="blue-grey-8">
+        <!-- <q-fab-action color="blue-grey-8">
           <q-toggle
             dense
             v-model="deactivatedOnly"
             label="DEACTIVATED"
             color="orange"
           />
-        </q-fab-action>
+        </q-fab-action> -->
       </q-fab>
     </q-page-sticky>
   </q-page>
@@ -65,7 +65,7 @@
 
 <script>
 import GET from 'src/repository/get'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 import { first, flatten, uniq } from 'lodash'
 
 export default {
@@ -172,12 +172,12 @@ export default {
       this.profileType = profile
       this.vendorType = vendor === '' || vendor === null ? '%' : vendor
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

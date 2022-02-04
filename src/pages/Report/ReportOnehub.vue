@@ -27,7 +27,7 @@
 <script>
 import GET from 'src/repository/get'
 import { first } from 'lodash'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 
 export default {
   name: 'ReportOnehub',
@@ -73,12 +73,12 @@ export default {
       this.showUploader = uOnehub
       this.raw = raw
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

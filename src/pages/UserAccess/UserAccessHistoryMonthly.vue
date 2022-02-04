@@ -72,7 +72,7 @@
 import GetRepo from 'src/repository/get'
 import jsonata from 'jsonata'
 import { first, includes, sortBy, indexOf, concat } from 'lodash'
-import { notify } from 'boot/notifier'
+import { info } from 'boot/notifier'
 
 export default {
   name: 'UserAccessHistory',
@@ -261,7 +261,7 @@ export default {
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

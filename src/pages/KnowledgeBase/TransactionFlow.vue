@@ -44,7 +44,7 @@
 
 <script>
 import GET from 'src/repository/get'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 import { first } from 'lodash'
 
 const pldtImages = [
@@ -107,12 +107,12 @@ export default {
       this.brandOption.model = first(brand.split(',')).toUpperCase()
       this.brandOption.list = brand.split(',').map(m => m.toUpperCase())
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

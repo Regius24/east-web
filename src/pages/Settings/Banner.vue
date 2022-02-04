@@ -63,7 +63,7 @@
 <script>
 import GET from 'src/repository/get'
 import PUT from 'src/repository/put'
-import { notify } from 'boot/notifier'
+import { positive, negative } from 'boot/notifier'
 
 export default {
   name: 'BannerSettingsPage',
@@ -95,7 +95,7 @@ export default {
         this.title = title
         this.text = text
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -111,9 +111,9 @@ export default {
 
         await PUT.updateBannerMessage(bannerDetails)
 
-        notify('Banner Details has been updated', '', 'mdi-check', 'green')
+        positive('Banner Details has been updated', '')
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     }
   },

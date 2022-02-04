@@ -50,7 +50,7 @@
 
 <script>
 import GetRepo from 'src/repository/get'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 import { first, filter, uniq, map } from 'lodash'
 
 export default {
@@ -151,12 +151,12 @@ export default {
 
       this.fetchWeeklyData()
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

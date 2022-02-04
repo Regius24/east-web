@@ -293,7 +293,7 @@
 import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 import GetRepo from 'src/repository/get'
 import PutRepo from 'src/repository/put'
 
@@ -346,7 +346,7 @@ export default {
     },
 
     export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
+      info('Downloading Data', 'Please wait')
       exportFile(`${name}.csv`, data)
     },
 
@@ -363,7 +363,7 @@ export default {
         console.log(result)
       } catch (err) {
         console.log(err)
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     }
   },

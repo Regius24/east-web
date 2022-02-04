@@ -30,7 +30,7 @@
 
 <script>
 import Papa from 'papaparse'
-import { notify } from 'boot/notifier'
+import { positive, negative } from 'boot/notifier'
 import PostRepo from 'src/repository/post'
 
 export default {
@@ -58,7 +58,7 @@ export default {
             this.loading = false
             this.hide()
 
-            notify('Success', 'data has been uploaded', 'mdi-check', 'green')
+            positive('Success', 'data has been uploaded')
 
             setTimeout(() => {
               this.$router.go()
@@ -66,7 +66,7 @@ export default {
           } catch (err) {
             console.log(err)
             this.loading = false
-            notify('Error encountered', 'data was not uploaded', 'mdi-alert', 'red')
+            negative('Error encountered', 'data was not uploaded')
           }
         }
       })

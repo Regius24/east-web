@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.53',
+    description: 'App Update',
+    timestamp: '02/04/2021',
+    updates: [
+      'Updated notification prompts'
+    ]
+  },
+
+  {
     version: '1.0.52',
     description: 'App Update',
     timestamp: '10/14/2021',

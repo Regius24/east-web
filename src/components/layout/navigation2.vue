@@ -95,7 +95,7 @@ export default {
           caption: '',
           sub: [
             { icon: 'mdi-badge-account-horizontal', label: 'Medallia', path: 'report-medallia', code: 'pMedallia', show: true },
-            { icon: 'mdi-account', label: 'Call Refusal Incidents', path: 'report-irab', code: 'pIrab', show: true },
+            { icon: 'mdi-account', label: 'Blacklist', path: 'report-irab', code: 'pIrab', show: true },
             { icon: 'mdi-tools', label: 'Password Resetting', path: 'report-password', code: 'pPassword', show: true },
 
             { icon: 'mdi-account-minus', label: 'Daily Leavers', path: 'report-leavers-daily', code: 'pLeavers', show: true },

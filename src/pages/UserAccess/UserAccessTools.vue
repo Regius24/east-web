@@ -86,7 +86,7 @@ import GetRepo from 'src/repository/get'
 import jsonata from 'jsonata'
 import { date } from 'quasar'
 import { first, concat, sortBy, indexOf } from 'lodash'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 
 export default {
   name: 'UserAccessTools',
@@ -145,7 +145,7 @@ export default {
         this.uamDataAgentsLoad = false
       } catch (err) {
         const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        negative('Something went wrong', `Error: ${statusText}`)
       }
     },
 
@@ -245,7 +245,7 @@ export default {
 
         this[`uamDataSummary${brand}`] = data
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -262,7 +262,7 @@ export default {
         this.uamDataSummarySmartSites = concat('All', smartSite.map(m => m.Site))
       } catch (err) {
         const statusText = err.response.statusText
-        notify('Something went wrong', `Error: ${statusText}`, 'mdi-alert', 'red')
+        negative('Something went wrong', `Error: ${statusText}`)
       }
     },
 
@@ -298,12 +298,12 @@ export default {
 
       this.fetchData()
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

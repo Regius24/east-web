@@ -59,7 +59,7 @@
 import GET from 'src/repository/get'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 
 export default {
   props: ['brand', 'vendor', 'data', 'loading'],
@@ -167,14 +167,14 @@ export default {
         this.export(title, unparse(data))
       } catch (err) {
         console.log(err)
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
 
         this.downloading = false
       }
     },
 
     export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
+      info('Downloading Data', 'Please wait')
       exportFile(`${name}.csv`, data)
 
       this.downloading = false

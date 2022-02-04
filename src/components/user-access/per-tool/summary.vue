@@ -95,7 +95,7 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 import GetRepo from 'src/repository/get'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 import { date } from 'quasar'
 
 window.jsPDF = jsPDF
@@ -221,13 +221,13 @@ export default {
     async fetchOnehub (brand, lob, vendor, table) {
       this.showLoading = true
       try {
-        notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+        info('Fetching Data', 'Please wait while data loads')
         const { data } = await GetRepo.UamDataAgentsDetailed(brand, lob, vendor, table)
 
         this.openAgentsDetailed(data)
         this.showLoading = false
       } catch (err) {
-        notify('Something went wrong', 'Error: no data found', 'mdi-alert', 'red')
+        negative('Something went wrong', 'Error: no data found')
         this.showLoading = false
       }
     },

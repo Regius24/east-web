@@ -35,7 +35,7 @@
 <script>
 import GET from 'src/repository/get'
 import { first, flatten, uniq } from 'lodash'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 
 export default {
   name: 'ReportPassword',
@@ -71,7 +71,7 @@ export default {
           this.summary = summary
         }
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     }
   },
@@ -87,7 +87,7 @@ export default {
           this.summary = summary
         }
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -107,7 +107,7 @@ export default {
           this.months.unshift('YTD')
         }
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -139,12 +139,12 @@ export default {
 
       this.FetchRaw(this.vendorType)
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>

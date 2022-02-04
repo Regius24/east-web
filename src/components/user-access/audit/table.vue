@@ -55,7 +55,7 @@
 import { first } from 'lodash'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
-import { notify } from 'boot/notifier'
+import { info } from 'boot/notifier'
 
 export default {
   props: ['data'],
@@ -106,7 +106,7 @@ export default {
     },
 
     export (name, data) {
-      notify('Downloading Data', 'Please wait', 'mdi-download', 'blue')
+      info('Downloading Data', 'Please wait')
       exportFile(`${name}.csv`, data)
     }
   }

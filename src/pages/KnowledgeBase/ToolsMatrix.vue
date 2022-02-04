@@ -31,7 +31,7 @@
 
 <script>
 import GET from 'src/repository/get'
-import { notify } from 'boot/notifier'
+import { negative, info } from 'boot/notifier'
 import { first } from 'lodash'
 
 import 'viewerjs/dist/viewer.min.css'
@@ -72,10 +72,10 @@ export default {
       if (this.brandCheck('pldt')) { this.fetchData('pldt') }
       if (this.brandCheck('smart')) { this.fetchData('smart') }
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
-  mounted () { notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange') }
+  mounted () { info('Fetching Data', 'Please wait while data loads') }
 }
 </script>

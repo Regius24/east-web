@@ -18,7 +18,7 @@ export default {
 
     if (loadedAppVer !== version) {
       this.$q.notify({
-        timeout: 6000,
+        timeout: 8000,
         color: 'pink',
         position: 'top',
         icon: 'mdi-alert',

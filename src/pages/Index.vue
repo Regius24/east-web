@@ -91,7 +91,7 @@
 import 'particles.js'
 import GetRepo from 'src/repository/get'
 import { mapActions } from 'vuex'
-import { notify } from 'boot/notifier'
+import { negative } from 'boot/notifier'
 
 export default {
   name: 'LoginPage',
@@ -263,7 +263,7 @@ export default {
 
         setTimeout(() => {
           this.$q.loading.hide()
-          notify('Something went wrong', '', 'mdi-alert', 'red')
+          negative('Something went wrong', '')
         }, 2500)
       }
     },

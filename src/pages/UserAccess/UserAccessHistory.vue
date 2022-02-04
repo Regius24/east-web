@@ -72,7 +72,7 @@
 import GetRepo from 'src/repository/get'
 import jsonata from 'jsonata'
 import { first, includes, sortBy, indexOf, concat } from 'lodash'
-import { notify } from 'boot/notifier'
+import { info, negative } from 'boot/notifier'
 
 export default {
   name: 'UserAccessHistory',
@@ -180,7 +180,7 @@ export default {
           this.fetchRawData()
         }
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -223,7 +223,7 @@ export default {
 
         this[`${brand}Summary`] = summary
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
       }
     },
 
@@ -239,7 +239,7 @@ export default {
         this.tableData = data
         this.tableLoad = false
       } catch (err) {
-        notify('Something went wrong', '', 'mdi-alert', 'red')
+        negative('Something went wrong', '')
         this.tableLoad = false
       }
     },
@@ -263,12 +263,12 @@ export default {
 
       this.initFetchData()
     } catch (err) {
-      notify('Something went wrong', '', 'mdi-alert', 'red')
+      negative('Something went wrong', '')
     }
   },
 
   mounted () {
-    notify('Fetching Data', 'Please wait while data loads', 'mdi-timer-sand', 'orange')
+    info('Fetching Data', 'Please wait while data loads')
   }
 }
 </script>
