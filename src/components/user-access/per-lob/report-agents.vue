@@ -156,6 +156,7 @@ export default {
 
     async exportData () {
       this.downloading = true
+
       try {
         const { data } = await GET.UamDataAgents(
           this.brand,
