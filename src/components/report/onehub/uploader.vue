@@ -40,6 +40,7 @@ export default {
   methods: {
     parseFile () {
       this.loading = true
+      const { domain } = this.$q.localStorage.getItem('userData')
 
       Papa.parse(this.file, {
         header: true,
@@ -47,7 +48,7 @@ export default {
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
           try {
-            const { data } = await PostRepo.OnehubData(parsed.data)
+            const { data } = await PostRepo.OnehubData(domain, parsed.data)
 
             console.log(data)
 

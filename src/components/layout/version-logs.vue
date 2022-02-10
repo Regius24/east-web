@@ -36,9 +36,11 @@ const logs = [
   {
     version: '1.0.53',
     description: 'App Update',
-    timestamp: '02/04/2021',
+    timestamp: '02/10/2021',
     updates: [
-      'Updated notification prompts'
+      'Updated notification prompts',
+      'Updated API endpoints for loggers',
+      'Added loggers for POST'
     ]
   },
 

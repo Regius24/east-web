@@ -44,6 +44,7 @@ export default {
   methods: {
     parseFile () {
       this.loading = true
+      const { domain } = this.$q.localStorage.getItem('userData')
 
       Papa.parse(this.file, {
         header: true,
@@ -51,9 +52,7 @@ export default {
         transformHeader: col => col.split(' ').join('').trim(),
         complete: async (parsed, file) => {
           try {
-            const { data } = await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
-
-            console.log(data)
+            await PostRepo.UamDataRaw(domain, parsed.data[0].Subgroup1, parsed.data)
 
             this.loading = false
             this.hide()
@@ -70,6 +69,8 @@ export default {
           }
         }
       })
+
+      console.log(domain)
     },
 
     show () {

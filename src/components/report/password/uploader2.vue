@@ -45,12 +45,13 @@ export default {
   methods: {
     async processFile (file) {
       this.loading = true
+      const { domain } = this.$q.localStorage.getItem('userData')
 
       try {
         const formData = new FormData()
         formData.append('file', file)
 
-        const result = await PostRepo.UploadPasswordResettingFile(formData)
+        const result = await PostRepo.UploadPasswordResettingFile(domain, formData)
         console.log(result)
 
         this.loading = false

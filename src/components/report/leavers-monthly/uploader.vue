@@ -48,12 +48,13 @@ export default {
   methods: {
     async processFile (file) {
       this.loading = true
+      const { domain } = this.$q.localStorage.getItem('userData')
 
       try {
         const formData = new FormData()
         formData.append('file', file)
 
-        const result = await PostRepo[`UploadLeaverMonthly${this.brand}File`](formData)
+        const result = await PostRepo[`UploadLeaverMonthly${this.brand}File`](domain, formData)
         console.log(result)
 
         this.loading = true
