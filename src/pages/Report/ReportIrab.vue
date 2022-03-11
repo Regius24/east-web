@@ -45,7 +45,7 @@
           label-position="left"
           color="blue-grey-7"
           icon="mdi-account-cancel"
-          label="Check for Blacklist"
+          label="Check for Redlist"
           @click="openUploaderBlacklist"
         />
 

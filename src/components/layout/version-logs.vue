@@ -34,9 +34,20 @@
 <script>
 const logs = [
   {
+    version: '1.0.54',
+    description: 'App Update',
+    timestamp: '03/11/2022',
+    updates: [
+      'Updated IRAB to Redlist',
+      'Updated Blacklist to Redlist',
+      'Updated a new Redlist VH column to Fraud'
+    ]
+  },
+
+  {
     version: '1.0.53',
     description: 'App Update',
-    timestamp: '02/10/2021',
+    timestamp: '02/10/2022',
     updates: [
       'Updated notification prompts',
       'Updated API endpoints for loggers',

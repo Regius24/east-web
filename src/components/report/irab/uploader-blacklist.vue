@@ -9,7 +9,7 @@
           outlined
           counter
           accept=".csv"
-          label="Upload data for Blacklist (.csv)"
+          label="Upload data to check in Redlist (.csv)"
           v-model="file"
           :disable="loading"
           :loading="loading"

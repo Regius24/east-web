@@ -13,7 +13,7 @@
           outlined
           counter
           accept=".csv"
-          label="Upload data for IRAB (.csv)"
+          label="Upload data for Redlist (.csv)"
           v-model="file"
           :disable="loading"
           :loading="loading"

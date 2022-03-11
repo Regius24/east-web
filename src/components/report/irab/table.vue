@@ -7,7 +7,7 @@
         bordered
         color="accent"
         separator="vertical"
-        title="IRAB List"
+        title="Redlist"
         :data="data"
         :columns="columns"
         row-key="name"
