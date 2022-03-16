@@ -84,9 +84,9 @@
               :props="props"
             >{{ props.row.QW }}</q-td>
             <q-td
-              key="VH"
+              key="FRAUD"
               :props="props"
-            >{{ props.row.VH }}</q-td>
+            >{{ props.row.FRAUD }}</q-td>
             <q-td
               key="XFERS"
               :props="props"

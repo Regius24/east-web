@@ -34,6 +34,16 @@
 <script>
 const logs = [
   {
+    version: '1.0.55',
+    description: 'App Update',
+    timestamp: '03/16/2022',
+    updates: [
+      'Updated Redlist Summary table UI',
+      'Removed all logging services from the backend'
+    ]
+  },
+
+  {
     version: '1.0.54',
     description: 'App Update',
     timestamp: '03/11/2022',

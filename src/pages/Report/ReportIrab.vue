@@ -72,7 +72,7 @@ export default {
   name: 'ReportIrab',
 
   components: {
-    SUMMARY: () => import('components/report/irab/summary'),
+    SUMMARY: () => import('components/report/irab/summary2'),
     TABLE: () => import('components/report/irab/table')
   },
 
