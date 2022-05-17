@@ -329,9 +329,7 @@ export default {
 
   async beforeMount () {
     try {
-      const { data } = await GetRepo.UserProfile(
-        this.$q.localStorage.getItem('userAccnt')
-      )
+      const { data } = await GetRepo.UserProfile(this.$q.localStorage.getItem('userAccnt'))
       const { brand, profile, vendor, uUALob } = first(data)
 
       this.brandList = brand

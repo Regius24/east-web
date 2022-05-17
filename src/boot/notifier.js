@@ -38,7 +38,7 @@ const warning = (message, caption) => Notify.create({
   caption: caption,
   type: 'warning',
   position: position,
-  timeout: timeout
+  timeout: 10000
 })
 
 const info = (message, caption) => Notify.create({

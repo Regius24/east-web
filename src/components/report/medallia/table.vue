@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card style="max-width: 93vw;">
     <q-card-section>
       <q-table
         dense
@@ -125,7 +125,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-style {
-  max-height: 80vh;
-}
+// .table-style {
+//   max-height: 80vh;
+//   max-width: 90vw;
+// }
 </style>

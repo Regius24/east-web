@@ -11,6 +11,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: 'user-access-lob', name: 'user-access-lob', component: () => import('src/pages/UserAccess/UserAccess.vue'), meta: { allow: true } },
+      { path: 'user-access-lob2', name: 'user-access-lob2', component: () => import('src/pages/UserAccess/UserAccess2.vue'), meta: { allow: false } },
       { path: 'user-access-tools', name: 'user-access-tools', component: () => import('src/pages/UserAccess/UserAccessTools.vue'), meta: { allow: true } },
       { path: 'user-access-summary', name: 'user-access-summary', component: () => import('src/pages/UserAccess/UserAccessSummary.vue'), meta: { allow: true } },
       { path: 'user-access-history-weekly', name: 'user-access-history-weekly', component: () => import('src/pages/UserAccess/UserAccessHistory.vue'), meta: { allow: true } },

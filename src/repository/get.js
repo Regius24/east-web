@@ -8,6 +8,7 @@ export default {
 
   // USER ACCESS
   UamDataSummary: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummary?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
+  UamDataSummaryV2: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryV2?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataSummaryTools: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryTools?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataSummaryAll: (BRAND, VENDOR, SITE) => axios.get(`${resource}UamDataSummaryAll?brand=${BRAND}&vendor=${VENDOR}&site=${SITE}`),
   UamDataAgents: (BRAND, TYPE, VENDOR) => axios.get(`${resource}UamDataAgents?brand=${BRAND}&type=${TYPE}&vendor=${VENDOR}`),

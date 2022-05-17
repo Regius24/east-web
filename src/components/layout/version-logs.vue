@@ -34,6 +34,35 @@
 <script>
 const logs = [
   {
+    version: '1.0.58',
+    description: 'App Update',
+    timestamp: '05/17/2022',
+    updates: [
+      'Added abort of parsing when uploading uam db',
+      'Added prompt of what column is invalid when uploading uam db',
+      'Updated uploader to handle .xlsx files instead'
+    ]
+  },
+
+  {
+    version: '1.0.57',
+    description: 'App Update',
+    timestamp: '05/13/2022',
+    updates: [
+      'Fixed Medallia report table overflowing from page'
+    ]
+  },
+
+  {
+    version: '1.0.56',
+    description: 'App Update',
+    timestamp: '05/05/2022',
+    updates: [
+      'Updated UAM file uploading to automate dump with Medallia files'
+    ]
+  },
+
+  {
     version: '1.0.55',
     description: 'App Update',
     timestamp: '03/16/2022',

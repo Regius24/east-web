@@ -201,11 +201,12 @@ export default {
 
     async addUser () {
       try {
-        const { domain: user } = this.$q.localStorage.getItem('userData')
         const domain = this.userForm.domain.toLowerCase()
         const profileId = this.userForm.profileId.value
 
-        await POST.InsertUserz(user, domain, profileId)
+        const res = await POST.InsertUserz(domain, profileId)
+
+        console.log(res)
 
         positive('User has been added', '')
 
@@ -238,8 +239,7 @@ export default {
       })
         .onOk(async () => {
           try {
-            const { domain: user } = this.$q.localStorage.getItem('userData')
-            await DELETE.Userz(user, domain)
+            await DELETE.Userz(domain)
 
             positive('User has been removed', '')
 

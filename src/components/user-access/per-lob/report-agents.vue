@@ -32,10 +32,10 @@
         <q-btn
           outline
           color="accent"
-          label="CSV"
+          label="XLSX"
           :loading="downloading"
           :disable="loading || downloading"
-          @click="exportData"
+          @click="exportData2"
         />
       </q-btn-group>
 
@@ -60,6 +60,7 @@ import GET from 'src/repository/get'
 import { exportFile } from 'quasar'
 import { unparse } from 'papaparse'
 import { info, negative } from 'boot/notifier'
+import XLSX from 'xlsx'
 
 export default {
   props: ['brand', 'vendor', 'data', 'loading'],
@@ -179,6 +180,32 @@ export default {
       exportFile(`${name}.csv`, data)
 
       this.downloading = false
+    },
+
+    async exportData2 () {
+      info('Downloading Data', 'Please wait')
+      this.downloading = true
+
+      try {
+        const { data } = await GET.UamDataAgents(
+          this.brand,
+          'all',
+          this.vendor
+        )
+        const title = `${this.brand} Agent List`
+
+        const wb = XLSX.utils.book_new()
+        const ws = XLSX.utils.json_to_sheet(data)
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+        XLSX.writeFile(wb, `${title}.xlsx`)
+        this.downloading = false
+      } catch (err) {
+        console.log(err)
+        negative('Something went wrong', 'Unable to export data')
+
+        this.downloading = false
+      }
     }
   }
 }

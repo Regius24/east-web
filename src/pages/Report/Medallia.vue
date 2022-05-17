@@ -2,8 +2,9 @@
   <q-page padding>
     <div class="row q-col-gutter-md justify-center">
       <!-- PLDT -->
-      <div class="col-12 col-md-11">
+      <div class="col-12">
         <TABLE
+          class="fit"
           :title="'PLDT Medallia'"
           :titleClass="'text-primary'"
           :data="pldtData"
@@ -12,7 +13,7 @@
       </div>
 
       <!-- SMART -->
-      <div class="col-12 col-md-11">
+      <div class="col-12">
         <TABLE
           :title="'SMART Medallia'"
           :titleClass="'text-secondary'"

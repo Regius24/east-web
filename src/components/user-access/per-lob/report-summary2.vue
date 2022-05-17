@@ -26,30 +26,6 @@
       </DxPivotGrid>
     </q-card-section>
 
-    <!-- FILTERS -->
-    <q-card-section class="row justify-center q-col-gutter-sm">
-      <div class="col-12 col-md-6">
-        <q-select
-          dense
-          standout
-          v-model="vendor"
-          :options="vendors"
-          :display-value="`Company Name: ${vendor}`"
-          :disable="vendorDis"
-        />
-      </div>
-
-      <div class="col-12 col-md-6">
-        <q-select
-          dense
-          standout
-          v-model="site"
-          :options="sites"
-          :display-value="`Site: ${site}`"
-        />
-      </div>
-    </q-card-section>
-
     <q-inner-loading :showing="showLoading">
       <q-spinner-gears
         size="50px"
@@ -94,17 +70,48 @@ export default {
     data (val) {
       this.pivotGridDataSource = new PivotGridDataSource({
         fields: [
-          { caption: 'Table', dataField: 'Table', area: 'row', width: 100, onCellClick: () => alert() },
+          { caption: 'Table', dataField: 'Table', area: 'row', width: 100 },
           { caption: 'Lob', dataField: 'Lob', area: 'row', width: 200 },
           { caption: 'Vendor', dataField: 'Vendor', area: 'row' },
-          { caption: 'Locked FTE', dataField: 'LockedFte', area: 'data', dataType: 'num', summaryType: 'sum' },
-          { caption: 'Agents', dataField: 'Agents', area: 'data', dataType: 'num', summaryType: 'sum' },
-          { caption: 'Complete', dataField: 'Complete', area: 'data', dataType: 'num', summaryType: 'sum' },
+          { caption: 'Locked FTE', dataField: 'LockedFTE', area: 'data' },
+          { caption: 'Access', dataField: 'Access', area: 'data', dataType: 'number', summaryType: 'sum' },
+          {
+            caption: 'Agents',
+            dataField: 'EE Number',
+            area: 'data',
+            summaryType: 'custom',
+            calculateCustomSummary: (options) => {
+              switch (options.summaryProcess) {
+                case 'start':
+                  // Initializing "totalValue" here
+                  break
+                case 'calculate':
+                  // Modifying "totalValue" here
+                  break
+                case 'finalize':
+                  // Assigning the final value to "totalValue" here
+                  break
+              }
+            }
+          },
+          {
+            caption: 'Complete',
+            dataField: 'Access',
+            area: 'data',
+            dataType: 'number',
+            summaryType: 'sum',
+            calculateSummaryValue: (summaryCell) => {
+              const access = summaryCell.value('Access')
+              const count = summaryCell.value('Count')
+
+              return access === count ? 1 : 0
+            }
+          },
           {
             caption: 'Score',
             area: 'data',
             calculateSummaryValue: (summaryCell) => {
-              const agents = summaryCell.value('Agents')
+              const agents = summaryCell.value('EE Number')
               const complete = summaryCell.value('Complete')
 
               if (agents !== undefined && complete !== undefined) {
