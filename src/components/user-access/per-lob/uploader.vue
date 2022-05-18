@@ -12,12 +12,12 @@
         <q-file
           outlined
           counter
-          accept=".xlsx"
-          label="Upload a file (.xlsx)"
+          accept=".csv"
+          label="Upload a file (.csv)"
           v-model="file"
           :disable="loading"
           :loading="loading"
-          @input="parseFile2"
+          @input="parseFile"
         >
           <template v-slot:prepend>
             <q-icon name="attach_file" />
@@ -31,8 +31,9 @@
 <script>
 import Excel from 'exceljs'
 import Papa from 'papaparse'
-import { positive, negative, warning } from 'boot/notifier'
-// import PostRepo from 'src/repository/post'
+import { positive, negative } from 'boot/notifier'
+import { Dialog } from 'quasar'
+import PostRepo from 'src/repository/post'
 
 export default {
   data () {
@@ -52,6 +53,7 @@ export default {
         transformHeader: col => col.split(' ').join('').trim(),
         step: ({ data }, parser) => {
           const {
+            EENumber,
             Last,
             First,
             CompanyName,
@@ -77,7 +79,13 @@ export default {
 
           const abortMe = (field, value) => {
             parser.abort()
-            warning(`The column "${field}" is required but has a value of "${value}"`, 'The column must have a valid value')
+
+            Dialog.create({
+              html: true,
+              title: `Invalid Value for Employee: <span class="text-amber">${EENumber}</span>`,
+              message: `<strong class="text-red">${field}</strong> is <strong class="text-red">${value}</strong> but is a required field and must have a valid value`,
+              style: 'width: 40vw;'
+            })
           }
 
           if (Last === 'NA') abortMe('Last', Last)
@@ -105,20 +113,20 @@ export default {
         },
         complete: async (parsed, file) => {
           try {
-            // await PostRepo.UamDataRaw(parsed.data[0].Subgroup1, parsed.data)
-
             if (file) {
-              positive('Success', 'data has been uploaded')
-            }
+              const formData = new FormData()
+              formData.append('file', file)
 
-            console.log(file)
+              await PostRepo.UploadUamDataRaw(formData)
+              positive('Success', 'data has been uploaded')
+
+              setTimeout(() => {
+                this.$router.go()
+              }, 1200)
+            }
 
             this.loading = false
             this.hide()
-
-            // setTimeout(() => {
-            //   this.$router.go()
-            // }, 1200)
           } catch (err) {
             console.log(err)
             this.loading = false
@@ -128,7 +136,7 @@ export default {
       })
     },
 
-    async parseFile2 () {
+    parseFile2 () {
       this.loading = true
 
       // READ AN EXCEL TO READ THROUGH
@@ -169,16 +177,18 @@ export default {
             ]
 
             sheet.eachRow((row, rowIndex) => {
-              requiredCols.forEach(col => {
-                const cellVal = row.getCell(columns.indexOf(col)).value
-                if (cellVal === 'NA' || cellVal === '') {
+              for (let i = 0; i < requiredCols.length; i++) {
+                const columnNum = columns.indexOf(requiredCols[i])
+                if (columnNum > -1) {
+                  const cellVal = row.getCell(columnNum).value
 
+                  if (cellVal === 'NA') {
+                    console.log(`column: ${columns[columnNum]} = ${cellVal}`)
+                  }
                 }
-              })
+              }
             })
           })
-
-          this.loading = false
         })
       }
     },

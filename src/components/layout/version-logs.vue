@@ -34,6 +34,18 @@
 <script>
 const logs = [
   {
+    version: '1.0.59',
+    description: 'App Update',
+    timestamp: '05/18/2022',
+    updates: [
+      'Updated uploader and reverted to .csv',
+      'Fixed uploader column checking',
+      'Added new column Domain for Agents Table',
+      'Added new column Tenure for Agenrs Extract Table'
+    ]
+  },
+
+  {
     version: '1.0.58',
     description: 'App Update',
     timestamp: '05/17/2022',

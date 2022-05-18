@@ -32,10 +32,10 @@
         <q-btn
           outline
           color="accent"
-          label="XLSX"
+          label="CSV"
           :loading="downloading"
           :disable="loading || downloading"
-          @click="exportData2"
+          @click="exportData"
         />
       </q-btn-group>
 
@@ -69,78 +69,24 @@ export default {
     return {
       downloading: false,
       filter: '',
-      columns: [
-        {
-          name: 'Subgroup3',
-          field: 'Subgroup3',
-          label: 'SUBGROUP3',
+      columns: []
+    }
+  },
+
+  watch: {
+    data (val) {
+      this.columns = []
+      const columns = Object.keys(val[0])
+
+      for (let i = 0; i < columns.length; i++) {
+        this.columns.push({
+          name: columns[i],
+          field: columns[i],
+          label: columns[i].toUpperCase(),
           align: 'left',
           headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'First',
-          field: 'First',
-          label: 'First Name',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Last',
-          field: 'Last',
-          label: 'Last Name',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Company',
-          field: 'Company Name',
-          label: 'Company',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Site',
-          field: 'Site',
-          label: 'SITE',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Agent Status',
-          field: 'Agent Status',
-          label: 'AGENT STATUS',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Batch Name',
-          field: 'Batch Name',
-          label: 'BATCH NAME',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Hired Date',
-          field: 'Hired Date',
-          label: 'HIRED DATE',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'End Date',
-          field: 'End Date',
-          label: 'END DATE',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        },
-        {
-          name: 'Job Level',
-          field: 'Job Level',
-          label: 'JOB LEVEL',
-          align: 'left',
-          headerStyle: 'text-align: left;'
-        }
-      ]
+        })
+      }
     }
   },
 
@@ -159,27 +105,19 @@ export default {
       this.downloading = true
 
       try {
-        const { data } = await GET.UamDataAgents(
-          this.brand,
-          'all',
-          this.vendor
-        )
+        const { data } = await GET.UamDataAgents(this.brand, 'all', this.vendor)
         const title = `${this.brand} Agent List`
 
-        this.export(title, unparse(data))
+        info('Downloading Data', 'Please wait')
+        exportFile(`${title}.csv`, unparse(data))
+
+        this.downloading = false
       } catch (err) {
         console.log(err)
         negative('Something went wrong', '')
 
         this.downloading = false
       }
-    },
-
-    export (name, data) {
-      info('Downloading Data', 'Please wait')
-      exportFile(`${name}.csv`, data)
-
-      this.downloading = false
     },
 
     async exportData2 () {
