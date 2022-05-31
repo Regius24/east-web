@@ -36,12 +36,30 @@ const logs = [
   {
     version: '1.0.59',
     description: 'App Update',
+    timestamp: '05/26/2022',
+    updates: [
+      'Fixed uploader issue due to columns values not being parsed correctly'
+    ]
+  },
+
+  {
+    version: '1.0.59',
+    description: 'App Update',
+    timestamp: '05/26/2022',
+    updates: [
+      'Fixed uploader column checking'
+    ]
+  },
+
+  {
+    version: '1.0.59',
+    description: 'App Update',
     timestamp: '05/18/2022',
     updates: [
       'Updated uploader and reverted to .csv',
       'Fixed uploader column checking',
       'Added new column Domain for Agents Table',
-      'Added new column Tenure for Agenrs Extract Table'
+      'Added new column Tenure for Agents Extract Table'
     ]
   },
 

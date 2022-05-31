@@ -5,9 +5,9 @@
   >
     <q-card class="q-dialog-plugin overflow-hidden">
       <q-card-section>
-        <div class="text-weight-medium text-caption text-justify text-deep-orange q-mb-sm">
-          *Be advised that the uploader is <span class="text-weight-bold">case</span>, <span class="text-weight-bold">spelling</span> and <span class="text-weight-bold">column</span> sensitive.
-          You may refer to the export file for reference (1st column of the file is only for tracking remove it when uploading).
+        <div class="text-weight-medium text-body2 text-justify text-deep-orange q-mb-sm">
+          *You may refer to the export file for a template;
+          Please remove the following columns before uploading: <span class="text-weight-bold text-italic">Date</span> and <span class="text-weight-bold text-italic">Tenure</span>.
         </div>
         <q-file
           outlined
@@ -74,7 +74,9 @@ export default {
             SalesforceID,
             HiredDate,
             COSMOEntitlements,
-            SALESFORCE
+            SALESFORCE,
+            AgentStatus,
+            JobLevel
           } = data
 
           const abortMe = (field, value) => {
@@ -83,32 +85,37 @@ export default {
             Dialog.create({
               html: true,
               title: `Invalid Value for Employee: <span class="text-amber">${EENumber}</span>`,
-              message: `<strong class="text-red">${field}</strong> is <strong class="text-red">${value}</strong> but is a required field and must have a valid value`,
-              style: 'width: 40vw;'
+              message: `<strong class="text-red">${field}</strong> is <strong class="text-red">${value}</strong> but is a required field and must have a valid value.`,
+              style: 'width: 40vw;',
+              persistent: true
             })
           }
 
-          if (Last === 'NA') abortMe('Last', Last)
-          else if (First === 'NA') abortMe('First', First)
-          else if (CompanyName === 'NA') abortMe('CompanyName', CompanyName)
-          else if (Subgroup1 === 'NA') abortMe('Subgroup1', Subgroup1)
-          else if (Subgroup2 === 'NA') abortMe('Subgroup2', Subgroup2)
-          else if (Subgroup3 === 'NA') abortMe('Subgroup3', Subgroup3)
-          else if (Site === 'NA') abortMe('Site', Site)
-          else if (TeamName === 'NA') abortMe('TeamName', TeamName)
-          else if (TLName === 'NA') abortMe('TLName', TLName)
-          else if (TLCosmo === 'NA') abortMe('TLCosmo', TLCosmo)
-          else if (TLEmail === 'NA') abortMe('TLEmail', TLEmail)
-          else if (TLCosmoID === 'NA') abortMe('TLCosmoID', TLCosmoID)
-          else if (OMName === 'NA') abortMe('OMName', OMName)
-          else if (OMCosmo === 'NA') abortMe('OMCosmo', OMCosmo)
-          else if (OMCosmoID === 'NA') abortMe('OMCosmoID', OMCosmoID)
-          else if (OMEmail === 'NA') abortMe('OMEmail', OMEmail)
-          else if (AgentCosmoID === 'NA') abortMe('AgentCosmoID', AgentCosmoID)
-          else if (SalesforceID === 'NA') abortMe('SalesforceID', SalesforceID)
-          else if (HiredDate === 'NA') abortMe('HiredDate', HiredDate)
-          else if (COSMOEntitlements === 'NA') abortMe('COSMOEntitlements', COSMOEntitlements)
-          else if (SALESFORCE === 'NA') abortMe('SALESFORCE', SALESFORCE)
+          const fieldCheck = (field) => field === 'NA' || field === ''
+          const agentStatusCheck = AgentStatus.trim() !== 'TRAINEES' && AgentStatus.trim() !== 'INACTIVE' && AgentStatus.trim() !== 'RESIGNED'
+          const jobLevelCheck = JobLevel.trim() === 'AGENT' && JobLevel.trim() === 'Ops Support'
+
+          if (fieldCheck(Last) && agentStatusCheck && jobLevelCheck) abortMe('Last', Last)
+          else if (fieldCheck(First) && agentStatusCheck && jobLevelCheck) abortMe('First', First)
+          else if (fieldCheck(CompanyName) && agentStatusCheck && jobLevelCheck) abortMe('CompanyName', CompanyName)
+          else if (fieldCheck(Subgroup1) && agentStatusCheck && jobLevelCheck) abortMe('Subgroup1', Subgroup1)
+          else if (fieldCheck(Subgroup2) && agentStatusCheck && jobLevelCheck) abortMe('Subgroup2', Subgroup2)
+          else if (fieldCheck(Subgroup3) && agentStatusCheck && jobLevelCheck) abortMe('Subgroup3', Subgroup3)
+          else if (fieldCheck(Site) && agentStatusCheck && jobLevelCheck) abortMe('Site', Site)
+          else if (fieldCheck(TeamName) && agentStatusCheck && jobLevelCheck) abortMe('TeamName', TeamName)
+          else if (fieldCheck(TLName) && agentStatusCheck && jobLevelCheck) abortMe('TLName', TLName)
+          else if (fieldCheck(TLCosmo) && agentStatusCheck && jobLevelCheck) abortMe('TLCosmo', TLCosmo)
+          else if (fieldCheck(TLEmail) && agentStatusCheck && jobLevelCheck) abortMe('TLEmail', TLEmail)
+          else if (fieldCheck(TLCosmoID) && agentStatusCheck && jobLevelCheck) abortMe('TLCosmoID', TLCosmoID)
+          else if (fieldCheck(OMName) && agentStatusCheck && jobLevelCheck) abortMe('OMName', OMName)
+          else if (fieldCheck(OMCosmo) && agentStatusCheck && jobLevelCheck) abortMe('OMCosmo', OMCosmo)
+          else if (fieldCheck(OMCosmoID) && agentStatusCheck && jobLevelCheck) abortMe('OMCosmoID', OMCosmoID)
+          else if (fieldCheck(OMEmail) && agentStatusCheck && jobLevelCheck) abortMe('OMEmail', OMEmail)
+          else if (fieldCheck(AgentCosmoID) && agentStatusCheck && jobLevelCheck) abortMe('AgentCosmoID', AgentCosmoID)
+          else if (fieldCheck(SalesforceID) && agentStatusCheck && jobLevelCheck) abortMe('SalesforceID', SalesforceID)
+          else if (fieldCheck(HiredDate) && agentStatusCheck && jobLevelCheck) abortMe('HiredDate', HiredDate)
+          else if (fieldCheck(COSMOEntitlements) && agentStatusCheck && jobLevelCheck) abortMe('COSMOEntitlements', COSMOEntitlements)
+          else if (fieldCheck(SALESFORCE) && agentStatusCheck && jobLevelCheck) abortMe('SALESFORCE', SALESFORCE)
           else parser.resume()
         },
         complete: async (parsed, file) => {
