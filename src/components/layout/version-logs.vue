@@ -34,6 +34,15 @@
 <script>
 const logs = [
   {
+    version: '1.0.60',
+    description: 'App Update',
+    timestamp: '07/20/2022',
+    updates: [
+      'Added new upload condition'
+    ]
+  },
+
+  {
     version: '1.0.59',
     description: 'App Update',
     timestamp: '05/26/2022',
