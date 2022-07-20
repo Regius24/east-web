@@ -31,9 +31,13 @@
 <script>
 import Excel from 'exceljs'
 import Papa from 'papaparse'
-import { positive, negative } from 'boot/notifier'
+import moment from 'moment'
 import { Dialog } from 'quasar'
-import PostRepo from 'src/repository/post'
+import {
+  // positive,
+  negative
+} from 'boot/notifier'
+// import PostRepo from 'src/repository/post'
 
 export default {
   data () {
@@ -72,11 +76,14 @@ export default {
             OMEmail,
             AgentCosmoID,
             SalesforceID,
-            HiredDate,
             COSMOEntitlements,
             SALESFORCE,
             AgentStatus,
-            JobLevel
+            JobLevel,
+            HiredDate,
+            TrainingDate,
+            LiveDate,
+            EndDate
           } = data
 
           const abortMe = (field, value) => {
@@ -91,9 +98,46 @@ export default {
             })
           }
 
+          const abortMeDate = () => {
+            parser.abort()
+
+            Dialog.create({
+              html: true,
+              title: `Invalid Value for Employee: <span class="text-amber">${EENumber}</span> (${AgentStatus})`,
+              message:
+              `
+                The following dates should not be equal and is sequential: <br />
+                <code>Hired Date < Training Date < Live Date</code> <br /><br />
+                Hired Date: <strong class="text-red">${HiredDate}</strong> <br />
+                Training Date: <strong class="text-red">${TrainingDate}</strong> <br />
+                Live Date: <strong class="text-red">${LiveDate}</strong> <br /><br />
+              `,
+              style: 'width: 40vw;',
+              persistent: true
+            })
+          }
+
+          const abortMeEndDate = () => {
+            parser.abort()
+
+            Dialog.create({
+              html: true,
+              title: `Invalid Value for Employee: <span class="text-amber">${EENumber}</span> (${AgentStatus})`,
+              message:
+              `
+                Unless the Agent Status is <strong>RESIGNED</strong> the End Date should have a value;  <br />
+                Otherwise else use <strong>NA</strong> instead: <br /><br />
+                End Date: <strong class="text-red">${EndDate}</strong> <br />
+              `,
+              style: 'width: 40vw;',
+              persistent: true
+            })
+          }
+
           const fieldCheck = (field) => field === 'NA' || field === ''
           const agentStatusCheck = AgentStatus.trim() !== 'TRAINEES' && AgentStatus.trim() !== 'INACTIVE' && AgentStatus.trim() !== 'RESIGNED'
           const jobLevelCheck = JobLevel.trim() === 'AGENT' && JobLevel.trim() === 'Ops Support'
+          const datesCheck = moment(new Date(HiredDate)).isBefore(new Date(TrainingDate)) && moment(new Date(TrainingDate)).isBefore(new Date(LiveDate))
 
           if (fieldCheck(Last) && agentStatusCheck && jobLevelCheck) abortMe('Last', Last)
           else if (fieldCheck(First) && agentStatusCheck && jobLevelCheck) abortMe('First', First)
@@ -116,21 +160,24 @@ export default {
           else if (fieldCheck(HiredDate) && agentStatusCheck && jobLevelCheck) abortMe('HiredDate', HiredDate)
           else if (fieldCheck(COSMOEntitlements) && agentStatusCheck && jobLevelCheck) abortMe('COSMOEntitlements', COSMOEntitlements)
           else if (fieldCheck(SALESFORCE) && agentStatusCheck && jobLevelCheck) abortMe('SALESFORCE', SALESFORCE)
+          else if (!datesCheck) abortMeDate()
+          else if (AgentStatus === 'RESIGNED' ? moment.isDate(new Date(EndDate)) : false) abortMeEndDate()
+          else if (AgentStatus !== 'RESIGNED' ? !(EndDate === 'NA') : true) abortMeEndDate()
           else parser.resume()
         },
         complete: async (parsed, file) => {
           try {
-            if (file) {
-              const formData = new FormData()
-              formData.append('file', file)
+            // if (file) {
+            //   const formData = new FormData()
+            //   formData.append('file', file)
 
-              await PostRepo.UploadUamDataRaw(formData)
-              positive('Success', 'data has been uploaded')
+            //   await PostRepo.UploadUamDataRaw(formData)
+            //   positive('Success', 'data has been uploaded')
 
-              setTimeout(() => {
-                this.$router.go()
-              }, 1200)
-            }
+            //   setTimeout(() => {
+            //     this.$router.go()
+            //   }, 1200)
+            // }
 
             this.loading = false
             this.hide()

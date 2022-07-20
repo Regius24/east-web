@@ -123,7 +123,9 @@ export default {
   },
 
   watch: {
-    data (val) { this.renderTable() },
+    data (val) {
+      this.renderTable()
+    },
 
     vendor (val) { this.$emit('vendorChange', val) },
 
